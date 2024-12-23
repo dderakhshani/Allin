@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\Roles\Add\" />
+    <Folder Include="Commands\Roles\Delete\" />
+    <Folder Include="Commands\Roles\Update\" />
+    <Folder Include="Commands\Users\Delete\" />
+    <Folder Include="Commands\Users\ChangePassword\" />
+    <Folder Include="Commands\Users\AddRoles\" />
+    <Folder Include="Events\" />
+    <Folder Include="IntegrationEvents\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Allin.CommonLibrary\Allin.CommonLibrary.csproj" />
+    <ProjectReference Include="..\Allin.Admin.Infrastructure\Allin.Admin.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,6 @@
+@Allin.Admin.ServiceApi_HostAddress = http://localhost:5144
+
+GET {{Allin.Admin.ServiceApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
