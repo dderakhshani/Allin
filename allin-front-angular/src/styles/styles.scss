@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "../../node_modules/primeng/resources/themes/aura-light-blue/theme.css";
+@import "../../node_modules/primeng/resources/primeng.css";
+@import "../../node_modules/primeicons/primeicons.css"
