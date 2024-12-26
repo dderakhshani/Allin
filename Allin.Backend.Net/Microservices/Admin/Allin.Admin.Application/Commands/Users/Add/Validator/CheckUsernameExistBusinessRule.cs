@@ -1,13 +1,13 @@
-using Allin.Common.Data;
+using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Validations;
 
 namespace Allin.Admin.Application.Commands.Users.Add.Validator
 {
     public class CheckUsernameExistBusinessRule : IBusinessRuleValidator<AddUserCommand>
     {
-        protected readonly BaseDbContext _dbContext;
+        protected readonly AdminDbContext _dbContext;
 
-        public CheckUsernameExistBusinessRule(BaseDbContext dbContext)
+        public CheckUsernameExistBusinessRule(AdminDbContext dbContext)
         {
             _dbContext = dbContext;
         }

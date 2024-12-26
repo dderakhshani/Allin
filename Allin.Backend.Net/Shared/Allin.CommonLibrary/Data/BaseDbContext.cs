@@ -6,7 +6,7 @@ namespace Allin.Common.Data;
 
 public partial class BaseDbContext : DbContext
 {
-    public BaseDbContext(DbContextOptions<BaseDbContext> options) : base(options)
+    public BaseDbContext(DbContextOptions options) : base(options)
     {
 
     }

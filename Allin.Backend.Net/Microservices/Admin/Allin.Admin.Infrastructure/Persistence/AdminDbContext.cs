@@ -6,7 +6,7 @@ namespace Allin.Admin.Infrastructure.Persistence
 {
     public class AdminDbContext : BaseDbContext
     {
-        public AdminDbContext(DbContextOptions<BaseDbContext> options) : base(options)
+        public AdminDbContext(DbContextOptions options) : base(options)
         {
         }
 

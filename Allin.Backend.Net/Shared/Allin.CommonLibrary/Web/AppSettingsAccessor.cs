@@ -4,17 +4,17 @@ namespace Allin.Common.Web
 {
     public interface IAppSettingsAccessor
     {
-        public IConnectionStringModel GetConnectionString();
-        public IJwtConfigurationModel GetJwtConfiguration();
-        public ISwaggerConfigurationModel GetSwaggerConfiguration();
-        public ICorsConfigurationModel GetCorsConfiguration();
+        public ConnectionStringModel GetConnectionString();
+        public JwtConfigurationModel GetJwtConfiguration();
+        public SwaggerConfigurationModel GetSwaggerConfiguration();
+        public CorsConfigurationModel GetCorsConfiguration();
     }
 
-    public interface IConnectionStringModel
+    public class ConnectionStringModel
     {
     }
 
-    public interface ICorsConfigurationModel
+    public class CorsConfigurationModel
     {
         public string PolicyName { get; set; }
         public bool AllowAnyOrigin { get; set; }
@@ -22,7 +22,7 @@ namespace Allin.Common.Web
         public bool AllowAnyHeader { get; set; }
     }
 
-    public interface IJwtConfigurationModel
+    public class JwtConfigurationModel
     {
         public string? Issuer { get; set; }
         public string? Audience { get; set; }
@@ -30,7 +30,7 @@ namespace Allin.Common.Web
         public int ExpirySecondTime { get; set; }
     }
 
-    public interface ISwaggerConfigurationModel
+    public class SwaggerConfigurationModel
     {
         public string? XmlPath { get; set; }
         public string? Name { get; set; }
@@ -39,7 +39,7 @@ namespace Allin.Common.Web
         public string? TermsOfService { get; set; }
     }
 
-    public interface ISwaggerContactConfigurationModel
+    public class SwaggerContactConfigurationModel
     {
         public string? Name { get; set; }
         public string? Email { get; set; }
@@ -55,25 +55,25 @@ namespace Allin.Common.Web
             _configuration = configuration;
         }
 
-        public IJwtConfigurationModel GetJwtConfiguration()
+        public JwtConfigurationModel GetJwtConfiguration()
         {
-            return _configuration.GetSection("Jwt").Get<IJwtConfigurationModel>()!;
+            return _configuration.GetSection("Jwt").Get<JwtConfigurationModel>()!;
         }
 
 
-        public ISwaggerConfigurationModel GetSwaggerConfiguration()
+        public SwaggerConfigurationModel GetSwaggerConfiguration()
         {
-            return _configuration.GetSection("Swagger").Get<ISwaggerConfigurationModel>()!;
+            return _configuration.GetSection("Swagger").Get<SwaggerConfigurationModel>()!;
         }
 
-        public ICorsConfigurationModel GetCorsConfiguration()
+        public CorsConfigurationModel GetCorsConfiguration()
         {
-            return _configuration.GetSection("Cors").Get<ICorsConfigurationModel>()!;
+            return _configuration.GetSection("Cors").Get<CorsConfigurationModel>()!;
         }
 
-        public IConnectionStringModel GetConnectionString()
+        public ConnectionStringModel GetConnectionString()
         {
-            return _configuration.GetSection("ConnectionStrings").Get<IConnectionStringModel>()!;
+            return _configuration.GetSection("ConnectionStrings").Get<ConnectionStringModel>()!;
         }
 
 
