@@ -1,4 +1,5 @@
-﻿using Allin.Common.Utilities.CustomBindings;
+﻿using Allin.Common.Data;
+using Allin.Common.Utilities.CustomBindings;
 using Allin.Common.Validations;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
@@ -35,6 +37,19 @@ namespace Allin.Common.Web
         public static void LoadSettings(IAppSettingsAccessor appSettings)
         {
             _appSettingsAccessor = appSettings;
+        }
+
+        public static void AddDbContext(this IServiceCollection services)
+        {
+            services.AddScoped<BaseDbContext>();
+        }
+
+        public static void AddMediatorForMicroservice(this IServiceCollection services, Assembly assembly)
+        {
+            services.AddMediatR(x =>
+            {
+                x.RegisterServicesFromAssembly(assembly);
+            });
         }
 
 
@@ -72,6 +87,7 @@ namespace Allin.Common.Web
             services.AddOAuth();
             services.AddCorsPolicy();
             services.AddSwagger();
+            services.AddScoped<IUserAccessor, UserAccessor>();
         }
 
         public static void UseBaseFeatures(this WebApplication app)
@@ -130,7 +146,7 @@ namespace Allin.Common.Web
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = AppSettingsAccessor.GetJwtConfiguration().Issuer,
                         ValidAudience = AppSettingsAccessor.GetJwtConfiguration().Audience,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret!)),
                         ClockSkew = TimeSpan.Zero
                     };
                 });

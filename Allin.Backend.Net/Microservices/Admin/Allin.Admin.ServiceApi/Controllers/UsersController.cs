@@ -1,10 +1,12 @@
 ﻿using Allin.Admin.Application.Commands.Users.Add;
 using Allin.Common.Web;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Allin.Admin.ServiceApi.Controllers
 {
+    [AllowAnonymous]
     public class UsersController : AuthorizeApiControllerBase
     {
         public UsersController(IMediator mediator, IUserAccessor userAccessor, IWebHostEnvironment currentEnvironment) : base(mediator, userAccessor, currentEnvironment)
