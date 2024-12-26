@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace Allin.Common.Web
 {
-
     public interface IAppSettingsAccessor
     {
         public IConnectionStringModel GetConnectionString();
         public IJwtConfigurationModel GetJwtConfiguration();
         public ISwaggerConfigurationModel GetSwaggerConfiguration();
         public ICorsConfigurationModel GetCorsConfiguration();
-
     }
 
     public interface IConnectionStringModel

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Allin.Common.Utilities
+namespace Allin.Common.Utilities.Mappings
 {
     public static class MappingExtensions
     {

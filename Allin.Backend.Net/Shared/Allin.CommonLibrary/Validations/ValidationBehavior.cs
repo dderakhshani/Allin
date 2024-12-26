@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 
 namespace Allin.Common.Validations
 {
-    public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse> where TResponse : GeneralServiceResult
+    public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
         private readonly IEnumerable<IBusinessRuleValidator<TRequest>> _businessRules;

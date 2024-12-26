@@ -2,7 +2,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Allin.Common.Utilities
+namespace Allin.Common.Utilities.CustomBindings
 {
     public class TypeIncludedJsonConverter<T> : JsonConverter<T>
     {
@@ -28,7 +28,7 @@ namespace Allin.Common.Utilities
             writer.WriteStartObject();
             writer.WriteString("typeToReviveInInterceptor", value.GetType().Name);
             writer.WritePropertyName("value");
-            JsonSerializer.Serialize<T>(writer, value);
+            JsonSerializer.Serialize(writer, value);
             writer.WriteEndObject();
         }
     }

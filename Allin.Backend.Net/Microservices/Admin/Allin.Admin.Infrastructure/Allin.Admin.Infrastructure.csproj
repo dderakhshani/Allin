@@ -7,12 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Logging\" />
-    <Folder Include="Persistence\Mongo\" />
-    <Folder Include="Persistence\SqlServer\" />
+    <Compile Remove="Persistence\Mongo\**" />
+    <EmbeddedResource Remove="Persistence\Mongo\**" />
+    <None Remove="Persistence\Mongo\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Logging\" />
+    <Folder Include="Logging\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Allin.CommonLibrary\Allin.CommonLibrary.csproj" />
     <ProjectReference Include="..\..\..\Shared\Allin.SharedCore\Allin.SharedCore.csproj" />
   </ItemGroup>
 

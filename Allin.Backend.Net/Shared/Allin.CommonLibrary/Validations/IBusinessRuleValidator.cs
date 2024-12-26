@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
-
-namespace Allin.Common.Validations
+﻿namespace Allin.Common.Validations
 {
-    public interface IBusinessRuleValidator<T> where T : IRequest<GeneralServiceResult>
+    public interface IBusinessRuleValidator<T> //where T : IRequest
     {
         Task<BusinessRuleResult> ValidateAsync(T command);
     }

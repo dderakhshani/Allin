@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Allin.Common.Data
+namespace Allin.Common.Data.QueryHelpers.QueryParsing
 {
     public static class ExpressionUtils
     {

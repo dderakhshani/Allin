@@ -1,30 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Allin.Common.Utilities.CustomBindings;
+using Allin.Common.Validations;
+using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Allin.Common.Utilities;
-using Allin.Common.Validations;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
-using FluentValidation;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
 
 namespace Allin.Common.Web
 {
     public static partial class StartupServiceHelper
     {
         private static IAppSettingsAccessor? _appSettingsAccessor;
-        private static IAppSettingsAccessor  AppSettingsAccessor
+        private static IAppSettingsAccessor AppSettingsAccessor
         {
             get
             {
@@ -67,7 +63,7 @@ namespace Allin.Common.Web
                 };
             });
 
-            
+
 
             services.AddMvc();
             services.AddHttpContextAccessor();
@@ -93,7 +89,7 @@ namespace Allin.Common.Web
             app.MapControllers();
         }
 
-        private static  void AddValidation(this IServiceCollection services)
+        private static void AddValidation(this IServiceCollection services)
         {
             //Register all IValidator<> automatically
             services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());

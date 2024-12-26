@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Allin.Common.Utilities
+namespace Allin.Common.Utilities.Mappings
 {
     public interface IMapFrom<Entity, Model>
     {

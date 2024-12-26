@@ -2,7 +2,7 @@ using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Allin.Common.Utilities
+namespace Allin.Common.Utilities.CustomBindings
 {
     public class PropertyJsonConverter : JsonConverter<string>
     {
