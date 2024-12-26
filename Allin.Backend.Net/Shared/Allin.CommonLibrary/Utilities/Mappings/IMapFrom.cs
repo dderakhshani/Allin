@@ -6,9 +6,5 @@ namespace Allin.Common.Utilities.Mappings
     {
         void Mapping(Profile profile) => profile.CreateMap(typeof(Entity), GetType()).ReverseMap();
 
-
-        Entity ToEntity(IMapper _mapper);
-
-        Model FromEntity(Entity entity, IMapper mapper);
     }
 }

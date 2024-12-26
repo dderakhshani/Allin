@@ -39,19 +39,6 @@ namespace Allin.Common.Web
             _appSettingsAccessor = appSettings;
         }
 
-        public static void AddDbContext(this IServiceCollection services)
-        {
-            services.AddScoped<BaseDbContext>();
-        }
-
-        public static void AddMediatorForMicroservice(this IServiceCollection services, Assembly assembly)
-        {
-            services.AddMediatR(x =>
-            {
-                x.RegisterServicesFromAssembly(assembly);
-            });
-        }
-
 
         public static void AddBaseServices(this IServiceCollection services)
         {
@@ -87,6 +74,7 @@ namespace Allin.Common.Web
             services.AddOAuth();
             services.AddCorsPolicy();
             services.AddSwagger();
+            services.AddMediator();
             services.AddScoped<IUserAccessor, UserAccessor>();
         }
 
@@ -214,6 +202,21 @@ namespace Allin.Common.Web
             });
         }
 
+        private static void AddMediator(this IServiceCollection services)
+        {
+
+            services.AddMediatR(config =>
+                {
+                    config.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+                    config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+                });
+        }
+
+        public static void AddGeneralAutoMapper(this IServiceCollection services, Type mappingProfileType)
+        {
+            services.AddAutoMapper(mappingProfileType);
+
+        }
 
         static void IgnoreInverseProperty(JsonTypeInfo typeInfo)
         {
