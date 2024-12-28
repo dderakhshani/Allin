@@ -41,3 +41,4 @@ export class ItemCategoriesListComponent implements OnInit{
   }
 
 }
+  
