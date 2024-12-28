@@ -1,32 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Allin.Common;
-using Allin.Common.Data;
-using Allin.Common.Utilities;
-using Allin.Common.Web;
+﻿using Allin.Admin.Application.Common;
+using Allin.Admin.Infrastructure.Persistence;
 using AutoMapper;
 
-namespace Allin.Admin.Application.Commands
+namespace Allin.Admin.Application.Commands.Users.Add
 {
-    public class AddUserCommandHandler : BaseCommandHandler<AddUserCommand>
+    public class AddUserCommandHandler : AdminCommandHandler<AddUserCommand, bool>
     {
-
-        public AddUserCommandHandler(
-            BaseDbContext dbContext,
-            IMapper mapper) : base(dbContext, mapper)
+        public AddUserCommandHandler(AdminDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
-
         }
 
-        public override async Task<GeneralApiResult> Handle(AddUserCommand request, CancellationToken cancellationToken)
+        public override async Task<bool> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
-           
+            //_dbContext>
             // Add user logic goes here
+            //DbContext.Users.Add
 
-            return GeneralApiResult.Ok();
+            return true;
         }
 
     }

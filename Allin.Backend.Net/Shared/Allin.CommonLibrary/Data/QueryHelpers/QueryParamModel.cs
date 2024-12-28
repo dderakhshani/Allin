@@ -1,4 +1,5 @@
-﻿using Allin.Common.Utilities;
+﻿using Allin.Common.Data.QueryHelpers.QueryParsing;
+using Allin.Common.Utilities.CustomBindings;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Allin.Common.Data
+namespace Allin.Common.Data.QueryHelpers
 {
 
     [ModelBinder(BinderType = typeof(QueryParamModelBinder))]

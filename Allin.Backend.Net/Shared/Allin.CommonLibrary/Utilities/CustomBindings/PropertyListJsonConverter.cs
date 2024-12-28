@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
-namespace Allin.Common.Utilities
+namespace Allin.Common.Utilities.CustomBindings
 {
     public class PropertyListJsonConverter : JsonConverter<List<string?>>
     {

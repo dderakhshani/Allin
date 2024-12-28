@@ -1,124 +1,83 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Allin.Common.Web
 {
-    public class GeneralApiResult: GeneralServiceResult
+    public class GeneralApiResult
     {
+        public bool IsSuccess { get; set; }
+        public string TraceId { get; set; }
+        public object? Data { get; set; }
+        public string Error { get; set; }
+        public IEnumerable<ValidationFailure>? ValidationErrors { get; set; }
         public HttpStatusCode HttpStatusCode { get; set; }
 
-        public static new GeneralApiResult Ok()
+        public static new GeneralApiResult Ok(string traceId)
         {
-            return new GeneralApiResult<object>()
+            return new GeneralApiResult()
             {
                 IsSuccess = true,
                 HttpStatusCode = System.Net.HttpStatusCode.OK,
+                TraceId = traceId
             };
         }
 
-        public static new GeneralApiResult Ok(object Data)
+        public static new GeneralApiResult Ok<T>(string traceId, T data = default)
         {
-            return new GeneralApiResult<object>()
+            return new GeneralApiResult()
             {
                 IsSuccess = true,
                 HttpStatusCode = System.Net.HttpStatusCode.OK,
-                Data = Data
-            };
-        }
-        public static new GeneralApiResult<T> Ok<T>(T Data)
-        {
-            return new GeneralApiResult<T>()
-            {
-                IsSuccess = true,
-                HttpStatusCode = System.Net.HttpStatusCode.OK,
-                Data = Data
+                Data = data,
+                TraceId = traceId
             };
         }
 
-        public static  GeneralApiResult NotFound(string? errorReason = null)
+        public static GeneralApiResult Fail(string traceId, string error)
         {
-            return NotFound<object>(errorReason);
-        }
-
-        public static GeneralApiResult<T> NotFound<T>(string? errorReason = null)
-        {
-            return new GeneralApiResult<T>()
+            return new GeneralApiResult()
             {
                 IsSuccess = false,
-                Errors = new List<ValidationFailure> { new ValidationFailure("", errorReason) },
-                HttpStatusCode = System.Net.HttpStatusCode.NotFound
-            };
-        }
-
-        public static GeneralApiResult BadRequest(string? errorReason = null)
-        {
-            return BadRequest<object>(errorReason);
-        }
-
-        public static GeneralApiResult<T> BadRequest<T>(string? errorReason = null)
-        {
-            return new GeneralApiResult<T>()
-            {
-                IsSuccess = false,
-                Errors = new List<ValidationFailure> { new ValidationFailure("", errorReason) },
-                HttpStatusCode = System.Net.HttpStatusCode.BadRequest
+                Error = error,
+                HttpStatusCode = System.Net.HttpStatusCode.InternalServerError,
+                TraceId = traceId
             };
         }
 
         public static GeneralApiResult ValidationError(IEnumerable<string> errors)
         {
-            return ValidationError<object>(errors);
+            return new GeneralApiResult()
+            {
+                IsSuccess = false,
+                ValidationErrors = errors.Select(msg => new ValidationFailure("", msg)),
+                HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity
+            };
         }
 
         public static GeneralApiResult ValidationError(string errorReason)
         {
-            return ValidationError<object>(errorReason);
+            return new GeneralApiResult()
+            {
+                IsSuccess = false,
+                ValidationErrors = new List<ValidationFailure> { new ValidationFailure("", errorReason) },
+                HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity
+            };
         }
 
         public static GeneralApiResult ValidationError(IEnumerable<ValidationFailure>? errors = null)
         {
-            return ValidationError<object>(errors);
-        }
-
-        public static GeneralApiResult<T> ValidationError<T>(IEnumerable<string> errors)
-        {
-            return new GeneralApiResult<T>()
+            return new GeneralApiResult()
             {
                 IsSuccess = false,
-                Errors = errors.Select(msg => new ValidationFailure("", msg)),
-                HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity
-            };
-        }
-
-        public static GeneralApiResult<T> ValidationError<T>(string errorReason)
-        {
-            return new GeneralApiResult<T>()
-            {
-                IsSuccess = false,
-                Errors = new List<ValidationFailure> { new ValidationFailure("", errorReason) },
-                HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity
-            };
-        }
-
-        public static GeneralApiResult<T> ValidationError<T>(IEnumerable<ValidationFailure>? errors = null)
-        {
-            return new GeneralApiResult<T>()
-            {
-                IsSuccess = false,
-                Errors = errors,
+                ValidationErrors = errors,
                 HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity
             };
         }
 
         public IActionResult MakeErrorActionResult()
         {
-            var result = new { this.Errors };
+            var result = new { this.ValidationErrors };
             switch (this.HttpStatusCode)
             {
                 case System.Net.HttpStatusCode.NotFound:
@@ -148,13 +107,5 @@ namespace Allin.Common.Web
             return this.MakeErrorActionResult();
 
         }
-
-
-    }
-
-    public class GeneralApiResult<T>: GeneralApiResult
-    {
-       
-
     }
 }

@@ -1,28 +1,20 @@
-using FluentValidation;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Gradient.Common;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Validations;
-using Allin.Common.Data;
 
-
-namespace Allin.Admin.Application.Commands
+namespace Allin.Admin.Application.Commands.Users.Add.Validator
 {
     public class CheckUsernameExistBusinessRule : IBusinessRuleValidator<AddUserCommand>
     {
-        protected readonly BaseDbContext _dbContext;
+        protected readonly AdminDbContext _dbContext;
 
-        public CheckUsernameExistBusinessRule(BaseDbContext dbContext)
+        public CheckUsernameExistBusinessRule(AdminDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         public async Task<BusinessRuleResult> ValidateAsync(AddUserCommand command)
         {
-            var userExist=false;
+            var userExist = false;
             //var userExist=_dbContext.Users.AnyAsync(x=>x.Username==command.Username);
 
             return BusinessRuleResult.Create(userExist, $"Username is already exist");

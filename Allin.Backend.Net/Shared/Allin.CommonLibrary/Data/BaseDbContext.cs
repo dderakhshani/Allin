@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Allin.Common.Logging;
-using System.Xml;
+﻿using Allin.SharedCore.Configurations;
+using Allin.SharedCore.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Serilog;
 
 namespace Allin.Common.Data;
 
 public partial class BaseDbContext : DbContext
 {
-    public BaseDbContext(DbContextOptions<BaseDbContext> options) : base(options)
+    public BaseDbContext(DbContextOptions options) : base(options)
     {
 
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(BaseTypeConfiguration<BaseEntity>).Assembly);
+
+        base.OnModelCreating(modelBuilder);
     }
 
     public async Task ExecuteAsUnitAsync(Func<Task> operationUnit, int unitTimeOut = 60 * 1000)

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Allin.Common.Utilities
+namespace Allin.Common.Utilities.Mappings
 {
     public class MappingProfile : Profile
     {

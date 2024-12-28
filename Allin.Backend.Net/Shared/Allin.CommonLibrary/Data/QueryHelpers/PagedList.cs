@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Allin.Common.Data
+namespace Allin.Common.Data.QueryHelpers
 {
     public class PagedList<T>
     {

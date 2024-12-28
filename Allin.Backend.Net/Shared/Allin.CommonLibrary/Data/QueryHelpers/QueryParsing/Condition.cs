@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using Allin.Common.Utilities;
+using Allin.Common.Utilities.CustomBindings;
 
-namespace Allin.Common.Data
+namespace Allin.Common.Data.QueryHelpers.QueryParsing
 {
     public class Condition
     {

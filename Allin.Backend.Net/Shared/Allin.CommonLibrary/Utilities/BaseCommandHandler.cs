@@ -1,31 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Allin.Common.Data;
-using Allin.Common.Web;
+﻿using Allin.Common.Data;
 using AutoMapper;
 using MediatR;
 
 namespace Allin.Common.Utilities
 {
-
-    public abstract class BaseCommandHandler<TRequest> : IRequestHandler<TRequest, GeneralApiResult> where TRequest : IRequest<GeneralApiResult>
+    public abstract class BaseCommandHandler<TRequest, TResponse, TDbContext> : IRequestHandler<TRequest, TResponse>
+            where TRequest : IRequest<TResponse>
+            where TDbContext : BaseDbContext
     {
-
-        protected readonly BaseDbContext _dbContext;
-        protected readonly IMapper _mapper;
+        protected TDbContext DbContext { get; private set; }
+        protected IMapper Mapper { get; private set; }
 
         public BaseCommandHandler(
-            BaseDbContext dbContext,
+            TDbContext dbContext,
             IMapper mapper)
         {
-            _dbContext = dbContext;
-            _mapper = mapper;
+            DbContext = dbContext;
+            Mapper = mapper;
         }
 
-        public abstract Task<GeneralApiResult> Handle(TRequest request, CancellationToken cancellationToken);
+        public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
     }
 
 }

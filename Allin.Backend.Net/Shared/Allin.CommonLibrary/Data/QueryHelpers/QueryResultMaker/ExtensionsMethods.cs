@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Allin.Common.Data.QueryHelpers;
+using Allin.Common.Data.QueryHelpers.QueryParsing;
 using Microsoft.EntityFrameworkCore;
 
-namespace Allin.Common.Data
+namespace Allin.Common.Data.QueryHelpers.QueryResultMaker
 {
     public static class QueryResultMakerExtensionMethods
     {

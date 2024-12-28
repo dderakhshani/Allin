@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
-using Allin.Common.Data.QueryHelpers;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Allin.Common.Data
+namespace Allin.Common.Data.QueryHelpers.QueryParsing
 {
     public static class QueryParserExtensionsMethods
     {

@@ -1,11 +1,12 @@
-﻿using Allin.Common.Utilities;
+﻿using Allin.Common.Data.QueryHelpers.QueryParsing;
+using Allin.Common.Utilities;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace Allin.Common.Data
+namespace Allin.Common.Data.QueryHelpers
 {
     public class QueryParamModelBinder : IModelBinder
     {
