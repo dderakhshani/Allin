@@ -76,7 +76,7 @@ export abstract class TableColumnBase<T = any, E = any> {
     public orderingFields?: string[];
     protected _fieldType: FieldTypesEnum;
 
-    public fieldType() {
+    public get fieldType() {
         return this._fieldType;
     }
     public displayFormat?: string;
@@ -88,6 +88,8 @@ export abstract class TableColumnBase<T = any, E = any> {
     }
 
     filterable: boolean | 'rowOnly' | 'cardOnly' = true;
+    globalFilterable: boolean | 'rowOnly' | 'cardOnly' = true;
+
     public editable: boolean = false;
     public editableFieldName?: string;
 

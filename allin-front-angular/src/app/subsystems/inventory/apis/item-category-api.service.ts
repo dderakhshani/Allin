@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ItemCategoryCommnad } from '../models/create-item-category-command';
+import { ItemCategoryCommnad } from '../models/commands/create-item-category-command';
 
 @Injectable({
   providedIn: 'root'
