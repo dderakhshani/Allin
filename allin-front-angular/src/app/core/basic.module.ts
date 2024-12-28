@@ -7,6 +7,7 @@ import { TreeTableModule } from 'primeng/treetable';
 import { DividerModule } from 'primeng/divider';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TimelineModule } from 'primeng/timeline';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CommonModule } from '@angular/common';
     ButtonModule,
     InputTextModule,
     TreeTableModule,
-    DividerModule
+    DividerModule,
+    TimelineModule
   ]
 })
 export class BasicModule { }

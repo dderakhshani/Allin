@@ -1,0 +1,23 @@
+
+<div class="flex">
+    <div class="w-2/5">
+        <div class="card flex p-10">
+            <p-timeline [value]="events">
+                <ng-template pTemplate="content" let-event>
+                    {{ event.status }}
+                </ng-template>
+            </p-timeline>
+        </div>       
+    </div>
+    <p-divider layout="vertical" />
+    <div class="flex flex-col w-3/5 p-10">
+        <div class="flex">
+            <app-add-person></app-add-person>
+        </div>
+        <div class="flex justify-end">
+            <p-button label="Next" icon="pi pi-angle-right" iconPos="right" />
+        </div>
+        
+        
+    </div>
+  </div>

@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
-import { CreateUserComponent } from "./create-user/create-user.component";
-import { ListUsersComponent } from "./list-users/list-users.component";
+import { CreateUserPageComponent } from "./create-user/create-user-page.component";
+import { UserListPageComponent } from "./user-list/user-list-page.component";
+
  
 export const User_ROUTES: Routes = [
     {
@@ -9,15 +10,15 @@ export const User_ROUTES: Routes = [
         pathMatch: "full"
     },
     {
-        path: "create-user",
-        component: CreateUserComponent, data: {
-            title: 'create user'
+        path: "create-user-page",
+        component: CreateUserPageComponent, data: {
+            title: 'create user page'
         }
     },
     {
-        path: "list-user",
-        component: ListUsersComponent, data: {
-            title: 'list user'
+        path: "user-list-page",
+        component: UserListPageComponent, data: {
+            title: 'user list page'
         }
     },
 ];
