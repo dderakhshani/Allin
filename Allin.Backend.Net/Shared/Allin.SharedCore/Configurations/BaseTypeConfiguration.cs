@@ -12,11 +12,9 @@ namespace Allin.SharedCore.Configurations
             builder.HasKey(x => x.Id);
 
             builder.Property<DateTime>("CreatedAt")
-                            .IsRequired()
-                            .ValueGeneratedOnAddOrUpdate();
+                            .IsRequired();
 
-            builder.Property<DateTime>("ModifiedAt")
-                .ValueGeneratedOnAddOrUpdate();
+            builder.Property<DateTime>("ModifiedAt");
 
             builder.Property<bool>("IsDeleted")
               .IsRequired();

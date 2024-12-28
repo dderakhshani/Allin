@@ -1,7 +1,7 @@
 using FluentValidation;
 
 
-namespace Allin.Admin.Application.Commands.Users.Add.Validator
+namespace Allin.Admin.Application.Commands
 {
     public sealed class AddUserCommandValidator : AbstractValidator<AddUserCommand>
     {

@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Roles\Add\" />
     <Folder Include="Commands\Roles\Delete\" />
     <Folder Include="Commands\Roles\Update\" />
     <Folder Include="Commands\Users\Delete\" />
