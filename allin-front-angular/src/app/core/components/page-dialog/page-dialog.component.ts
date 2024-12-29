@@ -7,7 +7,7 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 
 @Component({
     selector: 'app-page-dialog',
-    providers: [DialogService],
+    providers: [DialogService, ConfirmationService],
     standalone: true,
     imports: [
         CommonModule,

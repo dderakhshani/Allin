@@ -135,10 +135,10 @@ export class UserListPageComponent {
             isFullScreen: false,
         };
         this.ref = this.dialogService.open(PageDialogComponent, {
-            data: {
-                id: '51gF3'
-            },
-            header: 'Add New User'
+            data: data,
+            header: 'Add New User',
+            width: '100%',
+            height: '100vh'
         });
         this.ref.onClose.subscribe((result: any) => {
             if (result) {
