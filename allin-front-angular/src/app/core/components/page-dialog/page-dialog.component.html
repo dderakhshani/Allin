@@ -1,1 +1,31 @@
-<p>page-dialog works!</p>
+<div class="w-full md:w-4/5 lg:w-3/4 max-w-5xl min-w-80" [ngClass]="config.customCssClasses">
+    <div #container></div>
+    @if (!componentInstance) {
+    template
+    <ng-container *ngTemplateOutlet="templateContent;context:{ $implicit: this.config.extraData }">
+    </ng-container>
+    }
+
+</div>
+
+<div pTemplate="footer" class="flex" *ngIf="this.config.showModalFooter">
+
+    @if (config.customActionsTemplate) {
+    <ng-container *ngTemplateOutlet="this.config.customActionsTemplate;context:{ $implicit: this.config.extraData }">
+    </ng-container>
+    }
+    @else {
+    <div class="ml-auto"></div>
+
+
+    <p-button *ngIf="config.secondaryActionButtonConfigs?.visible" (click)="onDismiss()"
+        [label]="config.secondaryActionButtonConfigs?.title" [disabled]="config.mainButtonDisabled?.()" />
+
+    <p-button (click)="onConfirm()" [label]="config.mainActionButtonConfigs?.title"
+        [severity]="config.mainActionButtonConfigs?.color" [disabled]="config.mainButtonDisabled?.()" />
+
+
+    }
+
+
+</div>
