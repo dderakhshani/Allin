@@ -1,3 +1,8 @@
+<p-toolbar>
+    <div class="p-toolbar-group-end">
+        <p-button label="Add User" icon="pi pi-plus" class="mr-2" (onClick)="openAddUser()" />
+    </div>
+</p-toolbar>
 <app-png-table [columns]="columns" [dataSource]="customers">
     <div custom-filters>
         <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" placeholder="Select a City" />
