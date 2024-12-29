@@ -6,6 +6,7 @@ import { ButtonModule } from 'primeng/button';
 import { TreeTableModule } from 'primeng/treetable';
 import { CommonModule } from '@angular/common';
 import { NodeService } from './services/nodeservice';
+import { TimelineModule } from 'primeng/timeline';
 
 
 interface Column {
@@ -18,27 +19,26 @@ interface Column {
   templateUrl: './item-categories-list.component.html',
   styleUrl: './item-categories-list.component.scss',
   standalone: true,
-  imports: [BasicModule, CommonModule],
+  imports: [BasicModule, CommonModule, TreeTableModule, TimelineModule],
   providers: [NodeService]
-  
+
 })
-export class ItemCategoriesListComponent implements OnInit{
+export class ItemCategoriesListComponent implements OnInit {
 
   files!: TreeNode[];
 
-    cols!: Column[];
+  cols!: Column[];
 
-    constructor(private nodeService: NodeService) {}
+  constructor(private nodeService: NodeService) { }
 
-    ngOnInit() {
-      // this.nodeService.getFilesystem().then((files) => (this.files = files));
-      // this.cols = [
-      //     { field: 'name', header: 'Name' },
-      //     { field: 'size', header: 'Size' },
-      //     { field: 'type', header: 'Type' },
-      //     { field: '', header: '' }
-      // ];
+  ngOnInit() {
+    // this.nodeService.getFilesystem().then((files) => (this.files = files));
+    // this.cols = [
+    //     { field: 'name', header: 'Name' },
+    //     { field: 'size', header: 'Size' },
+    //     { field: 'type', header: 'Type' },
+    //     { field: '', header: '' }
+    // ];
   }
 
 }
-  

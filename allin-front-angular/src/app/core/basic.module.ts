@@ -6,9 +6,11 @@ import { DividerModule } from 'primeng/divider';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TimelineModule } from 'primeng/timeline';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { SelectButtonModule } from 'primeng/selectbutton';
+import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,14 @@ import { DropdownModule } from 'primeng/dropdown';
     CommonModule,
     FormsModule,
     ButtonModule,
+    CheckboxModule,
     InputTextModule,
-    TreeTableModule,
-    DividerModule,
-    TimelineModule,
-    FloatLabelModule,
-    SelectButtonModule,
+    IconFieldModule,
+    InputIconModule,
+    MultiSelectModule,
     DropdownModule,
+    DividerModule,
+    TimelineModule
   ]
 })
 export class BasicModule { }

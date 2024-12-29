@@ -1,1 +1,16 @@
-<p>user-list-page works!</p>
+<app-png-table [columns]="columns" [dataSource]="customers">
+    <div custom-filters>
+        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" placeholder="Select a City" />
+    </div>
+
+
+    <ng-template let-rowData templateForColumn="countryColumnTemplate">
+        <img src="https://flagicons.lipis.dev/flags/4x3/{{rowData.country.code}}.svg" style="width: 20px" />
+        <span class="ml-1 vertical-align-middle">{{ rowData.country.name }}</span>
+    </ng-template>
+
+    <ng-template let-rowData templateForColumn="statusColumnTemplate">
+        <p-tag [value]="rowData.status" [severity]="getSeverity(rowData.status)" />
+    </ng-template>
+
+</app-png-table>
