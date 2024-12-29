@@ -1,5 +1,6 @@
 ﻿using Allin.Common.Utilities.CustomBindings;
 using Allin.Common.Validations;
+using Allin.CommonLibrary.Localizations;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -7,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
@@ -207,6 +210,22 @@ namespace Allin.Common.Web
                     config.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
                     config.AddOpenBehavior(typeof(ValidationBehavior<,>));
                 });
+        }
+
+        public static void AddAllinLocalization(this IServiceCollection services, Assembly assembly, string resourcePath)
+        {
+            services.AddLocalization(options => options.ResourcesPath = resourcePath);
+            //services.AddSingleton<ILocalizationService, LocalizationService>();
+
+            services.AddSingleton<ILocalizator>(x =>
+            {
+                var factory = x.GetRequiredService<IStringLocalizerFactory>();
+                var assemblyName = new AssemblyName(assembly.FullName);
+                return new Localizator()
+                {
+                    Localizer = factory.Create("Localization", assemblyName.Name)
+                };
+            });
         }
 
         public static void AddGeneralAutoMapper(this IServiceCollection services, Type mappingProfileType)
