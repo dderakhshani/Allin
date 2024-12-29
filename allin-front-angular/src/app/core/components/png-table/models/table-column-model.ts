@@ -5,15 +5,15 @@ import { Observable } from 'rxjs';
 type DataTableColumnSpecification<T, E = any> = Partial<Omit<TableColumnBase<T>, 'fieldType' | 'fieldName' | 'valueFieldName' | 'groupingField'>> &
     Pick<TableColumnBase<T>, 'title'> &
 {
-    fieldNameInRoot: Extract<keyof T, string>,
-    fieldNameBelowRoot?: Extract<keyof E, string>,
-    valueFieldNameInRoot?: Extract<keyof T, string>,
-    valueFieldNameBelowRoot?: Extract<keyof E, string>,
-    textFieldNameInRoot?: Extract<keyof T, string>,
-    textFieldNameBelowRoot?: Extract<keyof E, string>,
-    groupingFieldNameInRoot?: Extract<keyof T, string>,
-    groupingFieldNameBelowRoot?: Extract<keyof E, string>,
-    requiredFields?: { fieldNameInRoot: Extract<keyof T, string>, fieldNameBelowRoot?: Extract<keyof E, string> }[]
+    rootFieldName: Extract<keyof T, string>,
+    nestedFieldName?: Extract<keyof E, string>,
+    rootValueFieldName?: Extract<keyof T, string>,
+    nestedValueFieldName?: Extract<keyof E, string>,
+    rootTextFieldName?: Extract<keyof T, string>,
+    nestedTextFieldName?: Extract<keyof E, string>,
+    rootGroupingFieldName?: Extract<keyof T, string>,
+    nestedGroupingFieldName?: Extract<keyof E, string>,
+    requiredFields?: { rootFieldName: Extract<keyof T, string>, nestedFieldName?: Extract<keyof E, string> }[]
 };
 
 type DataTableColumnsAsObject<T> = { [key: string]: TableColumnBase<T> };
@@ -33,24 +33,29 @@ export abstract class TableColumnBase<T = any, E = any> {
         this.title = init.title;
 
         this._fieldType = fieldType;
-        this.fieldName = init.fieldNameInRoot;
-        if (init.fieldNameBelowRoot) {
-            this.fieldName += `.${init.fieldNameBelowRoot}`
+        this.fieldName = init.rootFieldName;
+        if (init.nestedFieldName) {
+            this.fieldName += `.${init.nestedFieldName}`
         }
+
+        if (init.filterOptions)
+            this.filterOptions = init.filterOptions;
+        else
+            this.filterOptions = new TableColumnFilterOptions();
 
         this.requiredFieldNames = [];
         for (let requiredField of init.requiredFields ?? []) {
-            let field = String(requiredField.fieldNameInRoot);
-            if (requiredField.fieldNameBelowRoot) {
-                field += `.${requiredField.fieldNameBelowRoot}`
+            let field = String(requiredField.rootFieldName);
+            if (requiredField.nestedFieldName) {
+                field += `.${requiredField.nestedFieldName}`
             }
             this.requiredFieldNames.push(field);
         }
 
-        if (init.groupingFieldNameInRoot) {
-            this.groupingField = init.groupingFieldNameInRoot;
-            if (init.groupingFieldNameBelowRoot) {
-                this.groupingField += `.${init.groupingFieldNameBelowRoot}`;
+        if (init.rootGroupingFieldName) {
+            this.groupingField = init.rootGroupingFieldName;
+            if (init.nestedGroupingFieldName) {
+                this.groupingField += `.${init.nestedGroupingFieldName}`;
             }
         } else {
             this.groupingField = this.fieldName;
@@ -59,10 +64,7 @@ export abstract class TableColumnBase<T = any, E = any> {
         if (!this.orderingFields)
             this.orderingFields = [this.fieldName];
 
-        this.isDatabaseColumn = this._fieldType != FieldTypesEnum.SelectAction
-            && this._fieldType != FieldTypesEnum.CopyPasteAction
-            && (this._fieldType != FieldTypesEnum.WithTemplate || (this.fieldName != undefined && this.fieldName != null && this.fieldName != ''));
-
+        this.isDatabaseColumn = (this._fieldType != FieldTypesEnum.WithTemplate || (this.fieldName != undefined && this.fieldName != null && this.fieldName != ''));
 
 
         this.uniqueName = this.fieldName + (Math.random() + 1).toString(36).substring(7);
@@ -87,8 +89,9 @@ export abstract class TableColumnBase<T = any, E = any> {
         return this.isDatabaseColumn;
     }
 
-    filterable: boolean | 'rowOnly' | 'cardOnly' = true;
-    globalFilterable: boolean | 'rowOnly' | 'cardOnly' = true;
+    filterOptions: TableColumnFilterOptions;
+
+    templateRefId?: string;
 
     public editable: boolean = false;
     public editableFieldName?: string;
@@ -127,6 +130,7 @@ export class TableTextColumn<T = any, E = any> extends TableColumnBase<T, E> {
 
     constructor(init: DataTableColumnSpecification<T, E>) {
         super(FieldTypesEnum.Text, init);
+
     }
 
     placeholder?: string;
@@ -145,42 +149,49 @@ export class TableBooleanColumn<T = any, E = any> extends TableColumnBase<T, E> 
 
     constructor(init: DataTableColumnSpecification<T, E>) {
         super(FieldTypesEnum.Boolean, init);
+
+        if (!init.filterOptions) {
+            init.filterOptions = new TableColumnCheckBoxFilterOptions();
+        }
     }
+
+    displayStyle: BooleanColumnDisplayEnum = BooleanColumnDisplayEnum.Checkbox;
 
 }
 
 export class TableDropDownColumn<T = any, E = any> extends TableColumnBase<T, E> {
 
-    constructor(init: DataTableColumnSpecification<T, E>) {
+    constructor(init: DataTableColumnSpecification<T, E> & { itemsSource: TableColumnDropDownOptions }) {
         super(FieldTypesEnum.DropDown, init);
 
-        if (init.textFieldNameInRoot) {
-            this.textFieldName = init.textFieldNameInRoot;
-            if (init.textFieldNameBelowRoot) {
-                this.textFieldName += `.${init.textFieldNameBelowRoot}`;
+        if (init.rootTextFieldName) {
+            this.itemsSource.displayFieldName = init.rootTextFieldName;
+            if (init.nestedTextFieldName) {
+                this.itemsSource.displayFieldName += `.${init.nestedTextFieldName}`;
             }
         } else {
-            this.textFieldName = this.fieldName;
+            this.itemsSource.displayFieldName = this.fieldName;
         }
 
 
-        if (init.valueFieldNameInRoot) {
-            this.valueFieldName = init.valueFieldNameInRoot;
-            if (init.valueFieldNameBelowRoot) {
-                this.valueFieldName += `.${init.valueFieldNameBelowRoot}`;
+        if (init.rootValueFieldName) {
+            this.itemsSource.valueFieldName = init.rootValueFieldName;
+            if (init.nestedValueFieldName) {
+                this.itemsSource.valueFieldName += `.${init.nestedValueFieldName}`;
             }
         } else {
-            this.valueFieldName = this.fieldName;
+            this.itemsSource.valueFieldName = this.fieldName;
         }
 
         // if (this.fieldType === FieldTypesEnum.Enum && init.multiple === undefined)
         //     this.multiple = true;
 
+        if (!init.filterOptions) {
+            init.filterOptions = new TableColumnDropDownFilterOptions(init.itemsSource.items);
+        }
     }
 
-    public itemsSource?: DropDownDataSource;
-    public valueFieldName: string;
-    public textFieldName: string;
+    public itemsSource!: TableColumnDropDownOptions;
     multiple: boolean = false;
 }
 
@@ -205,7 +216,7 @@ export class TableTemplateColumn<T = any, E = any> extends TableColumnBase<T, E>
     constructor(init: DataTableColumnSpecification<T, E>) {
         super(FieldTypesEnum.WithTemplate, init);
     }
-    templateRefId?: string;
+
 }
 
 export class TableNumberColumn<T = any, E = any> extends TableColumnBase<T, E> {
@@ -225,12 +236,48 @@ export class TableMoneyColumn<T = any, E = any> extends TableColumnBase<T, E> {
     currencyCodeField?: string;
 }
 
+export class TableColumnFilterOptions<T = any> {
+    filterable: boolean | 'rowOnly' | 'cardOnly' = true;
+    globalFilterable: boolean | 'rowOnly' | 'cardOnly' = true;
+    filterControl: FilterControlEnum = FilterControlEnum.TextField;
+}
 
-export interface DropDownDataSource<T = any> {
+//This Option is not only for drop-down columns, can be applied on any columns
+export class TableColumnDropDownFilterOptions<T = any> extends TableColumnFilterOptions<T> {
+    multipleItemsSelect: boolean = true;
+    items: Observable<T[]> | T[];
+
+    constructor(items: Observable<T[]> | T[]) {
+        super();
+        this.filterControl = FilterControlEnum.DropDown;
+        this.items = items;
+    }
+}
+
+//Only for numeric columns
+export class TableColumnNumberFilterOptions<T = any> extends TableColumnFilterOptions<T> {
+    minValue?: number;
+    maxValue?: number;
+
+    constructor() {
+        super();
+        this.filterControl = FilterControlEnum.FromTo;//Default Control
+    }
+}
+
+export class TableColumnCheckBoxFilterOptions<T = any> extends TableColumnFilterOptions<T> {
+    constructor() {
+        super();
+        this.filterControl = FilterControlEnum.checkBox;
+    }
+}
+
+export interface TableColumnDropDownOptions<T = any> {
     displayFieldName: string;
     valueFieldName: string;
     enabledFieldName?: string | null;
-    items$: Observable<T[]>
+    items: Observable<T[]> | T[];
+
 }
 
 export enum FieldTypesEnum {
@@ -243,10 +290,23 @@ export enum FieldTypesEnum {
     Email = "email",
     Boolean = "checkbox",
     DropDown = "dropdown",
-    Enum = "enum",
-    CopyPasteAction = "CopyPasteAction",
-    SelectAction = "SelectAction",
+    Enum = "enum",//TODO: reserved for future
     WithTemplate = "WithTemplate"
+}
+export enum BooleanColumnDisplayEnum {
+    CheckCloseColorfull = 'check-close-color',
+    CheckCloseNoColor = 'check-close',
+    OnlyCheckCloseColorFull = 'only-check-color',
+    OnlyCheckCloseNoColor = 'only-check',
+    Checkbox = 'checkbox',
+}
+
+export enum FilterControlEnum {
+    TextField = 'text-field',
+    DropDown = 'drop-down',
+    FromTo = 'from-to',
+    Slider = 'slider',
+    checkBox = 'checkBox'
 }
 
 export enum AggregatesTypesEnum {
