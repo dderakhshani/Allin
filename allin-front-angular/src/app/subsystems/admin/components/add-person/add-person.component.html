@@ -1,1 +1,108 @@
-<p>add-person works!</p>
+<div class="flex flex-col w-full">
+    <div class="card flex w-full justify-content-center">
+        <p-accordion [multiple]="true" [activeIndex]="[0,1]">
+            <p-accordionTab header="General Information">
+                <div class="card flex justify-content-center">
+                    <p-fileUpload 
+                        name="demo[]" 
+                        url="https://www.primefaces.org/cdn/api/upload.php" 
+                        (onUpload)="onUpload($event)" 
+                        [multiple]="true" 
+                        accept="image/*" 
+                        maxFileSize="1000000">
+                            <ng-template pTemplate="content">
+                                <ul *ngIf="uploadedFiles.length">
+                                    <li *ngFor="let file of uploadedFiles">
+                                        {{ file.name }} - {{ file.size }} bytes
+                                    </li>
+                                </ul>
+                            </ng-template>
+                    </p-fileUpload>
+                </div>
+                <div class="flex flex-col w-full space-y-5 pt-5">
+                    <div class="flex space-x-5">
+                        <div>
+                            <p-selectButton [options]="typeOptions" [(ngModel)]="value3" optionLabel="label"
+                                optionValue="value3" />
+                        </div>
+                    </div>
+                    <div class="flex space-x-5">
+                        <div class="flex flex-col space-y-2 w-1/2">
+                            <label for="FirstName">FirstName</label>
+                            <input pInputText id="firstName" [(ngModel)]="value" />
+
+                        </div>
+                        <div class=" flex flex-col space-y-2 w-1/2">
+                            <label for="LastName">LastName</label>
+                            <input pInputText id="lastName" [(ngModel)]="value" />
+                        </div>
+                    </div>
+                    <div class="flex space-x-5">
+                        <div class=" flex flex-col space-y-2 w-1/2">
+                            <label for="SSN">SSN</label>
+                            <input pInputText id="ssn" [(ngModel)]="value" />
+                        </div>
+                        <div class=" flex flex-col space-y-2 w-1/2">
+                            <label for="birth_date">Birth Date</label>
+                            <p-calendar [(ngModel)]="date" inputId="birth_date" />
+                        </div>
+                    </div>
+                    <div class="flex space-x-5">
+                        <div class="w-1/2">
+                            <p-selectButton [options]="genderOptions" [(ngModel)]="value2" optionLabel="label"
+                                optionValue="value2" />
+                        </div>
+                        <div class="w-1/2">
+                        </div>
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Contact Information">
+                <div class="flex flex-col w-full space-y-5 pt-5">
+                    <div class="flex space-x-5 items-end">                    
+                        <div class=" flex flex-col space-y-2">
+                            <label for="Mobile">Select</label>
+                            <p-dropdown [options]="contact" [(ngModel)]="selectedContact" optionLabel="name"
+                            placeholder="Select Type" />
+                        </div>
+                        <div class=" flex flex-col space-y-2">
+                            <label for="Mobile">Mobile</label>
+                            <input pInputText id="mobile" [(ngModel)]="value" />
+                        </div>
+                        <div>
+                            <p-button icon="pi pi-trash" [text]="true" [severity]="'danger'" />
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <p-button label="Add a phone number" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
+                    </div>
+                    
+                    <div class="flex space-x-5 ">
+                        <div class=" flex flex-col space-y-2 w-1/2">
+                            <label for="Email">Email</label>
+                            <input pInputText id="email" [(ngModel)]="value" />
+                        </div>
+                    </div>
+                    <div class="flex space-x-5 items-end">                    
+                        <div class=" flex flex-col space-y-2">
+                            <label for="Mobile">Select</label>
+                            <p-dropdown [options]="location" [(ngModel)]="selectedLocation" optionLabel="name"
+                            placeholder="Select Location Type" />
+                        </div>
+                        <div class=" flex flex-col space-y-2">
+                            <label for="Address">Address</label>
+                            <input pInputText id="address" [(ngModel)]="value" />
+                        </div>
+                        <div>
+                            <p-button icon="pi pi-trash" [text]="true" [severity]="'danger'" />
+                        </div>
+                    </div>
+                    <div class="flex">
+                        <p-button label="Add a Address" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
+                    </div>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+
+</div>
