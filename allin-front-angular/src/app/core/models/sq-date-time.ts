@@ -6,7 +6,7 @@ export class SqDateTime extends BaseType {
     public date: Date;
     public excludeTimeZone: boolean;
 
-    static [Symbol.hasInstance](value: any) {
+    static override [Symbol.hasInstance](value: any) {
         if (value)
             return value["excludeTimeZone"] != undefined && value['date'] != undefined && !isNaN(Date.parse(value['date']));
         return false;
