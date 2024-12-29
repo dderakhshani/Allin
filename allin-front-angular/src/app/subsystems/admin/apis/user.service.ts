@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { BaseHttpService } from '../../../core/services/base.http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() { }
+  constructor(private baseHttpService: BaseHttpService) { }
 
   getData() {
     return [
