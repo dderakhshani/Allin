@@ -2,7 +2,7 @@
 using Allin.Admin.Infrastructure.Persistence;
 using AutoMapper;
 
-namespace Allin.Admin.Application.Commands.Users.Add
+namespace Allin.Admin.Application.Commands
 {
     public class AddUserCommandHandler : AdminCommandHandler<AddUserCommand, bool>
     {

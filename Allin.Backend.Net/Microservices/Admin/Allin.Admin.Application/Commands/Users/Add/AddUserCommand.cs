@@ -1,10 +1,9 @@
-﻿using Allin.Admin.Infrastructure.Persistence.Entities;
+﻿using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Utilities.Mappings;
-using AutoMapper;
 using MediatR;
 
 //NOTE namespace must be Allin.Admin.Application.Commands(inner folders doesn't affect the namespace)
-namespace Allin.Admin.Application.Commands.Users.Add
+namespace Allin.Admin.Application.Commands
 {
     public class AddUserCommand : IRequest<bool>, IMapFrom<User, AddUserCommand>
     {
@@ -14,6 +13,8 @@ namespace Allin.Admin.Application.Commands.Users.Add
         public required List<AddUserCommandRoles> Roles { get; set; }
 
     }
+
+
 
     public class AddUserCommandRoles
     {

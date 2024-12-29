@@ -1,7 +1,7 @@
 using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Validations;
 
-namespace Allin.Admin.Application.Commands.Users.Add.Validator
+namespace Allin.Admin.Application.Commands
 {
     public class CheckUsernameExistBusinessRule : IBusinessRuleValidator<AddUserCommand>
     {

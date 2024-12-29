@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Allin.CommonLibrary\Allin.CommonLibrary.csproj" />
     <ProjectReference Include="..\..\..\Shared\Allin.SharedCore\Allin.SharedCore.csproj" />
   </ItemGroup>

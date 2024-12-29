@@ -1,5 +1,6 @@
 ﻿
 using Allin.Common.Exceptions;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -74,7 +75,13 @@ namespace Allin.Common.Web
 
                 return GeneralApiResult.Fail(Nanoid.Generate(size: 8), errMsg);
             }
+            catch (ValidationException ex)
+            {
+                var logger = HttpContext.RequestServices.GetRequiredService<ILogger<AuthorizeApiControllerBase>>();
+                logger.LogError(ex, ex.Message);
 
+                return GeneralApiResult.Fail(Nanoid.Generate(size: 8), ex.Message);
+            }
             catch (Exception ex)
             {
                 var logger = HttpContext.RequestServices.GetRequiredService<ILogger<AuthorizeApiControllerBase>>();

@@ -1,5 +1,4 @@
-﻿using Allin.Common.Data;
-using Allin.Common.Utilities.CustomBindings;
+﻿using Allin.Common.Utilities.CustomBindings;
 using Allin.Common.Validations;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
@@ -202,9 +200,8 @@ namespace Allin.Common.Web
             });
         }
 
-        private static void AddMediator(this IServiceCollection services)
+        public static void AddMediator(this IServiceCollection services)
         {
-
             services.AddMediatR(config =>
                 {
                     config.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());

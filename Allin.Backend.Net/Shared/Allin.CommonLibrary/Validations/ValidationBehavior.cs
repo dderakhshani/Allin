@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Allin.Common.Validations
 {
-    public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest
+    public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : class
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
         private readonly IEnumerable<IBusinessRuleValidator<TRequest>> _businessRules;

@@ -43,6 +43,25 @@ public partial class BaseDbContext : DbContext
         });
     }
 
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        ChangeTracker.DetectChanges();
+
+        foreach (var entry in ChangeTracker.Entries())
+        {
+            if (entry.State == EntityState.Added)
+                entry.Property("CreatedAt").CurrentValue = DateTime.Now;
+
+            else if (entry.State == EntityState.Modified)
+                entry.Property("ModifiedAt").CurrentValue = DateTime.Now;
+
+            else if (entry.State == EntityState.Deleted)
+                entry.Property("IsDeleted").CurrentValue = true;
+
+        }
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
     //TODO: This method may  be added later to logging or decide other type of logging
     //public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
     //{
