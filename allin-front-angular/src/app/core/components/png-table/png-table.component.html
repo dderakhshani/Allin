@@ -12,6 +12,10 @@
                     placeholder="Search keyword" />
             </p-iconField>
 
+            <div class="px-2">
+                <ng-content select="[custom-filters]"></ng-content>
+            </div>
+
             <div class="ml-auto">
                 <div class="p-toolbar-group-end">
                     <p-button icon="pi pi-filter" severity="secondary" [outlined]="true" class="mr-2" />
@@ -83,11 +87,18 @@
                 <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.CheckCloseColorfull"
                     [ngClass]="{ 'text-green-500 pi-check-circle':  rowData[col.fieldName], 'text-red-500 pi-times-circle': !rowData[col.fieldName] }"></i>
                 <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.CheckCloseNoColor"
-                    [ngClass]="{ 'pi-check-circle':  rowData[col.fieldName], 'i-times-circle': !rowData[col.fieldName] }"></i>
+                    [ngClass]="{ 'pi-check-circle':  rowData[col.fieldName], 'pi-times-circle': !rowData[col.fieldName] }"></i>
+
                 <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCheckCloseColorFull"
                     [ngClass]="{ 'text-green-500 pi-check-circle':  rowData[col.fieldName] }"></i>
                 <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCheckCloseNoColor"
                     [ngClass]="{ 'text-green-500 pi-check-circle':  rowData[col.fieldName] }"></i>
+
+                <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCloseColorFull"
+                    [ngClass]="{ 'text-red-500 pi-times-circle': !rowData[col.fieldName] }"></i>
+                <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCloseNoColor"
+                    [ngClass]="{ 'pi-times-circle': !rowData[col.fieldName] }"></i>
+
                 <p-checkbox *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.Checkbox" readonly binary="true"
                     [(ngModel)]="rowData[col.fieldName]" />
                 }

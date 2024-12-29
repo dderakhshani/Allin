@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PngTableComponent } from '../../../../../core/components/png-table/png-table.component';
 import { BasicModule } from '../../../../../core/basic.module';
-import { TableBooleanColumn, TableColumnBase, TableTextColumn } from '../../../../../core/components/png-table/models/table-column-model';
+import { BooleanColumnDisplayEnum, TableBooleanColumn, TableColumnBase, TableTextColumn } from '../../../../../core/components/png-table/models/table-column-model';
 import { Table } from 'primeng/table';
 import { UserService } from '../../../apis/user.service';
 import { TagModule } from 'primeng/tag';
@@ -45,6 +45,7 @@ export class UserListPageComponent {
       title: 'Verified',
       rootFieldName: 'verified',
       sortable: false,
+      displayStyle: BooleanColumnDisplayEnum.OnlyCloseNoColor
     })
   ];
 
@@ -59,7 +60,19 @@ export class UserListPageComponent {
 
   constructor(private userService: UserService) { }
 
+  cities: any[] | undefined;
+
+  selectedCity: any | undefined;
+
+
   ngOnInit() {
+    this.cities = [
+      { name: 'New York', code: 'NY' },
+      { name: 'Rome', code: 'RM' },
+      { name: 'London', code: 'LDN' },
+      { name: 'Istanbul', code: 'IST' },
+      { name: 'Paris', code: 'PRS' }
+    ];
     this.userService.getCustomersLarge().then((customers) => {
       this.customers = customers;
       this.loading = false;

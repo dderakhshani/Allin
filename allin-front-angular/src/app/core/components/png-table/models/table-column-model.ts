@@ -147,11 +147,15 @@ export class TableEmailColumn<T = any, E = any> extends TableColumnBase<T, E> {
 
 export class TableBooleanColumn<T = any, E = any> extends TableColumnBase<T, E> {
 
-    constructor(init: DataTableColumnSpecification<T, E>) {
+    constructor(init: DataTableColumnSpecification<T, E> & Partial<TableBooleanColumn>) {
         super(FieldTypesEnum.Boolean, init);
 
         if (!init.filterOptions) {
             init.filterOptions = new TableColumnCheckBoxFilterOptions();
+        }
+
+        if (init.displayStyle) {
+            this.displayStyle = init.displayStyle;
         }
     }
 
@@ -298,6 +302,8 @@ export enum BooleanColumnDisplayEnum {
     CheckCloseNoColor = 'check-close',
     OnlyCheckCloseColorFull = 'only-check-color',
     OnlyCheckCloseNoColor = 'only-check',
+    OnlyCloseColorFull = 'only-close-color',
+    OnlyCloseNoColor = 'only-close',
     Checkbox = 'checkbox',
 }
 
