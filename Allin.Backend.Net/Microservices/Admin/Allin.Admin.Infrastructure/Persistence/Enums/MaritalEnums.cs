@@ -2,8 +2,10 @@
 {
     public enum MaritalEnums
     {
-        Male = 1,
-        Female = 2,
-        Other = 3
+        Single = 1,
+        Married = 2,
+        Seprated = 3,
+        Divorced = 4,
+        NoData
     }
 }
