@@ -15,5 +15,19 @@ export const Admin_ROOT_ROUTES: Routes = [
                 },
                 loadChildren: () => import('./person/routes').then(mod => mod.Person_ROUTES)
     },
+    {
+        path: "employee",
+                data: {
+                    title: 'employee'
+                },
+                loadChildren: () => import('./employee/routes').then(mod => mod.Employee_ROUTES)
+    },
+    {
+        path: "baseValue",
+                data: {
+                    title: 'baseValue'
+                },
+                loadChildren: () => import('./baseValue/routes').then(mod => mod.Basevalue_ROUTES)
+    },
 
 ];
