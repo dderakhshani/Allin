@@ -11,6 +11,7 @@ namespace Allin.Admin.ServiceApi.Controllers
     {
         public RoleController(IMediator mediator, IUserAccessor userAccessor, IWebHostEnvironment currentEnvironment) : base(mediator, userAccessor, currentEnvironment)
         {
+
         }
 
 

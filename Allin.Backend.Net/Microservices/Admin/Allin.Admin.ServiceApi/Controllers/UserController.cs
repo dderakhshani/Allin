@@ -11,6 +11,7 @@ namespace Allin.Admin.ServiceApi.Controllers
     {
         public UserController(IMediator mediator, IUserAccessor userAccessor, IWebHostEnvironment currentEnvironment) : base(mediator, userAccessor, currentEnvironment)
         {
+
         }
 
 

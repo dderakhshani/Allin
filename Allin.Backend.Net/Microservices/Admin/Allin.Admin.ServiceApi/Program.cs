@@ -2,8 +2,10 @@ using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Utilities.Mappings;
 using Allin.Common.Web;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+//Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("fr-FR");
 
 // Add services to the container.
 builder.Services.AddScoped<IAppSettingsAccessor, AppSettingsAccessor>();
@@ -19,13 +21,20 @@ builder.Services.AddDbContext<AdminDbContext>(options =>
 //builder.Services.AddValidatorsFromAssembly(typeof(AddRoleCommandValidator).Assembly);
 
 //builder.Services.AddAutoMapper(typeof(AddUserCommand).Assembly);
+// language
+
+
+builder.Services.AddAllinLocalization(Assembly.GetExecutingAssembly(), "Resources");
 
 builder.Services.AddMediator();
 
 var app = builder.Build();
+
+//app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseHttpsRedirection();
 
 app.UseBaseFeatures();
 
 app.Run();
+

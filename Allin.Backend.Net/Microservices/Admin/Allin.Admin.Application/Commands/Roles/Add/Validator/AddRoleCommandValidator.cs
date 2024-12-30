@@ -1,12 +1,13 @@
-﻿using FluentValidation;
+﻿using Allin.CommonLibrary.Localizations;
+using FluentValidation;
 
 namespace Allin.Admin.Application.Commands.Roles.Add.Validator
 {
     public sealed class AddRoleCommandValidator : AbstractValidator<AddRoleCommand>
     {
-        public AddRoleCommandValidator()
+        public AddRoleCommandValidator(ILocalizator localizator)
         {
-            RuleFor(x => x.Description).NotNull().WithMessage("Please specify the Username");//Errors must be obtain from Language Resources
+            RuleFor(x => x.Title).NotNull().WithMessage(localizator["TitleIsRequired"]);
         }
     }
 }
