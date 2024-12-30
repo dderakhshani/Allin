@@ -14,6 +14,8 @@
     <Folder Include="Commands\Users\AddRoles\" />
     <Folder Include="Events\" />
     <Folder Include="IntegrationEvents\" />
+    <Folder Include="Params\" />
+    <Folder Include="Queries\Permissions\" />
     <Folder Include="Services\" />
   </ItemGroup>
 

@@ -6,7 +6,7 @@ namespace Allin.Admin.Application.Commands
 {
     public class AddRoleCommand : IRequest<bool>, IMapFrom<Role, AddRoleCommand>
     {
-        public string? Title { get; set; }
+        public required string Title { get; set; }
         public required string UniqueName { get; set; }
         public string? Description { get; set; }
     }

@@ -1,3 +1,4 @@
+using Allin.Admin.Application.Queries;
 using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Utilities.Mappings;
 using Allin.Common.Web;
@@ -12,6 +13,8 @@ builder.Services.AddScoped<IAppSettingsAccessor, AppSettingsAccessor>();
 StartupServiceHelper.LoadSettings(new AppSettingsAccessor(builder.Configuration));
 builder.Services.AddBaseServices();
 builder.Services.AddGeneralAutoMapper(typeof(MappingProfile));
+
+builder.Services.AddScoped<IRoleQueries, RoleQueries>();
 
 builder.Services.AddDbContext<AdminDbContext>(options =>
               options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));

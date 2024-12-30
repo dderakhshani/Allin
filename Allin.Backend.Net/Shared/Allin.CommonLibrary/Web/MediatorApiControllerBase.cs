@@ -1,5 +1,6 @@
 ﻿
 using Allin.Common.Exceptions;
+using Allin.Common.Validations;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
@@ -42,6 +43,11 @@ namespace Allin.Common.Web
             }
         }
 
+        //public virtual IActionResult OkResult2(object result, CancellationToken cancellationToken)
+        //{
+        //    return GeneralApiResult.Ok(Nanoid.Generate(size: 8), result).MakeActionResult();
+        //}
+
         public virtual async Task<IActionResult> SendQuery<TResponse>(IRequest<TResponse> query, CancellationToken cancellationToken)
         {
             return Ok(await Send(query, cancellationToken));
@@ -76,6 +82,13 @@ namespace Allin.Common.Web
                 return GeneralApiResult.Fail(Nanoid.Generate(size: 8), errMsg);
             }
             catch (ValidationException ex)
+            {
+                var logger = HttpContext.RequestServices.GetRequiredService<ILogger<AuthorizeApiControllerBase>>();
+                logger.LogError(ex, ex.Message);
+
+                return GeneralApiResult.Fail(Nanoid.Generate(size: 8), ex.Message);
+            }
+            catch (BuesinessRuleException ex)
             {
                 var logger = HttpContext.RequestServices.GetRequiredService<ILogger<AuthorizeApiControllerBase>>();
                 logger.LogError(ex, ex.Message);

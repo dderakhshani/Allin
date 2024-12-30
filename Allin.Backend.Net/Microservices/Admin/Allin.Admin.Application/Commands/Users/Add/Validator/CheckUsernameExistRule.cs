@@ -3,11 +3,11 @@ using Allin.Common.Validations;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class CheckUsernameExistBusinessRule : IBusinessRuleValidator<AddUserCommand>
+    public class CheckUsernameExistRule : IBusinessRuleValidator<AddUserCommand>
     {
         protected readonly AdminDbContext _dbContext;
 
-        public CheckUsernameExistBusinessRule(AdminDbContext dbContext)
+        public CheckUsernameExistRule(AdminDbContext dbContext)
         {
             _dbContext = dbContext;
         }
