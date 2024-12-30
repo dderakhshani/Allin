@@ -11,19 +11,19 @@ export const Person_ROUTES: Routes = [
         pathMatch: "full"
     },
     {
-        path: "add-person",
+        path: "add",
         component: AddPersonPageComponent, data: {
             title: 'add person'
         }
     },
     {
-        path: "edit-person",
+        path: "edit",
         component: EditPersonPageComponent, data: {
             title: 'edit person'
         }
     },
     {
-        path: "person-list",
+        path: "person",
         component: PersonListPageComponent, data: {
             title: 'person list'
         }
