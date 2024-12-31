@@ -1,117 +1,120 @@
-<p-table #datatable [value]="_dataSource" dataKey="id" [rows]="10"
-    [rowsPerPageOptions]="configOptions.rowsPerPageOptions" [loading]="loading" [paginator]="true"
-    [globalFilterFields]="getGlobalFilterable" [tableStyle]="{ 'min-width': '75rem' }">
-    <ng-template pTemplate="caption">
-        <div class="flex items-center">
+<div class=" border rounded-lg">
+    <p-table #datatable [value]="_dataSource" dataKey="id" [rows]="10"
+        [rowsPerPageOptions]="configOptions.rowsPerPageOptions" [loading]="loading" [paginator]="true"
+        [globalFilterFields]="getGlobalFilterable" [tableStyle]="{ 'min-width': '75rem' }">
+        <ng-template pTemplate="caption">
+            <div class="flex items-center">
 
-            <p-iconField iconPosition="left" class="ml-2">
-                <p-inputIcon>
-                    <i class="pi pi-search"></i>
-                </p-inputIcon>
-                <input pInputText type="text" (input)="datatable.filterGlobal($any($event.target).value, 'contains')"
-                    placeholder="Search keyword" />
-            </p-iconField>
+                <p-iconField iconPosition="left" class="ml-2">
+                    <p-inputIcon>
+                        <i class="pi pi-search"></i>
+                    </p-inputIcon>
+                    <input pInputText type="text"
+                        (input)="datatable.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Search keyword" />
+                </p-iconField>
 
-            <div class="px-2">
-                <ng-content select="[custom-filters]"></ng-content>
-            </div>
+                <div class="px-2">
+                    <ng-content select="[custom-filters]"></ng-content>
+                </div>
 
-            <div class="ml-auto">
-                <div class="p-toolbar-group-end">
-                    <p-button icon="pi pi-filter" severity="secondary" [outlined]="true" class="mr-2" />
-                    <!-- <p-button icon="pi pi-filter-slash" severity="secondary" [outlined]="true" class="mr-2"
+                <div class="ml-auto">
+                    <div class="p-toolbar-group-end">
+                        <p-button icon="pi pi-filter" [outlined]="true" severity="secondary" class="mr-2" />
+                        <!-- <p-button icon="pi pi-filter-slash" severity="secondary" [outlined]="true" class="mr-2"
                         (onClick)="clear(datatable)" /> -->
-                    <p-button icon="pi pi-print" severity="secondary" [outlined]="true" class="mr-2" />
-                    <p-button icon="pi pi-file-export" severity="secondary" [outlined]="true" class="mr-2" />
-                    <p-button icon="pi pi-cog" severity="secondary" [outlined]="true" class="mr-2" />
-                    <p-button icon="pi pi-refresh" severity="secondary" [outlined]="true" class="mr-2" />
+                        <p-button icon="pi pi-print" [outlined]="true" severity="secondary" class="mr-2" />
+                        <p-button icon="pi pi-file-export" [outlined]="true" severity="secondary" class="mr-2" />
+                        <p-button icon="pi pi-cog" [outlined]="true" severity="secondary" class="mr-2" />
+                        <p-button icon="pi pi-refresh" [outlined]="true" severity="secondary" class="mr-2" />
+                    </div>
                 </div>
             </div>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            @for (column of columns; track $index) {
-            <th style="min-width:15rem" [pSortableColumn]="column.fieldName">
-                <div class="flex items-center">
-                    {{column.title}}
-                    <p-sortIcon *ngIf="configOptions.sortable" [field]="column.fieldName" />
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                @for (column of columns; track $index) {
+                <th style="min-width:15rem" [pSortableColumn]="column.fieldName">
+                    <div class="flex items-center">
+                        {{column.title}}
+                        <p-sortIcon *ngIf="configOptions.sortable" [field]="column.fieldName" />
 
-                    <div class="flex-grow"></div>
-                    @if(column.filterOptions.filterable && configOptions.filterable){
+                        <div class="flex-grow"></div>
+                        @if(column.filterOptions.filterable && configOptions.filterable){
 
-                    @if (column.filterOptions.filterControl== filterControlEnum.DropDown) {
-                    <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-multiSelect [ngModel]="value"
-                            [options]="(((column | as : tableDropDownColumn).itemsSource.items) | observableOrArray  | async)!"
-                            placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
-                        </p-multiSelect>
-                    </ng-template>
-                    }
-                    @else if (column.filterOptions.filterControl== filterControlEnum.checkBox) {
+                        @if (column.filterOptions.filterControl== filterControlEnum.DropDown) {
+                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                            <p-multiSelect [ngModel]="value"
+                                [options]="(((column | as : tableDropDownColumn).itemsSource.items) | observableOrArray  | async)!"
+                                placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
+                            </p-multiSelect>
+                        </ng-template>
+                        }
+                        @else if (column.filterOptions.filterControl== filterControlEnum.checkBox) {
 
-                    }
-                    @else if (column.filterOptions.filterControl== filterControlEnum.FromTo) {
+                        }
+                        @else if (column.filterOptions.filterControl== filterControlEnum.FromTo) {
 
-                    }
-                    @else if (column.filterOptions.filterControl== filterControlEnum.Slider) {
+                        }
+                        @else if (column.filterOptions.filterControl== filterControlEnum.Slider) {
 
-                    }
-                    @else {
-                    <p-columnFilter type="text" [field]="column.fieldName" placeholder="Search by name"
-                        display="menu" />
-                    }
+                        }
+                        @else {
+                        <p-columnFilter type="text" [field]="column.fieldName" placeholder="Search by name"
+                            display="menu" />
+                        }
 
-                    }
-                </div>
-            </th>
-            }
-        </tr>
-        <!-- <tr>
+                        }
+                    </div>
+                </th>
+                }
+            </tr>
+            <!-- <tr>
             @for (column of columns; track $index) {
             
             }
         </tr> -->
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-rowIndex>
-        <tr>
-            <td *ngFor="let col of columns">
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-rowIndex>
+            <tr>
+                <td *ngFor="let col of columns">
 
-                @if(col.templateRefId){
-                <ng-container
-                    *ngTemplateOutlet="this.getColumnTemplate(col.templateRefId);context:{ $implicit: rowData, index: rowIndex, col: col }">
-                </ng-container>
-                }
-                @else if(col.fieldType== fieldTypesEnum.Boolean){
-                @let boolCol = col | as: tableBooleanColumn;
-                <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.CheckCloseColorfull"
-                    [ngClass]="{ 'text-green-500 pi-check-circle':  rowData[col.fieldName], 'text-red-500 pi-times-circle': !rowData[col.fieldName] }"></i>
-                <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.CheckCloseNoColor"
-                    [ngClass]="{ 'pi-check-circle':  rowData[col.fieldName], 'pi-times-circle': !rowData[col.fieldName] }"></i>
+                    @if(col.templateRefId){
+                    <ng-container
+                        *ngTemplateOutlet="this.getColumnTemplate(col.templateRefId);context:{ $implicit: rowData, index: rowIndex, col: col }">
+                    </ng-container>
+                    }
+                    @else if(col.fieldType== fieldTypesEnum.Boolean){
+                    @let boolCol = col | as: tableBooleanColumn;
+                    <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.CheckCloseColorfull"
+                        [ngClass]="{ 'text-green-500 pi-check-circle':  rowData[col.fieldName], 'text-red-500 pi-times-circle': !rowData[col.fieldName] }"></i>
+                    <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.CheckCloseNoColor"
+                        [ngClass]="{ 'pi-check-circle':  rowData[col.fieldName], 'pi-times-circle': !rowData[col.fieldName] }"></i>
 
-                <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCheckCloseColorFull"
-                    [ngClass]="{ 'text-green-500 pi-check-circle':  rowData[col.fieldName] }"></i>
-                <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCheckCloseNoColor"
-                    [ngClass]="{ 'text-green-500 pi-check-circle':  rowData[col.fieldName] }"></i>
+                    <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCheckColorFull"
+                        [ngClass]="{ 'text-green-500 pi-check-circle':  rowData[col.fieldName] }"></i>
+                    <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCheckNoColor"
+                        [ngClass]="{ 'text-green-500 pi-check-circle':  rowData[col.fieldName] }"></i>
 
-                <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCloseColorFull"
-                    [ngClass]="{ 'text-red-500 pi-times-circle': !rowData[col.fieldName] }"></i>
-                <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCloseNoColor"
-                    [ngClass]="{ 'pi-times-circle': !rowData[col.fieldName] }"></i>
+                    <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCloseColorFull"
+                        [ngClass]="{ 'text-red-500 pi-times-circle': !rowData[col.fieldName] }"></i>
+                    <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCloseNoColor"
+                        [ngClass]="{ 'pi-times-circle': !rowData[col.fieldName] }"></i>
 
-                <p-checkbox *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.Checkbox" readonly binary="true"
-                    [(ngModel)]="rowData[col.fieldName]" />
-                }
-                @else{
-                {{ rowData[col.fieldName] }}
-                }
+                    <p-checkbox *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.Checkbox" readonly binary="true"
+                        [(ngModel)]="rowData[col.fieldName]" />
+                    }
+                    @else{
+                    {{ rowData[col.fieldName] }}
+                    }
 
-            </td>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-        <tr>
-            <td colspan="5">{{emptymMessage}}</td>
-        </tr>
-    </ng-template>
-</p-table>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="5">{{emptymMessage}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

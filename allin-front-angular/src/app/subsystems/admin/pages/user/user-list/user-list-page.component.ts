@@ -53,7 +53,7 @@ export class UserListPageComponent {
             title: 'Verified',
             rootFieldName: 'verified',
             sortable: false,
-            displayStyle: BooleanColumnDisplayEnum.OnlyCloseNoColor
+            displayStyle: BooleanColumnDisplayEnum.OnlyCheckColorFull
         })
     ];
 

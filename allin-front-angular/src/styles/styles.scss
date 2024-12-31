@@ -5,4 +5,9 @@
 
 @import "../../node_modules/primeng/resources/themes/aura-light-blue/theme.css";
 @import "../../node_modules/primeng/resources/primeng.css";
-@import "../../node_modules/primeicons/primeicons.css"
+@import "../../node_modules/primeicons/primeicons.css";
+
+.border {
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
