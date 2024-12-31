@@ -5,10 +5,25 @@
     "edit": "Edit",
     "next": "Next",
     "prev": "Prev",
+    "firstName":"First Name",
+    "lastName":"Last Name",
+    "ssn":"SSN",
+    "birthDate":"Birth Date",
+    "mobile":"Mobile",
+    "email":"Email",
+    "address":"Address",
+    "General-Info":"General Information",
+    "Contact-Info":"Contact Information",
+    
     "admin": {
         "add-user": "Add User",
+        "add-phone" :"Add a phone number",
+        "add-address":"Add a Address",
+
+
         "user": {
             "msg1": "This is a message only for users page list"
+            
         }
     }
 }
