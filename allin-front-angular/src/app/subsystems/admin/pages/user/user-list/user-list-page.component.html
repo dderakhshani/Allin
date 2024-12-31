@@ -1,6 +1,9 @@
+{{'admin.user.msg1' | translate}}
+<p-messages [value]="messages" [enableService]="false" [closable]="false" />
+
 <p-toolbar>
     <div class="p-toolbar-group-end">
-        <p-button label="Add User" icon="pi pi-plus" class="mr-2" (onClick)="openAddUser()" />
+        <p-button [label]="'admin.add-user' | translate" icon="pi pi-plus" class="mr-2" (onClick)="openAddUser()" />
     </div>
 </p-toolbar>
 <app-png-table [columns]="columns" [dataSource]="customers">
@@ -17,5 +20,5 @@
     <ng-template let-rowData templateForColumn="statusColumnTemplate">
         <p-tag [value]="rowData.status" [severity]="getSeverity(rowData.status)" />
     </ng-template>
-
+    {{'admin.add-user' | translate}}
 </app-png-table>

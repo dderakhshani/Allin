@@ -1,0 +1,14 @@
+{
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "next": "Next",
+    "prev": "Prev",
+    "admin": {
+        "add-user": "Add User",
+        "user": {
+            "msg1": "This is a message only for users page list"
+        }
+    }
+}

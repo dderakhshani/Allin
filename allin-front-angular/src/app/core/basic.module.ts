@@ -11,27 +11,33 @@ import { DropdownModule } from 'primeng/dropdown';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
 
+import { MessagesModule } from 'primeng/messages';
 @NgModule({
-  declarations: [
+    declarations: [
 
 
-  ],
-  imports: [
-
-  ],
-  exports: [
-    CommonModule,
-    FormsModule,
-    ButtonModule,
-    CheckboxModule,
-    InputTextModule,
-    IconFieldModule,
-    InputIconModule,
-    MultiSelectModule,
-    DropdownModule,
-    DividerModule,
-    TimelineModule
-  ]
+    ],
+    imports: [
+        TranslatePipe,
+        TranslateDirective
+    ],
+    exports: [
+        CommonModule,
+        FormsModule,
+        ButtonModule,
+        CheckboxModule,
+        InputTextModule,
+        IconFieldModule,
+        InputIconModule,
+        MultiSelectModule,
+        DropdownModule,
+        DividerModule,
+        MessagesModule,
+        TimelineModule,
+        TranslatePipe,
+        TranslateDirective
+    ]
 })
 export class BasicModule { }
