@@ -14,6 +14,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
 
 import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 @NgModule({
     declarations: [
 
@@ -34,7 +35,7 @@ import { MessagesModule } from 'primeng/messages';
         MultiSelectModule,
         DropdownModule,
         DividerModule,
-        MessagesModule,
+        MessageModule,
         TimelineModule,
         TranslatePipe,
         TranslateDirective

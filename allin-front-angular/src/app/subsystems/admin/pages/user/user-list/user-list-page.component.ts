@@ -10,7 +10,7 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreateUserPageComponent } from '../create-user/create-user-page.component';
 import { PageDialogComponent, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
-import { Message } from 'primeng/api';
+import { Message } from 'primeng/message';
 
 @Component({
     selector: 'app-user-list-page',
@@ -71,7 +71,6 @@ export class UserListPageComponent {
         public dialogService: DialogService,
         private translate: TranslateService
     ) {
-        this.messages = [{ severity: 'info', detail: this.translate.instant('admin.user.msg1') }];
 
         // this.translate.get('admin.user.msg1').subscribe((res: string) => {
         //     console.log(res);
@@ -132,7 +131,7 @@ export class UserListPageComponent {
                 return 'info';
 
             case 'negotiation':
-                return 'warning';
+                return 'warn';
 
             default:
                 return 'info';

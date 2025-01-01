@@ -1,6 +1,7 @@
-<div class=" border rounded-lg">
-    <p-table #datatable [value]="_dataSource" dataKey="id" [rows]="10"
+<div class="">
+    <p-table #datatable [value]="_dataSource" dataKey="id" [rows]="10" [rowHover]="true" stripedRows
         [rowsPerPageOptions]="configOptions.rowsPerPageOptions" [loading]="loading" [paginator]="true"
+        [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [globalFilterFields]="getGlobalFilterable" [tableStyle]="{ 'min-width': '75rem' }">
         <ng-template pTemplate="caption">
             <div class="flex items-center">
@@ -33,6 +34,11 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
+                @if(selectableRow){
+                <th style="width: 4rem">
+                    <p-tableHeaderCheckbox />
+                </th>
+                }
                 @for (column of columns; track $index) {
                 <th style="min-width:15rem" [pSortableColumn]="column.fieldName">
                     <div class="flex items-center">
@@ -76,7 +82,13 @@
         </tr> -->
         </ng-template>
         <ng-template pTemplate="body" let-rowData let-rowIndex>
-            <tr>
+            <tr [pSelectableRow]="rowData">
+                @if(selectableRow){
+                <td>
+                    <p-tableCheckbox [value]="rowData" />
+                </td>
+                }
+
                 <td *ngFor="let col of columns">
 
                     @if(col.templateRefId){

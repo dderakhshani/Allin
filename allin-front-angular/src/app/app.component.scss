@@ -1,0 +1,46 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.toolbar {
+    flex: 0 0 auto;
+}
+
+.main-content {
+    display: flex;
+    flex: 1 1 auto;
+    overflow: hidden;
+}
+
+.menu-panel {
+    flex: 0 0 250px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+}
+
+.menu-panel.compact {
+    width: 50px;
+}
+
+.menu-item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.menu-item i {
+    margin-right: 10px;
+}
+
+.menu-item.compact span {
+    display: none;
+}
+
+.content-area {
+    flex: 1
+}

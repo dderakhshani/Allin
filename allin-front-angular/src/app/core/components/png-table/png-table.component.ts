@@ -18,103 +18,106 @@ import { TableConfigOptions } from './models/table-config-options';
 import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
-  selector: 'app-png-table',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    TableModule,
-    ToolbarModule,
-    ButtonModule,
-    CheckboxModule,
-    TagModule,
-    IconFieldModule,
-    InputTextModule,
-    InputIconModule,
-    MultiSelectModule,
-    DropdownModule,
-    AsPipe,
-    ObservableOrArrayPipe
-  ],
-  templateUrl: './png-table.component.html',
-  styleUrl: './png-table.component.scss'
+    selector: 'app-png-table',
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormsModule,
+        TableModule,
+        ToolbarModule,
+        ButtonModule,
+        CheckboxModule,
+        TagModule,
+        IconFieldModule,
+        InputTextModule,
+        InputIconModule,
+        MultiSelectModule,
+        DropdownModule,
+        AsPipe,
+        ObservableOrArrayPipe
+    ],
+    templateUrl: './png-table.component.html',
+    styleUrl: './png-table.component.scss'
 })
 export class PngTableComponent {
-  fieldTypesEnum = FieldTypesEnum;
-  tableBooleanColumn = TableBooleanColumn;
-  booleanColumnDisplayEnum = BooleanColumnDisplayEnum;
-  tableDropDownColumn = TableDropDownColumn;
-  filterControlEnum = FilterControlEnum;
+    fieldTypesEnum = FieldTypesEnum;
+    tableBooleanColumn = TableBooleanColumn;
+    booleanColumnDisplayEnum = BooleanColumnDisplayEnum;
+    tableDropDownColumn = TableDropDownColumn;
+    filterControlEnum = FilterControlEnum;
 
-  @Input()
-  public configOptions: TableConfigOptions = new TableConfigOptions();
+    @Input()
+    public configOptions: TableConfigOptions = new TableConfigOptions();
 
-  @Input()
-  public columns!: TableColumnBase[];
+    @Input()
+    public columns!: TableColumnBase[];
 
-  @Input()
-  public loading: boolean = false;
+    @Input()
+    public loading: boolean = false;
 
-  @Input()
-  public emptymMessage = "No records to display";
+    @Input()
+    public emptymMessage = "No records to display";
 
-  @Input()
-  fetchDataTrigger = signal<boolean>(true);
+    @Input()
+    fetchDataTrigger = signal<boolean>(true);
 
-  _dataSource: any[] = [];
-  @Input()
-  public set dataSource(value: any[]) {
-    this._dataSource = value;
+    @Input()
+    public selectableRow?: boolean = true;
 
-  }
+    _dataSource: any[] = [];
+    @Input()
+    public set dataSource(value: any[]) {
+        this._dataSource = value;
 
-  public columnsTemplateMap: Map<string, TemplateRef<any>> = new Map();
-  @ContentChildren(TemplateRef, { descendants: true })
-  private columnsTemplatesQueryList!: QueryList<TemplateRef<any>>;
+    }
+
+    public columnsTemplateMap: Map<string, TemplateRef<any>> = new Map();
+    @ContentChildren(TemplateRef, { descendants: true })
+    private columnsTemplatesQueryList!: QueryList<TemplateRef<any>>;
 
 
-  constructor() {
-    effect(() => {
-      this.fetchData();
-    });
-  }
+    constructor() {
+        effect(() => {
+            this.fetchData();
+        });
+    }
 
-  public ngAfterContentInit(): void {
-    this.columnsTemplatesQueryList.forEach((template: any) => {
-      const attributes = template._declarationTContainer.attrs || [];
+    public ngAfterContentInit(): void {
+        this.columnsTemplatesQueryList.forEach((template: any) => {
+            const attributes = template._declarationTContainer.attrs || [];
 
-      // Find the `templateForColumn` attribute
-      const columnIdIndex = attributes.indexOf('templateForColumn') + 1;
-      if (columnIdIndex > 0 && columnIdIndex < attributes.length) {
-        const columnId = attributes[columnIdIndex];
-        this.columnsTemplateMap.set(columnId, template);
-      }
-    });
+            // Find the `templateForColumn` attribute
+            const columnIdIndex = attributes.indexOf('templateForColumn') + 1;
+            if (columnIdIndex > 0 && columnIdIndex < attributes.length) {
+                const columnId = attributes[columnIdIndex];
+                this.columnsTemplateMap.set(columnId, template);
+            }
+        });
 
-    this.columnsTemplatesQueryList.changes.subscribe(() => {
-      this.columnsTemplateMap = new Map();
-      this.columnsTemplatesQueryList!.forEach((item: any) => {
-        // this.columnsKeyTemplate[item.templateName] = item.template;
-      });
-    })
+        this.columnsTemplatesQueryList.changes.subscribe(() => {
+            this.columnsTemplateMap = new Map();
+            this.columnsTemplatesQueryList!.forEach((item: any) => {
+                // this.columnsKeyTemplate[item.templateName] = item.template;
+            });
+        })
 
-  }
+    }
 
-  get getGlobalFilterable() {
-    return this.columns.filter(x => x.filterOptions?.globalFilterable == true).map(x => x.fieldName);
-  }
+    get getGlobalFilterable() {
+        return this.columns.filter(x => x.filterOptions?.globalFilterable == true).map(x => x.fieldName);
+    }
 
-  fetchData() {
+    fetchData() {
 
-  }
+    }
 
-  clear(table: Table) {
-    table.clear();
-  }
+    clear(table: Table) {
+        table.clear();
+    }
 
-  getColumnTemplate(templateRefId: string): TemplateRef<any> {
-    return this.columnsTemplateMap.get(templateRefId)!;
-  }
+    getColumnTemplate(templateRefId: string): TemplateRef<any> {
+        return this.columnsTemplateMap.get(templateRefId)!;
+    }
 
 
 

@@ -135,4 +135,4 @@ export interface PageDialogConfig {
     */
     customCssClasses?: string;
 }
-export interface DialogActionButtonConfig { title?: string, color?: 'success' | 'info' | 'warning' | 'danger' | 'help' | 'primary' | 'secondary', visible?: boolean }
+export interface DialogActionButtonConfig { title?: string, color?: 'success' | 'info' | 'warn' | 'danger' | 'help' | 'primary' | 'secondary', visible?: boolean }

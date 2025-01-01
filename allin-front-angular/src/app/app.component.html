@@ -1,2 +1,54 @@
+<div class="main-container">
+    <!-- Toolbar -->
+    <p-toolbar class="toolbar">
+        <div class="p-toolbar-group-left">
+            <button *ngIf="isMobile" pButton type="button" icon="pi pi-bars" class="menu-button"
+                (click)="toggleDrawer()"></button>
+            <span class="app-title">My App</span>
+        </div>
+        <div class="p-toolbar-group-right">
+            <p-togglebutton (onChange)="darkChanged($event)" [(ngModel)]="dark" offIcon="pi pi-moon" onIcon="pi pi-sun"
+                onLabel="Light" offLabel="Dark" styleClass="w-24" />
+        </div>
+    </p-toolbar>
 
-<router-outlet />
+    <!-- Sidebar Menu -->
+    <p-drawer [(visible)]="mobileMenuVisible" [modal]="true" [position]="'left'" *ngIf="isMobile">
+        <div *ngFor="let item of menuItems" class="menu-item" (click)="openTab(item)">
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+        </div>
+    </p-drawer>
+    <div class="main-content">
+        <div class="menu-panel" *ngIf="!isMobile">
+            <div *ngFor="let item of menuItems" class="menu-item" [ngClass]="{ 'compact': isCompact }"
+                (click)="openTab(item)">
+                <i [class]="item.icon"></i>
+                <span *ngIf="!isCompact">{{ item.label }}</span>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+
+            <p-tabs [tabindex]="activeTabIndex" [selectOnFocus]="true">
+                <p-tablist>
+                    @for (tab of openedTabs; track tab.route) {
+                    <p-tab [value]="tab.route">
+                        <i [class]="tab.icon"></i>
+                        {{ tab.label }}
+                    </p-tab>
+                    }
+                </p-tablist>
+                <p-tabpanels>
+                    @for (tab of openedTabs; track tab.route) {
+                    <p-tabpanel [value]="tab.route">
+                        <router-outlet></router-outlet>
+                    </p-tabpanel>
+                    }
+                </p-tabpanels>
+            </p-tabs>
+
+        </div>
+    </div>
+</div>
