@@ -1,7 +1,7 @@
 <!-- menu.component.html -->
 <div class="menu-panel">
     <ng-template #menuTemplate let-menu let-level="level">
-        <ul class="menu" [ngStyle]="{ 'left.px': level*250}" [style.zIndex]="1000 - level" [@slideInFade]>
+        <ul class="menu" [ngStyle]="{ 'left.px': level*250-1}" [style.zIndex]="1000 - level" [@slideInFade]>
             <li *ngFor="let item of menu">
                 <a class="flex justify-between p-3 mx-3 px-4 mb-1 rounded-md  cursor-pointer items-center"
                     (click)="onMenuItemClick(item,$event)">
