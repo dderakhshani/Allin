@@ -43,7 +43,7 @@ export class AppComponent {
     isCompact = false;
     mobileMenuVisible = false;
     openedTabs: any[] = [];
-    activeTabIndex = 0;
+    activeTab = '';
 
     menuItems: MenuItem[] = [
         {
@@ -119,13 +119,12 @@ export class AppComponent {
     }
 
     openTab(item: MenuItem) {
-        const tabIndex = this.openedTabs.findIndex((tab) => tab.route === item.routerLink);
+        const tabIndex = this.openedTabs.findIndex((tab) => tab.routerLink === item.routerLink);
+        this.activeTab = item.routerLink;
 
         if (tabIndex === -1) {
             this.openedTabs.push(item);
-            this.activeTabIndex = this.openedTabs.length - 1;
         } else {
-            this.activeTabIndex = tabIndex;
         }
 
         this.router.navigateByUrl(item.routerLink);
@@ -136,10 +135,10 @@ export class AppComponent {
         this.openedTabs.splice(index, 1);
 
         if (this.openedTabs.length > 0) {
-            if (this.activeTabIndex >= index) {
-                this.activeTabIndex = Math.max(0, this.activeTabIndex - 1);
-            }
-            this.router.navigateByUrl(this.openedTabs[this.activeTabIndex].route);
+            // if (this.activeTabIndex >= index) {
+            //     this.activeTabIndex = Math.max(0, this.activeTabIndex - 1);
+            // }
+            // this.router.navigateByUrl(this.openedTabs[this.activeTabIndex].route);
         } else {
             this.router.navigateByUrl('/');
         }

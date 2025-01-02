@@ -42,18 +42,21 @@
         <!-- Content Area -->
         <div class="content-area">
 
-            <p-tabs [tabindex]="activeTabIndex" [selectOnFocus]="true">
+            <p-tabs [value]="activeTab">
                 <p-tablist>
-                    @for (tab of openedTabs; track tab.route) {
-                    <p-tab [value]="tab.route">
-                        <i [class]="tab.icon"></i>
+                    @for (tab of openedTabs; track tab.routerLink) {
+                    <p-tab class="tab-header" [value]="tab.routerLink">
+                        <i class="material-symbols-outlined mr-4">{{tab.icon}}</i>
                         {{ tab.label }}
+
+                        <p-button type="button" class="me-2" icon="pi pi-times" variant="text" [rounded]="true"
+                            severity="secondary"></p-button>
                     </p-tab>
                     }
                 </p-tablist>
                 <p-tabpanels>
-                    @for (tab of openedTabs; track tab.route) {
-                    <p-tabpanel [value]="tab.route">
+                    @for (tab of openedTabs; track tab.routerLink) {
+                    <p-tabpanel [value]="tab.routerLink">
                         <router-outlet></router-outlet>
                     </p-tabpanel>
                     }
