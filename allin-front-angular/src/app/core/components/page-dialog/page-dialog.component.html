@@ -1,7 +1,7 @@
 <div class="w-full md:w-4/5 lg:w-3/4 max-w-5xl min-w-80" [ngClass]="config.customCssClasses">
     <div #container></div>
     @if (!componentInstance) {
-    template
+
     <ng-container *ngTemplateOutlet="templateContent;context:{ $implicit: this.config.extraData }">
     </ng-container>
     }

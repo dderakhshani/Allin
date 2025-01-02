@@ -8,7 +8,7 @@ import { TagModule } from 'primeng/tag';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreateUserPageComponent } from '../create-user/create-user-page.component';
-import { PageDialogComponent, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
+import { openDialog, PageDialogComponent, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { Message } from 'primeng/message';
 
@@ -139,17 +139,8 @@ export class UserListPageComponent {
     }
 
     openAddUser() {
-        const data: PageDialogConfig = {
-            component: CreateUserPageComponent,
-            showModalFooter: false,
-            isFullScreen: false,
-        };
-        this.ref = this.dialogService.open(PageDialogComponent, {
-            data: data,
-            header: 'Add New User',
-            width: '100%',
-            height: '100vh'
-        });
+
+        this.ref = openDialog(this.dialogService, CreateUserPageComponent);
         this.ref.onClose.subscribe((result: any) => {
             if (result) {
                 // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });

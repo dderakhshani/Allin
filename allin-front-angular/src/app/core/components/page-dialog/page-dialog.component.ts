@@ -111,6 +111,22 @@ export class PageDialogComponent {
     }
 }
 
+export function openDialog(dialogService: DialogService, component: Type<any> | TemplateRef<any>) {
+    const data: PageDialogConfig = {
+        component: component,
+        showModalFooter: false,
+        isFullScreen: false,
+    };
+    return dialogService.open(PageDialogComponent, {
+        data: data,
+        header: 'Add New User',
+        styleClass: "full-screen-dialog",
+        closable: true,
+        modal: true,
+        contentStyle: { overflow: 'auto' },
+    });
+}
+
 interface IFormContainer { form?: FormGroup<any> }
 
 export interface PageDialogConfig {

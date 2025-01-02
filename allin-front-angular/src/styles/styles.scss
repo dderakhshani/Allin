@@ -22,6 +22,19 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+
+
+.full-screen-dialog {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+
+    .p-dialog-header {
+        @apply shadow;
+    }
+}
+
 .material-symbols-outlined {
     font-variation-settings:
         'FILL' 0,
