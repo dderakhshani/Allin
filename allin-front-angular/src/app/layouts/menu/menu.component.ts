@@ -39,6 +39,7 @@ export class MenuComponent {
 
 
     selectedMenu: MenuItem | null = null;
+    oldSelectedMenu: MenuItemOpenable | null = null;
 
     onMenuItemClick(menuItem: MenuItemOpenable, event: any): void {
         if (menuItem.items && menuItem.items.length > 0) {
@@ -46,13 +47,16 @@ export class MenuComponent {
             const rect = target.getBoundingClientRect();
             // this.submenuLeft = `${rect.right}px`;
             //
+            if (this.oldSelectedMenu)
+                this.toggleMenu(this.oldSelectedMenu);
+
             this.toggleMenu(menuItem);
         } else {
             this.selectedMenu = menuItem;
             this.closeAllMenus(this._menuItems);
             this.onItemSelected.emit(menuItem);
-            this.selectedMenu = null;
         }
+        this.oldSelectedMenu = menuItem;
     }
 
     toggleMenu(item: MenuItemOpenable): void {
