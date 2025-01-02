@@ -7,6 +7,14 @@ import { BasicModule } from './core/basic.module';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { DrawerModule } from 'primeng/drawer';
 import { TabsModule } from 'primeng/tabs';
+import { MenuModule } from 'primeng/menu';
+import { Menu } from 'primeng/menu';
+import { BadgeModule } from 'primeng/badge';
+import { OverlayBadgeModule } from 'primeng/overlaybadge';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { MenuComponent } from './layouts/menu/menu.component';
+import { MenuItem } from 'primeng/api';
 
 @Component({
     selector: 'app-root',
@@ -18,7 +26,12 @@ import { TabsModule } from 'primeng/tabs';
         ToolbarModule,
         ToggleButtonModule,
         DrawerModule,
-        TabsModule
+        TabsModule,
+        MenuModule,
+        BadgeModule,
+        OverlayBadgeModule,
+        AvatarModule,
+        MenuComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
@@ -32,11 +45,52 @@ export class AppComponent {
     openedTabs: any[] = [];
     activeTabIndex = 0;
 
-    menuItems = [
-        { label: 'Home', icon: 'pi pi-home', route: 'home' },
-        { label: 'Settings', icon: 'pi pi-cog', route: 'SettingsComponent' },
-        { label: 'User List', icon: 'pi pi-user', route: 'admin/user/list' },
+    menuItems: MenuItem[] = [
+        {
+            label: 'Home',
+            icon: 'home',
+            shortcut: '⌘+N',
+            routerLink: '/'
+        },
+        {
+            label: 'Settings',
+            icon: 'settings',
+            shortcut: '⌘+N',
+            items: [
+                {
+                    label: 'General',
+                    icon: 'settings',
+                    shortcut: '⌘+N',
+                    routerLink: '/settings/security'
+                },
+                {
+                    label: 'Security',
+                    icon: 'admin_panel_settings',
+                    shortcut: '⌘+N',
+                    routerLink: '/settings/security'
+                },
+            ],
+        },
+        {
+            label: 'Users',
+            icon: 'account_circle',
+            items: [
+                {
+                    label: 'Add User',
+                    icon: 'person_add',
+                    shortcut: '⌘+N',
+                    routerLink: '/admin/user/add'
+                },
+                {
+                    label: 'Users List',
+                    icon: 'group',
+                    badge: '2',
+                    routerLink: '/admin/user/list'
+                },
+            ],
+        },
     ];
+
     constructor(private translate: TranslateService,
         private primeng: PrimeNG,
         private router: Router
@@ -60,9 +114,12 @@ export class AppComponent {
     toggleDrawer() {
         this.mobileMenuVisible = !this.mobileMenuVisible;
     }
+    toggleCompact() {
+        this.mobileMenuVisible = !this.mobileMenuVisible;
+    }
 
-    openTab(item: any) {
-        const tabIndex = this.openedTabs.findIndex((tab) => tab.route === item.route);
+    openTab(item: MenuItem) {
+        const tabIndex = this.openedTabs.findIndex((tab) => tab.route === item.routerLink);
 
         if (tabIndex === -1) {
             this.openedTabs.push(item);
@@ -71,7 +128,7 @@ export class AppComponent {
             this.activeTabIndex = tabIndex;
         }
 
-        this.router.navigateByUrl(item.route);
+        this.router.navigateByUrl(item.routerLink);
         this.mobileMenuVisible = false;
     }
 

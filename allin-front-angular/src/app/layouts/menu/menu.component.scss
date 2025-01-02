@@ -1,0 +1,62 @@
+/* menu.component.css */
+.menu-panel {
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 250px;
+    background-color: rgb(15, 23, 42);
+    position: relative;
+    height: 100%;
+    color: white;
+
+    ul {
+
+        position: absolute;
+        top: 0 !important;
+        width: 250px;
+        background-color: rgb(15, 23, 42);
+
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+        height: 100%;
+        width: 100%;
+
+        li {
+            font-weight: 500;
+            line-height: 20px;
+
+            i {
+                opacity: 0.6;
+            }
+
+            span {
+                opacity: 0.8;
+            }
+        }
+
+        li>a:hover {
+            background-color: #ffffff1e;
+
+            i {
+                opacity: 1;
+            }
+
+            span {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.first-level {
+    position: relative;
+    /* relative positioning for the first-level menu */
+}
+
+.submenu-overlay {}
+
+.expand-icon {
+    font-weight: bold;
+}

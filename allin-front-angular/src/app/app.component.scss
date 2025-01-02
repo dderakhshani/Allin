@@ -4,9 +4,6 @@
     height: 100vh;
 }
 
-.toolbar {
-    flex: 0 0 auto;
-}
 
 .main-content {
     display: flex;
@@ -14,31 +11,17 @@
     overflow: hidden;
 }
 
+.toolbar {
+    --p-toolbar-border-color: transparent;
+    z-index: 5000;
+}
+
 .menu-panel {
-    flex: 0 0 250px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    border-right: 1px solid #ddd;
+    overflow: visible;
 }
 
 .menu-panel.compact {
     width: 50px;
-}
-
-.menu-item {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-}
-
-.menu-item i {
-    margin-right: 10px;
-}
-
-.menu-item.compact span {
-    display: none;
 }
 
 .content-area {
