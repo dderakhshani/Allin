@@ -139,8 +139,18 @@ export class UserListPageComponent {
     }
 
     openAddUser() {
-
-        this.ref = openDialog(this.dialogService, CreateUserPageComponent);
+        const config: PageDialogConfig = {
+            component: CreateUserPageComponent,
+            header: 'Add New User',
+            description: 'this is a desciption of the add user page',
+            steps: [
+                { index: 0, caption: 'Ordered', description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error' },
+                { index: 1, caption: 'Processing', description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error' },
+                { index: 2, caption: 'Shipped', description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error' },
+                { index: 3, caption: 'Delivered', description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error' }
+            ]
+        };
+        this.ref = openDialog(config, this.dialogService);
         this.ref.onClose.subscribe((result: any) => {
             if (result) {
                 // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });

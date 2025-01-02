@@ -146,6 +146,6 @@ export class AppComponent {
 
     darkChanged(event: any) {
         const element = document.querySelector('html');
-        element?.classList.toggle('dark-mode');
+        element?.classList.toggle('dark');
     }
 }

@@ -1,31 +1,78 @@
-<div class="w-full md:w-4/5 lg:w-3/4 max-w-5xl min-w-80" [ngClass]="config.customCssClasses">
-    <div #container></div>
-    @if (!componentInstance) {
+<div class="flex h-full">
+    <aside class="bg-side p-4 w-1/4 md:w-1/4 flex-shrink-0 h-full">
+        <h3>
+            {{config.header}}
+        </h3>
+        <p *ngIf="config.description">
+            {{config.description}}
+        </p>
+        <p-timeline [value]="config.steps" class="mt-4" styleClass="stepper-timeline">
+            <ng-template pTemplate="marker" let-step>
+                <span
+                    [ngClass]="{'step-check':selectedStepIndex>step.index ,'step-active':selectedStepIndex==step.index,'step-no-check':selectedStepIndex<step.index}"
+                    class="flex w-6 h-6 items-center justify-center  selectedStepIndex rounded-full z-10 shadow-sm">
+                    <i *ngIf="selectedStepIndex>step.index" class="pi pi-check "></i>
 
-    <ng-container *ngTemplateOutlet="templateContent;context:{ $implicit: this.config.extraData }">
-    </ng-container>
-    }
+                </span>
+            </ng-template>
+            <ng-template pTemplate="content" let-step>
+                <h4 class="text-gray-800 dark:text-slate-200">{{step.caption}}</h4>
+                <p class="text-gray-400 text-sm">
+                    {{step.description}}
+                </p>
+            </ng-template>
+        </p-timeline>
 
-</div>
+    </aside>
 
-<div pTemplate="footer" class="flex" *ngIf="this.config.showModalFooter">
+    <!-- Main Content and Right Sidebar -->
+    <div class="flex flex-1 flex-col h-full">
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Main Content -->
+            <div class="flex-grow w-1/2 md:w-3/4 overflow-hidden">
+                <div class="h-full overflow-y-auto">
+                    <div #container></div>
+                    @if (!componentInstance) {
 
-    @if (config.customActionsTemplate) {
-    <ng-container *ngTemplateOutlet="this.config.customActionsTemplate;context:{ $implicit: this.config.extraData }">
-    </ng-container>
-    }
-    @else {
-    <div class="ml-auto"></div>
+                    <ng-container *ngTemplateOutlet="templateContent;context:{ $implicit: this.config.extraData }">
+                    </ng-container>
+                    }
+                </div>
+            </div>
 
+            <!-- Right Sidebar -->
+            <aside class="bg-side w-1/4 flex-shrink-0 hidden md:block ">Sidebar 2</aside>
+        </div>
 
-    <p-button *ngIf="config.secondaryActionButtonConfigs?.visible" (click)="onDismiss()"
-        [label]="config.secondaryActionButtonConfigs?.title" [disabled]="config.mainButtonDisabled?.()" />
+        <!-- Footer -->
+        <footer class="flex p-4">
+            @if (config.customActionsTemplate) {
+            <ng-container
+                *ngTemplateOutlet="this.config.customActionsTemplate;context:{ $implicit: this.config.extraData }">
+            </ng-container>
+            }
+            @else {
+            <div class="ml-auto"></div>
 
-    <p-button (click)="onConfirm()" [label]="config.mainActionButtonConfigs?.title"
-        [severity]="config.mainActionButtonConfigs?.color" [disabled]="config.mainButtonDisabled?.()" />
+            @if(config.steps){
+            <p-button *ngIf="config.secondaryActionButtonConfigs?.visible" [label]="'Prev'"
+                [disabled]="config.mainButtonDisabled?.()" variant="outlined" severity="secondary" class="me-2" />
 
+            <p-button [label]="selectedStepIndex<config.steps.length-1? 'Next':config.mainActionButtonConfigs?.title"
+                [severity]="config.mainActionButtonConfigs?.color" (onClick)="onNext()"
+                [disabled]="config.mainButtonDisabled?.()" />
+            }
+            @else {
+            <p-button *ngIf="config.secondaryActionButtonConfigs?.visible" (click)="onDismiss()"
+                [label]="config.secondaryActionButtonConfigs?.title" [disabled]="config.mainButtonDisabled?.()"
+                variant="outlined" severity="secondary" class="me-2" />
 
-    }
+            <p-button (click)="onConfirm()" [label]="config.mainActionButtonConfigs?.title"
+                [severity]="config.mainActionButtonConfigs?.color" [disabled]="config.mainButtonDisabled?.()" />
+            }
 
+            }
+        </footer>
+    </div>
 
 </div>
