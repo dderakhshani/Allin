@@ -5,7 +5,6 @@ using Allin.Common.Web;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NanoidDotNet;
 
 namespace Allin.Admin.ServiceApi.Controllers
 {
@@ -19,22 +18,26 @@ namespace Allin.Admin.ServiceApi.Controllers
             _roleQueries = roleQueries;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(long id, CancellationToken cancellationToken)
+        {
+            return OkResult(await _roleQueries.GetById(id, cancellationToken));
+        }
+
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll([FromQuery] QueryParamModel param, CancellationToken cancellationToken)
         {
-            return GeneralApiResult.Ok(Nanoid.Generate(size: 8), await _roleQueries.GetAll(param)).MakeActionResult();
-
-            // return OkResult2(await _roleQueries.GetAll(), cancellationToken);
+            return OkResult(await _roleQueries.GetAll(param, cancellationToken));
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> Get([FromQuery] GetRoleQuery request, CancellationToken cancellationToken)
-        //{
-        //    return await SendQuery(request, cancellationToken);
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CreateRoleCommand request, CancellationToken cancellationToken)
+        {
+            return await SendCommand(request, cancellationToken);
+        }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] AddRoleCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Post([FromBody] CreateRoleCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);
         }

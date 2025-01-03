@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class CheckUniqueNameRule : IBusinessRuleValidator<AddRoleCommand>
+    public class CheckUniqueNameRule : IBusinessRuleValidator<CreateRoleCommand>
     {
         private readonly AdminDbContext _dbContext;
         private readonly ILocalizator _localizator;
@@ -16,7 +16,7 @@ namespace Allin.Admin.Application.Commands
             _localizator = localizator;
         }
 
-        public async Task<BusinessRuleResult> ValidateAsync(AddRoleCommand command)
+        public async Task<BusinessRuleResult> ValidateAsync(CreateRoleCommand command)
         {
             var roleExist = await _dbContext.Roles.AnyAsync(x => x.UniqueName == command.UniqueName);
 

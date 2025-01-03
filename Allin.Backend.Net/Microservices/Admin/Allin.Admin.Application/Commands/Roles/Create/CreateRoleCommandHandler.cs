@@ -4,13 +4,13 @@ using AutoMapper;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class AddRoleCommandHandler : AdminCommandHandler<AddRoleCommand, bool>
+    public class CreateRoleCommandHandler : AdminCommandHandler<CreateRoleCommand, bool>
     {
-        public AddRoleCommandHandler(AdminDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public CreateRoleCommandHandler(AdminDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 
-        public override async Task<bool> Handle(AddRoleCommand request, CancellationToken cancellationToken)
+        public override async Task<bool> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
         {
             var role = Mapper.Map<Role>(request);
             DbContext.Roles.Add(role);

@@ -5,6 +5,7 @@ using Allin.Common.Data.QueryHelpers;
 using Allin.Common.Data.QueryHelpers.QueryResultMaker;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Allin.Admin.Application.Queries
 {
@@ -14,19 +15,14 @@ namespace Allin.Admin.Application.Queries
         {
         }
 
-        public async Task<IEnumerable<RoleModel>> Filter(RoleFilterParam param)
+        public async Task<PagedList<RoleModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await DbContext.Roles.AsNoTracking().ProjectTo<RoleModel>(MapperProvider).ToPagedListAsync(param, cancellationToken);
         }
 
-        public async Task<PagedList<RoleModel>> GetAll(QueryParamModel param)
+        public async Task<RoleModel> GetById(long id, CancellationToken cancellationToken)
         {
-            return await DbContext.Roles.ProjectTo<RoleModel>(MapperProvider).ToPagedListAsync(param);
-        }
-
-        public async Task<RoleModel> GetById(long id)
-        {
-            throw new NotImplementedException();
+            return Mapper.Map<RoleModel>(await DbContext.Roles.AsNoTracking().FirstAsync(x => x.Id == id, cancellationToken));
         }
     }
 }

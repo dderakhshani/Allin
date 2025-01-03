@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Allin.Common.Data.QueryHelpers.QueryParsing;
 using Microsoft.EntityFrameworkCore;
 
@@ -51,7 +47,7 @@ namespace Allin.Common.Data.QueryHelpers.QueryResultMaker
 
         public static async Task<PagedList<TSource>> ToPagedListAsync<TSource>(
             this IQueryable<TSource> query,
-            QueryParamModel queryParam)
+            QueryParamModel queryParam, CancellationToken cancellationToken = default)
         {
             if (query == null)
             {
@@ -63,7 +59,7 @@ namespace Allin.Common.Data.QueryHelpers.QueryResultMaker
             var result = await query
             .OrderByMultipleColumns(queryParam.OrderByProperties)
             .Paginate(queryParam.PagingProperties)
-            .ToListAsync()
+            .ToListAsync(cancellationToken)
             //.SetCalculateFieldsRequirements(queryParam.ColumnsNamesToUse)
             ;
 
@@ -75,7 +71,7 @@ namespace Allin.Common.Data.QueryHelpers.QueryResultMaker
             }
             else
             {
-                totalCount = await query.CountAsync();
+                totalCount = await query.CountAsync(cancellationToken);
             }
 
             var pageData = new PagedList<TSource>

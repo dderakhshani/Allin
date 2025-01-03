@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Commands\Roles\Delete\" />
-    <Folder Include="Commands\Roles\Update\" />
+    <Folder Include="Commands\Roles\Delete\" />
     <Folder Include="Commands\Users\Delete\" />
     <Folder Include="Commands\Users\ChangePassword\" />
     <Folder Include="Commands\Users\AddRoles\" />

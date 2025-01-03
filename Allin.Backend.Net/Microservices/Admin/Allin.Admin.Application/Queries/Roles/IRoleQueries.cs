@@ -5,8 +5,7 @@ namespace Allin.Admin.Application.Queries
 {
     public interface IRoleQueries
     {
-        Task<PagedList<RoleModel>> GetAll(QueryParamModel param);
-        Task<IEnumerable<RoleModel>> Filter(RoleFilterParam param);
-        Task<RoleModel> GetById(long id);
+        Task<PagedList<RoleModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken);
+        Task<RoleModel> GetById(long id, CancellationToken cancellationToken);
     }
 }

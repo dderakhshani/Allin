@@ -43,23 +43,23 @@ namespace Allin.Common.Web
             }
         }
 
-        //public virtual IActionResult OkResult2(object result, CancellationToken cancellationToken)
-        //{
-        //    return GeneralApiResult.Ok(Nanoid.Generate(size: 8), result).MakeActionResult();
-        //}
+        protected virtual IActionResult OkResult(object result)
+        {
+            return GeneralApiResult.Ok(Nanoid.Generate(size: 8), result).MakeActionResult();
+        }
 
-        public virtual async Task<IActionResult> SendQuery<TResponse>(IRequest<TResponse> query, CancellationToken cancellationToken)
+        protected async Task<IActionResult> SendQuery<TResponse>(IRequest<TResponse> query, CancellationToken cancellationToken)
         {
             return Ok(await Send(query, cancellationToken));
         }
 
-        public virtual async Task<IActionResult> SendCommand<TResponse>(IRequest<TResponse> command,
+        protected async Task<IActionResult> SendCommand<TResponse>(IRequest<TResponse> command,
            CancellationToken cancellationToken)
         {
             return Ok(await Send(command, cancellationToken));
         }
 
-        public virtual async Task<GeneralApiResult> Send<TResponse>(IRequest<TResponse> query,
+        private async Task<GeneralApiResult> Send<TResponse>(IRequest<TResponse> query,
             CancellationToken cancellationToken)
         {
             try

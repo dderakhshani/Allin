@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Localization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ServiceStack;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 using System.Text;
@@ -77,6 +78,7 @@ namespace Allin.Common.Web
             services.AddSwagger();
             services.AddMediator();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddValidationException();
         }
 
         public static void UseBaseFeatures(this WebApplication app)
@@ -139,6 +141,11 @@ namespace Allin.Common.Web
                         ClockSkew = TimeSpan.Zero
                     };
                 });
+        }
+
+        private static void AddValidationException(this IServiceCollection services)
+        {
+            services.AddScoped<IExceptionProvider, ExceptionProvider>();
         }
 
         private static void AddCorsPolicy(this IServiceCollection services)
@@ -232,6 +239,14 @@ namespace Allin.Common.Web
         {
             services.AddAutoMapper(mappingProfileType);
 
+        }
+
+        public static void AddQueries(this IServiceCollection services)
+        {
+            services.Scan(source => source.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
+                  .AddClasses(type => type.AssignableTo(typeof(Allin.Common.Data.QueryBase<>)))
+                  .AsImplementedInterfaces()
+                  .WithTransientLifetime());
         }
 
         static void IgnoreInverseProperty(JsonTypeInfo typeInfo)

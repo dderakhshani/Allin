@@ -4,8 +4,9 @@ using MediatR;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class AddRoleCommand : IRequest<bool>, IMapFrom<Role, AddRoleCommand>
+    public class EditRoleCommand : IRequest<bool>, IMapFrom<Role, CreateRoleCommand>
     {
+        public required long Id { get; set; }
         public required string Title { get; set; }
         public required string UniqueName { get; set; }
         public string? Description { get; set; }
