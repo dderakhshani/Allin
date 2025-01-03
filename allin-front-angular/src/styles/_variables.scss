@@ -1,12 +1,5 @@
-$text-color: #311746;
-$text-color2: #3117467f;
-
-$background-color: #F1F5F9;
-
-$main-color: #5B7CFD;
-$accent-color: #FF967D;
-
-$success-color: #28A745;
-$danger-color: #CB3940;
-
-$border-color: #D0E1EE;
+:root {
+    --p-tabs-active-bar-height: 2px !important;
+    --side-menu-width: 250px;
+    --side-menu-compact-width: 75px;
+}

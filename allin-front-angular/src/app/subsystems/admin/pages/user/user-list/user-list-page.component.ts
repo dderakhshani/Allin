@@ -8,7 +8,9 @@ import { TagModule } from 'primeng/tag';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { CreateUserPageComponent } from '../create-user/create-user-page.component';
-import { PageDialogComponent, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
+import { openDialog, PageDialogComponent, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
+import { Message } from 'primeng/message';
 
 @Component({
     selector: 'app-user-list-page',
@@ -51,7 +53,7 @@ export class UserListPageComponent {
             title: 'Verified',
             rootFieldName: 'verified',
             sortable: false,
-            displayStyle: BooleanColumnDisplayEnum.OnlyCloseNoColor
+            displayStyle: BooleanColumnDisplayEnum.OnlyCheckColorFull
         })
     ];
 
@@ -63,10 +65,18 @@ export class UserListPageComponent {
     loading: boolean = true;
     cities: any[] | undefined;
     selectedCity: any | undefined;
+    messages: Message[] = [];
 
     constructor(private userService: UserService,
-        public dialogService: DialogService
-    ) { }
+        public dialogService: DialogService,
+        private translate: TranslateService
+    ) {
+
+        // this.translate.get('admin.user.msg1').subscribe((res: string) => {
+        //     console.log(res);
+        //     this.messages = [{ severity: 'info', detail: res }];
+        // });
+    }
 
 
 
@@ -121,7 +131,7 @@ export class UserListPageComponent {
                 return 'info';
 
             case 'negotiation':
-                return 'warning';
+                return 'warn';
 
             default:
                 return 'info';
@@ -129,17 +139,18 @@ export class UserListPageComponent {
     }
 
     openAddUser() {
-        const data: PageDialogConfig = {
+        const config: PageDialogConfig = {
             component: CreateUserPageComponent,
-            showModalFooter: false,
-            isFullScreen: false,
-        };
-        this.ref = this.dialogService.open(PageDialogComponent, {
-            data: data,
             header: 'Add New User',
-            width: '100%',
-            height: '100vh'
-        });
+            description: 'this is a desciption of the add user page',
+            steps: [
+                { index: 0, caption: 'Ordered', description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error' },
+                { index: 1, caption: 'Processing', description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error' },
+                { index: 2, caption: 'Shipped', description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error' },
+                { index: 3, caption: 'Delivered', description: '  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error' }
+            ]
+        };
+        this.ref = openDialog(config, this.dialogService);
         this.ref.onClose.subscribe((result: any) => {
             if (result) {
                 // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });

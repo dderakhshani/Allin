@@ -1,0 +1,49 @@
+::ng-deep {
+    .stepper-timeline {
+        .p-timeline-event-opposite {
+            display: none;
+        }
+
+
+
+        .step-no-check {
+            border: 3px solid var(--p-timeline-event-connector-color);
+        }
+
+        .step-active {
+            border: 3px solid var(--p-primary-color);
+        }
+
+        .step-check {
+            background: var(--p-primary-color);
+            color: var(--p-primary-contrast-color);
+        }
+
+        h4 {
+            margin: 0;
+        }
+
+        p {
+            @apply my-1
+        }
+    }
+
+
+    .p-dialog-content {
+        padding: 0 !important;
+    }
+}
+
+:host {
+    --background-color: var(--p-surface-100);
+    /* Default light mode background */
+}
+
+:host-context(.dark) {
+    --background-color: var(--p-surface-800);
+    /* Dark mode background */
+}
+
+.bg-side {
+    background-color: var(--background-color);
+}

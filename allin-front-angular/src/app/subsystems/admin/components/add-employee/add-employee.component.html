@@ -1,1 +1,37 @@
-<p>add-employee works!</p>
+
+<div class="flex flex-col w-full">
+    <div class="card flex w-full justify-content-center ">
+        <p-accordion [multiple]="true" [activeIndex]="[0,1]">
+            <p-accordionTab header="General Information">
+                
+                <div class="flex space-x-5 ">
+                    <div class=" flex flex-col space-y-2 w-1/2">
+                        <label for="EmployeeCode">EmployeeCode</label>
+                    <input pInputText id="employeeCode" [(ngModel)]="value" />
+                    </div>
+                    <div class=" flex flex-col space-y-2 w-1/2">
+                        <label for="EmploymentDate">EmploymentDate</label>
+                        <p-calendar [(ngModel)]="date" inputId="employmentDate" />
+                    </div>
+                </div>
+                <div class="flex space-x-5">
+                    <div class=" flex flex-col space-y-2 w-1/2">
+                        <label for="TypeOfPresence">Type of presence</label>
+                        <p-selectButton [options]="floatingOptions" [(ngModel)]="value2" optionLabel="label"
+                                            optionValue="value2" />
+                    </div>
+                    <div class=" flex flex-col space-y-2 w-1/2">
+                        <label for="LeaveDate">LeaveDate</label>
+                        <p-calendar [(ngModel)]="date" inputId="leaveDate" />
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Dynamac Information">
+                <div class="flex flex-col w-full space-y-5 pt-5">
+
+                </div>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+
+</div>

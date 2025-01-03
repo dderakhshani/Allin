@@ -3,6 +3,102 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import "../../node_modules/primeng/resources/themes/aura-light-blue/theme.css";
-@import "../../node_modules/primeng/resources/primeng.css";
-@import "../../node_modules/primeicons/primeicons.css"
+@import "primeicons/primeicons.css";
+@import '@material-symbols/font-300';
+@import "_variables.scss";
+
+html {
+    font-size: 14px;
+    font-family: "Inter var", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    line-height: normal;
+    font-weight: 400;
+}
+
+body {
+    background-color: var(--p-content-background) !important;
+    color: var(--text-color);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+.full-screen-dialog {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100% !important;
+    border-radius: 0 !important;
+
+    .p-dialog-header {
+        border-bottom: 1px solid var(--p-divider-border-color);
+    }
+}
+
+.p-tabpanels {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.toolbar {
+    min-height: 57px;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 200,
+        'GRAD' 0,
+        'opsz' 20
+}
+
+.menu-background {
+    background: rgb(32 38 53);
+}
+
+.border {
+    border: 1px solid var(--p-divider-border-color);
+    overflow: hidden;
+}
+
+.border-t {
+    border-top: 1px solid var(--p-divider-border-color);
+    overflow: hidden;
+}
+
+.border-b {
+    border-bottom: 1px solid var(--p-divider-border-color);
+    overflow: hidden;
+}
+
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #01010119;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #0000004f;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #00000072;
+}
+
+.dark {
+    ::-webkit-scrollbar-thumb {
+        background: #ffffff4f;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #ffffff72;
+    }
+}

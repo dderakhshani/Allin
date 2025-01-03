@@ -4,7 +4,8 @@ import { FormGroup, FormsModule } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-
+import { StepperModule } from 'primeng/stepper';
+import { TimelineModule } from 'primeng/timeline';
 @Component({
     selector: 'app-page-dialog',
     providers: [DialogService, ConfirmationService],
@@ -12,7 +13,8 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
     imports: [
         CommonModule,
         FormsModule,
-        ButtonModule
+        ButtonModule,
+        TimelineModule
     ],
     templateUrl: './page-dialog.component.html',
     styleUrl: './page-dialog.component.scss'
@@ -24,6 +26,9 @@ export class PageDialogComponent {
     protected componentInstance?: IFormContainer;
     protected templateContent: any;
     protected config: PageDialogConfig;
+    protected selectedStepIndex = 0;
+
+
 
     constructor(public dialogRef: DynamicDialogRef,
         public dialogConfig: DynamicDialogConfig<PageDialogConfig>,
@@ -31,10 +36,10 @@ export class PageDialogComponent {
 
         this.config = dialogConfig.data!;
 
-        if (this.config.isFullScreen !== false) {
-            dialogConfig.height = '100%';
-            dialogConfig.width = '100%';
-        }
+        // if (this.config.isFullScreen !== false) {
+        //     dialogConfig.height = '100%';
+        //     dialogConfig.width = '100%';
+        // }
 
         this.config.mainActionButtonConfigs = {
             title: this.config.mainActionButtonConfigs?.title || "OK",
@@ -78,6 +83,10 @@ export class PageDialogComponent {
         this.componentInstance = componentRef.instance;
     }
 
+    onNext() {
+        this.selectedStepIndex += 1;
+    }
+
     onConfirm(): void {
         this.config.onConfirm?.();
         // Close the dialog, return true
@@ -111,9 +120,23 @@ export class PageDialogComponent {
     }
 }
 
+export function openDialog(config: PageDialogConfig, dialogService: DialogService) {
+
+    return dialogService.open(PageDialogComponent, {
+        data: config,
+        header: config.header,
+        styleClass: "full-screen-dialog",
+        closable: true,
+        modal: true,
+        contentStyle: { overflow: 'auto' },
+    });
+}
+
 interface IFormContainer { form?: FormGroup<any> }
 
 export interface PageDialogConfig {
+    header: string;
+    description?: string,
     mainActionButtonConfigs?: DialogActionButtonConfig;
     secondaryActionButtonConfigs?: DialogActionButtonConfig;
     component?: Type<any> | TemplateRef<any>;
@@ -127,7 +150,8 @@ export interface PageDialogConfig {
     showModalHeader?: boolean | undefined;
     showModalFooter?: boolean | undefined;
     showDismissButton?: boolean | undefined;
-    isFullScreen?: boolean;
+    steps?: DialogSteps[];
+    // isFullScreen?: boolean;
     /**
      * Use this config if you want to add a custom css class to the dialog content e.g. overwrite the default responsive classes of the content.
      * 
@@ -135,4 +159,9 @@ export interface PageDialogConfig {
     */
     customCssClasses?: string;
 }
-export interface DialogActionButtonConfig { title?: string, color?: 'success' | 'info' | 'warning' | 'danger' | 'help' | 'primary' | 'secondary', visible?: boolean }
+export interface DialogSteps {
+    caption: string;
+    description: string;
+    index: number;
+}
+export interface DialogActionButtonConfig { title?: string, color?: 'success' | 'info' | 'warn' | 'danger' | 'help' | 'primary' | 'secondary', visible?: boolean }

@@ -1,21 +1,28 @@
+<p-message [closable]="false">
+    {{'admin.user.msg1' | translate}}
+</p-message>
+
+
 <p-toolbar>
-    <div class="p-toolbar-group-end">
-        <p-button label="Add User" icon="pi pi-plus" class="mr-2" (onClick)="openAddUser()" />
+    <div class="p-toolbar-group-end ">
+        <p-button [label]="'admin.add-user' | translate" icon="pi pi-plus" class="mr-2" (onClick)="openAddUser()" />
     </div>
 </p-toolbar>
-<app-png-table [columns]="columns" [dataSource]="customers">
-    <div custom-filters>
-        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" placeholder="Select a City" />
-    </div>
+<div class="pt-2">
+    <app-png-table [columns]="columns" [dataSource]="customers">
+        <div custom-filters>
+            <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" placeholder="Select a City" />
+        </div>
 
 
-    <ng-template let-rowData templateForColumn="countryColumnTemplate">
-        <img src="https://flagicons.lipis.dev/flags/4x3/{{rowData.country.code}}.svg" style="width: 20px" />
-        <span class="ml-1 vertical-align-middle">{{ rowData.country.name }}</span>
-    </ng-template>
+        <ng-template let-rowData templateForColumn="countryColumnTemplate">
+            <img src="https://flagicons.lipis.dev/flags/4x3/{{rowData.country.code}}.svg" style="width: 20px" />
+            <span class="ml-1 vertical-align-middle">{{ rowData.country.name }}</span>
+        </ng-template>
 
-    <ng-template let-rowData templateForColumn="statusColumnTemplate">
-        <p-tag [value]="rowData.status" [severity]="getSeverity(rowData.status)" />
-    </ng-template>
-
-</app-png-table>
+        <ng-template let-rowData templateForColumn="statusColumnTemplate">
+            <p-tag [value]="rowData.status" [severity]="getSeverity(rowData.status)" />
+        </ng-template>
+        {{'admin.add-user' | translate}}
+    </app-png-table>
+</div>

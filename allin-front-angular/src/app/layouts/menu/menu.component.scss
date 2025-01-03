@@ -1,0 +1,71 @@
+/* menu.component.css */
+.menu-panel {
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+    background-color: rgb(15, 23, 42);
+    position: relative;
+    height: 100%;
+    color: white;
+
+    ul {
+        border-left: 1px solid rgba(241, 245, 249, .12);
+        position: absolute;
+        top: 0 !important;
+        width: var(--side-menu-width);
+        left: 100%;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        box-shadow: 0 7px 8px rgba(0, 0, 0, 0.2);
+        height: 100%;
+
+        li {
+            font-weight: 500;
+            line-height: 20px;
+
+            i {
+                opacity: 0.6;
+            }
+
+            span {
+                opacity: 0.8;
+            }
+        }
+
+        li>a:hover,
+        li>a.selected {
+            background-color: #ffffff1e;
+
+            i {
+                opacity: 1;
+            }
+
+            span {
+                opacity: 1;
+            }
+        }
+
+
+    }
+
+    >ul {
+        left: 0;
+    }
+}
+
+.menu-panel.compact {
+    >ul {
+        width: var(--side-menu-compact-width);
+    }
+}
+
+.first-level {
+    position: relative;
+    /* relative positioning for the first-level menu */
+}
+
+.expand-icon {
+    font-weight: bold;
+}

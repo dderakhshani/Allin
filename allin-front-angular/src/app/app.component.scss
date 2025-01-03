@@ -1,0 +1,26 @@
+.toolbar {
+    --p-toolbar-border-color: transparent;
+    --p-toolbar-border-radius: 0;
+    --p-toolbar-background: transparent;
+}
+
+aside {
+    overflow: visible;
+    width: var(--side-menu-width);
+
+    &.compact {
+        width: var(--side-menu-compact-width);
+    }
+}
+
+header {
+    z-index: 500;
+    height: 57px;
+    // box-shadow: 7px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.tab-header {
+    --p-tabs-tab-padding: 0.5rem .25rem 0.5rem 1rem;
+}

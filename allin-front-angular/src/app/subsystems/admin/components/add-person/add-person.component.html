@@ -1,7 +1,7 @@
 <div class="flex flex-col w-full">
     <div class="card flex w-full justify-content-center">
         <p-accordion [multiple]="true" [activeIndex]="[0,1]">
-            <p-accordionTab header="General Information">
+            <p-accordionTab [header]="'General-Info' | translate">
                 <div class="card flex justify-content-center">
                     <p-fileUpload 
                         name="demo[]" 
@@ -28,22 +28,22 @@
                     </div>
                     <div class="flex space-x-5">
                         <div class="flex flex-col space-y-2 w-1/2">
-                            <label for="FirstName">FirstName</label>
+                            <label for="FirstName">{{'firstName' | translate}}</label>
                             <input pInputText id="firstName" [(ngModel)]="value" />
 
                         </div>
                         <div class=" flex flex-col space-y-2 w-1/2">
-                            <label for="LastName">LastName</label>
+                            <label for="LastName">{{'lastName' | translate}}</label>
                             <input pInputText id="lastName" [(ngModel)]="value" />
                         </div>
                     </div>
                     <div class="flex space-x-5">
                         <div class=" flex flex-col space-y-2 w-1/2">
-                            <label for="SSN">SSN</label>
+                            <label for="SSN">{{'ssn' | translate}}</label>
                             <input pInputText id="ssn" [(ngModel)]="value" />
                         </div>
                         <div class=" flex flex-col space-y-2 w-1/2">
-                            <label for="birth_date">Birth Date</label>
+                            <label for="birth_date">{{'birthDate' | translate}}</label>
                             <p-calendar [(ngModel)]="date" inputId="birth_date" />
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab header="Contact Information">
+            <p-accordionTab [header]="'Contact-Info' | translate">
                 <div class="flex flex-col w-full space-y-5 pt-5">
                     <div class="flex space-x-5 items-end">                    
                         <div class=" flex flex-col space-y-2">
@@ -66,7 +66,7 @@
                             placeholder="Select Type" />
                         </div>
                         <div class=" flex flex-col space-y-2">
-                            <label for="Mobile">Mobile</label>
+                            <label for="Mobile">{{'mobile' | translate}}</label>
                             <input pInputText id="mobile" [(ngModel)]="value" />
                         </div>
                         <div>
@@ -74,12 +74,12 @@
                         </div>
                     </div>
                     <div class="flex">
-                        <p-button label="Add a phone number" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
+                        <p-button [label]="'admin.add-phone' | translate" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
                     </div>
                     
                     <div class="flex space-x-5 ">
                         <div class=" flex flex-col space-y-2 w-1/2">
-                            <label for="Email">Email</label>
+                            <label for="Email">{{'email' | translate}}</label>
                             <input pInputText id="email" [(ngModel)]="value" />
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             placeholder="Select Location Type" />
                         </div>
                         <div class=" flex flex-col space-y-2">
-                            <label for="Address">Address</label>
+                            <label for="Address">{{'address' | translate}}</label>
                             <input pInputText id="address" [(ngModel)]="value" />
                         </div>
                         <div>
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="flex">
-                        <p-button label="Add a Address" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
+                        <p-button [label]="'admin.add-address' | translate" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
                     </div>
                 </div>
             </p-accordionTab>

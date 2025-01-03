@@ -1,0 +1,31 @@
+<!-- menu.component.html -->
+<div class="menu-panel" [class.compact]="compact">
+    <ng-template #menuTemplate let-menu let-level="level">
+        <ul class="menu menu-background mt-5" [style.zIndex]="1000 - level" [@slideInFade]>
+
+            <li *ngFor="let item of menu" class="mb-3 ">
+                <a class="flex justify-between p-3 mx-3 px-4 rounded-md  cursor-pointer items-center"
+                    (click)="onMenuItemClick(item,$event)" [ngClass]="{'selected': item.isOpen}">
+
+                    <span class="flex items-center">
+                        <i *ngIf="item.icon" class="material-symbols-outlined mr-4">{{item.icon}} </i>
+                        <span *ngIf="!compact ||level>0"> {{ item.label }}</span>
+                    </span>
+                    <i *ngIf="item.items && item.items.length > 0 && (!compact ||level>0)"
+                        class="expand-icon pi pi-angle-right "></i>
+                </a>
+
+                <ng-container *ngIf="item.items && item.isOpen">
+                    <ng-container
+                        *ngTemplateOutlet="menuTemplate; context: { $implicit: item.items,level: level+1 }"></ng-container>
+                </ng-container>
+            </li>
+        </ul>
+    </ng-template>
+
+    <ng-container *ngTemplateOutlet="menuTemplate; context: { $implicit: _menuItems ,level:0 }"></ng-container>
+
+    <!-- <div *ngIf="level === 0" class="close-bar" (click)="onCloseAll()">
+        <span class="close-icon">--</span>
+    </div> -->
+</div>

@@ -300,8 +300,8 @@ export enum FieldTypesEnum {
 export enum BooleanColumnDisplayEnum {
     CheckCloseColorfull = 'check-close-color',
     CheckCloseNoColor = 'check-close',
-    OnlyCheckCloseColorFull = 'only-check-color',
-    OnlyCheckCloseNoColor = 'only-check',
+    OnlyCheckColorFull = 'only-check-color',
+    OnlyCheckNoColor = 'only-check',
     OnlyCloseColorFull = 'only-close-color',
     OnlyCloseNoColor = 'only-close',
     Checkbox = 'checkbox',
