@@ -17,6 +17,7 @@ import { MenuComponent } from './layouts/menu/menu.component';
 import { MenuItem } from 'primeng/api';
 import { Ripple } from 'primeng/ripple';
 import { ToggleSwitch } from 'primeng/toggleswitch';
+import { DividerModule } from 'primeng/divider';
 
 @Component({
     selector: 'app-root',
@@ -34,7 +35,8 @@ import { ToggleSwitch } from 'primeng/toggleswitch';
         OverlayBadgeModule,
         AvatarModule,
         ToggleSwitch,
-        MenuComponent
+        MenuComponent,
+        DividerModule
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'

@@ -40,6 +40,10 @@ body {
     overflow-y: auto;
 }
 
+.toolbar {
+    min-height: 57px;
+}
+
 .material-symbols-outlined {
     font-variation-settings:
         'FILL' 0,
@@ -49,7 +53,7 @@ body {
 }
 
 .menu-background {
-    background: rgb(15, 23, 42);
+    background: rgb(32 38 53);
 }
 
 .border {
@@ -59,6 +63,11 @@ body {
 
 .border-t {
     border-top: 1px solid var(--p-divider-border-color);
+    overflow: hidden;
+}
+
+.border-b {
+    border-bottom: 1px solid var(--p-divider-border-color);
     overflow: hidden;
 }
 
