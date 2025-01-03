@@ -16,13 +16,28 @@ namespace Allin.Admin.Application.Commands
 
         public override async Task<bool> Handle(EditRoleCommand request, CancellationToken cancellationToken)
         {
-            var newRole = Mapper.Map<Role>(request);
+            var role = await DbContext.Roles.Include(x => x.RolePermissions).FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
 
-            DbContext.Entry(newRole).State = EntityState.Modified;
-            DbContext.Roles.ExecuteUpdateAsync<Role>(newRole);
-            await DbContext.SaveChangesAsync(cancellationToken);
+            Mapper.Map(request, role);
 
+            role.RolePermissions.Clear();
+            role.RolePermissions = request.PermissionIds.Select(x => new RolePermission()
+            {
+                PermissionId = x,
+            }).ToList();
+
+            await DbContext.SaveChangesAsync();
             return true;
+
+            //if (result == 0) throw _exceptionProvider.RecordNotFoundValidationException();
+            //var result = await DbContext.Roles.ExecuteUpdateAsync(x =>
+            //x.SetProperty(y => y.Title, z => request.Title)
+            // .SetProperty(y => y.UniqueName, z => request.UniqueName)
+            // .SetProperty(y => y.Description, z => request.Description)
+            // .SetProperty(y => y.DepartmentId, z => request.DepartmentId)
+            //, cancellationToken);
+            //DbContext.Entry(newRole).State = EntityState.Modified;
+            //await DbContext.Roles.ExecuteUpdateFromModelAsync<Role, EditRoleCommand>(request);
         }
     }
 }

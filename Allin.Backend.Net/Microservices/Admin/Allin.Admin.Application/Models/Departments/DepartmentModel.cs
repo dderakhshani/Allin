@@ -4,11 +4,11 @@ using Allin.Common.Utilities.Mappings;
 
 namespace Allin.Admin.Application.Models
 {
-    public class PermissionModel : AdminBaseModel, IMapFrom<Permission, PermissionModel>
+    public class DepartmentModel : AdminBaseModel, IMapFrom<Department, DepartmentModel>
     {
         public long? ParentId { get; set; }
+        public string Code { get; set; }
         public string Title { get; set; }
-        public string UniqueName { get; set; }
-        public string SubSystem { get; set; }
+        public long BranchId { get; set; }
     }
 }

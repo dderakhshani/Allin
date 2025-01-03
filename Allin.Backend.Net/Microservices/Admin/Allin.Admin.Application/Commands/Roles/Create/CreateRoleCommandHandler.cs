@@ -13,6 +13,12 @@ namespace Allin.Admin.Application.Commands
         public override async Task<bool> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
         {
             var role = Mapper.Map<Role>(request);
+
+            role.RolePermissions = request.PermissionIds.Select(x => new RolePermission()
+            {
+                PermissionId = x,
+            }).ToList();
+
             DbContext.Roles.Add(role);
             await DbContext.SaveChangesAsync(cancellationToken);
 

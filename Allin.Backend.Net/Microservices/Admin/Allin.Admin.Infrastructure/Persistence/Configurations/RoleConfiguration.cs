@@ -9,10 +9,10 @@ namespace Allin.Admin.Infrastructure.Persistence
         {
             builder.ToTable("Roles", "Admin");
 
-            builder.Property(x => x.Mobiles).HasColumnName("MobilesStrJson").HasConversion(
-                x => string.Join(",", x),
-                x => x.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList()
-            );
+            //builder.Property(x => x.Mobiles).HasColumnName("MobilesStrJson").HasConversion(
+            //    x => string.Join(",", x),
+            //    x => x.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList()
+            //);
 
             base.Configure(builder);
         }
