@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Query;
+using Serilog.Sinks.MSSqlServer;
 using ServiceStack;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -7,44 +10,65 @@ namespace Allin.Common.Data.Extensions
 {
     public static class QueryableExtensions
     {
-        public static async Task<int> ExecuteUpdateFromModelAsync<T>(
-        this IQueryable<T> query,
-        T model) where T : class
+        public static async Task<int> ExecuteUpdateFromModelAsync<TEntity,TModel>(
+        this IQueryable<TEntity> query,
+        TModel model) where TModel : class
         {
-            // Get all the properties of the model
-            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                                      .Where(p => p.CanRead)
-                                      .ToList();
+            //// Get all the properties of the model
+            //var properties = typeof(TModel).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            //                          .Where(p => p.CanRead)
+            //                          .ToList();
 
-            // Construct the update setters dynamically
-            var updateExpression = new List<(Expression<Func<T, object>> property, Expression value)>();
-            foreach (var property in properties)
-            {
-                var parameter = Expression.Parameter(typeof(T), "e");
-
-                // Property selector (e => e.Property)
-                var propertyExpression = Expression.Lambda<Func<T, object>>(
-                    Expression.Convert(
-                        Expression.Property(parameter, property.Name),
-                        typeof(object)
-                    ),
-                    parameter
-                );
-
-                // Value expression (model.Property)
-                var valueExpression = Expression.Constant(property.GetValue(model));
-
-                updateExpression.Add((propertyExpression, valueExpression));
-            }
 
             // Apply ExecuteUpdate with the constructed setters
-            return await query.ExecuteUpdateAsync(setters =>
+            if (model == null)
+                throw new ArgumentNullException(nameof(model));
+
+            var entityType = typeof(TEntity);
+            var properties = entityType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            // The parameter for the lambda (SetPropertyCalls<TEntity> setProperty)
+            var parameter = Expression.Parameter(typeof(SetPropertyCalls<TEntity>), "setProperty");
+
+            Expression body = parameter;
+
+            foreach (var property in properties)
             {
-                foreach (var (property, value) in updateExpression)
-                {
-                    setters.SetProperty(property, value);
-                }
-            });
+                var value = property.GetValue(model);
+                if (value == null) continue;
+
+                // Build the SetProperty expression
+                var propertyName = property.Name;
+
+                var setPropertyCall = Expression.Call(
+                    typeof(SetPropertyCalls<TEntity>),
+                    nameof(SetPropertyCalls<TEntity>.SetProperty),
+                    new Type[] { typeof(object) },
+                    body,
+                    Expression.Lambda(
+                        Expression.Call(
+                            typeof(EF),
+                            nameof(EF.Property),
+                            new Type[] { typeof(object) },
+                            Expression.Parameter(typeof(TEntity), "entity"),
+                            Expression.Constant(propertyName)
+                        ),
+                        Expression.Parameter(typeof(TEntity), "entity")
+                    ),
+                    Expression.Lambda(
+                        Expression.Constant(value),
+                        Expression.Parameter(typeof(TEntity), "entity")
+                    )
+                );
+
+                body = setPropertyCall;
+            }
+
+            // Compile the final lambda: setProperty => setProperty.SetProperty(...)
+            var lambda = Expression.Lambda<Func<SetPropertyCalls<TEntity>, SetPropertyCalls<TEntity>>>(body, parameter);
+
+            return await query.ExecuteUpdateAsync(lambda);
+
         }
     }
 }
