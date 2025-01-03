@@ -28,8 +28,6 @@ export class PageDialogComponent {
     protected config: PageDialogConfig;
     protected selectedStepIndex = 0;
 
-
-
     constructor(public dialogRef: DynamicDialogRef,
         public dialogConfig: DynamicDialogConfig<PageDialogConfig>,
         private confirmationService: ConfirmationService) {

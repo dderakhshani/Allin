@@ -55,12 +55,12 @@
             <div class="ml-auto"></div>
 
             @if(config.steps){
-            <p-button *ngIf="config.secondaryActionButtonConfigs?.visible" [label]="'Prev'"
-                [disabled]="config.mainButtonDisabled?.()" variant="outlined" severity="secondary" class="me-2" />
+            <p-button *ngIf="config.secondaryActionButtonConfigs?.visible" [label]="'Prev'" icon="pi pi-angle-left"
+                variant="outlined" severity="secondary" class="me-2" />
 
             <p-button [label]="selectedStepIndex<config.steps.length-1? 'Next':config.mainActionButtonConfigs?.title"
-                [severity]="config.mainActionButtonConfigs?.color" (onClick)="onNext()"
-                [disabled]="config.mainButtonDisabled?.()" />
+                [severity]="config.mainActionButtonConfigs?.color" (onClick)="onNext()" icon="pi pi-angle-right"
+                iconPos="right" [disabled]="false" />
             }
             @else {
             <p-button *ngIf="config.secondaryActionButtonConfigs?.visible" (click)="onDismiss()"
