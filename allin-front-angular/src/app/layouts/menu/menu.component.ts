@@ -41,7 +41,7 @@ export class MenuComponent {
     onItemSelected = new EventEmitter<MenuItem>();
 
 
-    selectedMenu: MenuItem | null = null;
+    selectedLastMenu: MenuItem | null = null;
     oldSelectedMenu: MenuItemOpenable | null = null;
 
     onMenuItemClick(menuItem: MenuItemOpenable, event: any): void {
@@ -55,7 +55,7 @@ export class MenuComponent {
 
             this.toggleMenu(menuItem);
         } else {
-            this.selectedMenu = menuItem;
+            this.selectedLastMenu = menuItem;
             this.closeAllMenus(this._menuItems);
             this.onItemSelected.emit(menuItem);
         }

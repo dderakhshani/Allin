@@ -16,6 +16,7 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { MenuComponent } from './layouts/menu/menu.component';
 import { MenuItem } from 'primeng/api';
 import { Ripple } from 'primeng/ripple';
+import { ToggleSwitch } from 'primeng/toggleswitch';
 
 @Component({
     selector: 'app-root',
@@ -32,7 +33,7 @@ import { Ripple } from 'primeng/ripple';
         BadgeModule,
         OverlayBadgeModule,
         AvatarModule,
-        Ripple,
+        ToggleSwitch,
         MenuComponent
     ],
     templateUrl: './app.component.html',
@@ -40,7 +41,7 @@ import { Ripple } from 'primeng/ripple';
 })
 export class AppComponent {
     title = 'Allin';
-    dark = true;
+    dark = false;
     isMobile = false;
     isCompact = false;
     mobileMenuVisible = false;

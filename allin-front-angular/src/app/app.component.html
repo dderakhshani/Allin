@@ -24,28 +24,25 @@
 
                 </ng-template>
                 <ng-template #end>
+                    <i class="pi pi-expand mx-4" style="font-size: 1.25rem"></i>
 
-                    <p-overlaybadge class="me-5">
-                        <i class="pi pi-expand" style="font-size: 1.5rem"></i>
+                    <p-overlaybadge value="2" class="mx-4">
+                        <i class="pi pi-bell" style="font-size: 1.25rem"></i>
                     </p-overlaybadge>
 
-                    <p-overlaybadge value="2" class="me-5">
-                        <i class="pi pi-bell" style="font-size: 1.5rem"></i>
-                    </p-overlaybadge>
+                    <i class="pi pi-cog mx-4" style="font-size: 1.25rem"></i>
 
-                    <p-overlaybadge value="0" class="me-5">
-                        <i class="pi pi-cog" style="font-size: 1.5rem"></i>
-                    </p-overlaybadge>
+                    <p-toggleswitch (onChange)="darkChanged($event)" [(ngModel)]="dark" class="ms-2" />
+                    <i *ngIf="!dark" class="pi pi-sun mx-2"></i>
+                    <i *ngIf="dark" class="pi pi-moon mx-2"></i>
 
-                    <p-togglebutton (onChange)="darkChanged($event)" [(ngModel)]="dark" offIcon="pi pi-moon"
-                        onIcon="pi pi-sun" onLabel="Light" offLabel="Dark" styleClass="w-24" />
                 </ng-template>
             </p-toolbar>
         </header>
 
         <!-- Main Content Area -->
-        <main class="flex-grow ">
-            <p-tabs [value]="activeTab">
+        <main class="flex flex-grow h-full overflow-hidden">
+            <p-tabs [value]="activeTab" class="flex-grow">
                 <p-tablist>
                     @for (tab of openedTabs; track tab.routerLink) {
                     <p-tab class="tab-header" [value]="tab.routerLink">

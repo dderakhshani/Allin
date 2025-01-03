@@ -35,6 +35,11 @@ body {
     }
 }
 
+.p-tabpanels {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
 .material-symbols-outlined {
     font-variation-settings:
         'FILL' 0,
@@ -55,4 +60,36 @@ body {
 .border-t {
     border-top: 1px solid var(--p-divider-border-color);
     overflow: hidden;
+}
+
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #01010119;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #0000004f;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #00000072;
+}
+
+.dark {
+    ::-webkit-scrollbar-thumb {
+        background: #ffffff4f;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #ffffff72;
+    }
 }

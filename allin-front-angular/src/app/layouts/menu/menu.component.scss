@@ -34,7 +34,8 @@
             }
         }
 
-        li>a:hover {
+        li>a:hover,
+        li>a.selected {
             background-color: #ffffff1e;
 
             i {
@@ -45,6 +46,8 @@
                 opacity: 1;
             }
         }
+
+
     }
 
     >ul {
