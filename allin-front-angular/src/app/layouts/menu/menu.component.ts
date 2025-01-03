@@ -34,6 +34,9 @@ export class MenuComponent {
         this._menuItems = value.map(x => ({ ...x, isOpen: false }));
     }
 
+    @Input()
+    compact: boolean = false;
+
     @Output()
     onItemSelected = new EventEmitter<MenuItem>();
 

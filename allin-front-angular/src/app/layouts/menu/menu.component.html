@@ -1,15 +1,17 @@
 <!-- menu.component.html -->
-<div class="menu-panel">
+<div class="menu-panel" [class.compact]="compact">
     <ng-template #menuTemplate let-menu let-level="level">
-        <ul class="menu" [ngStyle]="{ 'left.px': level*250-1}" [style.zIndex]="1000 - level" [@slideInFade]>
+        <ul class="menu menu-background" [style.zIndex]="1000 - level" [@slideInFade]>
+
             <li *ngFor="let item of menu">
                 <a class="flex justify-between p-3 mx-3 px-4 mb-1 rounded-md  cursor-pointer items-center"
                     (click)="onMenuItemClick(item,$event)">
                     <span class="flex items-center">
                         <i *ngIf="item.icon" class="material-symbols-outlined mr-4">{{item.icon}} </i>
-                        {{ item.label }}
+                        <span *ngIf="!compact ||level>0"> {{ item.label }}</span>
                     </span>
-                    <i *ngIf="item.items && item.items.length > 0" class="expand-icon pi pi-angle-right "></i>
+                    <i *ngIf="item.items && item.items.length > 0 && (!compact ||level>0)"
+                        class="expand-icon pi pi-angle-right "></i>
                 </a>
 
                 <ng-container *ngIf="item.items && item.isOpen">

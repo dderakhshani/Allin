@@ -15,6 +15,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { AvatarGroupModule } from 'primeng/avatargroup';
 import { MenuComponent } from './layouts/menu/menu.component';
 import { MenuItem } from 'primeng/api';
+import { Ripple } from 'primeng/ripple';
 
 @Component({
     selector: 'app-root',
@@ -31,6 +32,7 @@ import { MenuItem } from 'primeng/api';
         BadgeModule,
         OverlayBadgeModule,
         AvatarModule,
+        Ripple,
         MenuComponent
     ],
     templateUrl: './app.component.html',
@@ -112,11 +114,12 @@ export class AppComponent {
     }
 
     toggleDrawer() {
-        this.mobileMenuVisible = !this.mobileMenuVisible;
+        if (this.isMobile)
+            this.mobileMenuVisible = !this.mobileMenuVisible;
+        else
+            this.isCompact = !this.isCompact;
     }
-    toggleCompact() {
-        this.mobileMenuVisible = !this.mobileMenuVisible;
-    }
+
 
     openTab(item: MenuItem) {
         const tabIndex = this.openedTabs.findIndex((tab) => tab.routerLink === item.routerLink);

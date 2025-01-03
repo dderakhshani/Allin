@@ -1,47 +1,50 @@
-<div class="main-container">
-    <!-- Toolbar -->
-    <p-toolbar class="toolbar shadow">
-        <ng-template #start>
-            <p-button *ngIf="isMobile" type="button" icon="pi pi-bars" variant="text"
-                (click)="toggleDrawer()"></p-button>
-            <p-button *ngIf="!isMobile" type="button" icon="pi pi-bars" variant="text"
-                (click)="toggleCompact()"></p-button>
-            <img src="svgs/logo.svg" class="mr-2 size-10">
-            <span class="app-title">Allin</span>
-        </ng-template>
-        <ng-template #center>
+<div class="flex h-full">
+    <!-- Sidebar -->
+    <aside class="flex-none menu-background" [class.compact]="isCompact">
+        <p-toolbar class="toolbar">
+            <ng-template #start>
+                <img src="svgs/logo.svg" class="mx-3 size-10">
+                <h4 *ngIf="!isCompact" class="app-title m-0">Allin</h4>
+            </ng-template>
+        </p-toolbar>
 
-        </ng-template>
-        <ng-template #end>
-            <p-button type="button" class="me-2" icon="pi pi-expand" variant="text" [rounded]="true"
-                severity="secondary"></p-button>
+        <app-menu [menuItems]="menuItems" [compact]="isCompact" (onItemSelected)="openTab($event)"></app-menu>
+    </aside>
 
-            <p-button type="button" class="me-2" icon="pi pi-bell" variant="text" [rounded]="true"
-                severity="secondary"></p-button>
-            <p-button type="button" class="me-2" icon="pi pi-cog" variant="text" [rounded]="true"
-                severity="secondary"></p-button>
-            <p-togglebutton (onChange)="darkChanged($event)" [(ngModel)]="dark" offIcon="pi pi-moon" onIcon="pi pi-sun"
-                onLabel="Light" offLabel="Dark" styleClass="w-24" />
-        </ng-template>
-    </p-toolbar>
+    <!-- Main Content -->
+    <div class="flex flex-col flex-grow">
+        <!-- Toolbar -->
+        <header class="flex-none shadow">
+            <p-toolbar class="toolbar ">
+                <ng-template #start>
+                    <p-button class="me-2" type="button" icon="pi pi-bars" variant="text"
+                        (click)="toggleDrawer()"></p-button>
+                </ng-template>
+                <ng-template #center>
 
-    <!-- Sidebar Menu -->
-    <!-- <p-drawer [(visible)]="mobileMenuVisible" [modal]="true" [position]="'left'" *ngIf="isMobile">
-        <div *ngFor="let item of menuItems" class="menu-item" (onItemSelected)="openTab(item)">
-            <i [class]="item.icon"></i>
-            <span>{{ item.label }}</span>
-        </div>
-    </p-drawer> -->
+                </ng-template>
+                <ng-template #end>
 
-    <div class="main-content">
-        <div class="menu-panel" *ngIf="!isMobile">
-            <app-menu [menuItems]="menuItems" (onItemSelected)="openTab($event)"></app-menu>
+                    <p-overlaybadge class="me-5">
+                        <i class="pi pi-expand" style="font-size: 1.5rem"></i>
+                    </p-overlaybadge>
 
-        </div>
+                    <p-overlaybadge value="2" class="me-5">
+                        <i class="pi pi-bell" style="font-size: 1.5rem"></i>
+                    </p-overlaybadge>
 
-        <!-- Content Area -->
-        <div class="content-area">
+                    <p-overlaybadge value="0" class="me-5">
+                        <i class="pi pi-cog" style="font-size: 1.5rem"></i>
+                    </p-overlaybadge>
 
+                    <p-togglebutton (onChange)="darkChanged($event)" [(ngModel)]="dark" offIcon="pi pi-moon"
+                        onIcon="pi pi-sun" onLabel="Light" offLabel="Dark" styleClass="w-24" />
+                </ng-template>
+            </p-toolbar>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow ">
             <p-tabs [value]="activeTab">
                 <p-tablist>
                     @for (tab of openedTabs; track tab.routerLink) {
@@ -62,7 +65,18 @@
                     }
                 </p-tabpanels>
             </p-tabs>
-
-        </div>
+        </main>
     </div>
 </div>
+
+
+
+
+
+<!-- Sidebar Menu -->
+<!-- <p-drawer [(visible)]="mobileMenuVisible" [modal]="true" [position]="'left'" *ngIf="isMobile">
+        <div *ngFor="let item of menuItems" class="menu-item" (onItemSelected)="openTab(item)">
+            <i [class]="item.icon"></i>
+            <span>{{ item.label }}</span>
+        </div>
+    </p-drawer> -->

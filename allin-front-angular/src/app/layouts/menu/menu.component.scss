@@ -3,7 +3,7 @@
     padding: 0;
     margin: 0;
     display: block;
-    width: 250px;
+    width: 100%;
     background-color: rgb(15, 23, 42);
     position: relative;
     height: 100%;
@@ -13,15 +13,13 @@
         border-left: 1px solid rgba(241, 245, 249, .12);
         position: absolute;
         top: 0 !important;
-        width: 250px;
-        background-color: rgb(15, 23, 42);
-
+        width: var(--side-menu-width);
+        left: 100%;
         list-style: none;
         margin: 0;
         padding: 0;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
         height: 100%;
-        width: 100%;
 
         li {
             font-weight: 500;
@@ -48,14 +46,22 @@
             }
         }
     }
+
+    >ul {
+        left: 0;
+    }
+}
+
+.menu-panel.compact {
+    >ul {
+        width: var(--side-menu-compact-width);
+    }
 }
 
 .first-level {
     position: relative;
     /* relative positioning for the first-level menu */
 }
-
-.submenu-overlay {}
 
 .expand-icon {
     font-weight: bold;
