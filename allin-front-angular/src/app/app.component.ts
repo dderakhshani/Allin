@@ -36,7 +36,7 @@ import { DividerModule } from 'primeng/divider';
         AvatarModule,
         ToggleSwitch,
         MenuComponent,
-        DividerModule
+        DividerModule,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
