@@ -14,18 +14,15 @@ namespace Allin.Common.Data.Extensions
         this IQueryable<TEntity> query,
         TModel model) where TModel : class
         {
-            //// Get all the properties of the model
-            //var properties = typeof(TModel).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            //                          .Where(p => p.CanRead)
-            //                          .ToList();
-
 
             // Apply ExecuteUpdate with the constructed setters
             if (model == null)
                 throw new ArgumentNullException(nameof(model));
 
             var entityType = typeof(TEntity);
-            var properties = entityType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var properties = typeof(TModel).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                      .Where(p => p.CanRead)
+                                      .ToList();
 
             // The parameter for the lambda (SetPropertyCalls<TEntity> setProperty)
             var parameter = Expression.Parameter(typeof(SetPropertyCalls<TEntity>), "setProperty");
