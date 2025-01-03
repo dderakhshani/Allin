@@ -24,6 +24,7 @@ body {
 }
 
 
+
 .full-screen-dialog {
     width: 100vw !important;
     height: 100vh !important;
@@ -40,9 +41,14 @@ body {
     overflow-y: auto;
 }
 
-.toolbar {
+.p-toolbar {
     min-height: 57px;
+    --p-toolbar-border-color: transparent;
+    --p-toolbar-border-radius: 0;
 }
+
+
+
 
 .material-symbols-outlined {
     font-variation-settings:

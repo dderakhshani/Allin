@@ -1,0 +1,15 @@
+<div class="page-content">
+    @if(isLoading){
+    <p-progressbar mode="indeterminate" [style]="{ height: '6px' }" />
+    }
+
+    <header class="shadow">
+        <p-toolbar class="toolbar">
+            <ng-content select="[toolbar]"></ng-content>
+        </p-toolbar>
+    </header>
+
+    <div class="p-5">
+        <ng-content></ng-content>
+    </div>
+</div>

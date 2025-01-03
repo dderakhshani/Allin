@@ -11,6 +11,7 @@ import { CreateUserPageComponent } from '../create-user/create-user-page.compone
 import { openDialog, PageDialogComponent, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { Message } from 'primeng/message';
+import { PageContentComponent } from '../../../../../core/components/page-content/page-content.component';
 
 @Component({
     selector: 'app-user-list-page',
@@ -19,12 +20,16 @@ import { Message } from 'primeng/message';
         BasicModule,
         PngTableComponent,
         ToolbarModule,
-        TagModule],
+        TagModule,
+        PageContentComponent
+    ],
     providers: [DialogService],
     templateUrl: './user-list-page.component.html',
     styleUrl: './user-list-page.component.scss'
 })
 export class UserListPageComponent {
+
+    isLoading = false;
 
     columns: TableColumnBase[] = [
         new TableTextColumn({
