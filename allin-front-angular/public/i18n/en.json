@@ -15,7 +15,8 @@
     "General-Info": "General Information",
     "Contact-Info": "Contact Information",
     "admin": {
-        "add-user": "Add User",
+        "create-employee": "Add Employee",
+        "create-user": "Add User",
         "add-phone": "Add a phone number",
         "add-address": "Add a Address",
         "user": {

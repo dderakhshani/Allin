@@ -1,8 +1,8 @@
 import { Routes } from "@angular/router";
-import { AddEmployeePageComponent } from "./add-employee/add-employee-page.component";
+import { CreateEmployeePageComponent } from "./create-employee/create-employee-page.component";
 import { EditEmployeePageComponent } from "./edit-employee/edit-employee-page.component";
 import { EmployeeListPageComponent } from "./employee-list/employee-list-page.component";
- 
+
 export const Employee_ROUTES: Routes = [
     {
         path: "",
@@ -11,7 +11,7 @@ export const Employee_ROUTES: Routes = [
     },
     {
         path: "add",
-        component: AddEmployeePageComponent, data: {
+        component: CreateEmployeePageComponent, data: {
             title: 'add employee'
         }
     },
