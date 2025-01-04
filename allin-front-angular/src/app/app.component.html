@@ -1,5 +1,18 @@
 <div class="flex h-full">
+    <aside class="flex-none menu-background" [class.compact]="isCompact">
+        <header class="border-b">
+            <p-toolbar class="toolbar">
+                <ng-template #start>
+                    <img src="svgs/logo.svg" class="mx-3 size-10">
+                    <h4 *ngIf="!isCompact" class="app-title m-0">Allin</h4>
+                </ng-template>
+            </p-toolbar>
 
+        </header>
+
+
+        <app-menu [menuItems]="menuItems" [compact]="isCompact" (onItemSelected)="openTab($event)"></app-menu>
+    </aside>
     <!-- Main Content -->
     <div class="flex flex-col flex-grow">
 
