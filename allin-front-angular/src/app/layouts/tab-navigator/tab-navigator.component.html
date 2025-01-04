@@ -1,0 +1,20 @@
+<p-tabs [(value)]="activeTab" class="flex-grow">
+    <p-tablist>
+        @for (tab of openedTabs; track tab.routerLink) {
+        <p-tab class="tab-header" [value]="tab.routerLink">
+            <i class="material-symbols-outlined mr-4">{{tab.icon}}</i>
+            {{ tab.label }}
+
+            <p-button type="button" class="me-2" icon="pi pi-times" variant="text" [rounded]="true"
+                (onClick)="closeTab(tab);$event.stopPropagation(); " severity="secondary"></p-button>
+        </p-tab>
+        }
+    </p-tablist>
+    <p-tabpanels>
+        @for (tab of openedTabs; track tab.routerLink) {
+        <p-tabpanel [value]="tab.routerLink">
+            <router-outlet name="{{ tab.id }}"></router-outlet>
+        </p-tabpanel>
+        }
+    </p-tabpanels>
+</p-tabs>
