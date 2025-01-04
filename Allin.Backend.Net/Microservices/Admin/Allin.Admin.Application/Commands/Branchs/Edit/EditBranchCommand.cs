@@ -4,13 +4,10 @@ using MediatR;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class EditRoleCommand : IRequest<bool>, IMapFrom<Role, CreateRoleCommand>
+    public class EditBranchCommand : IRequest<bool>, IMapFrom<Branch, EditBranchCommand>
     {
         public required long Id { get; set; }
         public required string Title { get; set; }
         public required string UniqueName { get; set; }
-        public string? Description { get; set; }
-        public long? DepartmentId { get; set; }
-        public IEnumerable<long> PermissionIds { get; set; }
     }
 }

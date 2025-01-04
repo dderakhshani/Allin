@@ -9,5 +9,15 @@ namespace Allin.Admin.Application.Commands
         public required string Title { get; set; }
         public required string UniqueName { get; set; }
         public string? Description { get; set; }
+        public long? DepartmentId { get; set; }
+        public IEnumerable<long> PermissionIds { get; set; }
     }
+
+    //public class RolePermissionArg : IMapFrom<RolePermission, RolePermissionArg>
+    //{
+    //    public long RoleId { get; set; }
+    //    public long PermissionId { get; set; }
+    //    public Permission Permission { get; set; }
+    //    public Role Role { get; set; }
+    //}
 }

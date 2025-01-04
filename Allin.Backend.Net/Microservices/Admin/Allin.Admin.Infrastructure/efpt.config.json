@@ -55,6 +55,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[organization].[Branch]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[organization].[DepartmentPositions]",
          "ObjectType": 0
       },

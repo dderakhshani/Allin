@@ -17,6 +17,7 @@ namespace Allin.Admin.Infrastructure.Persistence
         }
 
         public DbSet<BaseValue> BaseValues { get; set; }
+        public DbSet<Branch> Branchs { get; set; }
         public DbSet<BaseValueType> BaseValueTypes { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<DepartmentPosition> DepartmentPositions { get; set; }
