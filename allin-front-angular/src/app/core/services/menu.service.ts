@@ -35,27 +35,22 @@ export class MenuService {
                 ],
             },
             {
-                label: 'Users',
-                icon: 'account_circle',
+                label: 'Administration',
+                icon: 'shield_person',
                 items: [
                     {
-                        label: 'Add User',
-                        icon: 'person_add',
+                        label: 'Persons',
+                        icon: 'group',
                         shortcut: '⌘+N',
-                        routerLink: '/admin/user/add'
+                        routerLink: '/admin/person/list'
                     },
                     {
-                        label: 'Users List',
-                        icon: 'group',
+                        label: 'Users ',
+                        icon: 'account_circle',
                         badge: '2',
                         routerLink: '/admin/user/list'
                     },
-                    {
-                        label: 'Add Person',
-                        icon: 'person_add',
-                        shortcut: '⌘+N',
-                        routerLink: '/admin/person/add'
-                    },
+
                     {
                         label: 'Employees',
                         icon: 'badge',
