@@ -18,6 +18,7 @@ import { MenuItem } from 'primeng/api';
 import { Ripple } from 'primeng/ripple';
 import { ToggleSwitch } from 'primeng/toggleswitch';
 import { DividerModule } from 'primeng/divider';
+import { MenuService } from './core/services/menu.service';
 
 @Component({
     selector: 'app-root',
@@ -50,73 +51,19 @@ export class AppComponent {
     openedTabs: any[] = [];
     activeTab = '';
 
-    menuItems: MenuItem[] = [
-        {
-            label: 'Home',
-            icon: 'home',
-            shortcut: '⌘+N',
-            routerLink: '/'
-        },
-        {
-            label: 'Settings',
-            icon: 'settings',
-            shortcut: '⌘+N',
-            items: [
-                {
-                    label: 'General',
-                    icon: 'settings',
-                    shortcut: '⌘+N',
-                    routerLink: '/settings/security'
-                },
-                {
-                    label: 'Security',
-                    icon: 'admin_panel_settings',
-                    shortcut: '⌘+N',
-                    routerLink: '/settings/security'
-                },
-            ],
-        },
-        {
-            label: 'Users',
-            icon: 'account_circle',
-            items: [
-                {
-                    label: 'Add User',
-                    icon: 'person_add',
-                    shortcut: '⌘+N',
-                    routerLink: '/admin/user/add'
-                },
-                {
-                    label: 'Users List',
-                    icon: 'group',
-                    badge: '2',
-                    routerLink: '/admin/user/list'
-                },
-                {
-                    label: 'Add Person',
-                    icon: 'person_add',
-                    shortcut: '⌘+N',
-                    routerLink: '/admin/person/add'
-                },
-                {
-                    label: 'Add Employee',
-                    icon: 'person_add',
-                    shortcut: '⌘+N',
-                    routerLink: '/admin/employee/add'
-                },
-            ],
-        },
-    ];
+    menuItems: MenuItem[] = [];
 
     constructor(private translate: TranslateService,
         private primeng: PrimeNG,
-        private router: Router
+        private router: Router,
+        private menuService: MenuService,
     ) {
         this.translate.addLangs(['de', 'en']);
         this.translate.setDefaultLang('en');
         this.translate.use('en');
 
         this.translate.get('primeng').subscribe(res => this.primeng.setTranslation(res));
+        this.menuItems = this.menuService.getAll();
     }
 
     ngOnInit() {
