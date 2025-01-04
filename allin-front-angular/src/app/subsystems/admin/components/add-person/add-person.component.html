@@ -22,35 +22,35 @@
                 <div class="flex flex-col w-full space-y-5 pt-5">
                     <div class="flex space-x-5">
                         <div>
-                            <p-selectButton [options]="typeOptions" [(ngModel)]="value3" optionLabel="label"
-                                optionValue="value3" />
+                            <p-selectButton [options]="legalOptions" [(ngModel)]="user.isLegal" optionLabel="label"
+                                optionValue="isLegal" />
                         </div>
                     </div>
                     <div class="flex space-x-5">
                         <div class="flex flex-col space-y-2 w-1/2">
                             <label for="FirstName">{{'firstName' | translate}}</label>
-                            <input pInputText id="firstName" [(ngModel)]="value" />
+                            <input pInputText id="firstName" [(ngModel)]="user.firstName" />
 
                         </div>
                         <div class=" flex flex-col space-y-2 w-1/2">
                             <label for="LastName">{{'lastName' | translate}}</label>
-                            <input pInputText id="lastName" [(ngModel)]="value" />
+                            <input pInputText id="lastName" [(ngModel)]="user.lastName" />
                         </div>
                     </div>
                     <div class="flex space-x-5">
                         <div class=" flex flex-col space-y-2 w-1/2">
                             <label for="SSN">{{'ssn' | translate}}</label>
-                            <input pInputText id="ssn" [(ngModel)]="value" />
+                            <input pInputText id="ssn" [(ngModel)]="user.ssn" />
                         </div>
                         <div class=" flex flex-col space-y-2 w-1/2">
                             <label for="birth_date">{{'birthDate' | translate}}</label>
-                            <p-calendar [(ngModel)]="date" inputId="birth_date" />
+                            <p-calendar [(ngModel)]="user.birthDate" inputId="birth_date" />
                         </div>
                     </div>
                     <div class="flex space-x-5">
                         <div class="w-1/2">
-                            <p-selectButton [options]="genderOptions" [(ngModel)]="value2" optionLabel="label"
-                                optionValue="value2" />
+                            <p-selectButton [options]="genderOptions" [(ngModel)]="user.genderBaseId" optionLabel="label"
+                                optionValue="genderValue" />
                         </div>
                         <div class="w-1/2">
                         </div>
@@ -59,46 +59,46 @@
             </p-accordionTab>
             <p-accordionTab [header]="'Contact-Info' | translate">
                 <div class="flex flex-col w-full space-y-5 pt-5">
-                    <div class="flex space-x-5 items-end">                    
+                    <div class="flex space-x-5 items-end" *ngFor="let mobile of user.mobiles">                    
                         <div class=" flex flex-col space-y-2">
                             <label for="Mobile">Select</label>
-                            <p-dropdown [options]="contact" [(ngModel)]="selectedContact" optionLabel="name"
+                            <p-dropdown [options]="contact" [(ngModel)]="mobile.type" optionLabel="name"
                             placeholder="Select Type" />
                         </div>
                         <div class=" flex flex-col space-y-2">
                             <label for="Mobile">{{'mobile' | translate}}</label>
-                            <input pInputText id="mobile" [(ngModel)]="value" />
+                            <input pInputText id="mobile" [(ngModel)]="mobile.phoneNumber" />
                         </div>
                         <div>
                             <p-button icon="pi pi-trash" [text]="true" [severity]="'danger'" />
                         </div>
                     </div>
                     <div class="flex">
-                        <p-button [label]="'admin.add-phone' | translate" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
+                        <p-button (click)=addMobile() [label]="'admin.add-phone' | translate" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
                     </div>
                     
                     <div class="flex space-x-5 ">
                         <div class=" flex flex-col space-y-2 w-1/2">
                             <label for="Email">{{'email' | translate}}</label>
-                            <input pInputText id="email" [(ngModel)]="value" />
+                            <input pInputText id="email" [(ngModel)]="user.email" />
                         </div>
                     </div>
-                    <div class="flex space-x-5 items-end">                    
+                    <div class="flex space-x-5 items-end" *ngFor="let address of user.addresses">                    
                         <div class=" flex flex-col space-y-2">
                             <label for="Mobile">Select</label>
-                            <p-dropdown [options]="location" [(ngModel)]="selectedLocation" optionLabel="name"
+                            <p-dropdown [options]="location" [(ngModel)]="address.type" optionLabel="name"
                             placeholder="Select Location Type" />
                         </div>
                         <div class=" flex flex-col space-y-2">
                             <label for="Address">{{'address' | translate}}</label>
-                            <input pInputText id="address" [(ngModel)]="value" />
+                            <input pInputText id="address" [(ngModel)]="address.address" />
                         </div>
                         <div>
                             <p-button icon="pi pi-trash" [text]="true" [severity]="'danger'" />
                         </div>
                     </div>
                     <div class="flex">
-                        <p-button [label]="'admin.add-address' | translate" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
+                        <p-button (click)=addAddress() [label]="'admin.add-address' | translate" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
                     </div>
                 </div>
             </p-accordionTab>

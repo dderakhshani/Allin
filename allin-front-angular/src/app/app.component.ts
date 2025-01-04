@@ -92,6 +92,18 @@ export class AppComponent {
                     badge: '2',
                     routerLink: '/admin/user/list'
                 },
+                {
+                    label: 'Add Person',
+                    icon: 'person_add',
+                    shortcut: '⌘+N',
+                    routerLink: '/admin/person/add'
+                },
+                {
+                    label: 'Add Employee',
+                    icon: 'person_add',
+                    shortcut: '⌘+N',
+                    routerLink: '/admin/employee/add'
+                },
             ],
         },
     ];
