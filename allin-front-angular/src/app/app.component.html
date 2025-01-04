@@ -12,6 +12,7 @@
 
 
         <app-menu [menuItems]="menuItems" [compact]="isCompact" (onItemSelected)="openTab($event)"></app-menu>
+
     </aside>
 
     <!-- Main Content -->
@@ -42,30 +43,12 @@
 
                 </ng-template>
             </p-toolbar>
+            <p-divider></p-divider>
         </header>
 
         <!-- Main Content Area -->
         <main class="flex flex-grow h-full overflow-hidden">
-            <p-tabs [value]="activeTab" class="flex-grow">
-                <p-tablist>
-                    @for (tab of openedTabs; track tab.routerLink) {
-                    <p-tab class="tab-header" [value]="tab.routerLink">
-                        <i class="material-symbols-outlined mr-4">{{tab.icon}}</i>
-                        {{ tab.label }}
-
-                        <p-button type="button" class="me-2" icon="pi pi-times" variant="text" [rounded]="true"
-                            severity="secondary"></p-button>
-                    </p-tab>
-                    }
-                </p-tablist>
-                <p-tabpanels>
-                    @for (tab of openedTabs; track tab.routerLink) {
-                    <p-tabpanel [value]="tab.routerLink">
-                        <router-outlet></router-outlet>
-                    </p-tabpanel>
-                    }
-                </p-tabpanels>
-            </p-tabs>
+            <app-tab-navigator></app-tab-navigator>
         </main>
     </div>
 </div>

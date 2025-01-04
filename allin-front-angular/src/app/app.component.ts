@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { TranslatePipe, TranslateDirective, TranslateService } from '@ngx-translate/core';
 import { PrimeNG } from 'primeng/config';
 import { ToolbarModule } from 'primeng/toolbar';
@@ -18,11 +18,15 @@ import { MenuItem } from 'primeng/api';
 import { Ripple } from 'primeng/ripple';
 import { ToggleSwitch } from 'primeng/toggleswitch';
 import { DividerModule } from 'primeng/divider';
+import { CommonModule } from '@angular/common';
+import { TabNavigatorComponent } from "./layouts/tab-navigator/tab-navigator.component";
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet,
+    imports: [
+        CommonModule,
+        RouterModule,
         TranslatePipe,
         TranslateDirective,
         BasicModule,
@@ -37,6 +41,7 @@ import { DividerModule } from 'primeng/divider';
         ToggleSwitch,
         MenuComponent,
         DividerModule,
+        TabNavigatorComponent
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
@@ -47,14 +52,14 @@ export class AppComponent {
     isMobile = false;
     isCompact = false;
     mobileMenuVisible = false;
-    openedTabs: any[] = [];
-    activeTab = '';
+
 
     menuItems: MenuItem[] = [
         {
             label: 'Home',
             icon: 'home',
             shortcut: '⌘+N',
+            id: '1',
             routerLink: '/'
         },
         {
@@ -63,12 +68,14 @@ export class AppComponent {
             shortcut: '⌘+N',
             items: [
                 {
+                    id: '2',
                     label: 'General',
                     icon: 'settings',
                     shortcut: '⌘+N',
-                    routerLink: '/settings/security'
+                    routerLink: '/settings/general'
                 },
                 {
+                    id: '3',
                     label: 'Security',
                     icon: 'admin_panel_settings',
                     shortcut: '⌘+N',
@@ -81,12 +88,14 @@ export class AppComponent {
             icon: 'account_circle',
             items: [
                 {
+                    id: '3',
                     label: 'Add User',
                     icon: 'person_add',
                     shortcut: '⌘+N',
                     routerLink: '/admin/user/add'
                 },
                 {
+                    id: '5',
                     label: 'Users List',
                     icon: 'group',
                     badge: '2',
@@ -98,7 +107,6 @@ export class AppComponent {
 
     constructor(private translate: TranslateService,
         private primeng: PrimeNG,
-        private router: Router
     ) {
         this.translate.addLangs(['de', 'en']);
         this.translate.setDefaultLang('en');
@@ -124,34 +132,12 @@ export class AppComponent {
     }
 
 
-    openTab(item: MenuItem) {
-        const tabIndex = this.openedTabs.findIndex((tab) => tab.routerLink === item.routerLink);
-        this.activeTab = item.routerLink;
-
-        if (tabIndex === -1) {
-            this.openedTabs.push(item);
-        } else {
-        }
-
-        this.router.navigateByUrl(item.routerLink);
-        this.mobileMenuVisible = false;
-    }
-
-    closeTab(tab: any, index: number) {
-        this.openedTabs.splice(index, 1);
-
-        if (this.openedTabs.length > 0) {
-            // if (this.activeTabIndex >= index) {
-            //     this.activeTabIndex = Math.max(0, this.activeTabIndex - 1);
-            // }
-            // this.router.navigateByUrl(this.openedTabs[this.activeTabIndex].route);
-        } else {
-            this.router.navigateByUrl('/');
-        }
-    }
-
     darkChanged(event: any) {
         const element = document.querySelector('html');
         element?.classList.toggle('dark');
+    }
+
+    openTab(item: MenuItem) {
+
     }
 }

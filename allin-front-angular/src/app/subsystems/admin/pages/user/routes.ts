@@ -13,12 +13,14 @@ export const User_ROUTES: Routes = [
         path: "create",
         component: CreateUserPageComponent, data: {
             title: 'create user page'
-        }
+        },
+        outlet: '4'
     },
     {
         path: "list",
         component: UserListPageComponent, data: {
             title: 'user list page'
-        }
+        },
+        outlet: '5'
     },
 ];
