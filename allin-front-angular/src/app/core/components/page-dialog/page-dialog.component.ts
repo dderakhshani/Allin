@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, TemplateRef, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormGroup, FormsModule } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -30,7 +31,8 @@ export class PageDialogComponent {
 
     constructor(public dialogRef: DynamicDialogRef,
         public dialogConfig: DynamicDialogConfig<PageDialogConfig>,
-        private confirmationService: ConfirmationService) {
+        private confirmationService: ConfirmationService,
+        private translate: TranslateService) {
 
         this.config = dialogConfig.data!;
 
@@ -40,13 +42,13 @@ export class PageDialogComponent {
         // }
 
         this.config.mainActionButtonConfigs = {
-            title: this.config.mainActionButtonConfigs?.title || "OK",
+            title: this.config.mainActionButtonConfigs?.title || this.translate.instant("save"),
             color: this.config.mainActionButtonConfigs?.color || 'primary',
             visible: true
         };
 
         this.config.secondaryActionButtonConfigs = {
-            title: this.config.secondaryActionButtonConfigs?.title || 'CANCEL',
+            title: this.config.secondaryActionButtonConfigs?.title || this.translate.instant("cancel"),
             color: this.config.secondaryActionButtonConfigs?.color || 'secondary',
             visible: this.config.secondaryActionButtonConfigs?.visible != undefined ? this.config.secondaryActionButtonConfigs?.visible : true
         };

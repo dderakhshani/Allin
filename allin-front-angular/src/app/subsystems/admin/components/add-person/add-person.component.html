@@ -1,22 +1,17 @@
 <div class="flex flex-col w-full">
     <div class="card flex w-full justify-content-center">
         <p-accordion [multiple]="true" [activeIndex]="[0,1]">
-            <p-accordionTab [header]="'General-Info' | translate">
+            <p-accordionTab [header]="'general-info' | translate">
                 <div class="card flex justify-content-center">
-                    <p-fileUpload 
-                        name="demo[]" 
-                        url="https://www.primefaces.org/cdn/api/upload.php" 
-                        (onUpload)="onUpload($event)" 
-                        [multiple]="true" 
-                        accept="image/*" 
-                        maxFileSize="1000000">
-                            <ng-template pTemplate="content">
-                                <ul *ngIf="uploadedFiles.length">
-                                    <li *ngFor="let file of uploadedFiles">
-                                        {{ file.name }} - {{ file.size }} bytes
-                                    </li>
-                                </ul>
-                            </ng-template>
+                    <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                        (onUpload)="onUpload($event)" [multiple]="true" accept="image/*" maxFileSize="1000000">
+                        <ng-template pTemplate="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">
+                                    {{ file.name }} - {{ file.size }} bytes
+                                </li>
+                            </ul>
+                        </ng-template>
                     </p-fileUpload>
                 </div>
                 <div class="flex flex-col w-full space-y-5 pt-5">
@@ -28,45 +23,45 @@
                     </div>
                     <div class="flex space-x-5">
                         <div class="flex flex-col space-y-2 w-1/2">
-                            <label for="FirstName">{{'firstName' | translate}}</label>
+                            <label for="FirstName">{{'person.firstName' | translate}}</label>
                             <input pInputText id="firstName" [(ngModel)]="user.firstName" />
 
                         </div>
                         <div class=" flex flex-col space-y-2 w-1/2">
-                            <label for="LastName">{{'lastName' | translate}}</label>
+                            <label for="LastName">{{'person.lastName' | translate}}</label>
                             <input pInputText id="lastName" [(ngModel)]="user.lastName" />
                         </div>
                     </div>
                     <div class="flex space-x-5">
                         <div class=" flex flex-col space-y-2 w-1/2">
-                            <label for="SSN">{{'ssn' | translate}}</label>
+                            <label for="SSN">{{'person.ssn' | translate}}</label>
                             <input pInputText id="ssn" [(ngModel)]="user.ssn" />
                         </div>
                         <div class=" flex flex-col space-y-2 w-1/2">
-                            <label for="birth_date">{{'birthDate' | translate}}</label>
+                            <label for="birth_date">{{'person.birthDate' | translate}}</label>
                             <p-calendar [(ngModel)]="user.birthDate" inputId="birth_date" />
                         </div>
                     </div>
                     <div class="flex space-x-5">
                         <div class="w-1/2">
-                            <p-selectButton [options]="genderOptions" [(ngModel)]="user.genderBaseId" optionLabel="label"
-                                optionValue="genderValue" />
+                            <p-selectButton [options]="genderOptions" [(ngModel)]="user.genderBaseId"
+                                optionLabel="label" optionValue="genderValue" />
                         </div>
                         <div class="w-1/2">
                         </div>
                     </div>
                 </div>
             </p-accordionTab>
-            <p-accordionTab [header]="'Contact-Info' | translate">
+            <p-accordionTab [header]="'contact-info' | translate">
                 <div class="flex flex-col w-full space-y-5 pt-5">
-                    <div class="flex space-x-5 items-end" *ngFor="let mobile of user.mobiles">                    
+                    <div class="flex space-x-5 items-end" *ngFor="let mobile of user.mobiles">
                         <div class=" flex flex-col space-y-2">
                             <label for="Mobile">Select</label>
                             <p-dropdown [options]="contact" [(ngModel)]="mobile.type" optionLabel="name"
-                            placeholder="Select Type" />
+                                placeholder="Select Type" />
                         </div>
                         <div class=" flex flex-col space-y-2">
-                            <label for="Mobile">{{'mobile' | translate}}</label>
+                            <label for="Mobile">{{'person.mobile' | translate}}</label>
                             <input pInputText id="mobile" [(ngModel)]="mobile.phoneNumber" />
                         </div>
                         <div>
@@ -74,23 +69,24 @@
                         </div>
                     </div>
                     <div class="flex">
-                        <p-button (click)=addMobile() [label]="'admin.add-phone' | translate" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
+                        <p-button (click)=addMobile() [label]="'admin.add-phone' | translate" icon="pi pi-plus-circle"
+                            [text]="true" severity="secondary" />
                     </div>
-                    
+
                     <div class="flex space-x-5 ">
                         <div class=" flex flex-col space-y-2 w-1/2">
-                            <label for="Email">{{'email' | translate}}</label>
-                            <input pInputText id="email" [(ngModel)]="user.email" />
+                            <label for="Email">{{'person.email' | translate}}</label>
+                            <input pInputText id="person.email" [(ngModel)]="user.email" />
                         </div>
                     </div>
-                    <div class="flex space-x-5 items-end" *ngFor="let address of user.addresses">                    
+                    <div class="flex space-x-5 items-end" *ngFor="let address of user.addresses">
                         <div class=" flex flex-col space-y-2">
                             <label for="Mobile">Select</label>
                             <p-dropdown [options]="location" [(ngModel)]="address.type" optionLabel="name"
-                            placeholder="Select Location Type" />
+                                placeholder="Select Location Type" />
                         </div>
                         <div class=" flex flex-col space-y-2">
-                            <label for="Address">{{'address' | translate}}</label>
+                            <label for="Address">{{'person.address' | translate}}</label>
                             <input pInputText id="address" [(ngModel)]="address.address" />
                         </div>
                         <div>
@@ -98,7 +94,8 @@
                         </div>
                     </div>
                     <div class="flex">
-                        <p-button (click)=addAddress() [label]="'admin.add-address' | translate" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
+                        <p-button (click)=addAddress() [label]="'admin.add-address' | translate"
+                            icon="pi pi-plus-circle" [text]="true" severity="secondary" />
                     </div>
                 </div>
             </p-accordionTab>
