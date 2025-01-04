@@ -55,7 +55,15 @@
          "ObjectType": 0
       },
       {
-         "Name": "[organization].[Branch]",
+         "Name": "[common].[TableExtendedFieldItems]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[common].[TableExtendedFields]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[common].[TableExtendedFieldValues]",
          "ObjectType": 0
       },
       {
@@ -90,7 +98,7 @@
    "UseDecimalDataAnnotationForSprocResult": true,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
-   "UseHierarchyId": false,
+   "UseHierarchyId": true,
    "UseInflector": true,
    "UseLegacyPluralizer": false,
    "UseManyToManyEntity": false,

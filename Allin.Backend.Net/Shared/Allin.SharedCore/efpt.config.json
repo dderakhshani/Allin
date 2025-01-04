@@ -1,84 +1,52 @@
 ﻿{
-  "CodeGenerationMode": 4,
-  "ContextClassName": "AllinDBContext",
-  "ContextNamespace": null,
-  "FilterSchemas": false,
-  "IncludeConnectionString": false,
-  "ModelNamespace": null,
-  "OutputContextPath": "Allin.Admin.Infrastructure.Persistence",
-  "OutputPath": "Persistence/Entities",
-  "PreserveCasingWithRegex": true,
-  "ProjectRootNamespace":  "Allin.Admin.Infrastructure",
-  "Schemas": null,
-  "SelectedHandlebarsLanguage": 2,
-  "SelectedToBeGenerated": 2,
-  "T4TemplatePath": null,
-  "Tables": [
-    {
-      "Name": "[admin].[BaseValues]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[admin].[BaseValueTypes]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[admin].[Locations]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[admin].[MenuItems]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[admin].[Permissions]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[admin].[RolePermissions]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[admin].[Roles]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[admin].[UserPermissions]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[admin].[UserRoles]",
-      "ObjectType": 0
-    },
-    {
-      "Name": "[admin].[Users]",
-      "ObjectType": 0
-    }
-  ],
-  "UiHint": null,
-  "UncountableWords": null,
-  "UseAsyncStoredProcedureCalls": true,
-  "UseBoolPropertiesWithoutDefaultSql": false,
-  "UseDatabaseNames": false,
-  "UseDatabaseNamesForRoutines": true,
-  "UseDateOnlyTimeOnly": true,
-  "UseDbContextSplitting": false,
-  "UseDecimalDataAnnotationForSprocResult": true,
-  "UseFluentApiOnly": true,
-  "UseHandleBars": false,
-  "UseHierarchyId": false,
-  "UseInflector": true,
-  "UseLegacyPluralizer": false,
-  "UseManyToManyEntity": false,
-  "UseNoDefaultConstructor": false,
-  "UseNoNavigations": false,
-  "UseNoObjectFilter": false,
-  "UseNodaTime": false,
-  "UseNullableReferences": false,
-  "UsePrefixNavigationNaming": false,
-  "UseSchemaFolders": false,
-  "UseSchemaNamespaces": false,
-  "UseSpatial": false,
-  "UseT4": true,
-  "UseT4Split": false
+   "CodeGenerationMode": 4,
+   "ContextClassName": "AllinDBContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Allin.SharedCore.Persistence",
+   "OutputPath": "Persistence\\Entities",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Allin.SharedCore",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 2,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[common].[AuditedFields]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[common].[Audits]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": true,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": true,
+   "UseT4Split": false
 }

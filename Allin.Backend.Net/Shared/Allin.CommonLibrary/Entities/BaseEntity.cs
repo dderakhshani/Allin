@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Allin.SharedCore.Entities
+namespace Allin.Common.Entities
 {
     public abstract class BaseEntity
     {

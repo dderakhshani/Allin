@@ -1,4 +1,4 @@
-﻿using Allin.SharedCore.Configurations;
+﻿using Allin.Common.Configurations;
 
 namespace Allin.Admin.Infrastructure.Persistence
 {
