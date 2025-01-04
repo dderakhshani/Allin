@@ -1,4 +1,4 @@
-<div class="page-content">
+<div class="page-content flex flex-col h-full">
     @if(isLoading){
     <p-progressbar mode="indeterminate" [style]="{ height: '6px' }" />
     }
@@ -9,7 +9,7 @@
         </p-toolbar>
     </header>
 
-    <div class="p-5">
+    <div class="h-full p-5">
         <ng-content></ng-content>
     </div>
 </div>

@@ -9,11 +9,33 @@ aside {
 
 header {
     z-index: 500;
+    min-height: 57px;
     height: 57px;
     // box-shadow: 7px 0px 8px rgba(0, 0, 0, 0.2);
 }
 
+.toolbar-action {
+    width: 2.5rem;
+    height: 2.5rem;
+    -webkit-user-select: none;
+    user-select: none;
+    border-radius: .5rem;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--topbar-item-text-color);
 
+    i {
+        font-size: 1.5rem
+    }
+
+    &:hover {
+        background-color: #00000017;
+        transition: background-color 300ms
+    }
+}
 
 .tab-header {
     --p-tabs-tab-padding: 0.5rem .25rem 0.5rem 1rem;

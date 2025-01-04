@@ -15,6 +15,7 @@ import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
 
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { PageContentComponent } from './components/page-content/page-content.component';
 @NgModule({
     declarations: [
 
@@ -22,7 +23,8 @@ import { MessageModule } from 'primeng/message';
     ],
     imports: [
         TranslatePipe,
-        TranslateDirective
+        TranslateDirective,
+        PageContentComponent
     ],
     exports: [
         CommonModule,
@@ -38,7 +40,8 @@ import { MessageModule } from 'primeng/message';
         MessageModule,
         TimelineModule,
         TranslatePipe,
-        TranslateDirective
+        TranslateDirective,
+        PageContentComponent
     ]
 })
 export class BasicModule { }

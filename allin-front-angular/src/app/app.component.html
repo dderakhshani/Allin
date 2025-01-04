@@ -1,51 +1,56 @@
-<div class="flex h-full">
-    <!-- Sidebar -->
-    <aside class="flex-none menu-background" [class.compact]="isCompact">
-        <header class="border-b">
-            <p-toolbar class="toolbar">
-                <ng-template #start>
-                    <img src="svgs/logo.svg" class="mx-3 size-10">
-                    <h4 *ngIf="!isCompact" class="app-title m-0">Allin</h4>
-                </ng-template>
-            </p-toolbar>
-        </header>
+<div class="flex flex-col h-full">
+    <!-- Toolbar -->
+    <header class="flex border-l border-b shadow">
 
-
-        <app-menu [menuItems]="menuItems" [compact]="isCompact" (onItemSelected)="openTab($event)"></app-menu>
-    </aside>
-
-    <!-- Main Content -->
-    <div class="flex flex-col flex-grow">
-
-        <!-- Toolbar -->
-        <header class="flex-none border-b">
-            <p-toolbar class="toolbar ">
-                <ng-template #start>
+        <p-toolbar class="toolbar flex-grow">
+            <ng-template #start>
+                <div class="flex items-center ">
+                    <div class="w-64 flex items-center " [ngClass]="{'w-16': isCompact}">
+                        <img src="svgs/logo.svg" class="mx-3 size-10">
+                        <h4 *ngIf="!isCompact" class="app-title m-0">Allin</h4>
+                    </div>
+                    <p-divider layout="vertical"></p-divider>
                     <p-button class="me-2" type="button" icon="pi pi-bars" variant="text"
                         (click)="toggleDrawer()"></p-button>
-                </ng-template>
-                <ng-template #center>
+                </div>
 
-                </ng-template>
-                <ng-template #end>
-                    <i class="pi pi-expand mx-4" style="font-size: 1.25rem"></i>
+            </ng-template>
 
-                    <p-overlaybadge value="2" class="mx-4">
-                        <i class="pi pi-bell" style="font-size: 1.25rem"></i>
-                    </p-overlaybadge>
 
-                    <i class="pi pi-cog mx-4" style="font-size: 1.25rem"></i>
+            <ng-template #end>
+                <!-- <p-button class="mx-2 toolbar-action" type="button" variant="text" size="large"
+                    severity="secondary">
+                    <i class="pi pi-expand "></i>
+                </p-button> -->
+                <a class="toolbar-action mx-2" pRipple>
+                    <i class="pi pi-expand "></i>
+                </a>
 
-                    <p-toggleswitch (onChange)="darkChanged($event)" [(ngModel)]="dark" class="ms-2" />
-                    <i *ngIf="!dark" class="pi pi-sun mx-2"></i>
-                    <i *ngIf="dark" class="pi pi-moon mx-2"></i>
+                <a class="toolbar-action mx-2" pRipple>
+                    <i class="pi pi-bell" pBadge value="2" badgeSize="small"></i>
+                </a>
 
-                </ng-template>
-            </p-toolbar>
-        </header>
+                <a class="toolbar-action mx-2" pRipple>
+                    <i class="pi pi-cog "></i>
+                </a>
+
+                <p-toggleswitch (onChange)="darkChanged($event)" [(ngModel)]="dark" class="ms-2" />
+                <i *ngIf="!dark" class="pi pi-sun mx-2"></i>
+                <i *ngIf="dark" class="pi pi-moon mx-2"></i>
+
+            </ng-template>
+        </p-toolbar>
+
+    </header>
+
+    <!-- Main Content -->
+    <div class="flex flex-grow ">
+        <aside class="flex-none menu-background" [class.compact]="isCompact">
+            <app-menu [menuItems]="menuItems" [compact]="isCompact" (onItemSelected)="openTab($event)"></app-menu>
+        </aside>
 
         <!-- Main Content Area -->
-        <main class="flex flex-grow h-full overflow-hidden">
+        <main class="flex flex-grow  overflow-hidden max-h-[calc(100vh-57px)]">
             <p-tabs [value]="activeTab" class="flex-grow">
                 <p-tablist>
                     @for (tab of openedTabs; track tab.routerLink) {

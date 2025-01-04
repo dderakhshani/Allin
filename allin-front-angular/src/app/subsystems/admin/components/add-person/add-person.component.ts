@@ -6,6 +6,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { FieldsetModule } from 'primeng/fieldset';
 import { FileUploadEvent, FileUploadModule } from 'primeng/fileupload';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { Address, CreatePersonCommand, Mobile } from '../../models/commands/create-Person-command';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -23,13 +24,20 @@ interface UploadEvent {
 })
 export class AddPersonComponent {
 
+    user!: CreatePersonCommand;
+
+    legalOptions: any[] = [{ label: 'Legal Entity', isLegal: 'Legal Entity' }, { label: 'Natural Person', isLegal: 'Natural Person' }];
+    isLegal: string = 'Natural Person';
+
+    genderOptions: any[] = [{ label: 'Male', genderValue: 1 }, { label: 'Female', genderValue: 2 }];
+    genderValue: number = 1;
+
+
     value: string | undefined;
     date: Date | undefined;
 
-    typeOptions: any[] = [{ label: 'Legal Entity', value3: 'Legal Entity' }, { label: 'Natural Person', value3: 'Natural Person' }];
-    value3: string = 'Natural Person';
-    genderOptions: any[] = [{ label: 'Male', value2: 'Male' }, { label: 'Female', value2: 'Female' }];
-    value2: string = 'Male';
+    
+    
     uploadedFiles: any[] = [];
 
     contact: any[] | undefined;
@@ -41,6 +49,21 @@ export class AddPersonComponent {
     constructor(private messageService: MessageService) { }
 
     ngOnInit() {
+        this.user = {
+            firstName: '',
+            lastName: '',
+            ssn: '',
+            mobiles: [{type:0,phoneNumber:""}],
+            addresses: [{type:0,address:""}],
+            email: '',
+            photoUrl: '',
+            signatureImageUrl: '',
+            // birthDate: null,
+            // genderBaseId: null,
+            // maritalStatus: null,
+            isLegal: false // مقدار پیش‌فرض
+          };
+          
         this.contact = [
             { name: 'Mobile', code: 'Mobile' },
             { name: 'Phone', code: 'Phone' },
@@ -61,5 +84,19 @@ export class AddPersonComponent {
 
         this.messageService.add({ severity: 'info', summary: 'File Uploaded', detail: '' });
     }
+
+    addMobile() {
+
+        let newMobile: Mobile = {type:0,phoneNumber:""};
+        this.user.mobiles.push(newMobile);
+    
+      }
+
+      addAddress() {
+
+        let newAddress: Address = {type:0,address:""};
+        this.user.addresses.push(newAddress);
+    
+      }
 
 }
