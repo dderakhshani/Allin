@@ -73,6 +73,11 @@ body {
     overflow: hidden;
 }
 
+.border-l {
+    border-left: 1px solid var(--p-divider-border-color);
+    overflow: hidden;
+}
+
 /* Scroll bar stylings */
 ::-webkit-scrollbar {
     width: .5rem;

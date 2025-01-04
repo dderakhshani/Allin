@@ -38,6 +38,7 @@ import { MenuService } from './core/services/menu.service';
         ToggleSwitch,
         MenuComponent,
         DividerModule,
+        Ripple
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
