@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { BadgeModule } from 'primeng/badge';
+import { Ripple } from 'primeng/ripple';
 type MenuItemOpenable = MenuItem & { isOpen: boolean };
 
 @Component({
@@ -10,6 +11,7 @@ type MenuItemOpenable = MenuItem & { isOpen: boolean };
     standalone: true,
     imports: [CommonModule,
         BadgeModule,
+        Ripple
     ],
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss',
