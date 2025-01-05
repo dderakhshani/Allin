@@ -6,6 +6,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { FieldsetModule } from 'primeng/fieldset';
 import { FileUploadEvent, FileUploadModule } from 'primeng/fileupload';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { FloatLabel } from 'primeng/floatlabel';
 import { Address, CreatePersonCommand, Mobile } from '../../models/commands/create-Person-command';
 
 interface UploadEvent {
@@ -17,7 +18,7 @@ interface UploadEvent {
 @Component({
     selector: 'app-add-person',
     standalone: true,
-    imports: [BasicModule, CalendarModule, AccordionModule, FieldsetModule, FileUploadModule, SelectButtonModule],
+    imports: [BasicModule, CalendarModule, AccordionModule, FieldsetModule, FileUploadModule, SelectButtonModule,FloatLabel],
     providers: [MessageService],
     templateUrl: './add-person.component.html',
     styleUrl: './add-person.component.scss'
