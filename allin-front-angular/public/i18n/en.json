@@ -24,6 +24,9 @@
     },
     "admin": {
         "create-employee": "Add Employee",
+        "create-person": "Add Person",
+        "create-role": "Add Role",
+        "create-department": "Add Department",
         "create-user": "Add User",
         "add-phone": "Add a phone number",
         "add-address": "Add a Address",
