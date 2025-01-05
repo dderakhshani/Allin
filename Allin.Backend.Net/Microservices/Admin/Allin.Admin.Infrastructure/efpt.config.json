@@ -15,10 +15,6 @@
    "T4TemplatePath": null,
    "Tables": [
       {
-         "Name": "[admin].[BaseValues]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[admin].[BaseValueTypes]",
          "ObjectType": 0
       },
@@ -67,6 +63,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[organization].[Branchs]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[organization].[DepartmentPositions]",
          "ObjectType": 0
       },
@@ -76,6 +76,10 @@
       },
       {
          "Name": "[organization].[Employees]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[organization].[PersonAddresses]",
          "ObjectType": 0
       },
       {

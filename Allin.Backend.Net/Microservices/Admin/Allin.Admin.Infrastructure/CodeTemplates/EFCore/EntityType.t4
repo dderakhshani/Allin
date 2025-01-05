@@ -28,7 +28,8 @@
     var usings = new List<string>
     {
         "System",
-        "System.Collections.Generic"
+        "System.Collections.Generic",
+        "Allin.Common.Entities"
     };
 
     if (Options.UseDataAnnotations)
@@ -65,12 +66,14 @@ namespace Allin.Admin.Infrastructure.Persistence;
         }
     }
 #>
-public class <#= EntityType.Name #> : AdminBaseEntity
+public class <#= EntityType.Name #> : AdminBaseEntity <#= EntityType.GetProperties().Any(x=> x.Name=="Hierarchy")?", IHierarchyEntity":"" #>
 {
 <#
     var firstProperty = true;
     foreach (var property in EntityType.GetProperties().OrderBy(p => p.GetColumnOrder() ?? -1))
     {
+       
+
         if (property.Name=="Id" || property.Name=="CreatedAt" || property.Name=="ModifiedAt" || property.Name=="IsDeleted")
         {
            continue;

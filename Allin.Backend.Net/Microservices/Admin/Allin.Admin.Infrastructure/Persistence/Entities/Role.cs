@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Allin.Common.Entities;
 namespace Allin.Admin.Infrastructure.Persistence;
 
-public class Role : AdminBaseEntity
+public class Role : AdminBaseEntity 
 {
   public string Title { get; set; }
   public string UniqueName { get; set; }

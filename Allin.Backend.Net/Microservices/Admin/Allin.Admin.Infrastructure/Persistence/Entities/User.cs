@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Allin.Common.Entities;
 namespace Allin.Admin.Infrastructure.Persistence;
 
-public class User : AdminBaseEntity
+public class User : AdminBaseEntity 
 {
   public long PersonId { get; set; }
   public string Username { get; set; }

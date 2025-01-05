@@ -7,7 +7,7 @@ namespace Allin.Admin.Infrastructure.Persistence
     {
         public override void Configure(EntityTypeBuilder<TableExtendedFieldValue> builder)
         {
-            builder.ToTable("TableExtendedFieldValue", "Common");
+            builder.ToTable("TableExtendedFieldValues", "Common");
 
             base.Configure(builder);
         }

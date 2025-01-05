@@ -15,6 +15,7 @@
     <Folder Include="Events\" />
     <Folder Include="IntegrationEvents\" />
     <Folder Include="Params\" />
+    <Folder Include="Queries\Persons\Params\" />
     <Folder Include="Queries\TableExtendedFields\Params\" />
     <Folder Include="Queries\Departments\Params\" />
     <Folder Include="Queries\Branchs\Params\" />

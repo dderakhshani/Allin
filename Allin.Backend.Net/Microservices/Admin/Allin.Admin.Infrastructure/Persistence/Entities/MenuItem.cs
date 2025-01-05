@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Allin.Common.Entities;
 namespace Allin.Admin.Infrastructure.Persistence;
 
-public class MenuItem : AdminBaseEntity
+public class MenuItem : AdminBaseEntity 
 {
   public long? ParentId { get; set; }
   public long? PermissionId { get; set; }

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Allin.Common.Entities;
 using Microsoft.EntityFrameworkCore;
 namespace Allin.Admin.Infrastructure.Persistence;
 
-public class Permission : AdminBaseEntity
+public class Permission : AdminBaseEntity , IHierarchyEntity
 {
   public HierarchyId Hierarchy { get; set; }
   public long? ParentId { get; set; }

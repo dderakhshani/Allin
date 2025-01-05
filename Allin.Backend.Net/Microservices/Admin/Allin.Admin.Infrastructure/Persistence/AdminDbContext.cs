@@ -35,6 +35,7 @@ namespace Allin.Admin.Infrastructure.Persistence
         public DbSet<TableExtendedField> TableExtendedFields { get; set; }
         public DbSet<TableExtendedFieldItem> TableExtendedFieldItems { get; set; }
         public DbSet<TableExtendedFieldValue> TableExtendedFieldValues { get; set; }
+        public DbSet<PersonAddress> PersonAddresses { get; set; }
 
 
     }

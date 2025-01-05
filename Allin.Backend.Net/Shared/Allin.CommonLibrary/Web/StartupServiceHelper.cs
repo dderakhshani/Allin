@@ -247,6 +247,7 @@ namespace Allin.Common.Web
                   .AddClasses(type => type.AssignableTo(typeof(Allin.Common.Data.QueryBase<>)))
                   .AsImplementedInterfaces()
                   .WithTransientLifetime());
+
         }
 
         static void IgnoreInverseProperty(JsonTypeInfo typeInfo)

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Allin.Common.Entities;
 namespace Allin.Admin.Infrastructure.Persistence;
 
-public class RolePermission : AdminBaseEntity
+public class RolePermission : AdminBaseEntity 
 {
   public long RoleId { get; set; }
   public long PermissionId { get; set; }

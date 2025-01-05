@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Allin.Common.Entities;
 namespace Allin.Admin.Infrastructure.Persistence;
 
-public class Position : AdminBaseEntity
+public class Position : AdminBaseEntity 
 {
   public long? ParentId { get; set; }
   public string LevelCode { get; set; }
