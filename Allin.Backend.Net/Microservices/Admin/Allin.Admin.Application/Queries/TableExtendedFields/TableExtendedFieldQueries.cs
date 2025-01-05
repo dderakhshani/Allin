@@ -27,7 +27,7 @@ namespace Allin.Admin.Application.Queries
 
          public async Task<TableExtendedFieldModel> GetByTableName(string tableName, CancellationToken cancellationToken)
         {
-            return Mapper.Map<TableExtendedFieldModel>(await DbContext.TableExtendedFields.AsNoTracking().FirstAsync(x => x.tableName == tableName, cancellationToken));
+            return Mapper.Map<TableExtendedFieldModel>(await DbContext.TableExtendedFields.AsNoTracking().FirstAsync(x => x.TableName == tableName, cancellationToken));
         }
     }
 }
