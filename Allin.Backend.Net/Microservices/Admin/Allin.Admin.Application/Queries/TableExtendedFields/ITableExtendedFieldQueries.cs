@@ -7,5 +7,6 @@ namespace Allin.Admin.Application.Queries
     {
         Task<PagedList<TableExtendedFieldModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken);
         Task<TableExtendedFieldModel> GetById(long id, CancellationToken cancellationToken);
+        Task<TableExtendedFieldModel> GetByTableName(string tableName, CancellationToken cancellationToken);
     }
 }

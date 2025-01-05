@@ -18,10 +18,10 @@ namespace Allin.Admin.ServiceApi.Controllers
             _tableExtendedFieldQueries = tableExtendedFieldQueries;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(long id, CancellationToken cancellationToken)
+        [HttpGet("{tablName}")]
+        public async Task<IActionResult> Get(string tablName, CancellationToken cancellationToken)
         {
-            return OkResult(await _tableExtendedFieldQueries.GetById(id, cancellationToken));
+            return OkResult(await _tableExtendedFieldQueries.GetByTableName(tablName, cancellationToken));
         }
 
         [HttpGet("get-all")]

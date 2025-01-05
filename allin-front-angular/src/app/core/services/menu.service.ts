@@ -51,7 +51,7 @@ export class MenuService {
                         routerLink: '/admin/employee/list'
                     },
                     {
-                        label: 'Roles & Permission',
+                        label: 'Roles & Permissions',
                         icon: 'admin_panel_settings',
                         shortcut: '⌘+N',
                         routerLink: '/admin/role/list'
@@ -63,7 +63,7 @@ export class MenuService {
                         routerLink: '/admin/user/list'
                     },
                     {
-                        label: 'department',
+                        label: 'departments',
                         icon: 'graph_2',
                         badge: '2',
                         routerLink: '/admin/department/list'
