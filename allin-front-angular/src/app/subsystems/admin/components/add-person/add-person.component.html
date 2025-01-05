@@ -56,13 +56,14 @@
                 <div class="flex flex-col w-full space-y-5 pt-5">
                     <div class="flex space-x-5 items-end" *ngFor="let mobile of user.mobiles">
                         <div class=" flex flex-col space-y-2">
-                            <label for="Mobile">Select</label>
                             <p-dropdown [options]="contact" [(ngModel)]="mobile.type" optionLabel="name"
                                 placeholder="Select Type" />
                         </div>
                         <div class=" flex flex-col space-y-2">
-                            <label for="Mobile">{{'person.mobile' | translate}}</label>
-                            <input pInputText id="mobile" [(ngModel)]="mobile.phoneNumber" />
+                            <p-floatlabel variant="on">
+                                <input pInputText id="on_label" [(ngModel)]="mobile.phoneNumber" autocomplete="off" />
+                                <label for="on_label">{{'person.mobile' | translate}}</label>
+                            </p-floatlabel>
                         </div>
                         <div>
                             <p-button icon="pi pi-trash" [text]="true" [severity]="'danger'" />
@@ -81,13 +82,14 @@
                     </div>
                     <div class="flex space-x-5 items-end" *ngFor="let address of user.addresses">
                         <div class=" flex flex-col space-y-2">
-                            <label for="Mobile">Select</label>
                             <p-dropdown [options]="location" [(ngModel)]="address.type" optionLabel="name"
                                 placeholder="Select Location Type" />
                         </div>
                         <div class=" flex flex-col space-y-2">
-                            <label for="Address">{{'person.address' | translate}}</label>
-                            <input pInputText id="address" [(ngModel)]="address.address" />
+                            <p-floatlabel variant="on">
+                                <input pInputText id="on_label" [(ngModel)]="address.address" autocomplete="off" />
+                                <label for="on_label">{{'person.address' | translate}}</label>
+                            </p-floatlabel>
                         </div>
                         <div>
                             <p-button icon="pi pi-trash" [text]="true" [severity]="'danger'" />

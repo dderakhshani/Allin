@@ -23,7 +23,7 @@ export const Person_ROUTES: Routes = [
         }
     },
     {
-        path: "person",
+        path: "list",
         component: PersonListPageComponent, data: {
             title: 'person list'
         }

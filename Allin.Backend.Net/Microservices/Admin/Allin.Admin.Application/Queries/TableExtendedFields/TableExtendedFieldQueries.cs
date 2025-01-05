@@ -24,5 +24,15 @@ namespace Allin.Admin.Application.Queries
         {
             return Mapper.Map<TableExtendedFieldModel>(await DbContext.TableExtendedFields.AsNoTracking().FirstAsync(x => x.Id == id, cancellationToken));
         }
+
+         public async Task<List<TableExtendedFieldModel>> GetByTableName(string tableName, CancellationToken cancellationToken)
+        {
+            // return Mapper.Map<TableExtendedFieldModel>(await DbContext.TableExtendedFields.AsNoTracking().FirstAsync(x => x.TableName == tableName, cancellationToken));
+
+            // return Mapper.Map<TableExtendedFieldModel>(await DbContext.TableExtendedFields.AsNoTracking().ToListAsync(x => x.TableName == tableName, cancellationToken));
+
+            return Mapper.Map<List<TableExtendedFieldModel>>(await DbContext.TableExtendedFields.AsNoTracking().Where(x => x.TableName == tableName).ProjectTo<TableExtendedFieldModel>(MapperProvider).ToListAsync(cancellationToken));
+
+        }
     }
 }

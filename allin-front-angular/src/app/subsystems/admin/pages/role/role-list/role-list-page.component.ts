@@ -9,21 +9,21 @@ import { Message } from 'primeng/message';
 import { UserService } from '../../../apis/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { openDialog, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
-import { AddPersonPageComponent } from '../add-person/add-person-page.component';
+import { CreateRolePageComponent } from '../create-role/create-role-page.component';
 
 @Component({
-  selector: 'app-person-list-page',
+  selector: 'app-role-list-page',
   standalone: true,
-  imports: [
-            BasicModule,
-            PngTableComponent,
-            ToolbarModule,
-  ],
-  providers: [DialogService],
-  templateUrl: './person-list-page.component.html',
-  styleUrl: './person-list-page.component.scss'
+   imports: [
+              BasicModule,
+              PngTableComponent,
+              ToolbarModule,
+    ],
+    providers: [DialogService],
+  templateUrl: './role-list-page.component.html',
+  styleUrl: './role-list-page.component.scss'
 })
-export class PersonListPageComponent {
+export class RoleListPageComponent {
     isLoading = false;
 
     columns: TableColumnBase[] = [
@@ -75,9 +75,9 @@ export class PersonListPageComponent {
 
     openAdd() {
         const config: PageDialogConfig = {
-            component: AddPersonPageComponent,
-            header: 'Add New Person',
-            description: 'this is a desciption of the add person page',
+            component: CreateRolePageComponent,
+            header: 'Add New Role',
+            description: 'this is a desciption of the add role page',
         };
         this.ref = openDialog(config, this.dialogService);
         this.ref.onClose.subscribe((result: any) => {

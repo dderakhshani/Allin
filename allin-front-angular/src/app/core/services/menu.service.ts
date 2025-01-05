@@ -45,18 +45,31 @@ export class MenuService {
                         routerLink: '/admin/person/list'
                     },
                     {
-                        label: 'Users ',
-                        icon: 'account_circle',
-                        badge: '2',
-                        routerLink: '/admin/user/list'
-                    },
-
-                    {
                         label: 'Employees',
                         icon: 'badge',
                         shortcut: '⌘+N',
                         routerLink: '/admin/employee/list'
                     },
+                    {
+                        label: 'Roles & Permissions',
+                        icon: 'admin_panel_settings',
+                        shortcut: '⌘+N',
+                        routerLink: '/admin/role/list'
+                    },
+                    {
+                        label: 'Users',
+                        icon: 'account_circle',
+                        badge: '2',
+                        routerLink: '/admin/user/list'
+                    },
+                    {
+                        label: 'departments',
+                        icon: 'graph_2',
+                        badge: '2',
+                        routerLink: '/admin/department/list'
+                    },
+
+                    
                 ],
             },
         ]
