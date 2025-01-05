@@ -1,5 +1,5 @@
-﻿using Allin.SharedCore.Configurations;
-using Allin.SharedCore.Entities;
+﻿using Allin.Common.Configurations;
+using Allin.Common.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Allin.Common.Data;

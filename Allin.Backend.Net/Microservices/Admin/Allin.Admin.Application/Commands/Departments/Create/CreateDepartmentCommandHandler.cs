@@ -1,5 +1,6 @@
 ﻿using Allin.Admin.Application.Common;
 using Allin.Admin.Infrastructure.Persistence;
+using Allin.Common.Data;
 using AutoMapper;
 using System.Data;
 
@@ -19,6 +20,8 @@ namespace Allin.Admin.Application.Commands
             {
                 PositionId = x,
             }).ToList();
+
+            department.Hierarchy = await DbContext.Departments.GetHierarchyIdAsync(request.ParentId);
 
             DbContext.Departments.Add(department);
             await DbContext.SaveChangesAsync(cancellationToken);

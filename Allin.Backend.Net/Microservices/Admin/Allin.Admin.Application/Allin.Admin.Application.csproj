@@ -8,12 +8,14 @@
 
   <ItemGroup>
     <Folder Include="Commands\Roles\Delete\Validator\" />
+    <Folder Include="Commands\TableExtendedFields\Delete\" />
     <Folder Include="Commands\Users\Delete\" />
     <Folder Include="Commands\Users\ChangePassword\" />
     <Folder Include="Commands\Users\AddRoles\" />
     <Folder Include="Events\" />
     <Folder Include="IntegrationEvents\" />
     <Folder Include="Params\" />
+    <Folder Include="Queries\TableExtendedFields\Params\" />
     <Folder Include="Queries\Departments\Params\" />
     <Folder Include="Queries\Branchs\Params\" />
     <Folder Include="Services\" />
@@ -22,6 +24,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.HierarchyId" Version="8.0.11" />
   </ItemGroup>
 
   <ItemGroup>

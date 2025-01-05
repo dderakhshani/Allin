@@ -41,7 +41,7 @@
     if (!string.IsNullOrEmpty(NamespaceHint))
     {
 #>
-namespace Allin.Admin.Infrastructure.Persistence;
+namespace Allin.SharedCore.Persistence;
 
 <#
     }
@@ -65,7 +65,7 @@ namespace Allin.Admin.Infrastructure.Persistence;
         }
     }
 #>
-public class <#= EntityType.Name #> : AdminBaseEntity
+public class <#= EntityType.Name #> : SharedBaseEntity
 {
 <#
     var firstProperty = true;
@@ -105,10 +105,12 @@ public class <#= EntityType.Name #> : AdminBaseEntity
 
         usings.AddRange(code.GetRequiredUsings(property.ClrType));
 
-        var needsNullable = Options.UseNullableReferenceTypes && property.IsNullable && !property.ClrType.IsValueType;
+        var needsNullable = (Options.UseNullableReferenceTypes && property.IsNullable && !property.ClrType.IsValueType) || (property.IsNullable && property.Name.EndsWith("Enum"));
         var needsInitializer = Options.UseNullableReferenceTypes && !property.IsNullable && !property.ClrType.IsValueType;
+
+        
 #>
-    public <#= code.Reference(property.ClrType) #><#= needsNullable ? "?" : "" #> <#= property.Name #> { get; set; }<#= needsInitializer ? " = null!;" : "" #>
+  public <#=  property.Name.EndsWith("Enum")? property.Name+"s" :(property.Name.EndsWith("StrJson")? "IList<string>":(property.Name.EndsWith("NumJson")? "IList<int>":  code.Reference(property.ClrType))) #><#= needsNullable ? "?" : "" #> <#= property.Name.EndsWith("StrJson")? property.Name.Replace("StrJson","") :(property.Name.EndsWith("NumJson")? property.Name.Replace("NumJson",""): property.Name)  #> { get; set; }<#= needsInitializer ? " = null!;" : "" #>
 <#
         firstProperty = false;
     }

@@ -32,6 +32,9 @@ namespace Allin.Admin.Infrastructure.Persistence
         public DbSet<User> Users { get; set; }
         public DbSet<UserPermission> UserPermissions { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<TableExtendedField> TableExtendedFields { get; set; }
+        public DbSet<TableExtendedFieldItem> TableExtendedFieldItems { get; set; }
+        public DbSet<TableExtendedFieldValue> TableExtendedFieldValues { get; set; }
 
 
     }

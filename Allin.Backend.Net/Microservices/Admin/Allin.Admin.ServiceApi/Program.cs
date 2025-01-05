@@ -16,7 +16,9 @@ builder.Services.AddGeneralAutoMapper(typeof(MappingProfile));
 //builder.Services.AddScoped<IRoleQueries, RoleQueries>();
 
 builder.Services.AddDbContext<AdminDbContext>(options =>
-              options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+             options.UseSqlServer(builder.Configuration.GetConnectionString("Default"), config => config.UseHierarchyId()));
+
+
 //.AddInterceptors(new EventInterceptor()));
 
 //Register all IValidator<> automatically

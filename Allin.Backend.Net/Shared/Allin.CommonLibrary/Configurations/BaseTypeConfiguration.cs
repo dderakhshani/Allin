@@ -1,8 +1,8 @@
-﻿using Allin.SharedCore.Entities;
+﻿using Allin.Common.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Allin.SharedCore.Configurations
+namespace Allin.Common.Configurations
 {
     public abstract class BaseTypeConfiguration<T> : IEntityTypeConfiguration<T>
           where T : BaseEntity
