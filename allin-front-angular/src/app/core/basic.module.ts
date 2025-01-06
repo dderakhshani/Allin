@@ -3,7 +3,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TreeTableModule } from 'primeng/treetable';
 import { DividerModule } from 'primeng/divider';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TimelineModule } from 'primeng/timeline';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -12,6 +12,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
+import { InputNumber } from 'primeng/inputnumber';
 
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -24,21 +25,24 @@ import { PageContentComponent } from './components/page-content/page-content.com
     imports: [
         TranslatePipe,
         TranslateDirective,
-        PageContentComponent
+        PageContentComponent,
+        InputNumber,
     ],
     exports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         ButtonModule,
         CheckboxModule,
         InputTextModule,
+
         IconFieldModule,
         InputIconModule,
         MultiSelectModule,
         DropdownModule,
         DividerModule,
         MessageModule,
-        TimelineModule,
+        InputNumber,
         TranslatePipe,
         TranslateDirective,
         PageContentComponent

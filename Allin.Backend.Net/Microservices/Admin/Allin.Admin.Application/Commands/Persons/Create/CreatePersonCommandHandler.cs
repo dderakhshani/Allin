@@ -15,8 +15,7 @@ namespace Allin.Admin.Application.Commands
             var person = Mapper.Map<Person>(request);
 
             var extendedFieldValues = Mapper.Map<IEnumerable<TableExtendedFieldValue>>(request.ExtendedFieldValues);
-            foreach (var item in extendedFieldValues)
-                item.RecordId = person.Id;
+
 
             using (DbContext.Database.BeginTransaction())
             {

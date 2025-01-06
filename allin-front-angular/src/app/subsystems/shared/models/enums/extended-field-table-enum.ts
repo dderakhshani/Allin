@@ -1,4 +1,4 @@
-export enum ExtendedFieldTableNames{
-    Person='Person',
-    Employee='Employee'
+export enum ExtendedFieldTableNamesEnum {
+    Person = 'Person',
+    Employee = 'Employee'
 }

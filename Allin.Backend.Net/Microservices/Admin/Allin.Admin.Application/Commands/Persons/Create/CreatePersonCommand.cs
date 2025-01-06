@@ -24,7 +24,6 @@ namespace Allin.Admin.Application.Commands
 
     public class ExtendedFieldArg : IMapFrom<TableExtendedFieldValue, ExtendedFieldArg>
     {
-        public long RecordId { get; set; }
         public long TableExtendedFieldId { get; set; }
         public string Value { get; set; }
         public string? ValueFieldItemId { get; set; }

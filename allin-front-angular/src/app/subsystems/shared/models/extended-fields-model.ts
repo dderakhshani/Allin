@@ -1,11 +1,13 @@
 import { ExtendedFieldTypeEnum } from "./enums/extended-field-type-enum";
-import { ExtendedFieldUIControl } from "./enums/extended-field-ui-control-enum";
+import { ExtendedFieldUIControlEnum } from "./enums/extended-field-ui-control-enum";
 
 export interface ExtendedFieldModel {
-    title: string;
-    uniqueName: string;
-    orderIndex: string;
+    id: number;
+    fieldName: string;
     description: string;
-    fieldType: ExtendedFieldTypeEnum;
-    uiControl: ExtendedFieldUIControl;
+    uniqueName: string;
+    orderIndex: number;
+    Items: [];
+    fieldType: number;
+    uiControl: number;
 }
