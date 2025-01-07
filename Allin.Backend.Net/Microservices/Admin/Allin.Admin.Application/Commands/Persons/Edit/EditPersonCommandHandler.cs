@@ -16,11 +16,30 @@ namespace Allin.Admin.Application.Commands
 
         public override async Task<bool> Handle(EditPersonCommand request, CancellationToken cancellationToken)
         {
-            var person = await DbContext.Persons.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
+            var person = Mapper.Map<Person>(request);
 
-            Mapper.Map(request, person);
+            var extendedFieldValues = Mapper.Map<IEnumerable<TableExtendedFieldValue>>(request.ExtendedFieldValues);
 
-            await DbContext.SaveChangesAsync();
+            using (DbContext.Database.BeginTransaction())
+            {
+                var existExtendedFieldValues = await DbContext.TableExtendedFieldValues.Where(x => x.RecordId == request.Id).ToListAsync();
+
+                DbContext.TableExtendedFieldValues.RemoveRange(existExtendedFieldValues);
+
+                var existAddresses = await DbContext.PersonAddresses.Where(x => x.PersonId == person.Id).ToListAsync();
+
+                DbContext.PersonAddresses.RemoveRange(existAddresses);
+
+                DbContext.Persons.Update(person);
+
+                foreach (var item in extendedFieldValues)
+                    item.RecordId = person.Id;
+
+                DbContext.TableExtendedFieldValues.AddRange(extendedFieldValues);
+                await DbContext.SaveChangesAsync(cancellationToken);
+
+                DbContext.Database.CommitTransaction();
+            }
 
             return true;
         }

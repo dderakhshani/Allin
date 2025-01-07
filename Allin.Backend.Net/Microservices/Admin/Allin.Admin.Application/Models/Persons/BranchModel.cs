@@ -18,5 +18,6 @@ namespace Allin.Admin.Application.Models
         public GenderEnums GenderEnum { get; set; }
         public MaritalEnums? MaritalEnum { get; set; }
         public IEnumerable<TableExtendedFieldValueModel> ExtendedFieldValues { get; set; }
+        public IEnumerable<PersonAddressModel> PersonAddresses { get; set; }
     }
 }

@@ -16,7 +16,6 @@ namespace Allin.Admin.Application.Commands
 
             var extendedFieldValues = Mapper.Map<IEnumerable<TableExtendedFieldValue>>(request.ExtendedFieldValues);
 
-
             using (DbContext.Database.BeginTransaction())
             {
                 DbContext.Persons.Add(person);
