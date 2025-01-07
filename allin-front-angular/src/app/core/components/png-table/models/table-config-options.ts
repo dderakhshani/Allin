@@ -1,4 +1,5 @@
 
+
 export class TableConfigOptions {
 
     public constructor(init?: Partial<TableConfigOptions>) {
@@ -7,6 +8,7 @@ export class TableConfigOptions {
     }
     toolbarOptions: ToolBarConfig = new ToolBarConfig();
 
+    internaLoadFetch: boolean = false;
     rowsPerPageOptions = [10, 50, 100, 200];
     // cardConfig?: CardConfig;
     showTotals?: boolean = true;

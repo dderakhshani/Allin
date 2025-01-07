@@ -1,5 +1,14 @@
-import { QueryCondition } from "./query-condition.model";
-import { QueryPaging } from "./query-paging.model";
+export interface QueryCondition {
+    propertyName: string
+    comparison: string
+    values: any[]
+}
+
+export interface QueryPaging {
+    pageSize: number;
+    pageIndex: number;
+}
+
 
 export interface QueryParamModel {
     pagingProperties?: QueryPaging;

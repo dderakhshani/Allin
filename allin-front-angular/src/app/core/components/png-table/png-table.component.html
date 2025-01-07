@@ -1,8 +1,8 @@
 <p-table #datatable [value]="_dataSource" dataKey="id" [rows]="10" [rowHover]="true" stripedRows
     [rowsPerPageOptions]="configOptions.rowsPerPageOptions" [loading]="loading" [paginator]="true"
     [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [scrollable]="true" scrollHeight="100%" [globalFilterFields]="getGlobalFilterable"
-    [tableStyle]="{ 'min-width': '75rem' }">
+    [scrollable]="true" scrollHeight="100%" [globalFilterFields]="getGlobalFilterable" sortMode="multiple"
+    [multiSortMeta]="" (onLazyLoad)="getDataFromServer($event)" [lazy]="true" [tableStyle]="{ 'min-width': '75rem' }">
     <ng-template pTemplate="caption">
         <div class="flex items-center">
 

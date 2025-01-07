@@ -6,7 +6,7 @@ import { TagModule } from 'primeng/tag';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { Table, TableModule } from 'primeng/table';
+import { Table, TableFilterEvent, TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { BooleanColumnDisplayEnum, FieldTypesEnum, FilterControlEnum, TableBooleanColumn, TableColumnBase, TableDropDownColumn } from './models/table-column-model';
 import { AsPipe } from '../../pipes/as.pipe';
 import { FormsModule } from '@angular/forms';
@@ -16,6 +16,11 @@ import { __values } from 'tslib';
 import { ObservableOrArrayPipe } from '../../pipes/observable-array.pipe';
 import { TableConfigOptions } from './models/table-config-options';
 import { CheckboxModule } from 'primeng/checkbox';
+import { QueryFilterHelper } from './models/query-filter.model';
+import { QueryCondition, QueryParamModel } from "./models/server-query.models";
+import { PagedList } from './models/paged-list';
+import { BaseHttpService, UrlSegments } from '../../services/base.http.service';
+import { finalize, tap } from 'rxjs';
 
 @Component({
     selector: 'app-png-table',
@@ -53,10 +58,13 @@ export class PngTableComponent {
     public columns!: TableColumnBase[];
 
     @Input()
+    dataApiUrl?: UrlSegments;
+
+    @Input()
     public loading: boolean = false;
 
     @Input()
-    public emptymMessage = "No records to display";
+    public emptymMessage = "No records to display";//TODO: translate
 
     @Input()
     fetchDataTrigger = signal<boolean>(true);
@@ -76,9 +84,9 @@ export class PngTableComponent {
     private columnsTemplatesQueryList!: QueryList<TemplateRef<any>>;
 
 
-    constructor() {
+    constructor(private httpService: BaseHttpService) {
         effect(() => {
-            this.fetchData();
+            // this.getDataFromServer();
         });
     }
 
@@ -107,8 +115,45 @@ export class PngTableComponent {
         return this.columns.filter(x => x.filterOptions?.globalFilterable == true).map(x => x.fieldName);
     }
 
-    fetchData() {
+    private getDataFromServer(event: TableLazyLoadEvent) {
+        console.log(event.filters);
+        let conditions: QueryCondition[] = [];
+        for (var key in event.filters) {
+            const qc = new QueryFilterHelper(key, event.filters[key]).toServerCondition();
+            if (qc)
+                conditions = [...conditions, ...qc];
+        }
 
+        const queryParams = <QueryParamModel>{
+            pagingProperties: {
+                pageSize: 0,
+                pageIndex: 0
+            },
+            group: "",
+            columnsNamesToShow: [],
+            conditions: conditions,
+            orderByProperties: event.multiSortMeta?.map(x => x.field + " " + (x.order == 1 ? "asc" : "desc")).join(", ").trim() ?? "",
+            searchTerm: event.globalFilter
+        };
+
+        this.loading = true;
+        if (this.dataApiUrl?.queryStringParams)
+            this.dataApiUrl.queryStringParams = { ...this.dataApiUrl.queryStringParams, ... this.convertToQueryString(queryParams) };
+        else if (this.dataApiUrl)
+            this.dataApiUrl.queryStringParams = this.convertToQueryString(queryParams);
+
+        this.httpService.getData<PagedList<any[]>>(this.dataApiUrl)
+            .pipe(
+                tap(result => {
+                    this.dataSource = result.data;
+                    this.total = result.totalCount;
+                    this.manipulate && this.manipulate(result);
+                }),
+                finalize(() => this.loading = false)
+            )
+            .subscribe(result => {
+
+            });
     }
 
     clear(table: Table) {
@@ -120,5 +165,33 @@ export class PngTableComponent {
     }
 
 
+    private convertToQueryString(queryParam: QueryParamModel): { [key: string]: string | number | boolean } {
+        const queryStringParams: { [key: string]: string | number | boolean } = {};
+        if (queryParam.pagingProperties) {
+            queryStringParams['pagingProperties'] = JSON.stringify(queryParam.pagingProperties);
+        }
+
+        if (queryParam.group) {
+            queryStringParams['group'] = queryParam.group;
+        }
+
+        if (queryParam.orderByProperties) {
+            queryStringParams['orderByProperties'] = queryParam.orderByProperties;
+        }
+
+        if (queryParam.columnsNamesToShow) {
+            queryStringParams['columnsNamesToShow'] = JSON.stringify(queryParam.columnsNamesToShow);
+        }
+        if (queryParam.conditions) {
+            // replace('},', '}@') : Please note that,this is a contract between the Front-end and Back-end
+            queryStringParams['conditions'] = JSON.stringify(queryParam.conditions).replace(/},/g, '}@');
+        }
+        if (queryParam.searchTerm)
+            queryStringParams['searchTerm'] = queryParam.searchTerm;
+        else
+            queryStringParams['searchTerm'] = '';
+
+        return queryStringParams;
+    }
 
 }
