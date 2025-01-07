@@ -9,7 +9,7 @@ namespace Allin.Admin.Application.Commands
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Ssn { get; set; }
-        public IList<string> Mobiles { get; set; }
+        public IList<Mobile> Mobiles { get; set; }
         public bool? IsLegal { get; set; }
         public string Email { get; set; }
         public string PhotoUrl { get; set; }
@@ -34,5 +34,11 @@ namespace Allin.Admin.Application.Commands
         public long TypeBaseId { get; set; }
         public long CityBaseId { get; set; }
         public string Address { get; set; }
+    }
+
+    public class Mobile
+    {
+        public string Type { get; set; }
+        public string phoneNumber { get; set; }
     }
 }

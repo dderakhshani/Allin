@@ -26,12 +26,7 @@
                 </div>
             </p-accordionTab>
             <p-accordionTab header="Dynamac Information">
-                <div class="grid grid-cols-2 gap-4">
-                    <div *ngFor="let item of extendedFields">
-                        <label>{{item.fieldName}}</label>
-                    </div>
 
-                </div>
                 <app-extended-fields [tableName]="TableNamesEnum.Employee"
                     [(values)]="extendedFieldsValue"></app-extended-fields>
             </p-accordionTab>
