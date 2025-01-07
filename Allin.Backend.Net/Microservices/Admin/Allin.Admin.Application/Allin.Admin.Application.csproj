@@ -21,6 +21,7 @@
     <Folder Include="Commands\Users\Delete\" />
     <Folder Include="Commands\Users\ChangePassword\" />
     <Folder Include="Commands\Users\AddRoles\" />
+    <Folder Include="Queries\BaseValues\Params\" />
     <Folder Include="Services\" />
     <Folder Include="Params\" />
     <Folder Include="Queries\Employees\Params\" />
