@@ -62,8 +62,8 @@
                         @for (mobile of form.controls.mobiles.controls; track $index) {
                         <div class="flex space-x-5 items-end">
                             <div class=" flex flex-col space-y-2">
-                                <p-dropdown [options]="contact" [formControl]="mobile.get('type')" optionLabel="name"
-                                    placeholder="Select Location Type" />
+                                <p-dropdown [options]="mobileTypes" [formControl]="mobile.get('type')"
+                                    optionLabel="name" optionValue="value" placeholder="Select Location Type" />
                             </div>
                             <div class=" flex flex-col space-y-2">
                                 <p-floatlabel variant="on">
@@ -86,7 +86,9 @@
                     <div class="flex space-x-5 ">
                         <div class=" flex flex-col space-y-2 w-1/2">
                             <label for="Email">{{'person.email' | translate}}</label>
-                            <input pInputText id="person.email" [formControl]="form.controls.email" />
+                            {{form.controls.email.dirty}}-{{form.controls.email.invalid}}
+                            <input pInputText id="person.email" type="email" [formControl]="form.controls.email"
+                                [ngClass]="{'ng-invalid ng-dirty': form.controls.email.dirty && form.controls.email.invalid}" />
                         </div>
                     </div>
 

@@ -9,7 +9,7 @@ namespace Allin.Admin.Application.Commands
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Ssn { get; set; }
-        public IList<Mobile> Mobiles { get; set; }
+        public IList<PhoneArg> Mobiles { get; set; }
         public bool? IsLegal { get; set; }
         public string Email { get; set; }
         public string PhotoUrl { get; set; }
@@ -36,9 +36,18 @@ namespace Allin.Admin.Application.Commands
         public string Address { get; set; }
     }
 
-    public class Mobile
+    public class PhoneArg
     {
-        public string Type { get; set; }
-        public string phoneNumber { get; set; }
+        public PhoneTypeEnum Type { get; set; }
+        public string PhoneNumber { get; set; }
+
+        public enum PhoneTypeEnum
+        {
+            HomePhone = 1,
+
+            OfficePhone = 2,
+            Mobile = 3,
+            Fax = 4
+        }
     }
 }

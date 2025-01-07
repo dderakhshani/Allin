@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BasicModule } from '../../../../core/basic.module';
 import { MessageService } from 'primeng/api';
 import { CalendarModule } from 'primeng/calendar';
@@ -13,6 +13,7 @@ import { ExtendedFieldsComponent } from '../../../shared/components/extended-fie
 import { ExtendedFieldModel } from '../../../shared/models/extended-fields-model';
 import { ExtendedFieldValueModel } from '../../../shared/models/extended-field-value-model';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Toast } from 'primeng/toast';
 
 interface UploadEvent {
     originalEvent: Event;
@@ -23,7 +24,15 @@ interface UploadEvent {
 @Component({
     selector: 'app-add-person',
     standalone: true,
-    imports: [BasicModule, CalendarModule, AccordionModule, FieldsetModule, FileUploadModule, SelectButtonModule, FloatLabel, ExtendedFieldsComponent],
+    imports: [BasicModule,
+        Toast,
+        CalendarModule,
+        AccordionModule,
+        FieldsetModule,
+        FileUploadModule,
+        SelectButtonModule,
+        FloatLabel,
+        ExtendedFieldsComponent],
     providers: [MessageService],
     templateUrl: './add-person.component.html',
     styleUrl: './add-person.component.scss'
@@ -31,8 +40,11 @@ interface UploadEvent {
 export class AddPersonComponent {
     TableName = ExtendedFieldTableNamesEnum.Person;
 
+    @Input()
+    showValidationWarning = true;
+
     @Output()
-    commandChange = new EventEmitter<CreatePersonCommand>();
+    commandChange = new EventEmitter<CreatePersonCommand | null>();
 
     extendedFields: ExtendedFieldModel[] = [];
     extendedFieldsValue?: ExtendedFieldValueModel[];
@@ -45,7 +57,7 @@ export class AddPersonComponent {
         genderEnum: this.fb.control<number | null>(null),
         isLegal: this.fb.control<Boolean | null>(null),
         mobiles: this.fb.array<FormGroup>([]),
-        email: this.fb.control<string | null>(null),
+        email: this.fb.control<string | null>(null, Validators.email),
         photoUrl: this.fb.control<string | null>(null),
         signatureImageUrl: this.fb.control<string | null>(null),
         maritalEnum: this.fb.control<number | null>(null),
@@ -56,9 +68,9 @@ export class AddPersonComponent {
 
     legalOptions: any[] = [{ label: 'Legal Entity', isLegal: true }, { label: 'Natural Person', isLegal: false }];
     genderOptions: any[] = [{ label: 'Male', genderValue: 1 }, { label: 'Female', genderValue: 2 }];
-    contact: any[] | undefined;
+    // contact: any[] | undefined;
     location: any[] | undefined;
-
+    mobileTypes = [{ name: 'HomePhone', value: 1 }, { name: 'OfficePhone', value: 2 }, { name: 'Mobile', value: 3 }, { name: 'Fax', value: 4 }]
     uploadedFiles: any[] = [];
 
     //Output
@@ -69,19 +81,27 @@ export class AddPersonComponent {
     ngOnInit() {
 
         this.form.valueChanges.subscribe(x => {
-            let command: CreatePersonCommand = {
-                ...<CreatePersonCommand>this.form.getRawValue(),
-                extendedFieldValues: this.extendedFieldsValue
-            };
+            if (this.form.valid) {
+                let command: CreatePersonCommand = {
+                    ...<CreatePersonCommand>this.form.getRawValue(),
+                    extendedFieldValues: this.extendedFieldsValue ?? [],
+                    photoUrl: "",
+                    signatureImageUrl: "",
+                };
 
-            // emit command to output
-            this.commandChange.emit(command);
+                // emit command to output
+                this.commandChange.emit(command);
+            }
+            else {
+                if (this.showValidationWarning)
+                    this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Please fix the errors' });//TODO: translate
+                this.commandChange.emit(null);
+            }
+
+
+
         })
 
-        this.contact = [
-            { name: 'Mobile', code: 'Mobile' },
-            { name: 'Phone', code: 'Phone' },
-        ];
         this.location = [
             { name: 'Home', code: 'Home' },
             { name: 'Office', code: 'Office' },
@@ -105,8 +125,8 @@ export class AddPersonComponent {
     addMobile() {
 
         const itemGroup = this.fb.group({
-            type: new FormControl('', Validators.required),
-            mobil: new FormControl('', Validators.required)
+            type: new FormControl(1, Validators.required),
+            phoneNumber: new FormControl('', Validators.required)
         });
         this.mobilesForm.controls.push(itemGroup);
 
