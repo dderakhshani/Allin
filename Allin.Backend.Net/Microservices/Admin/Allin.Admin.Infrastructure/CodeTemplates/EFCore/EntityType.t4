@@ -120,6 +120,11 @@ public class <#= EntityType.Name #> : AdminBaseEntity <#= EntityType.GetProperti
 
     foreach (var navigation in EntityType.GetNavigations())
     {
+        if (EntityType.Name=="BaseValue")
+        {
+           continue;
+        }
+
         if (Options.UseDataAnnotations)
         {
             foreach (var dataAnnotation in navigation.GetDataAnnotations(annotationCodeGenerator))

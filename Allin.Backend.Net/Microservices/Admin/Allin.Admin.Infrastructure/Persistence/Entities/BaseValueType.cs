@@ -7,4 +7,5 @@ public class BaseValueType : AdminBaseEntity
 {
   public string BaseValueTypeTitle { get; set; }
   public string Description { get; set; }
+  public string UniqueName { get; set; }
 }

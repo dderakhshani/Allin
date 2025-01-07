@@ -6,17 +6,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class EditPersonCommandHandler : AdminCommandHandler<EditPersonCommand, bool>
+    public class EditEmployeeCommandHandler : AdminCommandHandler<EditEmployeeCommand, bool>
     {
         private readonly IExceptionProvider _exceptionProvider;
-        public EditPersonCommandHandler(AdminDbContext dbContext, IMapper mapper, IExceptionProvider exceptionProvider) : base(dbContext, mapper)
+        public EditEmployeeCommandHandler(AdminDbContext dbContext, IMapper mapper, IExceptionProvider exceptionProvider) : base(dbContext, mapper)
         {
             _exceptionProvider = exceptionProvider;
         }
 
-        public override async Task<bool> Handle(EditPersonCommand request, CancellationToken cancellationToken)
+        public override async Task<bool> Handle(EditEmployeeCommand request, CancellationToken cancellationToken)
         {
-            var entity = Mapper.Map<Person>(request);
+            var entity = Mapper.Map<Employee>(request);
 
             var extendedFieldValues = Mapper.Map<IEnumerable<TableExtendedFieldValue>>(request.ExtendedFieldValues);
 
@@ -26,11 +26,7 @@ namespace Allin.Admin.Application.Commands
 
                 DbContext.TableExtendedFieldValues.RemoveRange(existExtendedFieldValues);
 
-                var existAddresses = await DbContext.PersonAddresses.Where(x => x.PersonId == entity.Id).ToListAsync();
-
-                DbContext.PersonAddresses.RemoveRange(existAddresses);
-
-                DbContext.Persons.Update(entity);
+                DbContext.Employeies.Update(entity);
 
                 foreach (var item in extendedFieldValues)
                     item.RecordId = entity.Id;
