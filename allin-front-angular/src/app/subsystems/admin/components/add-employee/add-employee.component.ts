@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BasicModule } from '../../../../core/basic.module';
 import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
@@ -9,47 +9,66 @@ import { ExtendedFieldTableNamesEnum } from '../../../shared/models/enums/extend
 import { ExtendedFieldValueModel } from '../../../shared/models/extended-field-value-model';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CreateEmployeeCommand } from '../../models/commands/create-employee-command';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-add-employee',
   standalone: true,
-  imports: [BasicModule, CalendarModule, SelectButtonModule, AccordionModule, ExtendedFieldsComponent],
+  imports: [BasicModule,
+    CalendarModule,
+    SelectButtonModule,
+    AccordionModule,
+    ExtendedFieldsComponent],
+  providers: [MessageService],
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.scss'
 })
 export class AddEmployeeComponent {
-  TableNamesEnum = ExtendedFieldTableNamesEnum;
+  tableName = ExtendedFieldTableNamesEnum.Employee;
 
-  value: string | undefined;
-  date: Date | undefined;
-  tableName: string = "employee";
+  @Input()
+  showValidationWarning = true;
+
+  @Output()
+  commandChange = new EventEmitter<CreateEmployeeCommand | null>();
+
   extendedFields: ExtendedFieldModel[] = [];
-
-  floatingOptions: any[] = [{ label: 'Floating', value2: 'Floating' }, { label: 'Fixed', value2: 'Fixed' }];
-  value2: string = 'Fixed';
-
   extendedFieldsValue?: ExtendedFieldValueModel[];
 
   form = this.fb.group({
-    employeeCode: this.fb.control<string | null>(null),
-    positionId: this.fb.control<number | null>(null),
-    departmentId: this.fb.control<number | null>(null),
     personId: this.fb.control<number | null>(null),
+    employeeCode: this.fb.control<string | null>(null),
+    departmentPositionId: this.fb.control<number | null>(null),
+    employmentDate: this.fb.control<Date | null>(null),
+    contractTypeBaseId: this.fb.control<number | null>(null),
+    floating: this.fb.control<boolean | null>(null),
   })
 
+  floatingOptions: any[] = [{ label: 'Floating', value2: 'Floating' }, { label: 'Fixed', value2: 'Fixed' }];
 
-  constructor(public fb: FormBuilder) {
+  constructor(private messageService: MessageService,
+    public fb: FormBuilder) {
 
   }
   ngOnInit() {
-    this.form.valueChanges.subscribe(x => {
-      let command: CreateEmployeeCommand = {
-        ...<CreateEmployeeCommand>this.form.getRawValue(),
-        extendedFieldValues: this.extendedFieldsValue
-      };
 
-      // emit command to output
+    this.form.valueChanges.subscribe(x => {
+      if (this.form.valid) {
+        let command: CreateEmployeeCommand = {
+          ...<CreateEmployeeCommand>this.form.getRawValue(),
+          extendedFieldValues: this.extendedFieldsValue ?? [],
+        };
+
+        // emit command to output
+        this.commandChange.emit(command);
+      }
+      else {
+        if (this.showValidationWarning)
+          this.messageService.add({ severity: 'warn', summary: 'Warn', detail: 'Please fix the errors' });//TODO: translate
+        this.commandChange.emit(null);
+      }
     })
+
   }
 
 

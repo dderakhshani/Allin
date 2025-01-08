@@ -38,7 +38,7 @@ interface UploadEvent {
     styleUrl: './add-person.component.scss'
 })
 export class AddPersonComponent {
-    TableName = ExtendedFieldTableNamesEnum.Person;
+    tableName = ExtendedFieldTableNamesEnum.Person;
 
     @Input()
     showValidationWarning = true;
@@ -102,6 +102,7 @@ export class AddPersonComponent {
 
         })
 
+        //Todo: load in server
         this.location = [
             { name: 'Home', code: 'Home' },
             { name: 'Office', code: 'Office' },

@@ -1,7 +1,7 @@
 <div class="flex flex-col w-full" [formGroup]="form">
     <div class="card flex w-full justify-content-center">
-        <p-accordion [multiple]="true" [activeIndex]="[0,1]">
-            <p-accordionTab [header]="'general-info' | translate">
+        <p-accordion [multiple]="true" [activeIndex]="[0,1,2]">
+            <p-accordionTab [header]="'basic-info' | translate">
                 <!-- <div class="card flex justify-content-center">
                     <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
                         (onUpload)="onUpload($event)" [multiple]="true" accept="image/*" maxFileSize="1000000">
@@ -16,10 +16,15 @@
                 </div> -->
                 <div class="flex flex-col w-full space-y-5 pt-5">
                     <div class="flex space-x-5">
-                        <div>
+                        <div class="w-1/2">
                             <p-selectButton [options]="legalOptions" [formControl]="form.controls.isLegal"
                                 optionLabel="label" optionValue="isLegal" />
                         </div>
+                        <div class="w-1/2">
+                            <p-selectButton [options]="genderOptions" [formControl]="form.controls.genderEnum"
+                                optionLabel="label" optionValue="genderValue" />
+                        </div>
+
                     </div>
                     <div class="flex space-x-5">
                         <div class="flex flex-col space-y-2 w-1/2">
@@ -43,17 +48,14 @@
                         </div>
                     </div>
                     <div class="flex space-x-5">
-                        <div class="w-1/2">
-                            <p-selectButton [options]="genderOptions" [formControl]="form.controls.genderEnum"
-                                optionLabel="label" optionValue="genderValue" />
-                        </div>
-                        <div class="w-1/2">
-                        </div>
+
                     </div>
-                    <div class="flex space-x-5">
-                        <app-extended-fields [tableName]="TableName"
-                            [(values)]="extendedFieldsValue"></app-extended-fields>
-                    </div>
+
+                </div>
+            </p-accordionTab>
+            <p-accordionTab [header]="'other-info' | translate">
+                <div class="flex space-x-5">
+                    <app-extended-fields [tableName]="tableName" [(values)]="extendedFieldsValue"></app-extended-fields>
                 </div>
             </p-accordionTab>
             <p-accordionTab [header]="'contact-info' | translate">
@@ -61,7 +63,7 @@
                     <div formArrayName="mobiles">
                         @for (mobile of form.controls.mobiles.controls; track $index) {
                         <div class="flex space-x-5 items-end">
-                            <div class=" flex flex-col space-y-2">
+                            <div class=" flex flex-col space-y-2 w-52">
                                 <p-dropdown [options]="mobileTypes" [formControl]="mobile.get('type')"
                                     optionLabel="name" optionValue="value" placeholder="Select Location Type" />
                             </div>
@@ -86,7 +88,6 @@
                     <div class="flex space-x-5 ">
                         <div class=" flex flex-col space-y-2 w-1/2">
                             <label for="Email">{{'person.email' | translate}}</label>
-                            {{form.controls.email.dirty}}-{{form.controls.email.invalid}}
                             <input pInputText id="person.email" type="email" [formControl]="form.controls.email"
                                 [ngClass]="{'ng-invalid ng-dirty': form.controls.email.dirty && form.controls.email.invalid}" />
                         </div>
@@ -95,7 +96,7 @@
                     <div formArrayName="adddress">
                         @for (address of form.controls.personAddresses.controls; track $index) {
                         <div class="flex space-x-5 items-end">
-                            <div class=" flex flex-col space-y-2">
+                            <div class=" flex flex-col space-y-2 w-52">
                                 <p-dropdown [options]="location" [formControl]="address.get('type')" optionLabel="name"
                                     placeholder="Select Location Type" />
                             </div>

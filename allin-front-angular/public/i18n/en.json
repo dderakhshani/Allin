@@ -6,6 +6,8 @@
     "next": "Next",
     "prev": "Prev",
     "general-info": "General Information",
+    "basic-info": "Basic Information",
+    "other-info": "Other Information",
     "contact-info": "Contact Information",
     "person": {
         "firstName": "First Name",
