@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Admin.ServiceApi",
+            "type": "shell",
+            "command": "dotnet watch run xyz",
+            "options": {
+                "cwd": "${workspaceFolder}/Allin.Backend.Net/Microservices/Admin/Allin.Admin.ServiceApi"
+            },
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "group": "admin",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Front End",
+            "type": "shell",
+            "command": "npm install; npm start",
+            "options": {
+                "cwd": "allin-front-angular"
+            },
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "group": "admin",
+                "panel": "shared"
+            }
+        },
+    ]
+}
