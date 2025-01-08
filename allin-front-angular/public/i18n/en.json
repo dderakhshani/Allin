@@ -24,6 +24,11 @@
         "leave-date": "Leave Date",
         "type-of-presence": "Type of presence"
     },
+    "role": {
+        "title": "Role Name",
+        "description": "Description",
+        "department": "Department"
+    },
     "admin": {
         "create-employee": "Add Employee",
         "create-person": "Add Person",

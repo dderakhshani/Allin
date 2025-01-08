@@ -33,7 +33,7 @@ export class ExtendedFieldsComponent {
   @Output()
   valuesChange = new EventEmitter<ExtendedFieldValueModel[]>()
 
-  fields!: ExtendedFieldValueModel[];
+  private fields!: ExtendedFieldValueModel[];
 
   checked: boolean = false;
   amount: number = 0;
@@ -62,6 +62,7 @@ export class ExtendedFieldsComponent {
     }
 
   }
+
   initForm() {
     this.fields.forEach(field => {
       const control = this.fb.group({
@@ -74,6 +75,10 @@ export class ExtendedFieldsComponent {
     this.form.valueChanges.subscribe(x => {
       this.valuesChange.emit(this.fieldsForm.getRawValue());
     });
+  }
+
+  getUIControl(index: number) {
+    return this.fields[index];
   }
 
 
