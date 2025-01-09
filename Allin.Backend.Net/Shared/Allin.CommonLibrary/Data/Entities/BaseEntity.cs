@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Allin.Common.Entities
+namespace Allin.Common.Data
 {
     public abstract class BaseEntity
     {
@@ -13,10 +13,9 @@ namespace Allin.Common.Entities
         //public bool IsDeleted { get; set; }
     }
 
-    public abstract class BaseHierarchyEntity : IHierarchyEntity
+    public abstract class BaseHierarchyEntity : BaseEntity, IHierarchyEntity
     {
-        [Key]
-        public long Id { get; set; }
+
         public HierarchyId Hierarchy { get; set; }
         public long? ParentId { get; set; }
 

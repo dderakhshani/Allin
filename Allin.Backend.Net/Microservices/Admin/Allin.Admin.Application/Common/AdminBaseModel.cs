@@ -1,4 +1,4 @@
-﻿using Allin.SharedCore.Models;
+﻿using Allin.Common.Models;
 
 namespace Allin.Admin.Application.Common
 {

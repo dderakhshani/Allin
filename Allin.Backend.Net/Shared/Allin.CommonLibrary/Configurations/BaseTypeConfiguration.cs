@@ -1,4 +1,4 @@
-﻿using Allin.Common.Entities;
+﻿using Allin.Common.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

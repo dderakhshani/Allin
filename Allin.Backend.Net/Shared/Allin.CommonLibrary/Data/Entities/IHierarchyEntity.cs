@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Allin.Common.Entities
+namespace Allin.Common.Data
 {
     public interface IHierarchyEntity
     {
