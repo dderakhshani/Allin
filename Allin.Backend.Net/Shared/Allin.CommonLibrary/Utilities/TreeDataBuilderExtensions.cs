@@ -36,7 +36,7 @@ public static class TreeDataBuilder
         return rootNodes;
     }
 
-    public static List<TreeNode<T>> ToTreeModel<T>(this List<T> items) where T : BaseHierarchyModel
+    public static IEnumerable<TreeNode<T>> ToTreeModel<T>(this IEnumerable<T> items) where T : BaseHierarchyModel
     {
         var lookup = items.ToDictionary(item => item.Id, item => new TreeNode<T> { Data = item });
         var rootNodes = new List<TreeNode<T>>();

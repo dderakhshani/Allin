@@ -19,13 +19,9 @@ namespace Allin.Admin.Application.Queries
             return await DbContext.Permissions.AsNoTracking().ProjectTo<PermissionModel>(MapperProvider).ToListAsync();
         }
 
-        public async Task<List<TreeNode<PermissionModel>>> GetAllTree(CancellationToken cancellationToken)
+        public async Task<IEnumerable<TreeNode<PermissionModel>>> GetAllTree(CancellationToken cancellationToken)
         {
-            return (await DbContext.Permissions.AsNoTracking()
-                    .ProjectTo<PermissionModel>(MapperProvider)
-                    .ToListAsync()
-                    )
-                    .ToTreeModel();
+            return (await this.GetAll(cancellationToken)).ToTreeModel();
         }
     }
 }

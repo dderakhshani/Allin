@@ -6,6 +6,6 @@ namespace Allin.Admin.Application.Queries
     public interface IPermissionQueries
     {
         Task<IEnumerable<PermissionModel>> GetAll(CancellationToken cancellationToken);
-        Task<List<TreeNode<PermissionModel>>> GetAllTree(CancellationToken cancellationToken);
+        Task<IEnumerable<TreeNode<PermissionModel>>> GetAllTree(CancellationToken cancellationToken);
     }
 }
