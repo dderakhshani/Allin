@@ -1,6 +1,5 @@
 <form [formGroup]="form">
     <div formArrayName="fields" class="grid grid-cols-2 gap-4">
-        {{fieldsForm.controls.length}}
         @for (ctl of fieldsForm.controls; track $index) {
         <div>
             <label>{{getField($index).fieldName}}</label>
