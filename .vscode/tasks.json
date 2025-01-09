@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Admin.ServiceApi",
+            "label": "Admin.ServiceApi Run",
             "type": "shell",
             "command": "dotnet watch run xyz",
             "options": {
@@ -13,6 +13,19 @@
             "presentation": {
                 "group": "admin",
                 "panel": "shared"
+            }
+        },
+        {
+            "label": "Admin.ServiceApi Build",
+            "type": "shell",
+            "command": "dotnet build",
+            "options": {
+                "cwd": "${workspaceFolder}/Allin.Backend.Net/Microservices/Admin/Allin.Admin.ServiceApi"
+            },
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "group": "admin",
             }
         },
         {
