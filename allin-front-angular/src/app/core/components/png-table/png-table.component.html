@@ -31,6 +31,11 @@
                 </div>
             </div>
         </div>
+        @if(currentFilters){
+        <c-data-table-filters-header [filters]="currentFilters">
+        </c-data-table-filters-header>
+        }
+
     </ng-template>
     <ng-template pTemplate="header">
         <tr>

@@ -13,6 +13,7 @@ import { AddPersonPageComponent } from '../add-person/add-person-page.component'
 import { PersonService } from '../../../apis/person.service';
 import { PersonModel } from '../../../models/queries/person-mode';
 import { NoToolbarCTableConfig } from '../../../../../core/components/png-table/models/table-config-options';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
     selector: 'app-person-list-page',
@@ -70,6 +71,11 @@ export class PersonListPageComponent {
     cities: any[] | undefined;
     selectedCity: any | undefined;
     messages: Message[] = [];
+    dataApiUrl = {
+        controller: `person`,
+        action: 'get-all',
+        routeParameters: []
+    };
 
     constructor(private userService: UserService,
         public dialogService: DialogService,

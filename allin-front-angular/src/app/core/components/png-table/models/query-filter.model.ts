@@ -1,16 +1,17 @@
 
 import { FilterMetadata } from "primeng/api";
 import { QueryCondition } from "./server-query.models";
+import { TableColumnBase } from "./table-column-model";
 
 export class QueryFilterHelper {
 
     filter: FilterMetadata | FilterMetadata[] | undefined;
-    fieldName: string;
+    column: TableColumnBase;
 
-    constructor(fieldName: string, init: FilterMetadata | FilterMetadata[] | undefined) {
+    constructor(column: TableColumnBase, init: FilterMetadata | FilterMetadata[] | undefined) {
 
         this.filter = init;
-        this.fieldName = fieldName;
+        this.column = column;
     }
 
 
@@ -28,31 +29,22 @@ export class QueryFilterHelper {
         const conditions: QueryCondition[] = [];
 
         filters.forEach(f => {
-            conditions.push({
-                propertyName: this.fieldName,
-                comparison: f.operator!,
-                values: [f.value],
-            });
+            if (f.value)
+                conditions.push({
+                    propertyName: this.column.fieldName,
+                    comparison: f.matchMode!,
+                    operator: CONDITIONS_DICT[f.matchMode!],
+                    values: [f.value],
+                    column: this.column
+                });
         })
 
         return conditions;
     }
 }
 
-//Just add an object into the below array, if you want a new condition; the name and operator properties have to be unique
-export const CONDITIONS_LIST = [
-    { name: "equals", symbol: "=", operator: "e" },
-    { name: "notEquals", symbol: "<>", operator: "ne" },
-    { name: "contains", symbol: "Contains", operator: "contains" },
-    { name: "greaterThan", symbol: ">", operator: "gt" },
-    { name: "greaterThanOrEqualTo", symbol: ">=", operator: "gte" },
-    { name: "lessThan", symbol: "<", operator: "lt" },
-    { name: "lessThanOrEqual", symbol: "<=", operator: "lte" },
-    { name: "IsNull", symbol: "Is Null", operator: "n" },
-    { name: "IsNotNull", symbol: "Not Null", operator: "nn" },
-] as const;
 
-export declare class FilterMatchMode {
+export class FilterMatchMode {
     static readonly STARTS_WITH = "startsWith";
     static readonly NOT_CONTAINS = "notContains";
     static readonly ENDS_WITH = "endsWith";
@@ -68,17 +60,37 @@ export declare class FilterMatchMode {
     static readonly DATE_AFTER = "dateAfter";
 }
 
-type OperatorName = typeof CONDITIONS_LIST[number]['name'];
-type Operator = typeof CONDITIONS_LIST[number]['operator'];
-type OperatorSymbol = typeof CONDITIONS_LIST[number]['symbol'];
+//Just add an object into the below array, if you want a new condition; the name and operator properties have to be unique startsWith
+export const CONDITIONS_LIST = [
+    { name: FilterMatchMode.STARTS_WITH, symbol: "=", operator: "sw" },
+    { name: FilterMatchMode.ENDS_WITH, symbol: "=", operator: "ew" },
+    { name: "equals", symbol: "=", operator: "e" },
+    { name: "notEquals", symbol: "<>", operator: "ne" },
+    { name: "contains", symbol: "Contains", operator: "contains" },
+    { name: "greaterThan", symbol: ">", operator: "gt" },
+    { name: "greaterThanOrEqualTo", symbol: ">=", operator: "gte" },
+    { name: "lessThan", symbol: "<", operator: "lt" },
+    { name: "lessThanOrEqual", symbol: "<=", operator: "lte" },
+    { name: "IsNull", symbol: "Is Null", operator: "n" },
+    { name: "IsNotNull", symbol: "Not Null", operator: "nn" },
+] as const;
 
-interface Condition { name: OperatorName, symbol: OperatorSymbol, operator: Operator };
 
-interface ConditionOperatorSource extends Record<OperatorName | Operator, Condition> {
-    // All: Condition[]
-};
 
-export const ConditionOperators = CONDITIONS_LIST.reduce((acc, item) =>
-    (acc[item.name as OperatorName] = item, acc[item.operator as Operator] = item, acc), {} as ConditionOperatorSource
-);
+type OperatorNames = typeof CONDITIONS_LIST[number]['name'];
+type Operators = typeof CONDITIONS_LIST[number]['operator'];
+type OperatorSymbols = typeof CONDITIONS_LIST[number]['symbol'];
+
+export interface OperatorModel { name: OperatorNames, symbol: OperatorSymbols, operator: Operators };
+
+export const CONDITIONS_DICT = CONDITIONS_LIST.reduce((acc, condition) => {
+    acc[condition.name] = condition;
+    return acc;
+}, {} as Record<string, OperatorModel>);
+
+
+
+
+
+
 

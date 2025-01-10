@@ -21,6 +21,7 @@ import { QueryCondition, QueryPaging, QueryParamModel } from "./models/server-qu
 import { PagedList } from './models/paged-list';
 import { BaseHttpService, UrlSegments } from '../../services/base.http.service';
 import { finalize, tap } from 'rxjs';
+import { DataTableFiltersHeaderComponent } from './data-table-filters-header/data-table-filters-header.component';
 
 @Component({
     selector: 'app-png-table',
@@ -39,7 +40,8 @@ import { finalize, tap } from 'rxjs';
         MultiSelectModule,
         DropdownModule,
         AsPipe,
-        ObservableOrArrayPipe
+        ObservableOrArrayPipe,
+        DataTableFiltersHeaderComponent
     ],
     templateUrl: './png-table.component.html',
     styleUrl: './png-table.component.scss'
@@ -129,13 +131,18 @@ export class PngTableComponent {
         this.queryPaging.pageSize = e.rows;
     }
 
+    currentFilters?: { [key: string]: QueryCondition };
     getDataFromServer(event: TableLazyLoadEvent) {
 
         let conditions: QueryCondition[] = [];
         for (var key in event.filters) {
-            const qc = new QueryFilterHelper(key, event.filters[key]).toServerCondition();
-            if (qc)
+            const qc = new QueryFilterHelper(this.columns.find(x => x.fieldName == key)!, event.filters[key]).toServerCondition();
+            if (qc) {
+                this.currentFilters = this.currentFilters ?? {};
                 conditions = [...conditions, ...qc];
+                this.currentFilters[key] = qc[0];
+            }
+
         }
 
         const queryParams = <QueryParamModel>{

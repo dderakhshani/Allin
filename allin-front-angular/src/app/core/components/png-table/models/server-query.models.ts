@@ -1,7 +1,13 @@
+import { OperatorModel } from "./query-filter.model";
+import { TableColumnBase } from "./table-column-model";
+
 export interface QueryCondition {
-    propertyName: string
-    comparison: string
-    values: any[]
+    propertyName: string;
+    comparison: string;
+    values: any[];
+
+    column: TableColumnBase;
+    operator: OperatorModel;
 }
 
 export interface QueryPaging {
