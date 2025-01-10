@@ -1,8 +1,9 @@
 <p-table #datatable [value]="_dataSource" dataKey="id" [rows]="10" [rowHover]="true" stripedRows
     [rowsPerPageOptions]="configOptions.rowsPerPageOptions" [loading]="loading" [paginator]="true"
     [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [scrollable]="true" scrollHeight="100%" [globalFilterFields]="getGlobalFilterable"
-    [tableStyle]="{ 'min-width': '75rem' }">
+    [scrollable]="true" scrollHeight="100%" [globalFilterFields]="getGlobalFilterable" sortMode="multiple"
+    [multiSortMeta]="" [lazy]="true" [tableStyle]="{ 'min-width': '75rem' }" (onLazyLoad)="getDataFromServer($event)"
+    (onPage)="pageChanged($event)" (onFilter)="filterChanged($event)">
     <ng-template pTemplate="caption">
         <div class="flex items-center">
 
@@ -19,17 +20,25 @@
             </div>
 
             <div class="ml-auto">
+                @if (configOptions.toolbarOptions.showToolbar) {
                 <div class="p-toolbar-group-end">
                     <p-button icon="pi pi-filter" [outlined]="true" severity="secondary" class="mr-2" />
                     <!-- <p-button icon="pi pi-filter-slash" severity="secondary" [outlined]="true" class="mr-2"
-                        (onClick)="clear(datatable)" /> -->
+                            (onClick)="clear(datatable)" /> -->
                     <p-button icon="pi pi-print" [outlined]="true" severity="secondary" class="mr-2" />
                     <p-button icon="pi pi-file-export" [outlined]="true" severity="secondary" class="mr-2" />
                     <p-button icon="pi pi-cog" [outlined]="true" severity="secondary" class="mr-2" />
                     <p-button icon="pi pi-refresh" [outlined]="true" severity="secondary" class="mr-2" />
                 </div>
+                }
+
             </div>
         </div>
+        @if(currentFilters.length>0){
+        <c-data-table-filters-header [filters]="currentFilters" (filtersChanged)="onHeaderFiltersChanged($event)">
+        </c-data-table-filters-header>
+        }
+
     </ng-template>
     <ng-template pTemplate="header">
         <tr>

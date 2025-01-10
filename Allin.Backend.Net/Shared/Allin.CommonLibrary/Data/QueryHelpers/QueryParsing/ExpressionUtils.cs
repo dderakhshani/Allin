@@ -25,6 +25,7 @@ namespace Allin.Common.Data.QueryHelpers.QueryParsing
         public const string IsNull = "n";
         public const string IsNotNull = "nn";
 
+
         public static Expression<Func<T, bool>> BuildPredicate<T>(string propertyName, string comparison, object value)
         {
             var parameter = Expression.Parameter(typeof(T), "x");
