@@ -1,0 +1,42 @@
+<p-divider></p-divider>
+<ng-container>
+    <div class="flex pl-2 items-center">
+
+        <span class="me-2 font-bold text-gray-900 dark:text-slate-300">
+            <i class="pi pi-filter-fill me-2"></i>
+            Filters:
+        </span>
+        <div class="flex items-center gap-2 flex-wrap">
+            @for (filter of filters; track $index) {
+            <p-chip (onRemove)="removeFilter($index)" [removable]="true">
+                {{filter.column.title}}
+                {{filter.operator.symbol}}&nbsp;
+
+                @if (filter.column.fieldType===FieldTypes.DropDown ||
+                filter.column.fieldType===FieldTypes.Enum) {
+                <ng-container *ngIf="filter.column.itemsSource">
+                    <ng-container *ngIf="(filter.column.itemsSource?.items$ | async) as items">
+                        "{{getItemsSourceValue(filter.column,items,filter.value)}}"
+                    </ng-container>
+                </ng-container>
+                }
+                @else {
+                <ng-container *ngIf="filter.column.fieldType===FieldTypes.Date">
+                    "{{filter.value | date}}"
+                </ng-container>
+
+                <ng-container *ngIf="filter.column.fieldType!==FieldTypes.Date">
+                    "{{filter.values[0]}}"
+                </ng-container>
+                }
+
+            </p-chip>
+            }
+
+        </div>
+        @if (filters?.length>1) {
+        <p-button label="Clear" icon="pi pi-filter-slash" variant="outlined" class="ml-10" (click)="removeAll()" />
+        }
+
+    </div>
+</ng-container>
