@@ -2,7 +2,8 @@
     [rowsPerPageOptions]="configOptions.rowsPerPageOptions" [loading]="loading" [paginator]="true"
     [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [scrollable]="true" scrollHeight="100%" [globalFilterFields]="getGlobalFilterable" sortMode="multiple"
-    [multiSortMeta]="" (onLazyLoad)="getDataFromServer($event)" [lazy]="true" [tableStyle]="{ 'min-width': '75rem' }">
+    [multiSortMeta]="" [lazy]="true" [tableStyle]="{ 'min-width': '75rem' }" (onLazyLoad)="getDataFromServer($event)"
+    (onPage)="pageChanged($event)">
     <ng-template pTemplate="caption">
         <div class="flex items-center">
 

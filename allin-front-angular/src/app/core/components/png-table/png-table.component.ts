@@ -6,7 +6,7 @@ import { TagModule } from 'primeng/tag';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { Table, TableFilterEvent, TableLazyLoadEvent, TableModule } from 'primeng/table';
+import { Table, TableFilterEvent, TableLazyLoadEvent, TableModule, TablePageEvent } from 'primeng/table';
 import { BooleanColumnDisplayEnum, FieldTypesEnum, FilterControlEnum, TableBooleanColumn, TableColumnBase, TableDropDownColumn } from './models/table-column-model';
 import { AsPipe } from '../../pipes/as.pipe';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,7 @@ import { ObservableOrArrayPipe } from '../../pipes/observable-array.pipe';
 import { TableConfigOptions } from './models/table-config-options';
 import { CheckboxModule } from 'primeng/checkbox';
 import { QueryFilterHelper } from './models/query-filter.model';
-import { QueryCondition, QueryParamModel } from "./models/server-query.models";
+import { QueryCondition, QueryPaging, QueryParamModel } from "./models/server-query.models";
 import { PagedList } from './models/paged-list';
 import { BaseHttpService, UrlSegments } from '../../services/base.http.service';
 import { finalize, tap } from 'rxjs';
@@ -45,6 +45,7 @@ import { finalize, tap } from 'rxjs';
     styleUrl: './png-table.component.scss'
 })
 export class PngTableComponent {
+
     fieldTypesEnum = FieldTypesEnum;
     tableBooleanColumn = TableBooleanColumn;
     booleanColumnDisplayEnum = BooleanColumnDisplayEnum;
@@ -72,6 +73,13 @@ export class PngTableComponent {
     @Input()
     public selectableRow?: boolean = true;
 
+    manipulateDataCallback?: (value: PagedList<any[]>) => PagedList<any[]>;
+
+    queryPaging: QueryPaging = {
+        pageSize: 10,
+        pageIndex: 0
+    };
+    totalCount?: number;
     _dataSource: any[] = [];
     @Input()
     public set dataSource(value: any[]) {
@@ -109,14 +117,20 @@ export class PngTableComponent {
             });
         })
 
+        this.getDataFromServer({})
     }
 
     get getGlobalFilterable() {
         return this.columns.filter(x => x.filterOptions?.globalFilterable == true).map(x => x.fieldName);
     }
 
-    private getDataFromServer(event: TableLazyLoadEvent) {
-        console.log(event.filters);
+    pageChanged(e: TablePageEvent) {
+        this.queryPaging.pageIndex = e.first;
+        this.queryPaging.pageSize = e.rows;
+    }
+
+    getDataFromServer(event: TableLazyLoadEvent) {
+
         let conditions: QueryCondition[] = [];
         for (var key in event.filters) {
             const qc = new QueryFilterHelper(key, event.filters[key]).toServerCondition();
@@ -125,10 +139,7 @@ export class PngTableComponent {
         }
 
         const queryParams = <QueryParamModel>{
-            pagingProperties: {
-                pageSize: 0,
-                pageIndex: 0
-            },
+            pagingProperties: this.queryPaging,
             group: "",
             columnsNamesToShow: [],
             conditions: conditions,
@@ -142,12 +153,12 @@ export class PngTableComponent {
         else if (this.dataApiUrl)
             this.dataApiUrl.queryStringParams = this.convertToQueryString(queryParams);
 
-        this.httpService.getData<PagedList<any[]>>(this.dataApiUrl)
+        this.httpService.getData<PagedList<any[]>>(this.dataApiUrl!)
             .pipe(
                 tap(result => {
                     this.dataSource = result.data;
-                    this.total = result.totalCount;
-                    this.manipulate && this.manipulate(result);
+                    this.totalCount = result.totalCount;
+                    this.manipulateDataCallback && this.manipulateDataCallback(result);
                 }),
                 finalize(() => this.loading = false)
             )
