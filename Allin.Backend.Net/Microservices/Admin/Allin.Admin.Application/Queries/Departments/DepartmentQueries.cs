@@ -6,6 +6,7 @@ using Allin.Common.Data.QueryHelpers.QueryResultMaker;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using Allin.Common.Utilities;
 
 namespace Allin.Admin.Application.Queries
 {
@@ -18,6 +19,10 @@ namespace Allin.Admin.Application.Queries
         public async Task<PagedList<DepartmentModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken)
         {
             return await DbContext.Departments.AsNoTracking().ProjectTo<DepartmentModel>(MapperProvider).ToPagedListAsync(param);
+        }
+        public async Task<IEnumerable<TreeNode<DepartmentModel>>> GetAllTree(QueryParamModel param, CancellationToken cancellationToken)
+        {
+            return (await DbContext.Departments.AsNoTracking().ProjectTo<DepartmentModel>(MapperProvider).ToListAsync()).ToTreeModel();
         }
 
         public async Task<DepartmentModel> GetById(long id, CancellationToken cancellationToken)
