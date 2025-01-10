@@ -1,1 +1,17 @@
-<p>department-grid works!</p>
+<p-treetable [value]="data" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Department Name</th>
+            <th>Code</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+        <tr [ttRow]="rowNode">
+            <td>
+                <p-treeTableToggler [rowNode]="rowNode" />
+                {{ rowData.title }}
+            </td>
+            <td>{{ rowData.code }}</td>
+        </tr>
+    </ng-template>
+</p-treetable>

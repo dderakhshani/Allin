@@ -11,14 +11,14 @@
         </div>
 
     </ng-container>
-    <div class="flex flex-col h-full">
+    <div class="h-full w-full flex-nowrap flex-grow ">
 
 
         @if(selectedShowType=="chart"){
-        <app-department-chart></app-department-chart>
+        <app-department-chart [data]="departments"></app-department-chart>
         }
         @else if(selectedShowType=="grid"){
-        <app-department-grid></app-department-grid>
+        <app-department-grid [data]="departments"></app-department-grid>
         }
 
 

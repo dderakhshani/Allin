@@ -6,6 +6,7 @@ namespace Allin.Common.Utilities;
 public class TreeNode<T>
 {
     public T Data { get; set; }
+    public bool Expanded { get; set; } = true;
     public List<TreeNode<T>> Children { get; set; } = new List<TreeNode<T>>();
 }
 

@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { OrganizationChartModule } from 'primeng/organizationchart';
+import { DepartmentModel } from '../../../../models/queries/department-model';
 @Component({
   selector: 'app-department-chart',
   standalone: true,
@@ -9,36 +10,8 @@ import { OrganizationChartModule } from 'primeng/organizationchart';
   styleUrl: './department-chart.component.scss'
 })
 export class DepartmentChartComponent {
-  data: TreeNode[] = [
-    {
-      label: 'F.C Barcelona',
-      expanded: true,
-      children: [
-        {
-          label: 'Argentina',
-          expanded: true,
-          children: [
-            {
-              label: 'Argentina'
-            },
-            {
-              label: 'France'
-            }
-          ]
-        },
-        {
-          label: 'France',
-          expanded: true,
-          children: [
-            {
-              label: 'France'
-            },
-            {
-              label: 'Morocco'
-            }
-          ]
-        }
-      ]
-    }
-  ];
+
+  @Input()
+  data?: TreeNode<DepartmentModel>[];
+
 }

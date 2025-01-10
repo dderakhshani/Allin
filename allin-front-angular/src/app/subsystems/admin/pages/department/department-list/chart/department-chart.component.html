@@ -1,3 +1,16 @@
-<div class="card flex justify-center">
-    <p-organization-chart [value]="data" />
+<div class=" w-full h-full overflow-auto ">
+    <div class="w-max-0">
+        <p-organization-chart [value]="data" [collapsible]="true">
+            <ng-template let-node pTemplate="default">
+                <div class="flex flex-col">
+                    <div class="flex flex-col items-center">
+                        <span class="font-bold mb-2">{{ node.data.title }}</span>
+                        <span>{{ node.data.code }}</span>
+                    </div>
+                </div>
+            </ng-template>
+        </p-organization-chart>
+
+    </div>
+
 </div>

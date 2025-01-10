@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { openDialog, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
 import { AddPersonPageComponent } from '../add-person/add-person-page.component';
 import { PersonService } from '../../../apis/person.service';
-import { PersonModel } from '../../../models/queries/person-mode';
+import { PersonModel } from '../../../models/queries/person-model';
 import { NoToolbarCTableConfig } from '../../../../../core/components/png-table/models/table-config-options';
 import { environment } from '../../../../../../environments/environment';
 

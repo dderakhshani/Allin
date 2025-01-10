@@ -2,15 +2,17 @@ import { Component } from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
 import { BasicModule } from '../../../../../core/basic.module';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Customer, Representative } from '../../user/user-list/user-list-page.component';
+import { Representative } from '../../user/user-list/user-list-page.component';
 import { Message } from 'primeng/message';
-import { UserService } from '../../../apis/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { openDialog, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
 import { CreateDepartmentPageComponent } from '../create-department/create-department-page.component';
 import { DepartmentChartComponent } from './chart/department-chart.component';
 import { SelectButton } from 'primeng/selectbutton';
 import { DepartmentGridComponent } from './grid/department-grid.component';
+import { DepartmentService } from '../../../apis/department.service';
+import { DepartmentModel } from '../../../models/queries/department-model';
+import { TreeNode } from 'primeng/api';
 
 @Component({
     selector: 'app-department-list-page',
@@ -37,7 +39,7 @@ export class DepartmentListPageComponent {
 
     ref: DynamicDialogRef | undefined;
 
-    customers!: Customer[];
+    departments?: TreeNode<DepartmentModel>[];
     representatives!: Representative[];
     statuses!: any[];
     loading: boolean = true;
@@ -45,11 +47,19 @@ export class DepartmentListPageComponent {
     selectedCity: any | undefined;
     messages: Message[] = [];
 
-    constructor(private userService: UserService,
+    constructor(private departmentService: DepartmentService,
         public dialogService: DialogService,
         private translate: TranslateService
     ) {
 
+    }
+
+    ngOnInit() {
+
+        this.departmentService.getAllTree()
+            .subscribe(response => {
+                this.departments = response;
+            });
     }
 
     openAdd() {

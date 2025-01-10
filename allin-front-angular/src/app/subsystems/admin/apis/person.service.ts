@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseHttpService } from '../../../core/services/base.http.service';
 import { Observable } from 'rxjs';
-import { PersonModel } from '../models/queries/person-mode';
+import { PersonModel } from '../models/queries/person-model';
 import { EditPersonCommand } from '../models/commands/edit-person-command';
 import { CreatePersonCommand } from '../models/commands/create-Person-command';
 import { PagedList } from '../../../core/components/png-table/models/paged-list';
