@@ -151,7 +151,7 @@ export interface PageDialogConfig {
     showModalFooter?: boolean | undefined;
     showDismissButton?: boolean | undefined;
     steps?: DialogSteps[];
-    // isFullScreen?: boolean;
+    isFullScreen?: boolean;
     /**
      * Use this config if you want to add a custom css class to the dialog content e.g. overwrite the default responsive classes of the content.
      * 
