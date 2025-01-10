@@ -86,15 +86,7 @@ export class PersonListPageComponent {
     }
 
     ngOnInit() {
-        this.personService.getAll().subscribe(
-            (response) => {
-                this.persons = response.data;
-                console.log('اطلاعات با موفقیت دریافت شد:', response);
-            },
-            (error) => {
-                console.error('خطا در دریافت اطلاعات:', error);
-            }
-        );
+
     }
 
 
