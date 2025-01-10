@@ -1,6 +1,6 @@
 
 import { FilterMetadata } from "primeng/api";
-import { QueryCondition } from "./server-query.models";
+import { FilterQueryCondition, ServerQueryCondition } from "./query.models";
 import { TableColumnBase } from "./table-column-model";
 
 export class QueryFilterHelper {
@@ -15,7 +15,7 @@ export class QueryFilterHelper {
     }
 
 
-    toServerCondition(): QueryCondition[] | null {
+    toServerCondition(): ServerQueryCondition[] | null {
         let filters: FilterMetadata[] = [];
 
         if (!this.filter)
@@ -26,13 +26,36 @@ export class QueryFilterHelper {
         else
             filters = [this.filter];
 
-        const conditions: QueryCondition[] = [];
+        const conditions: ServerQueryCondition[] = [];
 
         filters.forEach(f => {
             if (f.value)
                 conditions.push({
                     propertyName: this.column.fieldName,
                     comparison: f.matchMode!,
+                    values: [f.value],
+                });
+        })
+
+        return conditions;
+    }
+
+    toFilterCondition(): FilterQueryCondition[] | null {
+        let filters: FilterMetadata[] = [];
+
+        if (!this.filter)
+            return null;
+
+        if (this.filter instanceof Array)
+            filters = this.filter;
+        else
+            filters = [this.filter];
+
+        const conditions: FilterQueryCondition[] = [];
+
+        filters.forEach(f => {
+            if (f.value)
+                conditions.push({
                     operator: CONDITIONS_DICT[f.matchMode!],
                     values: [f.value],
                     column: this.column
@@ -62,8 +85,8 @@ export class FilterMatchMode {
 
 //Just add an object into the below array, if you want a new condition; the name and operator properties have to be unique startsWith
 export const CONDITIONS_LIST = [
-    { name: FilterMatchMode.STARTS_WITH, symbol: "=", operator: "sw" },
-    { name: FilterMatchMode.ENDS_WITH, symbol: "=", operator: "ew" },
+    { name: FilterMatchMode.STARTS_WITH, symbol: "starts", operator: "sw" },
+    { name: FilterMatchMode.ENDS_WITH, symbol: "ends", operator: "ew" },
     { name: "equals", symbol: "=", operator: "e" },
     { name: "notEquals", symbol: "<>", operator: "ne" },
     { name: "contains", symbol: "Contains", operator: "contains" },

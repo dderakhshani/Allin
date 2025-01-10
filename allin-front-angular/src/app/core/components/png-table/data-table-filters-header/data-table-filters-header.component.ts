@@ -1,7 +1,7 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QueryCondition } from '../models/server-query.models';
+import { FilterQueryCondition } from '../models/query.models';
 import { Chip } from 'primeng/chip';
 import { FieldTypesEnum, TableColumnBase, TableDropDownColumn } from '../models/table-column-model';
 import { BasicModule } from '../../../basic.module';
@@ -22,7 +22,7 @@ export class DataTableFiltersHeaderComponent implements OnInit {
 
     Object = Object;
     @Input()
-    filters?: { [key: string]: QueryCondition };
+    filters?: FilterQueryCondition[];
     @Output()
     filtersChanged = new EventEmitter<any>();
 
@@ -31,15 +31,15 @@ export class DataTableFiltersHeaderComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    removeFilter(key: any) {
+    removeFilter(index: number) {
         if (this.filters) {
-            delete this.filters[key];
+            this.filters.splice(index, 1);
             this.filtersChanged.emit(this.filters);
         }
     }
 
     removeAll() {
-        this.filters = {};
+        this.filters = [];
         this.filtersChanged.emit(this.filters);
     }
 
@@ -53,6 +53,7 @@ export class DataTableFiltersHeaderComponent implements OnInit {
         const filterItems = items.filter((x: any) => value.indexOf(x.value) !== -1);
         return items.map((item: any) => item[column.itemsSource?.displayFieldName ?? 0]).join(', ');
     }
+
 
 }
 

@@ -1,11 +1,15 @@
 import { OperatorModel } from "./query-filter.model";
 import { TableColumnBase } from "./table-column-model";
 
-export interface QueryCondition {
+export interface ServerQueryCondition {
     propertyName: string;
     comparison: string;
     values: any[];
 
+}
+
+export interface FilterQueryCondition {
+    values: any[];
     column: TableColumnBase;
     operator: OperatorModel;
 }
@@ -20,7 +24,7 @@ export interface QueryParamModel {
     pagingProperties?: QueryPaging;
     group?: string;
     orderByProperties?: string;
-    conditions?: QueryCondition[];
+    conditions?: ServerQueryCondition[];
     columnsNamesToShow: string[];
     searchTerm?: string;
 }

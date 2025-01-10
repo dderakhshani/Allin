@@ -1,57 +1,42 @@
-<ng-container *ngIf="filters && Object.keys(filters).length>0">
-    <div class="flex pl-2 py-1 bg-white border-t-1 border-gray-200 border-solid items-center">
-        <div class="card flex items-center gap-2 flex-wrap">
-            <p-chip *ngFor="let key of Object.keys(filters)" (removed)="removeFilter(key)">
-                {{filters[key].column.title}}
-                {{filters[key].condition.symbol}}&nbsp;
+<p-divider></p-divider>
+<ng-container>
+    <div class="flex pl-2 items-center">
 
-                <ng-container
-                    *ngIf="filters[key].column.fieldType===FieldTypes.DropDown || filters[key].column.fieldType===FieldTypes.Enum;else nonDropDown">
-                    <ng-container *ngIf="filters[key].column.itemsSource">
-                        <ng-container *ngIf="(filters[key].column.itemsSource?.items$ | async) as items">
-                            "{{getItemsSourceValue(filters[key].column,items,filters[key].value)}}"
-                        </ng-container>
+        <span class="me-2 font-bold text-gray-900 dark:text-slate-300">
+            <i class="pi pi-filter-fill me-2"></i>
+            Filters:
+        </span>
+        <div class="flex items-center gap-2 flex-wrap">
+            @for (filter of filters; track $index) {
+            <p-chip (onRemove)="removeFilter($index)" [removable]="true">
+                {{filter.column.title}}
+                {{filter.operator.symbol}}&nbsp;
+
+                @if (filter.column.fieldType===FieldTypes.DropDown ||
+                filter.column.fieldType===FieldTypes.Enum) {
+                <ng-container *ngIf="filter.column.itemsSource">
+                    <ng-container *ngIf="(filter.column.itemsSource?.items$ | async) as items">
+                        "{{getItemsSourceValue(filter.column,items,filter.value)}}"
                     </ng-container>
-
+                </ng-container>
+                }
+                @else {
+                <ng-container *ngIf="filter.column.fieldType===FieldTypes.Date">
+                    "{{filter.value | date}}"
                 </ng-container>
 
-                <ng-template #nonDropDown>
-                    <ng-container *ngIf="filters[key].column.fieldType===FieldTypes.Date">
-                        "{{filters[key].value | date}}"
-                    </ng-container>
-
-                    <ng-container *ngIf="filters[key].column.fieldType!==FieldTypes.Date">
-                        "{{filters[key].value}}"
-                    </ng-container>
-                </ng-template>
-
-                <ng-container *ngIf="filters[key].value2 && filters[key].condition2">
-                    &nbsp;and &nbsp;
-                    {{filters[key].condition2!.symbol}}&nbsp;
-
-                    <ng-container
-                        *ngIf="filters[key].column.fieldType===FieldTypes.DropDown || filters[key].column.fieldType===FieldTypes.Enum;else nonDropDown2">
-
-                        <ng-container *ngIf="(filters[key].column.itemsSource?.items$ | async) as items">
-                            "{{getItemsSourceValue(filters[key].column,items,filters[key].value2)}}"
-                        </ng-container>
-                    </ng-container>
-                    <ng-template #nonDropDown2>
-                        <ng-container *ngIf="filters[key].column.fieldType===FieldTypes.Date">
-                            "{{filters[key].value2 | date}}"
-                        </ng-container>
-                        <ng-container *ngIf="filters[key].column.fieldType!==FieldTypes.Date">
-                            "{{filters[key].value2}}"
-                        </ng-container>
-                    </ng-template>
-
+                <ng-container *ngIf="filter.column.fieldType!==FieldTypes.Date">
+                    "{{filter.values[0]}}"
                 </ng-container>
+                }
+
             </p-chip>
-        </div>
+            }
 
-        <button class="ml-10" mat-flat-button mat-filter-item *ngIf="Object.keys(filters).length>1"
-            (click)="removeAll()">
-            <span class="text-gray-500">CLEAR FILTERS</span>
-        </button>
+        </div>
+        @if (filters?.length>1) {
+        <p-button label="Clear" icon="pi pi-filter-slash" variant="outlined" class="ml-10" (click)="removeAll()" />
+        }
+
     </div>
 </ng-container>

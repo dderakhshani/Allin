@@ -17,7 +17,7 @@ import { ObservableOrArrayPipe } from '../../pipes/observable-array.pipe';
 import { TableConfigOptions } from './models/table-config-options';
 import { CheckboxModule } from 'primeng/checkbox';
 import { QueryFilterHelper } from './models/query-filter.model';
-import { QueryCondition, QueryPaging, QueryParamModel } from "./models/server-query.models";
+import { ServerQueryCondition, QueryPaging, QueryParamModel, FilterQueryCondition } from "./models/query.models";
 import { PagedList } from './models/paged-list';
 import { BaseHttpService, UrlSegments } from '../../services/base.http.service';
 import { finalize, tap } from 'rxjs';
@@ -131,16 +131,33 @@ export class PngTableComponent {
         this.queryPaging.pageSize = e.rows;
     }
 
-    currentFilters?: { [key: string]: QueryCondition };
+
+    currentFilters: FilterQueryCondition[] = [];
+    filterChanged(e: TableFilterEvent) {
+        this.currentFilters = [];
+        for (var key in e.filters) {
+            const qc = new QueryFilterHelper(this.columns.find(x => x.fieldName == key)!, e.filters[key]).toFilterCondition();
+            if (qc && qc.length) {
+                this.currentFilters = this.currentFilters ?? {};
+                this.currentFilters = [... this.currentFilters, ...qc];
+            }
+
+        }
+    }
+
+    public onHeaderFiltersChanged(filters: any) {
+        this.currentFilters = filters;
+        this.queryPaging.pageIndex = 0;
+        this.getDataFromServer({});
+    }
+
     getDataFromServer(event: TableLazyLoadEvent) {
 
-        let conditions: QueryCondition[] = [];
+        let conditions: ServerQueryCondition[] = [];
         for (var key in event.filters) {
             const qc = new QueryFilterHelper(this.columns.find(x => x.fieldName == key)!, event.filters[key]).toServerCondition();
-            if (qc) {
-                this.currentFilters = this.currentFilters ?? {};
+            if (qc && qc.length) {
                 conditions = [...conditions, ...qc];
-                this.currentFilters[key] = qc[0];
             }
 
         }
@@ -173,6 +190,8 @@ export class PngTableComponent {
 
             });
     }
+
+
 
     clear(table: Table) {
         table.clear();
