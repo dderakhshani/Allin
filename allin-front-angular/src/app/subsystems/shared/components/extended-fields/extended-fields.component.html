@@ -1,17 +1,16 @@
 <form [formGroup]="form">
     <div formArrayName="fields" class="grid grid-cols-2 gap-4">
-
-        @for (field of fields; track $index) {
+        @for (ctl of fieldsForm.controls; track $index) {
         <div>
-            <label>{{field.fieldName}}</label>
-            @if(field.uiControl==UIControlEnum.Text){
-            <input type="text" pInputText [formControlName]="$index" />
+            <label>{{getField($index).fieldName}}</label>
+            @if(getField($index).uiControl==UIControlEnum.Text){
+            <input type="text" pInputText [formControl]="ctl.get('value')" />
             }
-            @else if(field.uiControl==UIControlEnum.ToggleSwitch){
-            <p-toggleswitch [formControlName]="$index" />
+            @else if(getField($index).uiControl==UIControlEnum.ToggleSwitch){
+            <p-toggleswitch [formControl]="ctl.get('value')" />
             }
-            @else if(field.uiControl==UIControlEnum.Number){
-            <p-inputnumber [formControlName]="$index" mode="decimal" inputId="withoutgrouping" />
+            @else if(getField($index).uiControl==UIControlEnum.Number){
+            <p-inputnumber [formControl]="ctl.get('value')" mode="decimal" inputId="withoutgrouping" />
             }
         </div>
 

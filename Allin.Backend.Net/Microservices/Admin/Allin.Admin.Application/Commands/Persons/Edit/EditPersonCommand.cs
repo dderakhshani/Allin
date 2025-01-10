@@ -19,5 +19,6 @@ namespace Allin.Admin.Application.Commands
         public GenderEnums GenderEnum { get; set; }
         public MaritalEnums? MaritalEnum { get; set; }
         public IEnumerable<ExtendedFieldArg> ExtendedFieldValues { get; set; }
+        public IEnumerable<AddressArg> PersonAddresses { get; set; }
     }
 }

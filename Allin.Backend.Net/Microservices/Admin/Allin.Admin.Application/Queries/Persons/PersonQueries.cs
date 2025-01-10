@@ -22,7 +22,7 @@ namespace Allin.Admin.Application.Queries
 
         public async Task<PersonModel> GetById(long id, CancellationToken cancellationToken)
         {
-            var person = Mapper.Map<PersonModel>(await DbContext.Persons.AsNoTracking().FirstAsync(x => x.Id == id, cancellationToken));
+            var person = Mapper.Map<PersonModel>(await DbContext.Persons.Include(x => x.PersonAddresses).AsNoTracking().FirstAsync(x => x.Id == id, cancellationToken));
 
             person.ExtendedFieldValues = await DbContext.TableExtendedFieldValues.AsNoTracking().Where(x => x.RecordId == id).ProjectTo<TableExtendedFieldValueModel>(MapperProvider).ToListAsync(cancellationToken);
 

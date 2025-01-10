@@ -7,14 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Events\**" />
+    <Compile Remove="IntegrationEvents\**" />
+    <EmbeddedResource Remove="Events\**" />
+    <EmbeddedResource Remove="IntegrationEvents\**" />
+    <None Remove="Events\**" />
+    <None Remove="IntegrationEvents\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Commands\Roles\Delete\Validator\" />
     <Folder Include="Commands\TableExtendedFields\Delete\" />
     <Folder Include="Commands\Users\Delete\" />
     <Folder Include="Commands\Users\ChangePassword\" />
     <Folder Include="Commands\Users\AddRoles\" />
-    <Folder Include="Events\" />
-    <Folder Include="IntegrationEvents\" />
+    <Folder Include="Queries\BaseValues\Params\" />
+    <Folder Include="Services\" />
     <Folder Include="Params\" />
+    <Folder Include="Queries\Employees\Params\" />
     <Folder Include="Queries\Persons\Params\" />
     <Folder Include="Queries\TableExtendedFields\Params\" />
     <Folder Include="Queries\Departments\Params\" />

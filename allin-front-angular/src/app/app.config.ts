@@ -47,7 +47,7 @@ export const appConfig: ApplicationConfig = {
             }
         }),
         provideHttpClient(),
-        { provide: API_BASE_URL, useValue: `${environment.baseUrl}/admin/api` },
+        { provide: API_BASE_URL, useValue: `${environment.baseUrl}/api` },
         provideTranslateService({
             defaultLanguage: 'en',
             loader: {

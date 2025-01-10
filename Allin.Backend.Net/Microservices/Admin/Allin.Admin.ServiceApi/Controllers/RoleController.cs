@@ -32,10 +32,10 @@ namespace Allin.Admin.ServiceApi.Controllers
             return OkResult(await _roleQueries.GetAll(param, cancellationToken));
         }
 
-        [HttpGet("get-permissions")]
+        [HttpGet("get-permissions-tree")]
         public async Task<IActionResult> GetPermissions(CancellationToken cancellationToken)
         {
-            return OkResult(await _permissionQueries.GetAll(cancellationToken));
+            return OkResult(await _permissionQueries.GetAllTree(cancellationToken));
         }
 
         [HttpPost]

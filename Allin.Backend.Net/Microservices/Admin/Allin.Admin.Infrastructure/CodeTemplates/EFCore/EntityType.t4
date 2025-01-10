@@ -120,6 +120,7 @@ public class <#= EntityType.Name #> : AdminBaseEntity <#= EntityType.GetProperti
 
     foreach (var navigation in EntityType.GetNavigations())
     {
+        
         if (Options.UseDataAnnotations)
         {
             foreach (var dataAnnotation in navigation.GetDataAnnotations(annotationCodeGenerator))
@@ -131,7 +132,8 @@ public class <#= EntityType.Name #> : AdminBaseEntity <#= EntityType.GetProperti
         }
 
         var targetType = navigation.TargetEntityType.Name;
-        if (navigation.IsCollection)
+        if (EntityType.Name!="BaseValue" || targetType=="BaseValueType")
+        if (navigation.IsCollection  )
         {
 #>
     public virtual ICollection<<#= targetType #>> <#= navigation.Name #> { get; set; } = new List<<#= targetType #>>();

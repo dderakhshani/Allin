@@ -1,1 +1,3 @@
-<app-add-person></app-add-person>
+<app-add-person (commandChange)="command=$event"></app-add-person>
+
+<p-button label="Submit" (click)="saveData()" />

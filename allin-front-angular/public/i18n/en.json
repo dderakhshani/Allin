@@ -6,6 +6,8 @@
     "next": "Next",
     "prev": "Prev",
     "general-info": "General Information",
+    "basic-info": "Basic Information",
+    "other-info": "Other Information",
     "contact-info": "Contact Information",
     "person": {
         "firstName": "First Name",
@@ -21,6 +23,11 @@
         "employment-date": "Employment Date",
         "leave-date": "Leave Date",
         "type-of-presence": "Type of presence"
+    },
+    "role": {
+        "title": "Role Name",
+        "description": "Description",
+        "department": "Department"
     },
     "admin": {
         "create-employee": "Add Employee",

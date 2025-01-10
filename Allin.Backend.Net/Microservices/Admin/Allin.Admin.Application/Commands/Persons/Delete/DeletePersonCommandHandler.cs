@@ -16,16 +16,18 @@ namespace Allin.Admin.Application.Commands
 
         public override async Task<bool> Handle(DeletePersonCommand request, CancellationToken cancellationToken)
         {
-            var branch = await DbContext.Persons.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
+            var person = await DbContext.Persons.Include(x => x.PersonAddresses).FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
 
-            DbContext.Persons.Remove(branch);
+            using (DbContext.Database.BeginTransaction())
+            {
+                DbContext.Persons.Remove(person);
 
-            var extendedFieldValues = await DbContext.TableExtendedFieldValues.Where(x => x.RecordId == branch.Id)
-                .ToListAsync(cancellationToken);
+                var extendedFieldValues = await DbContext.TableExtendedFieldValues.Where(x => x.RecordId == person.Id).ToListAsync(cancellationToken);
 
-            DbContext.TableExtendedFieldValues.RemoveRange(extendedFieldValues);
+                DbContext.TableExtendedFieldValues.RemoveRange(extendedFieldValues);
 
-            await DbContext.SaveChangesAsync();
+                await DbContext.SaveChangesAsync();
+            }
 
             return true;
         }
