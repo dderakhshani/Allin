@@ -40,3 +40,4 @@ export class ToolBarConfig {
     sort: boolean | 'rowOnly' | 'cardOnly' = true;
     group: boolean | 'rowOnly' | 'cardOnly' = true;
 }
+export const NoToolbarCTableConfig = new TableConfigOptions({ toolbarOptions: new ToolBarConfig({ showToolbar: false }) });

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PersonModel } from '../models/queries/person-mode';
 import { EditPersonCommand } from '../models/commands/edit-person-command';
 import { CreatePersonCommand } from '../models/commands/create-Person-command';
+import { PagedList } from '../../../core/components/png-table/models/paged-list';
 
 @Injectable({
     providedIn: 'root'
@@ -36,7 +37,7 @@ export class PersonService {
             });
     }
 
-    getAll(): Observable<PersonModel> {
+    getAll(): Observable<PagedList<PersonModel[]>> {
         return this.baseHttpService.getData({
             controller: this.controllerPath,
             action: 'get-all',

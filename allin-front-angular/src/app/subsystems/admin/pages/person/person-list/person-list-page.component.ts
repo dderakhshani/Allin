@@ -4,61 +4,66 @@ import { BasicModule } from '../../../../../core/basic.module';
 import { PngTableComponent } from '../../../../../core/components/png-table/png-table.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BooleanColumnDisplayEnum, TableBooleanColumn, TableColumnBase, TableTextColumn } from '../../../../../core/components/png-table/models/table-column-model';
-import { Customer, Representative } from '../../user/user-list/user-list-page.component';
+import { Representative } from '../../user/user-list/user-list-page.component';
 import { Message } from 'primeng/message';
 import { UserService } from '../../../apis/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { openDialog, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
 import { AddPersonPageComponent } from '../add-person/add-person-page.component';
+import { PersonService } from '../../../apis/person.service';
+import { PersonModel } from '../../../models/queries/person-mode';
+import { NoToolbarCTableConfig } from '../../../../../core/components/png-table/models/table-config-options';
 
 @Component({
-  selector: 'app-person-list-page',
-  standalone: true,
-  imports: [
-            BasicModule,
-            PngTableComponent,
-            ToolbarModule,
-  ],
-  providers: [DialogService],
-  templateUrl: './person-list-page.component.html',
-  styleUrl: './person-list-page.component.scss'
+    selector: 'app-person-list-page',
+    standalone: true,
+    imports: [
+        BasicModule,
+        PngTableComponent,
+        ToolbarModule,
+    ],
+    providers: [DialogService],
+    templateUrl: './person-list-page.component.html',
+    styleUrl: './person-list-page.component.scss'
 })
 export class PersonListPageComponent {
     isLoading = false;
+    noToolbarCTableConfig = NoToolbarCTableConfig;
 
     columns: TableColumnBase[] = [
         new TableTextColumn({
-            title: 'Name',
-            rootFieldName: 'name',
-            sortable: false,
+            title: 'First Name',
+            rootFieldName: 'firstName',
         }),
         new TableTextColumn({
             title: 'Last Name',
-            rootFieldName: 'country',
-            sortable: false,
+            rootFieldName: 'lastName',
         }),
         new TableTextColumn({
-            title: 'Agent',
-            rootFieldName: 'agent',
-            sortable: false,
+            title: 'SSN',
+            rootFieldName: 'ssn',
         }),
         new TableTextColumn({
-            title: 'Status',
-            rootFieldName: 'status',
-            templateRefId: 'statusColumnTemplate',
-            sortable: false,
+            title: 'Email',
+            rootFieldName: 'email',
         }),
-        new TableBooleanColumn({
-            title: 'Verified',
-            rootFieldName: 'verified',
-            sortable: false,
-            displayStyle: BooleanColumnDisplayEnum.OnlyCheckColorFull
-        })
+        // new TableTextColumn({
+        //     title: 'Status',
+        //     rootFieldName: 'email',
+        //     templateRefId: 'statusColumnTemplate',
+        //     sortable: false,
+        // }),
+        // new TableBooleanColumn({
+        //     title: 'Verified',
+        //     rootFieldName: 'verified',
+        //     sortable: false,
+        //     displayStyle: BooleanColumnDisplayEnum.OnlyCheckColorFull
+        // })
     ];
 
     ref: DynamicDialogRef | undefined;
 
-    customers!: Customer[];
+    persons!: PersonModel[];
     representatives!: Representative[];
     statuses!: any[];
     loading: boolean = true;
@@ -68,10 +73,24 @@ export class PersonListPageComponent {
 
     constructor(private userService: UserService,
         public dialogService: DialogService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private personService: PersonService
     ) {
 
     }
+
+    ngOnInit() {
+        this.personService.getAll().subscribe(
+            (response) => {
+                this.persons = response.data;
+                console.log('اطلاعات با موفقیت دریافت شد:', response);
+            },
+            (error) => {
+                console.error('خطا در دریافت اطلاعات:', error);
+            }
+        );
+    }
+
 
     openAdd() {
         const config: PageDialogConfig = {
