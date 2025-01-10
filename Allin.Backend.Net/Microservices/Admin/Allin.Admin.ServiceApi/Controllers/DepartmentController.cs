@@ -29,6 +29,11 @@ namespace Allin.Admin.ServiceApi.Controllers
         {
             return OkResult(await _departmentQueries.GetAll(param, cancellationToken));
         }
+        [HttpGet("get-department-tree")]
+        public async Task<IActionResult> GetDepartments([FromQuery] QueryParamModel param, CancellationToken cancellationToken)
+        {
+            return OkResult(await _departmentQueries.GetAllTree(param, cancellationToken));
+        }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateDepartmentCommand request, CancellationToken cancellationToken)

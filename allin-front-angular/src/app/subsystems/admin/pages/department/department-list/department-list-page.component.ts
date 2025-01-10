@@ -1,60 +1,39 @@
 import { Component } from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
 import { BasicModule } from '../../../../../core/basic.module';
-import { PngTableComponent } from '../../../../../core/components/png-table/png-table.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { BooleanColumnDisplayEnum, TableBooleanColumn, TableColumnBase, TableTextColumn } from '../../../../../core/components/png-table/models/table-column-model';
 import { Customer, Representative } from '../../user/user-list/user-list-page.component';
 import { Message } from 'primeng/message';
 import { UserService } from '../../../apis/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { openDialog, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
 import { CreateDepartmentPageComponent } from '../create-department/create-department-page.component';
+import { DepartmentChartComponent } from './chart/department-chart.component';
+import { SelectButton } from 'primeng/selectbutton';
+import { DepartmentGridComponent } from './grid/department-grid.component';
 
 @Component({
-  selector: 'app-department-list-page',
-  standalone: true,
-   imports: [
-              BasicModule,
-              PngTableComponent,
-              ToolbarModule,
+    selector: 'app-department-list-page',
+    standalone: true,
+    imports: [
+        BasicModule,
+        ToolbarModule,
+        DepartmentChartComponent,
+        DepartmentGridComponent,
+        SelectButton
     ],
     providers: [DialogService],
-  templateUrl: './department-list-page.component.html',
-  styleUrl: './department-list-page.component.scss'
+    templateUrl: './department-list-page.component.html',
+    styleUrl: './department-list-page.component.scss'
 })
 export class DepartmentListPageComponent {
     isLoading = false;
 
-    columns: TableColumnBase[] = [
-        new TableTextColumn({
-            title: 'Name',
-            rootFieldName: 'name',
-            sortable: false,
-        }),
-        new TableTextColumn({
-            title: 'Last Name',
-            rootFieldName: 'country',
-            sortable: false,
-        }),
-        new TableTextColumn({
-            title: 'Agent',
-            rootFieldName: 'agent',
-            sortable: false,
-        }),
-        new TableTextColumn({
-            title: 'Status',
-            rootFieldName: 'status',
-            templateRefId: 'statusColumnTemplate',
-            sortable: false,
-        }),
-        new TableBooleanColumn({
-            title: 'Verified',
-            rootFieldName: 'verified',
-            sortable: false,
-            displayStyle: BooleanColumnDisplayEnum.OnlyCheckColorFull
-        })
+    stateOptions: any[] = [
+        { label: 'Chart', value: 'chart', icon: 'pi pi-sitemap' },
+        { label: 'Grid', value: 'grid', icon: 'pi pi-align-justify' }
     ];
+    selectedShowType: string = 'chart';
 
     ref: DynamicDialogRef | undefined;
 
