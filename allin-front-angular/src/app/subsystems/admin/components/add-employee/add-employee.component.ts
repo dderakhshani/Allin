@@ -28,6 +28,7 @@ export class AddEmployeeComponent {
 
   @Input()
   showValidationWarning = true;
+  person?: number;
 
   @Output()
   commandChange = new EventEmitter<CreateEmployeeCommand | null>();

@@ -20,7 +20,7 @@
                             <p-selectButton [options]="legalOptions" [formControl]="form.controls.isLegal"
                                 optionLabel="label" optionValue="isLegal" />
                         </div>
-                        <div class="w-1/2">
+                        <div class="w-1/2" [hidden]=" form.controls.isLegal.value === true">
                             <p-selectButton [options]="genderOptions" [formControl]="form.controls.genderEnum"
                                 optionLabel="label" optionValue="genderValue" />
                         </div>
