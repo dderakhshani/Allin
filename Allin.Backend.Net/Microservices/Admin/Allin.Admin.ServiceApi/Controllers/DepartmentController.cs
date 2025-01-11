@@ -35,7 +35,7 @@ namespace Allin.Admin.ServiceApi.Controllers
             return OkResult(await _departmentQueries.GetAllTree(param, cancellationToken));
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateDepartmentCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);

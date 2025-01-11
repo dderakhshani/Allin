@@ -29,6 +29,10 @@
         "description": "Description",
         "department": "Department"
     },
+    "department": {
+        "title": "Department Name",
+        "code": "Department Code"
+    },
     "admin": {
         "create-employee": "Add Employee",
         "create-person": "Add Person",

@@ -1,17 +1,25 @@
 <p-treetable [value]="data" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
     <ng-template pTemplate="header">
         <tr>
+            <th></th>
             <th>Department Name</th>
             <th>Code</th>
+
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
         <tr [ttRow]="rowNode">
             <td>
+                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" />
+                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" />
+                <p-button label="Add Child" icon="pi pi-plus" (onClick)="openAdd()" />
+            </td>
+            <td>
                 <p-treeTableToggler [rowNode]="rowNode" />
                 {{ rowData.title }}
             </td>
             <td>{{ rowData.code }}</td>
+
         </tr>
     </ng-template>
 </p-treetable>
