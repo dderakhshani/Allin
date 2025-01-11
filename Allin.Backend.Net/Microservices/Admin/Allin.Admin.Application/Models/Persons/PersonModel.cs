@@ -9,8 +9,7 @@ namespace Allin.Admin.Application.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Ssn { get; set; }
-        public IList<string> Mobiles { get; set; }
-        public IList<int> Cities { get; set; }
+        public IEnumerable<PhonesComplex> Phones { get; set; }
         public string Email { get; set; }
         public string PhotoUrl { get; set; }
         public string SignatureImageUrl { get; set; }

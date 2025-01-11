@@ -1,4 +1,5 @@
-﻿using Allin.Common.Utilities.CustomBindings;
+﻿using Allin.Common.Utilities;
+using Allin.Common.Utilities.CustomBindings;
 using Allin.Common.Validations;
 using Allin.CommonLibrary.Localizations;
 using FluentValidation;
@@ -78,7 +79,11 @@ namespace Allin.Common.Web
             services.AddSwagger();
             services.AddMediator();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IEnumConverter, EnumConverter>();
+
             services.AddValidationException();
+
+
         }
 
         public static void UseBaseFeatures(this WebApplication app)

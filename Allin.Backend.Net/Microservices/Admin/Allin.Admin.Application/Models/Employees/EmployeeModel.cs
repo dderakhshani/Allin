@@ -8,27 +8,23 @@ namespace Allin.Admin.Application.Models
     public class EmployeeModel : AdminBaseModel, IMapFrom<Employee, EmployeeModel>
     {
         public long PersonId { get; set; }
-        public long? DepartmentPositionId { get; set; }
+        public long DepartmentId { get; set; }
+        public long PositionId { get; set; }
         public string EmployeeCode { get; set; }
         public DateTime? EmploymentDate { get; set; }
         public long ContractTypeBaseId { get; set; }
         public bool Floating { get; set; }
         public DateTime? LeaveDate { get; set; }
         public IEnumerable<TableExtendedFieldValueModel> ExtendedFieldValues { get; set; }
-        public DepartmentPositionModel DepartmentPosition { get; set; }
-
-        // Titles 
-        public string ContractTypeBaseTitle { get; set; }
 
 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Employee, EmployeeModel>()
-                    .ForMember(dest => dest.ContractTypeBaseTitle, opt => opt.MapFrom(src => src.ContractTypeBase.BaseValueTitle))
-                   ;
+                    .ForMember(dest => dest.DepartmentId, opt => opt.MapFrom(src => src.DepartmentPosition.DepartmentId))
+
+                    .ForMember(dest => dest.PositionId, opt => opt.MapFrom(src => src.DepartmentPosition.PositionId));
+
         }
-
     }
-
-
 }

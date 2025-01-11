@@ -120,6 +120,12 @@
   <data name="DuplicatedRecord" xml:space="preserve">
     <value>رکورد تکرای است</value>
   </data>
+  <data name="GenderEnums.Female" xml:space="preserve">
+    <value>زن</value>
+  </data>
+  <data name="GenderEnums.Male" xml:space="preserve">
+    <value>مرد</value>
+  </data>
   <data name="NameIsRequired" xml:space="preserve">
     <value>نام نباید خالی باشد</value>
   </data>

@@ -43,7 +43,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[admin].[UserPermissions]",
+         "Name": "[admin].[UserDeniedPermissions]",
          "ObjectType": 0
       },
       {
@@ -114,7 +114,7 @@
    "UseNoNavigations": false,
    "UseNoObjectFilter": false,
    "UseNodaTime": false,
-   "UseNullableReferences": false,
+   "UseNullableReferences": true,
    "UsePrefixNavigationNaming": false,
    "UseSchemaFolders": false,
    "UseSchemaNamespaces": false,

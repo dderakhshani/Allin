@@ -15,9 +15,9 @@ namespace Allin.Admin.Application.Queries
         {
         }
 
-        public async Task<PagedList<EmployeeModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken)
+        public async Task<PagedList<BreifEmployeeModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken)
         {
-            return await DbContext.Employeies.AsNoTracking().ProjectTo<EmployeeModel>(MapperProvider).ToPagedListAsync(param);
+            return await DbContext.Employeies.Include(x => x.DepartmentPosition).Include(x => x.DepartmentPosition.Department).Include(x => x.DepartmentPosition.Position).AsNoTracking().ProjectTo<BreifEmployeeModel>(MapperProvider).ToPagedListAsync(param);
         }
 
         public async Task<EmployeeModel> GetById(long id, CancellationToken cancellationToken)

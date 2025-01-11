@@ -1,6 +1,8 @@
 using Allin.Admin.Infrastructure.Persistence;
+using Allin.Common.Utilities;
 using Allin.Common.Utilities.Mappings;
 using Allin.Common.Web;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -11,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IAppSettingsAccessor, AppSettingsAccessor>();
 StartupServiceHelper.LoadSettings(new AppSettingsAccessor(builder.Configuration));
 builder.Services.AddBaseServices();
+
 builder.Services.AddGeneralAutoMapper(typeof(MappingProfile));
 
 //builder.Services.AddScoped<IRoleQueries, RoleQueries>();
@@ -27,6 +30,8 @@ builder.Services.AddDbContext<AdminDbContext>(options =>
 //builder.Services.AddAutoMapper(typeof(AddUserCommand).Assembly);
 // language
 
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
 builder.Services.AddQueries();
 
 builder.Services.AddAllinLocalization(Assembly.GetExecutingAssembly(), "Resources");
@@ -34,6 +39,8 @@ builder.Services.AddAllinLocalization(Assembly.GetExecutingAssembly(), "Resource
 builder.Services.AddMediator();
 
 var app = builder.Build();
+
+GlobalContainer.ServiceProvider = app.Services;
 
 //app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 

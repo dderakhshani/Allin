@@ -10,7 +10,7 @@ namespace Allin.Admin.Application.Models
         public string Title { get; set; }
         public string UniqueName { get; set; }
         public string Description { get; set; }
-        // public IList<string> Mobiles { get; set; }
+        // public IList<string> Phones { get; set; }
         public IEnumerable<PermissionModel> Permissions { get; set; }
         // public virtual ICollection<PermissionModel> UserRoles { get; set; } = new List<UserRole>();
     }

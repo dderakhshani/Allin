@@ -29,7 +29,7 @@
     {
         "System",
         "System.Collections.Generic",
-        "Allin.Common.Entities"
+        "Allin.Common.Data"
     };
 
     if (Options.UseDataAnnotations)
@@ -108,12 +108,12 @@ public class <#= EntityType.Name #> : AdminBaseEntity <#= EntityType.GetProperti
 
         usings.AddRange(code.GetRequiredUsings(property.ClrType));
 
-        var needsNullable = (Options.UseNullableReferenceTypes && property.IsNullable && !property.ClrType.IsValueType) || (property.IsNullable && property.Name.EndsWith("Enum"));
+        var needsNullable = (Options.UseNullableReferenceTypes && property.IsNullable && property.ClrType.IsValueType==false) || (property.IsNullable && property.Name.EndsWith("Enum"));
         var needsInitializer = Options.UseNullableReferenceTypes && !property.IsNullable && !property.ClrType.IsValueType;
 
         
 #>
-  public <#=  property.Name.EndsWith("Enum")? property.Name+"s" :(property.Name.EndsWith("StrJson")? "IList<string>":(property.Name.EndsWith("NumJson")? "IList<int>":  code.Reference(property.ClrType))) #><#= needsNullable ? "?" : "" #> <#= property.Name.EndsWith("StrJson")? property.Name.Replace("StrJson","") :(property.Name.EndsWith("NumJson")? property.Name.Replace("NumJson",""): property.Name)  #> { get; set; }<#= needsInitializer ? " = null!;" : "" #>
+  public <#=  property.Name.EndsWith("Enum")? property.Name+"s" :(property.Name.EndsWith("StrJson")? $"IList<{property.Name.Replace("StrJson","")}Complex>":(property.Name.EndsWith("NumJson")? "IList<int>":  code.Reference(property.ClrType))) #><#= needsNullable ? "?" : "" #> <#= property.Name.EndsWith("StrJson")? property.Name.Replace("StrJson","") :(property.Name.EndsWith("NumJson")? property.Name.Replace("NumJson",""): property.Name)  #> { get; set; }<#= needsInitializer ? " = null!;" : "" #>
 <#
         firstProperty = false;
     }

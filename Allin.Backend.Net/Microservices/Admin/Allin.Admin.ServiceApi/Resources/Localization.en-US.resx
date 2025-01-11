@@ -120,6 +120,15 @@
   <data name="DuplicatedRecord" xml:space="preserve">
     <value>Duplicated Record Found</value>
   </data>
+  <data name="GenderEnums.Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="GenderEnums.Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="MaritalEnums.Single" xml:space="preserve">
+    <value>Single</value>
+  </data>
   <data name="NameIsRequired" xml:space="preserve">
     <value>Name can not be empty</value>
   </data>
@@ -131,5 +140,8 @@
   </data>
   <data name="TitleIsRequired" xml:space="preserve">
     <value>Title can not be empty</value>
+  </data>
+  <data name="UsernameIsDuplicated" xml:space="preserve">
+    <value>Username must be unique</value>
   </data>
 </root>

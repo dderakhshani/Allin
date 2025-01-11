@@ -7,7 +7,7 @@ namespace Allin.Admin.Infrastructure.Persistence
     {
         public override void Configure(EntityTypeBuilder<UserRole> builder)
         {
-            builder.ToTable("UserRoles", "Organization");
+            builder.ToTable("UserRoles", "Admin");
 
             base.Configure(builder);
         }

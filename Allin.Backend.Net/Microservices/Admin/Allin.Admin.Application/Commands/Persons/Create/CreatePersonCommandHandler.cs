@@ -8,6 +8,7 @@ namespace Allin.Admin.Application.Commands
     {
         public CreatePersonCommandHandler(AdminDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
+
         }
 
         public override async Task<bool> Handle(CreatePersonCommand request, CancellationToken cancellationToken)

@@ -30,7 +30,7 @@ namespace Allin.Admin.ServiceApi.Controllers
             return OkResult(await _personQueries.GetAll(param, cancellationToken));
         }
 
-        [HttpPost("create")]
+        [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatePersonCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);

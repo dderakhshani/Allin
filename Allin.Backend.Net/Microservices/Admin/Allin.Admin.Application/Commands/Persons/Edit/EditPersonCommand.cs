@@ -10,7 +10,7 @@ namespace Allin.Admin.Application.Commands
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Ssn { get; set; }
-        public IList<string> Mobiles { get; set; }
+        public IList<string> Phones { get; set; }
         public bool? IsLegal { get; set; }
         public string Email { get; set; }
         public string PhotoUrl { get; set; }

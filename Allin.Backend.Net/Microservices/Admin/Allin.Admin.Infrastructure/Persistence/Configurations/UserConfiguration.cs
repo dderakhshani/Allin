@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Allin.Admin.Infrastructure.Persistence
 {
@@ -6,7 +7,8 @@ namespace Allin.Admin.Infrastructure.Persistence
     {
         public override void Configure(EntityTypeBuilder<User> builder)
         {
-            //builder.ow
+            builder.ToTable("Users", "Admin");
+
             base.Configure(builder);
         }
     }

@@ -118,18 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DuplicatedRecord" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="GenderEnums.Female" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="GenderEnums.Male" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="MaritalEnums.Single" xml:space="preserve">
     <value />
   </data>
   <data name="NameIsRequired" xml:space="preserve">
     <value>-</value>
   </data>
   <data name="RecordNotFound" xml:space="preserve">
-    <value />
+    <value>-</value>
   </data>
   <data name="RoleNameUnique" xml:space="preserve">
     <value>-</value>
   </data>
   <data name="TitleIsRequired" xml:space="preserve">
     <value>-</value>
+  </data>
+  <data name="UsernameIsDuplicated" xml:space="preserve">
+    <value />
   </data>
 </root>

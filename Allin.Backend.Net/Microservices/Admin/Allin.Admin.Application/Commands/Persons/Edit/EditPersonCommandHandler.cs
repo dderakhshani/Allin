@@ -16,7 +16,9 @@ namespace Allin.Admin.Application.Commands
 
         public override async Task<bool> Handle(EditPersonCommand request, CancellationToken cancellationToken)
         {
-            var entity = Mapper.Map<Person>(request);
+            var entity = await DbContext.Persons.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
+
+            Mapper.Map(request, entity);
 
             var extendedFieldValues = Mapper.Map<IEnumerable<TableExtendedFieldValue>>(request.ExtendedFieldValues);
 

@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace Allin.Common.Utilities.Mappings
 {
     public class MappingProfile : Profile
     {
+
         public MappingProfile()
         {
             var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -15,6 +13,7 @@ namespace Allin.Common.Utilities.Mappings
             .SelectMany(a => a.GetExportedTypes());
             ApplyMappingsFromAssembly(types);
         }
+
 
         private void ApplyMappingsFromAssembly(IEnumerable<Type> types)
         {

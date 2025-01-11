@@ -8,6 +8,6 @@ namespace Allin.Admin.Application.Models
     {
         public string Title { get; set; }
         public string UniqueName { get; set; }
-        public virtual ICollection<DepartmentModel> Departments { get; set; }
+        //public virtual ICollection<DepartmentModel> Departments { get; set; }
     }
 }
