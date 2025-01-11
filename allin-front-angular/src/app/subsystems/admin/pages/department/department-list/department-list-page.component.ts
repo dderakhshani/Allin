@@ -13,6 +13,7 @@ import { DepartmentGridComponent } from './grid/department-grid.component';
 import { DepartmentService } from '../../../apis/department.service';
 import { DepartmentModel } from '../../../models/queries/department-model';
 import { TreeNode } from 'primeng/api';
+import { CreateDepartmentCommand } from '../../../models/commands/create-department-command';
 
 @Component({
     selector: 'app-department-list-page',
@@ -29,6 +30,9 @@ import { TreeNode } from 'primeng/api';
     styleUrl: './department-list-page.component.scss'
 })
 export class DepartmentListPageComponent {
+
+    command?: CreateDepartmentCommand;
+
     isLoading = false;
 
     stateOptions: any[] = [
@@ -55,22 +59,40 @@ export class DepartmentListPageComponent {
     }
 
     ngOnInit() {
+        this.fetchData();
+    }
 
+    fetchData() {
         this.departmentService.getAllTree()
             .subscribe(response => {
                 this.departments = response;
             });
     }
 
-    openAdd() {
+    openAdd(parentItem: DepartmentModel) {
         const config: PageDialogConfig = {
+            extraData: parentItem,
             component: CreateDepartmentPageComponent,
-            header: 'Add New department',
-            description: 'this is a desciption of the add department page',
+            header: 'Add New Department',
+            description: 'this is a desciption of the add person page',
+            isFullScreen: false,
         };
         this.ref = openDialog(config, this.dialogService);
         this.ref.onClose.subscribe((result: any) => {
             if (result) {
+
+                if (this.command) {
+                    this.departmentService.create(this.command).subscribe(
+                        (response) => {
+                            console.log('اطلاعات با موفقیت ذخیره شد:', response);
+                        },
+                        (error) => {
+                            console.error('خطا در ذخیره اطلاعات:', error);
+                        }
+                    );
+                }
+
+                this.fetchData();
                 // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
             }
         });

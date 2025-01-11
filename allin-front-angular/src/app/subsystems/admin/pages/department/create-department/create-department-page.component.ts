@@ -3,6 +3,7 @@ import { BasicModule } from '../../../../../core/basic.module';
 import { FormBuilder } from '@angular/forms';
 import { CreateDepartmentCommand } from '../../../models/commands/create-department-command';
 import { MessageService } from 'primeng/api';
+import { DepartmentModel } from '../../../models/queries/department-model';
 
 @Component({
   selector: 'app-create-department-page',
@@ -18,7 +19,7 @@ import { MessageService } from 'primeng/api';
 export class CreateDepartmentPageComponent {
 
   @Input()
-  parentId?: number;
+  extraData?: DepartmentModel;
   showValidationWarning = true;
 
   @Output()
@@ -44,7 +45,7 @@ export class CreateDepartmentPageComponent {
       if (this.form.valid) {
         let command: CreateDepartmentCommand = {
           ...<CreateDepartmentCommand>this.form.getRawValue(),
-          parentId: this.parentId,
+          parentId: this.extraData?.id,
           branchId: 1,
           positionIds: [0],
         };

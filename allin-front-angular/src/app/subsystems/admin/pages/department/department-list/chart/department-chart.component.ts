@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { OrganizationChartModule } from 'primeng/organizationchart';
 import { DepartmentModel } from '../../../../models/queries/department-model';
@@ -19,21 +19,13 @@ export class DepartmentChartComponent {
 
   @Input()
   data?: TreeNode<DepartmentModel>[];
+  @Output()
+  onAddChildClick = new EventEmitter<DepartmentModel>();
 
   ref: DynamicDialogRef | undefined;
 
   constructor(public dialogService: DialogService,) { }
   openAdd(item: DepartmentModel) {
-    const config: PageDialogConfig = {
-      component: CreateDepartmentPageComponent,
-      header: 'Add New Department',
-      description: 'this is a desciption of the add person page',
-    };
-    this.ref = openDialog(config, this.dialogService);
-    this.ref.onClose.subscribe((result: any) => {
-      if (result) {
-        // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
-      }
-    });
+    this.onAddChildClick.emit(item);
   }
 }

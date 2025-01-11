@@ -15,10 +15,10 @@
 
 
         @if(selectedShowType=="chart"){
-        <app-department-chart [data]="departments"></app-department-chart>
+        <app-department-chart [data]="departments" (onAddChildClick)="openAdd($event)"></app-department-chart>
         }
         @else if(selectedShowType=="grid"){
-        <app-department-grid [data]="departments"></app-department-grid>
+        <app-department-grid [data]="departments" (onAddChildClick)="openAdd($event)"></app-department-grid>
         }
 
 
