@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Allin.Common.Web;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
+using NanoidDotNet;
 
 
 namespace Allin.Common.Validations
@@ -34,7 +35,7 @@ namespace Allin.Common.Validations
             catch (ValidationException exception)
             {
 
-                var validationDetails = GeneralApiResult.ValidationError(exception.Errors);
+                var validationDetails = GeneralApiResult.ValidationError(Nanoid.Generate(size: 8), exception.Errors);
                 context.Response.StatusCode = (int)validationDetails.HttpStatusCode;
                 await context.Response.WriteAsJsonAsync(validationDetails);
 
@@ -42,7 +43,7 @@ namespace Allin.Common.Validations
             catch (BuesinessRuleException exception)
             {
 
-                var validationDetails = GeneralApiResult.ValidationError(exception.Errors);
+                var validationDetails = GeneralApiResult.ValidationError(Nanoid.Generate(size: 8), exception.Errors);
                 context.Response.StatusCode = (int)validationDetails.HttpStatusCode;
                 await context.Response.WriteAsJsonAsync(validationDetails);
 

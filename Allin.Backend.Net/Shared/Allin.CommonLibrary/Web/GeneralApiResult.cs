@@ -45,33 +45,36 @@ namespace Allin.Common.Web
             };
         }
 
-        public static GeneralApiResult ValidationError(IEnumerable<string> errors)
+        public static GeneralApiResult ValidationError(string traceId, IEnumerable<string> errors)
         {
             return new GeneralApiResult()
             {
                 IsSuccess = false,
                 ValidationErrors = errors.Select(msg => new ValidationFailure("", msg)),
-                HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity
+                HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
+                TraceId = traceId
             };
         }
 
-        public static GeneralApiResult ValidationError(string errorReason)
+        public static GeneralApiResult ValidationError(string traceId, string errorReason)
         {
             return new GeneralApiResult()
             {
                 IsSuccess = false,
                 ValidationErrors = new List<ValidationFailure> { new ValidationFailure("", errorReason) },
-                HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity
+                HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
+                TraceId = traceId
             };
         }
 
-        public static GeneralApiResult ValidationError(IEnumerable<ValidationFailure>? errors = null)
+        public static GeneralApiResult ValidationError(string traceId, IEnumerable<ValidationFailure>? errors = null)
         {
             return new GeneralApiResult()
             {
                 IsSuccess = false,
                 ValidationErrors = errors,
-                HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity
+                HttpStatusCode = System.Net.HttpStatusCode.UnprocessableEntity,
+                TraceId = traceId
             };
         }
 
