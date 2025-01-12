@@ -57,7 +57,7 @@ export class CreateDepartmentPageComponent implements IFormDialogContainer {
         ...<CreateDepartmentCommand>this.form.getRawValue(),
         parentId: this.parentDepartment?.id,
         branchId: this.parentDepartment?.branchId,
-        positionIds: [0],
+        positionIds: [],
       }
       return new Observable((subscriber) => {
         this.departmentService.create(command).subscribe(data => {
