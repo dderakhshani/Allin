@@ -31,7 +31,7 @@ export class DepartmentGridComponent {
   ngOnInit() {
   }
 
-  openAdd(item: DepartmentModel) {
+  addChildClick(item: DepartmentModel) {
     this.onAddChildClick.emit(item);
   }
 

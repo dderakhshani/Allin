@@ -12,7 +12,7 @@
             <td>
                 <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" />
                 <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" />
-                <p-button label="Add Child" icon="pi pi-plus" (onClick)="openAdd(rowNode)" />
+                <p-button label="Add Child" icon="pi pi-plus" (onClick)="addChildClick(rowData)" />
             </td>
             <td>
                 <p-treeTableToggler [rowNode]="rowNode" />

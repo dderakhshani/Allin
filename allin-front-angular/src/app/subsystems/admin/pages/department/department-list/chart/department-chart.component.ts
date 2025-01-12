@@ -25,7 +25,8 @@ export class DepartmentChartComponent {
   ref: DynamicDialogRef | undefined;
 
   constructor(public dialogService: DialogService,) { }
-  openAdd(item: DepartmentModel) {
-    this.onAddChildClick.emit(item);
+
+  addChildClick(node: TreeNode<DepartmentModel>) {
+    this.onAddChildClick.emit(node.data);
   }
 }

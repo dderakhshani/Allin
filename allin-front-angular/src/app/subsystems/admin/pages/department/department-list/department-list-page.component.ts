@@ -80,8 +80,6 @@ export class DepartmentListPageComponent {
         this.ref = openDialog(config, this.dialogService);
         this.ref.onClose.subscribe((result: any) => {
             if (result) {
-
-
                 this.fetchData();
                 // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
             }
