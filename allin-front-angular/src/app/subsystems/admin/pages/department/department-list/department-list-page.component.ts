@@ -31,7 +31,7 @@ import { CreateDepartmentCommand } from '../../../models/commands/create-departm
 })
 export class DepartmentListPageComponent {
 
-    command?: CreateDepartmentCommand;
+
 
     isLoading = false;
 
@@ -81,16 +81,6 @@ export class DepartmentListPageComponent {
         this.ref.onClose.subscribe((result: any) => {
             if (result) {
 
-                if (this.command) {
-                    this.departmentService.create(this.command).subscribe(
-                        (response) => {
-                            console.log('اطلاعات با موفقیت ذخیره شد:', response);
-                        },
-                        (error) => {
-                            console.error('خطا در ذخیره اطلاعات:', error);
-                        }
-                    );
-                }
 
                 this.fetchData();
                 // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });

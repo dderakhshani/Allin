@@ -7,6 +7,40 @@ import { ButtonModule } from 'primeng/button';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { StepperModule } from 'primeng/stepper';
 import { TimelineModule } from 'primeng/timeline';
+import { Observable } from 'rxjs';
+
+
+export interface PageDialogConfig {
+    header: string;
+    description?: string,
+    mainActionButtonConfigs?: DialogActionButtonConfig;
+    secondaryActionButtonConfigs?: DialogActionButtonConfig;
+    component?: Type<any> | TemplateRef<any>;
+    extraData?: any;
+    customActionsTemplate?: TemplateRef<any>;
+    onConfirm?: () => void;
+    canDismiss?: (componentInstance?: IFormDialogContainer) => boolean;
+    onDismiss?: () => void;
+    mainButtonDisabled?: () => boolean;
+    showModalHeader?: boolean | undefined;
+    showModalFooter?: boolean | undefined;
+    showDismissButton?: boolean | undefined;
+    steps?: DialogSteps[];
+    isFullScreen?: boolean;
+    /**
+     * Use this config if you want to add a custom css class to the dialog content e.g. overwrite the default responsive classes of the content.
+     * 
+     * The default is "w-full md:w-4/5 lg:w-3/4 max-w-5xl min-w-80", it is a document :D, to be sure check the html template.
+    */
+    customCssClasses?: string;
+}
+export interface DialogSteps {
+    caption: string;
+    description: string;
+    index: number;
+}
+export interface DialogActionButtonConfig { title?: string, color?: 'success' | 'info' | 'warn' | 'danger' | 'help' | 'primary' | 'secondary', visible?: boolean }
+
 @Component({
     selector: 'app-page-dialog',
     providers: [DialogService, ConfirmationService],
@@ -24,7 +58,7 @@ export class PageDialogComponent {
 
     @ViewChild('container', { read: ViewContainerRef })
     protected container!: ViewContainerRef;
-    protected componentInstance?: IFormContainer;
+    protected componentInstance?: IFormDialogContainer;
     protected templateContent: any;
     protected config: PageDialogConfig;
     protected selectedStepIndex = 0;
@@ -69,9 +103,6 @@ export class PageDialogComponent {
     ngAfterViewInit(): void {
         if (this.config.component instanceof Type) {
             this.loadComponent();
-            if (this.config.afterComponentCreated) {
-                this.config.afterComponentCreated(this.componentInstance!)
-            }
         }
         else
             this.templateContent = this.config.component as TemplateRef<any>;
@@ -87,10 +118,14 @@ export class PageDialogComponent {
         this.selectedStepIndex += 1;
     }
 
-    onConfirm(): void {
-        this.config.onConfirm?.();
-        // Close the dialog, return true
-        this.dialogRef.close(true);
+    onConfirm() {
+        this.componentInstance?.save().subscribe(result => {
+            if (result) {
+                this.config.onConfirm?.();
+                this.dialogRef.close(true);
+            }
+        });
+
     }
 
     onDismiss(): void {
@@ -132,36 +167,7 @@ export function openDialog(config: PageDialogConfig, dialogService: DialogServic
     });
 }
 
-interface IFormContainer { form?: FormGroup<any> }
-
-export interface PageDialogConfig {
-    header: string;
-    description?: string,
-    mainActionButtonConfigs?: DialogActionButtonConfig;
-    secondaryActionButtonConfigs?: DialogActionButtonConfig;
-    component?: Type<any> | TemplateRef<any>;
-    extraData?: any;
-    customActionsTemplate?: TemplateRef<any>;
-    onConfirm?: () => void;
-    canDismiss?: (componentInstance?: IFormContainer) => boolean;
-    onDismiss?: () => void;
-    afterComponentCreated?: (componentInstance: IFormContainer) => void;
-    mainButtonDisabled?: () => boolean;
-    showModalHeader?: boolean | undefined;
-    showModalFooter?: boolean | undefined;
-    showDismissButton?: boolean | undefined;
-    steps?: DialogSteps[];
-    isFullScreen?: boolean;
-    /**
-     * Use this config if you want to add a custom css class to the dialog content e.g. overwrite the default responsive classes of the content.
-     * 
-     * The default is "w-full md:w-4/5 lg:w-3/4 max-w-5xl min-w-80", it is a document :D, to be sure check the html template.
-    */
-    customCssClasses?: string;
+export interface IFormDialogContainer {
+    form?: FormGroup<any>;
+    save(): Observable<boolean>;
 }
-export interface DialogSteps {
-    caption: string;
-    description: string;
-    index: number;
-}
-export interface DialogActionButtonConfig { title?: string, color?: 'success' | 'info' | 'warn' | 'danger' | 'help' | 'primary' | 'secondary', visible?: boolean }
