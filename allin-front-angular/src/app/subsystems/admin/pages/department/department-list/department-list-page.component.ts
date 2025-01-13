@@ -13,7 +13,7 @@ import { DepartmentGridComponent } from './grid/department-grid.component';
 import { DepartmentService } from '../../../apis/department.service';
 import { DepartmentModel } from '../../../models/queries/department-model';
 import { TreeNode } from 'primeng/api';
-import { CreateDepartmentCommand } from '../../../models/commands/create-department-command';
+import { EditDepartmentPageComponent } from '../edit-department/edit-department-page.component';
 
 @Component({
     selector: 'app-department-list-page',
@@ -30,8 +30,6 @@ import { CreateDepartmentCommand } from '../../../models/commands/create-departm
     styleUrl: './department-list-page.component.scss'
 })
 export class DepartmentListPageComponent {
-
-
 
     isLoading = false;
 
@@ -84,5 +82,29 @@ export class DepartmentListPageComponent {
                 // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
             }
         });
+    }
+
+    openEdit(item: DepartmentModel) {
+        const config: PageDialogConfig = {
+            extraData: item,
+            component: EditDepartmentPageComponent,
+            header: 'Edit Department',
+            description: 'this is a desciption of the Edit Department',
+            isFullScreen: false,
+        };
+        this.ref = openDialog(config, this.dialogService);
+        this.ref.onClose.subscribe((result: any) => {
+            if (result) {
+                this.fetchData();
+                // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
+            }
+        });
+    }
+
+    deleteItem(item: DepartmentModel) {
+        this.departmentService.delete(item.id)
+            .subscribe(response => {
+                this.fetchData();
+            });
     }
 }

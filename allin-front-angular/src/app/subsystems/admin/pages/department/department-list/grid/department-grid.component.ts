@@ -3,9 +3,8 @@ import { TreeNode } from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
 import { DepartmentModel } from '../../../../models/queries/department-model';
 import { BasicModule } from '../../../../../../core/basic.module';
-import { openDialog, PageDialogConfig } from '../../../../../../core/components/page-dialog/page-dialog.component';
-import { CreateDepartmentPageComponent } from '../../create-department/create-department-page.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { DepartmentService } from '../../../../apis/department.service';
 
 @Component({
   selector: 'app-department-grid',
@@ -23,16 +22,30 @@ export class DepartmentGridComponent {
 
   @Output()
   onAddChildClick = new EventEmitter<DepartmentModel>();
+  @Output()
+  onEditClick = new EventEmitter<DepartmentModel>();
+  @Output()
+  onDeleteClick = new EventEmitter<DepartmentModel>();
 
   ref: DynamicDialogRef | undefined;
 
-  constructor(public dialogService: DialogService,) { }
+  constructor(public dialogService: DialogService,
+    private departmentService: DepartmentService,
+  ) { }
 
   ngOnInit() {
   }
 
   addChildClick(item: DepartmentModel) {
     this.onAddChildClick.emit(item);
+  }
+
+  editClick(item: DepartmentModel) {
+    this.onEditClick.emit(item);
+  }
+
+  deleteClick(item: DepartmentModel) {
+    this.onDeleteClick.emit(item);
   }
 
 }

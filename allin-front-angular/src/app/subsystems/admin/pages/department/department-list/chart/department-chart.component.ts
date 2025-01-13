@@ -4,8 +4,7 @@ import { OrganizationChartModule } from 'primeng/organizationchart';
 import { DepartmentModel } from '../../../../models/queries/department-model';
 import { BasicModule } from '../../../../../../core/basic.module';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CreateDepartmentPageComponent } from '../../create-department/create-department-page.component';
-import { openDialog, PageDialogConfig } from '../../../../../../core/components/page-dialog/page-dialog.component';
+import { DepartmentService } from '../../../../apis/department.service';
 @Component({
   selector: 'app-department-chart',
   standalone: true,
@@ -21,12 +20,26 @@ export class DepartmentChartComponent {
   data?: TreeNode<DepartmentModel>[];
   @Output()
   onAddChildClick = new EventEmitter<DepartmentModel>();
+  @Output()
+  onEditClick = new EventEmitter<DepartmentModel>();
+  @Output()
+  onDeleteClick = new EventEmitter<DepartmentModel>();
 
   ref: DynamicDialogRef | undefined;
 
-  constructor(public dialogService: DialogService,) { }
+  constructor(public dialogService: DialogService,
+    private departmentService: DepartmentService,
+  ) { }
 
   addChildClick(node: TreeNode<DepartmentModel>) {
     this.onAddChildClick.emit(node.data);
+  }
+
+  deleteClick(node: TreeNode<DepartmentModel>) {
+
+    if (node.data) {
+      let item: DepartmentModel = { ...node.data };
+      this.onDeleteClick.emit(item);
+    }
   }
 }

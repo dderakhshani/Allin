@@ -33,8 +33,6 @@ export class CreateDepartmentPageComponent implements IFormDialogContainer {
   form = this.fb.group({
     code: this.fb.control<string | null>(null, Validators.required),
     title: this.fb.control<string | null>(null, Validators.required),
-
-
   })
 
   constructor(private messageService: MessageService,

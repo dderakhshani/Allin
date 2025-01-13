@@ -2,8 +2,7 @@
 
     <ng-container toolbar>
         <div class="p-toolbar-group-end ">
-            <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label"
-                optionValue="value" aria-labelledby="basic">
+            <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label" optionValue="value" aria-labelledby="basic">
                 <ng-template #item let-item>
                     <i [class]="item.icon"> {{item.label}}</i>
                 </ng-template>
@@ -15,10 +14,10 @@
 
 
         @if(selectedShowType=="chart"){
-        <app-department-chart [data]="departments" (onAddChildClick)="openAdd($event)"></app-department-chart>
+        <app-department-chart [data]="departments" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)" (onDeleteClick)="deleteItem($event)"></app-department-chart>
         }
         @else if(selectedShowType=="grid"){
-        <app-department-grid [data]="departments" (onAddChildClick)="openAdd($event)"></app-department-grid>
+        <app-department-grid [data]="departments" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)" (onDeleteClick)="deleteItem($event)"></app-department-grid>
         }
 
 

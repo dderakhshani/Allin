@@ -9,7 +9,8 @@
                         <div>
                             <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" />
                             <p-button label="Add Child" icon="pi pi-plus" (onClick)="addChildClick(node)" />
-                            <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" />
+                            <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"
+                                (onClick)="deleteClick(node)" />
                         </div>
                     </div>
                 </div>
