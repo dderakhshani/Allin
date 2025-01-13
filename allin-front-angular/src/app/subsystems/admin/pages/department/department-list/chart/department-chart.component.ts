@@ -35,6 +35,10 @@ export class DepartmentChartComponent {
     this.onAddChildClick.emit(node.data);
   }
 
+  editClick(node: TreeNode<DepartmentModel>) {
+    this.onEditClick.emit(node.data);
+  }
+
   deleteClick(node: TreeNode<DepartmentModel>) {
 
     if (node.data) {
