@@ -1,20 +1,21 @@
 <div #page class="page-content flex flex-col h-full">
+
     @if(isLoading){
     <p-progressbar mode="indeterminate" [style]="{ height: '6px' }" />
     }
 
-
-
-    <header class="shadow">
+    <header class="shadow z-50">
         <p-toolbar class="toolbar">
             <ng-content select="[toolbar]"></ng-content>
         </p-toolbar>
     </header>
 
-    <div class="h-full p-5">
+    <div class="h-full p-5 overflow-auto relative">
         <ng-content></ng-content>
+
+        @if(isLoading && blockUI){
+        <div class="block-ui"></div>
+        }
     </div>
+
 </div>
-@if(blockUI){
-<p-blockui [target]="page" [blocked]="isLoading" />
-}

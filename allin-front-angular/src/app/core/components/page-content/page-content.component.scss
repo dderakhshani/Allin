@@ -1,5 +1,16 @@
 .page-content {
     background: var(--p-content-hover-background);
+
+    .block-ui {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #0000003b;
+        backdrop-filter: blur(2px);
+        z-index: 6000;
+    }
 }
 
 ::ng-deep .p-toolbar {}
