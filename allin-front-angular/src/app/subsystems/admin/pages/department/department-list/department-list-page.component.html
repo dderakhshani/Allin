@@ -1,8 +1,9 @@
-<app-page-content [isLoading]="isLoading">
+<app-page-content [isLoading]="isLoading" [blockUI]="true">
 
     <ng-container toolbar>
         <div class="p-toolbar-group-end ">
-            <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label" optionValue="value" aria-labelledby="basic">
+            <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label"
+                optionValue="value" aria-labelledby="basic">
                 <ng-template #item let-item>
                     <i [class]="item.icon"> {{item.label}}</i>
                 </ng-template>
@@ -10,18 +11,17 @@
         </div>
 
     </ng-container>
-    <div class="h-full w-full flex-nowrap flex-grow ">
 
 
-        @if(selectedShowType=="chart"){
-        <app-department-chart [data]="departments" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)" (onDeleteClick)="deleteItem($event)"></app-department-chart>
-        }
-        @else if(selectedShowType=="grid"){
-        <app-department-grid [data]="departments" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)" (onDeleteClick)="deleteItem($event)"></app-department-grid>
-        }
+    @if(selectedShowType=="chart"){
+    <app-department-chart [data]="departments" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)"
+        (onDeleteClick)="deleteItem($event)"></app-department-chart>
+    }
+    @else if(selectedShowType=="grid"){
+    <app-department-grid [data]="departments" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)"
+        (onDeleteClick)="deleteItem($event)"></app-department-grid>
+    }
 
-
-    </div>
 
 
 </app-page-content>
