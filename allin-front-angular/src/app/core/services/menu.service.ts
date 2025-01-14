@@ -63,13 +63,20 @@ export class MenuService {
                         routerLink: '/admin/user/list'
                     },
                     {
-                        label: 'departments',
+                        label: 'Departments',
                         icon: 'graph_2',
                         badge: '2',
                         routerLink: '/admin/department/list'
                     },
 
-                    
+                    {
+                        label: 'Positions',
+                        icon: 'diversity_3',
+                        badge: '2',
+                        routerLink: '/admin/position/list'
+                    },
+
+
                 ],
             },
         ]

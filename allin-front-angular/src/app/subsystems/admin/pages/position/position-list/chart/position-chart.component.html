@@ -1,0 +1,21 @@
+<div class=" w-full h-full overflow-auto ">
+    <div class="w-max-0">
+        <p-organization-chart [value]="data" [collapsible]="true">
+            <ng-template let-node pTemplate="default">
+                <div class="flex flex-col">
+                    <div class="flex flex-col items-center">
+                        <span class="font-bold mb-2">{{ node.data.title }}</span>
+                        <span>{{ node.data.code }}</span>
+                        <div>
+                            <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (onClick)="editClick(node)" />
+                            <p-button label="Add Child" icon="pi pi-plus" (onClick)="addChildClick(node)" />
+                            <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(node)" />
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-organization-chart>
+
+    </div>
+
+</div>
