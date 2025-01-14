@@ -1,11 +1,4 @@
-<!-- @if(config.showModalHeader){
-<div mat-dialog-title [ngClass]="config.headerCssClasses" class="text-primary-contrast-500">
-    <span>
-        {{config.title}}
-    </span>
-</div>
-} -->
-<div mat-dialog-content class="mt-3">
+<div>
     @if(config.contentAreaTemplate) {
     <ng-container *ngTemplateOutlet="config.contentAreaTemplate;context:{ $implicit: config.extraData }">
     </ng-container>
@@ -15,17 +8,20 @@
     }
 </div>
 
-<mat-dialog-actions class="flex" *ngIf="config.showModalFooter">
+<footer class="flex">
+
     @if(config.actionAreaTemplate){
     <ng-container *ngTemplateOutlet="config.actionAreaTemplate;context:{ $implicit: config.extraData }">
     </ng-container>
     }
     @else{
-    <button mat-button type="button" mat-dialog-close (click)="onDismiss()"
-        class="ml-auto">{{config.secondaryActionButtonConfigs!.title}}</button>
-    <button mat-raised-button type="button" [color]="config.mainActionButtonConfigs?.color" [mat-dialog-close]="true"
-        (click)="onConfirm()" [disabled]="config.mainButtonDisabled?.()"
-        cdkFocusInitial>{{config.mainActionButtonConfigs!.title}}</button>
+    <p-button type="button" (click)="onDismiss()" [label]="config.secondaryActionButtonConfigs!.title"
+        [severity]="config.secondaryActionButtonConfigs?.color" class="ml-auto mr-2" />
+
+    <p-button type="button" [severity]="config.mainActionButtonConfigs?.color" [raised]="true"
+        [label]="config.mainActionButtonConfigs!.title" (click)="onConfirm()"
+        [disabled]="config.mainButtonDisabled?.()" />
+
     }
 
-</mat-dialog-actions>
+</footer>
