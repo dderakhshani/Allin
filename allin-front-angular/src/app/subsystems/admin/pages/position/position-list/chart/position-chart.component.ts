@@ -6,15 +6,15 @@ import { BasicModule } from '../../../../../../core/basic.module';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DepartmentService } from '../../../../apis/department.service';
 @Component({
-  selector: 'app-department-chart',
+  selector: 'app-position-chart',
   standalone: true,
   imports: [BasicModule,
     OrganizationChartModule
   ],
-  templateUrl: './department-chart.component.html',
-  styleUrl: './department-chart.component.scss'
+  templateUrl: './position-chart.component.html',
+  styleUrl: './position-chart.component.scss'
 })
-export class DepartmentChartComponent {
+export class PositionChartComponent {
 
   @Input()
   data?: TreeNode<DepartmentModel>[];

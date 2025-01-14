@@ -1,23 +1,25 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TreeNode } from 'primeng/api';
-import { OrganizationChartModule } from 'primeng/organizationchart';
+import { TreeTableModule } from 'primeng/treetable';
 import { DepartmentModel } from '../../../../models/queries/department-model';
 import { BasicModule } from '../../../../../../core/basic.module';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DepartmentService } from '../../../../apis/department.service';
+
 @Component({
-  selector: 'app-department-chart',
+  selector: 'app-position-grid',
   standalone: true,
-  imports: [BasicModule,
-    OrganizationChartModule
-  ],
-  templateUrl: './department-chart.component.html',
-  styleUrl: './department-chart.component.scss'
+  imports: [
+    BasicModule,
+    TreeTableModule],
+  templateUrl: './position-grid.component.html',
+  styleUrl: './position-grid.component.scss'
 })
-export class DepartmentChartComponent {
+export class PositionGridComponent {
 
   @Input()
   data?: TreeNode<DepartmentModel>[];
+
   @Output()
   onAddChildClick = new EventEmitter<DepartmentModel>();
   @Output()
@@ -31,19 +33,19 @@ export class DepartmentChartComponent {
     private departmentService: DepartmentService,
   ) { }
 
-  addChildClick(node: TreeNode<DepartmentModel>) {
-    this.onAddChildClick.emit(node.data);
+  ngOnInit() {
   }
 
-  editClick(node: TreeNode<DepartmentModel>) {
-    this.onEditClick.emit(node.data);
+  addChildClick(item: DepartmentModel) {
+    this.onAddChildClick.emit(item);
   }
 
-  deleteClick(node: TreeNode<DepartmentModel>) {
-
-    if (node.data) {
-      let item: DepartmentModel = { ...node.data };
-      this.onDeleteClick.emit(item);
-    }
+  editClick(item: DepartmentModel) {
+    this.onEditClick.emit(item);
   }
+
+  deleteClick(item: DepartmentModel) {
+    this.onDeleteClick.emit(item);
+  }
+
 }

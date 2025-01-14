@@ -34,6 +34,7 @@ export interface PageDialogConfig {
     */
     customCssClasses?: string;
 }
+
 export interface DialogSteps {
     caption: string;
     description: string;

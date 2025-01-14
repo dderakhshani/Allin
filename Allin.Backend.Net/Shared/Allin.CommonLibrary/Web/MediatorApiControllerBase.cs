@@ -67,40 +67,20 @@ namespace Allin.Common.Web
                 var result = await _mediator.Send(query, cancellationToken);
                 return GeneralApiResult.Ok(Nanoid.Generate(size: 8), result);
             }
-            catch (AllinException ex)
+
+            catch (ValidationException ex)//TODO: Middle must handle this
             {
                 var logger = HttpContext.RequestServices.GetRequiredService<ILogger<AuthorizeApiControllerBase>>();
                 logger.LogError(ex, ex.Message);
 
-                var errMsg = $"{ex.ErrorMessage}.";
-
-                if (!string.IsNullOrWhiteSpace(ex.Tag))
-                {
-                    errMsg += $" ({ex.Tag})";
-                }
-
-                return GeneralApiResult.Fail(Nanoid.Generate(size: 8), errMsg);
+                return GeneralApiResult.ValidationError(Nanoid.Generate(size: 8), ex.Errors);
             }
-            catch (ValidationException ex)
+            catch (BuesinessRuleException ex)//TODO: Middle must handle this
             {
                 var logger = HttpContext.RequestServices.GetRequiredService<ILogger<AuthorizeApiControllerBase>>();
                 logger.LogError(ex, ex.Message);
 
-                return GeneralApiResult.Fail(Nanoid.Generate(size: 8), ex.Message);
-            }
-            catch (BuesinessRuleException ex)
-            {
-                var logger = HttpContext.RequestServices.GetRequiredService<ILogger<AuthorizeApiControllerBase>>();
-                logger.LogError(ex, ex.Message);
-
-                return GeneralApiResult.Fail(Nanoid.Generate(size: 8), ex.Message);
-            }
-            catch (Exception ex)
-            {
-                var logger = HttpContext.RequestServices.GetRequiredService<ILogger<AuthorizeApiControllerBase>>();
-                logger.LogError(ex, ex.Message);
-
-                return GeneralApiResult.Fail(Nanoid.Generate(size: 8), ex.Message);
+                return GeneralApiResult.ValidationError(Nanoid.Generate(size: 8), ex.Errors);
             }
         }
     }

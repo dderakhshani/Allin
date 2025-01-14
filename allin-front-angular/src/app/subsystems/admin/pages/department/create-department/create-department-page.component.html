@@ -1,10 +1,12 @@
 <div class="flex flex-col w-full space-y-5 p-5" [formGroup]="form">
     <div class="flex flex-col space-y-2">
         <label for="Title">{{'department.title' | translate}}</label>
-        <input pInputText id="title" [formControl]="form.controls.title" />
+        <input pInputText id="title" [formControl]="form.controls.title"
+            [ngClass]="{'ng-invalid ':  form.controls.title.invalid}" />
     </div>
     <div class="flex flex-col space-y-2">
         <label for="Code">{{'department.code' | translate}}</label>
-        <input pInputText id="code" [formControl]="form.controls.code" />
+        <input pInputText id="code" [formControl]="form.controls.code"
+            [ngClass]="{'ng-invalid ':  form.controls.code.invalid}" />
     </div>
 </div>

@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
 import { BaseHttpService } from '../../../core/services/base.http.service';
 import { Observable } from 'rxjs';
-import { DepartmentModel } from '../models/queries/department-model';
-import { PagedList } from '../../../core/components/png-table/models/paged-list';
 import { TreeNode } from 'primeng/api';
-import { CreateDepartmentCommand } from '../models/commands/create-department-command';
-import { EditDepartmentCommand } from '../models/commands/edit-department-command';
+import { CreatePositionCommand } from '../models/commands/create-position-command';
+import { EditPositionCommand } from '../models/commands/edit-position-command';
+import { PositionModel } from '../models/queries/position-model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DepartmentService {
+export class PositionService {
 
-  private readonly controllerPath = "department";
+  private readonly controllerPath = "position";
 
   constructor(private baseHttpService: BaseHttpService) { }
 
-  create(model: CreateDepartmentCommand): Observable<any> {
+  create(model: CreatePositionCommand): Observable<any> {
     return this.baseHttpService.postJsonData({
       controller: this.controllerPath, action: 'create'
     }, model);
@@ -31,20 +30,20 @@ export class DepartmentService {
       });
   }
 
-  edit(model: EditDepartmentCommand): Observable<void> {
+  edit(model: EditPositionCommand): Observable<void> {
     return this.baseHttpService.putJsonData({
       controller: this.controllerPath,
       action: 'edit'
     }, model);
   }
 
-
-  getAllTree(): Observable<TreeNode<DepartmentModel>[]> {
+  getAllTree(): Observable<TreeNode<PositionModel>[]> {
     return this.baseHttpService.getData({
       controller: this.controllerPath,
       action: 'get-department-tree',
       routeParameters: []
     });
   }
+
 
 }
