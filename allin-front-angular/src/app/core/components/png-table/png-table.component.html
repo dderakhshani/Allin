@@ -3,6 +3,7 @@
     [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [scrollable]="true" scrollHeight="100%" [globalFilterFields]="getGlobalFilterable" sortMode="multiple"
     [multiSortMeta]="" [lazy]="true" [tableStyle]="{ 'min-width': '75rem' }" (onLazyLoad)="getDataFromServer($event)"
+    [expandedRowKeys]="expandedRows" (onRowExpand)="rowExpand($event)" (onRowCollapse)="rowCollapse($event)"
     (onPage)="pageChanged($event)" (onFilter)="filterChanged($event)">
     <ng-template pTemplate="caption">
         <div class="flex items-center">
@@ -42,7 +43,10 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            @if(selectableRow){
+            @if(isRowExapandable){
+            <th style="width: 5rem"> </th>
+            }
+            @if(isRowselectable){
             <th style="width: 4rem">
                 <p-tableHeaderCheckbox />
             </th>
@@ -91,7 +95,15 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-rowIndex>
         <tr [pSelectableRow]="rowData">
-            @if(selectableRow){
+            @if(isRowselectable){
+            <td>
+                <p-button type="button" pRipple [pRowToggler]="rowData" [text]="true" [rounded]="true" [plain]="true"
+                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+            </td>
+            }
+
+
+            @if(isRowselectable){
             <td>
                 <p-tableCheckbox [value]="rowData" />
             </td>
@@ -134,6 +146,14 @@
     <ng-template pTemplate="emptymessage">
         <tr>
             <td colspan="5">{{emptymMessage}}</td>
+        </tr>
+    </ng-template>
+    <ng-template #expandedrow let-rowData let-rowIndex>
+        <tr>
+            <td colspan="7">
+                <ng-container *ngTemplateOutlet="contentTemplate; context: { rowData: rowData, rowIndex: rowIndex }">
+                </ng-container>
+            </td>
         </tr>
     </ng-template>
 </p-table>

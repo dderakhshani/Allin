@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, ContentChildren, effect, Input, input, QueryList, signal, Signal, TemplateRef } from '@angular/core';
+import { Component, ContentChild, ContentChildren, effect, EventEmitter, Input, input, Output, QueryList, signal, Signal, TemplateRef } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { TagModule } from 'primeng/tag';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { Table, TableFilterEvent, TableLazyLoadEvent, TableModule, TablePageEvent } from 'primeng/table';
+import { Table, TableFilterEvent, TableLazyLoadEvent, TableModule, TablePageEvent, TableRowCollapseEvent, TableRowExpandEvent } from 'primeng/table';
 import { BooleanColumnDisplayEnum, FieldTypesEnum, FilterControlEnum, TableBooleanColumn, TableColumnBase, TableDropDownColumn } from './models/table-column-model';
 import { AsPipe } from '../../pipes/as.pipe';
 import { FormsModule } from '@angular/forms';
@@ -54,6 +54,12 @@ export class PngTableComponent {
     tableDropDownColumn = TableDropDownColumn;
     filterControlEnum = FilterControlEnum;
 
+    @ContentChild('expandedRow', { static: true }) contentTemplate?: TemplateRef<any>;
+
+    public columnsTemplateMap: Map<string, TemplateRef<any>> = new Map();
+    @ContentChildren(TemplateRef, { descendants: true })
+    private columnsTemplatesQueryList!: QueryList<TemplateRef<any>>;
+
     @Input()
     public configOptions: TableConfigOptions = new TableConfigOptions();
 
@@ -73,7 +79,16 @@ export class PngTableComponent {
     fetchDataTrigger = signal<boolean>(true);
 
     @Input()
-    public selectableRow?: boolean = true;
+    public isRowselectable?: boolean = true;
+
+    @Input()
+    public isRowExapandable?: boolean = false;
+
+    @Output()
+    onRowExpand = new EventEmitter<any>();
+
+    @Output()
+    onRowCollapse = new EventEmitter<any>();
 
     manipulateDataCallback?: (value: PagedList<any[]>) => PagedList<any[]>;
 
@@ -89,10 +104,9 @@ export class PngTableComponent {
 
     }
 
-    public columnsTemplateMap: Map<string, TemplateRef<any>> = new Map();
-    @ContentChildren(TemplateRef, { descendants: true })
-    private columnsTemplatesQueryList!: QueryList<TemplateRef<any>>;
 
+
+    expandedRows = {};
 
     constructor(private httpService: BaseHttpService) {
         effect(() => {
@@ -192,13 +206,20 @@ export class PngTableComponent {
     }
 
 
-
     clear(table: Table) {
         table.clear();
     }
 
     getColumnTemplate(templateRefId: string): TemplateRef<any> {
         return this.columnsTemplateMap.get(templateRefId)!;
+    }
+
+    rowExpand(event: TableRowExpandEvent) {
+        this.onRowExpand.emit(event.data);
+    }
+
+    rowCollapse(event: TableRowCollapseEvent) {
+        this.onRowCollapse.emit(event.data);
     }
 
 
