@@ -93,7 +93,7 @@
             }
         </tr> -->
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-rowIndex>
+    <ng-template pTemplate="body" let-rowData let-rowIndex let-expanded="expanded">
         <tr [pSelectableRow]="rowData">
             @if(isRowExapandable){
             <td>
