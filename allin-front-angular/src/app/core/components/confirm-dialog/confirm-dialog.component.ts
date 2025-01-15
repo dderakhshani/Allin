@@ -1,8 +1,10 @@
 
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Inject, Input, TemplateRef, Type, ViewChild, ViewContainerRef, AfterViewInit } from '@angular/core';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ButtonModule } from 'primeng/button';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
-export interface ConfirmDialogModel {
+export interface ConfirmDialogConfig {
     title: string;
     message: string;
     headerCssClasses: string;
@@ -11,45 +13,44 @@ export interface ConfirmDialogModel {
     secondaryActionButtonConfigs?: ConfirmDialogActionButtonConfig;
     contentAreaTemplate?: TemplateRef<any>;
     actionAreaTemplate?: TemplateRef<any>;
-    showModalHeader?: boolean | undefined;
-    showModalFooter?: boolean | undefined;
-    showDismissButton?: boolean | undefined;
-
-    extraData?: any;
 
     mainButtonDisabled?: () => boolean;
 }
 
-export interface ConfirmDialogActionButtonConfig { title: string, color: string }
+export interface ConfirmDialogActionButtonConfig { title: string, color: 'success' | 'info' | 'warn' | 'danger' | 'help' | 'primary' | 'secondary' }
 
-export interface ConfirmDialogActionButtonConfig { title: string, color: string }
+export interface ConfirmDialogActionButtonConfig { title: string, color: 'success' | 'info' | 'warn' | 'danger' | 'help' | 'primary' | 'secondary' }
 
 @Component({
     selector: 'app-confirm-dialog',
     templateUrl: './confirm-dialog.component.html',
+    standalone: true,
+    imports: [
+        CommonModule,
+        ButtonModule,
+    ],
     styleUrls: ['./confirm-dialog.component.scss']
 })
 export class ConfirmDialogComponent {
 
-    protected config: ConfirmDialogModel;
+    protected config: ConfirmDialogConfig;
 
     constructor(public dialogRef: DynamicDialogRef,
-        public dialogConfig: DynamicDialogConfig<ConfirmDialogModel>,) {
+        public dialogConfig: DynamicDialogConfig<ConfirmDialogConfig>,) {
 
         this.config = dialogConfig.data!;
 
         this.config.headerCssClasses = this.config.headerCssClasses || 'bg-primary-500';
-        this.config.showModalHeader = this.config.showModalHeader || true;
-        this.config.showModalFooter = this.config.showModalFooter || true;
+
 
         this.config.mainActionButtonConfigs = {
-            title: this.config.mainActionButtonConfigs?.title || "OK",
+            title: this.config.mainActionButtonConfigs?.title || "OK",//TODO: translate
             color: this.config.mainActionButtonConfigs?.color || 'primary'
         };
 
         this.config.secondaryActionButtonConfigs = {
-            title: this.config.secondaryActionButtonConfigs?.title || 'CANCEL',
-            color: this.config.secondaryActionButtonConfigs?.color || 'primary'
+            title: this.config.secondaryActionButtonConfigs?.title || 'Cancel',//TODO: translate
+            color: this.config.secondaryActionButtonConfigs?.color || 'secondary'
         };
 
     }
@@ -63,8 +64,36 @@ export class ConfirmDialogComponent {
     }
 }
 
-/**
- * Class to represent confirm dialog model.
- *
- * It has been kept here to keep it as part of shared component.
- */
+
+export function openConfirmDialog(config: ConfirmDialogConfig, dialogService: DialogService) {
+
+    return dialogService.open(ConfirmDialogComponent, {
+        data: config,
+        header: config.title,
+        closable: true,
+        modal: true,
+        contentStyle: { overflow: 'auto' },
+    });
+}
+
+export function openConfirmDeleteDialog(message: string, dialogService: DialogService) {
+
+    return dialogService.open(ConfirmDialogComponent, {
+        data: <ConfirmDialogConfig>{
+            title: 'Confirm Delete',//TODO: translate
+            message: message,
+            mainActionButtonConfigs: {
+                title: 'Delete',
+                color: 'danger'
+            },
+            secondaryActionButtonConfigs: {
+                title: 'Cancel',
+                color: 'secondary'
+            }
+        },
+        header: 'Confirm Delete',//TODO: translate,
+        closable: true,
+        modal: true,
+        contentStyle: { overflow: 'auto' },
+    });
+}

@@ -14,6 +14,8 @@ import { DepartmentService } from '../../../apis/department.service';
 import { DepartmentModel } from '../../../models/queries/department-model';
 import { TreeNode } from 'primeng/api';
 import { EditDepartmentPageComponent } from '../edit-department/edit-department-page.component';
+import { finalize } from 'rxjs';
+import { ConfirmDialogConfig, openConfirmDeleteDialog, openConfirmDialog } from '../../../../../core/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-department-list-page',
@@ -61,7 +63,11 @@ export class DepartmentListPageComponent {
     }
 
     fetchData() {
+        this.isLoading = true;
         this.departmentService.getAllTree()
+            .pipe(finalize(() => {
+                this.isLoading = false;
+            }))
             .subscribe(response => {
                 this.departments = response;
             });
@@ -102,9 +108,21 @@ export class DepartmentListPageComponent {
     }
 
     deleteItem(item: DepartmentModel) {
-        this.departmentService.delete(item.id)
-            .subscribe(response => {
-                this.fetchData();
-            });
+        //TODO: translate
+        this.ref = openConfirmDeleteDialog(`Are you sure you want to delete ${item.title}?`, this.dialogService);
+
+        this.ref.onClose.subscribe((result: any) => {
+            if (result) {
+                this.isLoading = true;
+                this.departmentService.delete(item.id)
+                    .pipe(finalize(() => {
+                        this.isLoading = false;
+                    }))
+                    .subscribe(response => {
+                        this.fetchData();
+                    });
+            }
+        });
     }
+
 }
