@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
-import { AddBasevaluePageComponent } from "./add-basevalue/add-basevalue-page.component";
 import { BasevalueListPageComponent } from "./basevalue-list/basevalue-list-page.component";
 import { EditBasevaluePageComponent } from "./edit-basevalue/edit-basevalue-page.component";
+import { CreateBasevaluePageComponent } from "./create-basevalue/create-basevalue-page.component";
 
 export const Basevalue_ROUTES: Routes = [
     {
@@ -11,7 +11,7 @@ export const Basevalue_ROUTES: Routes = [
     },
     {
         path: "add",
-        component: AddBasevaluePageComponent, data: {
+        component: CreateBasevaluePageComponent, data: {
             title: 'add basevalue'
         }
     },

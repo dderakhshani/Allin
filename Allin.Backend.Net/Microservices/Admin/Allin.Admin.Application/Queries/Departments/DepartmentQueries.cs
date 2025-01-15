@@ -22,7 +22,7 @@ namespace Allin.Admin.Application.Queries
         }
         public async Task<IEnumerable<TreeNode<DepartmentModel>>> GetAllTree(QueryParamModel param, CancellationToken cancellationToken)
         {
-            return (await DbContext.Departments.AsNoTracking().ProjectTo<DepartmentModel>(MapperProvider).ToListAsync()).ToTreeModel();
+            return (await DbContext.Departments.AsNoTracking().ProjectTo<DepartmentModel>(MapperProvider).ToListAsync()).ToTreeModel(nameof(DepartmentModel.Title), nameof(DepartmentModel.Code));
         }
 
         public async Task<DepartmentModel> GetById(long id, CancellationToken cancellationToken)

@@ -5,7 +5,9 @@ namespace Allin.Common.Utilities;
 
 public class TreeNode<T>
 {
-    public T Data { get; set; }
+    public required T Data { get; set; }
+    public string? Label { get; set; }
+    public string? Key { get; set; }
     public bool Expanded { get; set; } = true;
     public List<TreeNode<T>> Children { get; set; } = new List<TreeNode<T>>();
 }
@@ -37,9 +39,15 @@ public static class TreeDataBuilder
         return rootNodes;
     }
 
-    public static IEnumerable<TreeNode<T>> ToTreeModel<T>(this IEnumerable<T> items) where T : BaseHierarchyModel
+    public static IEnumerable<TreeNode<T>> ToTreeModel<T>(this IEnumerable<T> items, string? LabelFieldName, string? KeyFieldName) where T : BaseHierarchyModel
     {
-        var lookup = items.ToDictionary(item => item.Id, item => new TreeNode<T> { Data = item });
+        var lookup = items.ToDictionary(item => item.Id,
+        item => new TreeNode<T>
+        {
+            Data = item,
+            Label = LabelFieldName != null ? GetPropertyValue(item, LabelFieldName).ToString() : null,
+            Key = KeyFieldName != null ? GetPropertyValue(item, KeyFieldName).ToString() : null
+        });
         var rootNodes = new List<TreeNode<T>>();
 
         foreach (var item in items)
@@ -58,6 +66,11 @@ public static class TreeDataBuilder
         }
 
         return rootNodes;
+    }
+
+    private static object GetPropertyValue(object src, string propertyName)
+    {
+        return src.GetType().GetProperty(propertyName).GetValue(src, null);
     }
 
 }

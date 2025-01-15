@@ -75,6 +75,12 @@ export class MenuService {
                         badge: '2',
                         routerLink: '/admin/position/list'
                     },
+                    {
+                        label: 'Places',
+                        icon: 'location_on',
+                        badge: '2',
+                        routerLink: '/admin/place/list'
+                    },
 
 
                 ],

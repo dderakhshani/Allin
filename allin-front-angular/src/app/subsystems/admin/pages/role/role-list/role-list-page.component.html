@@ -1,9 +1,8 @@
-<app-page-content [isLoading]="isLoading">
+<app-page-content [isLoading]="false">
 
     <ng-container toolbar>
         <div class="p-toolbar-group-end ">
-            <p-button [label]="'admin.create-role' | translate" icon="pi pi-plus" class="mr-2"
-                (onClick)="openAdd()" />
+            <p-button [label]="'admin.create-role' | translate" icon="pi pi-plus" class="mr-2" (onClick)="openAdd()" />
         </div>
     </ng-container>
     <div class="flex flex-col h-full">
