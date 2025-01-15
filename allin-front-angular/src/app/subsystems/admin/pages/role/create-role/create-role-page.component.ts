@@ -8,7 +8,7 @@ import { BasicModule } from '../../../../../core/basic.module';
 import { PngTableComponent } from '../../../../../core/components/png-table/png-table.component';
 import { DepartmentModel } from '../../../models/queries/department-model';
 import { DepartmentService } from '../../../apis/department.service';
-import { finalize } from 'rxjs';
+import { finalize, Observable, of } from 'rxjs';
 import { Tree } from 'primeng/tree';
 import { RoleService } from '../../../apis/role.service';
 import { PermissiontModel } from '../../../models/queries/permission-model';
@@ -72,7 +72,7 @@ export class CreateRolePageComponent {
         title: this.fb.control<string | null>(null),
         uniqueName: this.fb.control<string | null>(null),
         description: this.fb.control<string | null>(null),
-        department: this.fb.control<any | null>(null),
+        department: this.fb.control<TreeNode | null>(null),
         permissionIds: this.fb.control<[number] | null>(null),
     })
 
@@ -109,6 +109,26 @@ export class CreateRolePageComponent {
             .subscribe(response => {
                 this.permissions = response;
             });
+    }
+
+    save(): Observable<boolean> {
+        if (this.form.valid) {
+            const command = <CreateRoleCommand>{
+                ...<CreateRoleCommand>this.form.getRawValue(),
+                uniqueName: "todo",
+                departmentId: this.form.controls.department.value?.data.id,
+                positionIds: this.selectedPermissions.map(x => x.data.id),
+            }
+            return new Observable((subscriber) => {
+                this.roleService.create(command).subscribe(data => {
+
+                    subscriber.next(true);
+                });
+            });
+
+        }
+        else
+            return of(false);
     }
 
 }

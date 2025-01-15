@@ -38,7 +38,7 @@ namespace Allin.Admin.ServiceApi.Controllers
             return OkResult(await _permissionQueries.GetAllTree(cancellationToken));
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreateRoleCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);

@@ -16,6 +16,7 @@
     </div>
 
     <div class="pt-2 h-full">
-        <p-tree [value]="permissions" selectionMode="checkbox" styleClass="w-full md:w-[30rem]" [(selection)]="selectedPermissions" />
+
+        <p-tree [value]="permissions" selectionMode="checkbox" styleClass="w-full md:w-[30rem]" [(selection)]="selectedPermissions" [filter]="true" filterPlaceholder="Permisions Filter" />
     </div>
 </form>
