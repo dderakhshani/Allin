@@ -162,6 +162,10 @@ export class UserListPageComponent {
             }
         });
     }
+
+    loadInnerData(data: any) {
+
+    }
 }
 
 export interface Country {

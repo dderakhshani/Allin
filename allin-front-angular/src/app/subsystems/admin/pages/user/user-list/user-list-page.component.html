@@ -12,12 +12,13 @@
         </p-message>
 
         <div class="pt-2 h-full">
-            <app-png-table [columns]="columns" [dataSource]="customers">
+            <app-png-table [columns]="columns" [dataSource]="customers" [isRowExapandable]="true"
+                (onRowExpand)="loadInnerData($event)">
+
                 <div custom-filters>
                     <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"
                         placeholder="Select a City" />
                 </div>
-
 
                 <ng-template let-rowData templateForColumn="countryColumnTemplate">
                     <img src="https://flagicons.lipis.dev/flags/4x3/{{rowData.country.code}}.svg" style="width: 20px" />
@@ -27,7 +28,13 @@
                 <ng-template let-rowData templateForColumn="statusColumnTemplate">
                     <p-tag [value]="rowData.status" [severity]="getSeverity(rowData.status)" />
                 </ng-template>
-                {{'admin.add-user' | translate}}
+
+                <ng-template #expandedRow let-rowData="rowData">
+                    <div expanded-row>
+                        <div> Here is expanded Area of the row:</div>
+                        Row Data: {{ rowData | json }}
+                    </div>
+                </ng-template>
             </app-png-table>
         </div>
     </div>
