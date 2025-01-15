@@ -95,13 +95,12 @@
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-rowIndex>
         <tr [pSelectableRow]="rowData">
-            @if(isRowselectable){
+            @if(isRowExapandable){
             <td>
                 <p-button type="button" pRipple [pRowToggler]="rowData" [text]="true" [rounded]="true" [plain]="true"
                     [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
             </td>
             }
-
 
             @if(isRowselectable){
             <td>
