@@ -8,9 +8,23 @@
     <div class="flex flex-col h-full">
 
         <div class="pt-2 h-full">
-            <app-png-table [columns]="columns" [dataSource]="customers">
+            <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+                <ng-template #header>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>uniqueName</th>
+                    </tr>
+                </ng-template>
+                <ng-template #body let-product>
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.title }}</td>
+                        <td>{{ product.uniqueName }}</td>
 
-            </app-png-table>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
     </div>
 

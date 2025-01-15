@@ -4,6 +4,7 @@ import { TreeNode } from 'primeng/api';
 import { Observable } from 'rxjs';
 import { PermissiontModel } from '../models/queries/permission-model';
 import { CreateRoleCommand } from '../models/commands/create-role-command';
+import { RoleModel } from '../models/queries/role-model';
 
 @Injectable({
     providedIn: 'root'
@@ -36,6 +37,14 @@ export class RoleService {
     //   }, model);
     // }
 
+
+    getAll(): Observable<RoleModel[]> {
+        return this.baseHttpService.getData({
+            controller: this.controllerPath,
+            action: 'get-all',
+            routeParameters: []
+        });
+    }
 
     getAllTree(): Observable<TreeNode<PermissiontModel>[]> {
         return this.baseHttpService.getData({
