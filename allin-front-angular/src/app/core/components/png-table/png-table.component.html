@@ -2,9 +2,9 @@
     [rowsPerPageOptions]="configOptions.rowsPerPageOptions" [loading]="loading" [paginator]="true"
     [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [scrollable]="true" scrollHeight="100%" [globalFilterFields]="getGlobalFilterable" sortMode="multiple"
-    [multiSortMeta]="" [lazy]="true" [tableStyle]="{ 'min-width': '75rem' }" (onLazyLoad)="getDataFromServer($event)"
-    [expandedRowKeys]="expandedRows" (onRowExpand)="rowExpand($event)" (onRowCollapse)="rowCollapse($event)"
-    (onPage)="pageChanged($event)" (onFilter)="filterChanged($event)">
+    [multiSortMeta]="" [lazy]="this.configOptions.internaLoadFetch" [tableStyle]="{ 'min-width': '75rem' }"
+    (onLazyLoad)="getDataFromServer($event)" [expandedRowKeys]="expandedRows" (onRowExpand)="rowExpand($event)"
+    (onRowCollapse)="rowCollapse($event)" (onPage)="pageChanged($event)" (onFilter)="filterChanged($event)">
     <ng-template pTemplate="caption">
         <div class="flex items-center">
 

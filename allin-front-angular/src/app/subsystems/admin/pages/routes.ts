@@ -50,5 +50,12 @@ export const Admin_ROOT_ROUTES: Routes = [
         },
         loadChildren: () => import('./position/routes').then(mod => mod.Position_ROUTES)
     },
+    {
+        path: "place",
+        data: {
+            title: 'place'
+        },
+        loadChildren: () => import('./place/routes').then(mod => mod.Place_ROUTES)
+    },
 
 ];

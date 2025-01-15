@@ -109,6 +109,8 @@ export class PngTableComponent {
     expandedRows = {};
 
     constructor(private httpService: BaseHttpService) {
+        if (this.dataApiUrl)
+            this.configOptions.internaLoadFetch = true;
         effect(() => {
             // this.getDataFromServer();
         });
@@ -131,9 +133,7 @@ export class PngTableComponent {
             this.columnsTemplatesQueryList!.forEach((item: any) => {
                 // this.columnsKeyTemplate[item.templateName] = item.template;
             });
-        })
-
-        this.getDataFromServer({})
+        });
     }
 
     get getGlobalFilterable() {
@@ -162,7 +162,8 @@ export class PngTableComponent {
     public onHeaderFiltersChanged(filters: any) {
         this.currentFilters = filters;
         this.queryPaging.pageIndex = 0;
-        this.getDataFromServer({});
+        if (this.configOptions.internaLoadFetch)
+            this.getDataFromServer({});
     }
 
     getDataFromServer(event: TableLazyLoadEvent) {

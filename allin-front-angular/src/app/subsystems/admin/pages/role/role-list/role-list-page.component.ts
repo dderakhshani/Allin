@@ -10,51 +10,30 @@ import { UserService } from '../../../apis/user.service';
 import { TranslateService } from '@ngx-translate/core';
 import { openDialog, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
 import { CreateRolePageComponent } from '../create-role/create-role-page.component';
+import { TreeNode } from 'primeng/api';
+import { TableModule } from 'primeng/table';
+import { RoleService } from '../../../apis/role.service';
+import { finalize } from 'rxjs';
+import { RoleModel } from '../../../models/queries/role-model';
 
 @Component({
-  selector: 'app-role-list-page',
-  standalone: true,
-   imports: [
-              BasicModule,
-              PngTableComponent,
-              ToolbarModule,
+    selector: 'app-role-list-page',
+    standalone: true,
+    imports: [
+        BasicModule,
+        PngTableComponent,
+        ToolbarModule,
+        TableModule
     ],
     providers: [DialogService],
-  templateUrl: './role-list-page.component.html',
-  styleUrl: './role-list-page.component.scss'
+    templateUrl: './role-list-page.component.html',
+    styleUrl: './role-list-page.component.scss'
 })
 export class RoleListPageComponent {
     isLoading = false;
 
-    columns: TableColumnBase[] = [
-        new TableTextColumn({
-            title: 'Name',
-            rootFieldName: 'name',
-            sortable: false,
-        }),
-        new TableTextColumn({
-            title: 'Last Name',
-            rootFieldName: 'country',
-            sortable: false,
-        }),
-        new TableTextColumn({
-            title: 'Agent',
-            rootFieldName: 'agent',
-            sortable: false,
-        }),
-        new TableTextColumn({
-            title: 'Status',
-            rootFieldName: 'status',
-            templateRefId: 'statusColumnTemplate',
-            sortable: false,
-        }),
-        new TableBooleanColumn({
-            title: 'Verified',
-            rootFieldName: 'verified',
-            sortable: false,
-            displayStyle: BooleanColumnDisplayEnum.OnlyCheckColorFull
-        })
-    ];
+    roles!: RoleModel[];
+    products!: RoleModel[];
 
     ref: DynamicDialogRef | undefined;
 
@@ -68,9 +47,26 @@ export class RoleListPageComponent {
 
     constructor(private userService: UserService,
         public dialogService: DialogService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private roleService: RoleService,
     ) {
 
+    }
+
+    ngOnInit() {
+        this.fetchRoleListData();
+    }
+
+    fetchRoleListData() {
+        this.isLoading = true;
+        this.roleService.getAll()
+            .pipe(finalize(() => {
+                this.isLoading = false;
+            }))
+            .subscribe(response => {
+                this.roles = response;
+                this.products = response;
+            });
     }
 
     openAdd() {

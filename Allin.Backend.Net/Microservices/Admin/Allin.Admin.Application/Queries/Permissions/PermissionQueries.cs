@@ -21,7 +21,7 @@ namespace Allin.Admin.Application.Queries
 
         public async Task<IEnumerable<TreeNode<PermissionModel>>> GetAllTree(CancellationToken cancellationToken)
         {
-            return (await this.GetAll(cancellationToken)).ToTreeModel();
+            return (await this.GetAll(cancellationToken)).ToTreeModel(nameof(PermissionModel.Title), nameof(PermissionModel.UniqueName));
         }
     }
 }

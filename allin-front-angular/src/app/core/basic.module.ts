@@ -14,9 +14,11 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
 import { InputNumber } from 'primeng/inputnumber';
 
+
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { PageContentComponent } from './components/page-content/page-content.component';
+import { TreeSelect } from 'primeng/treeselect';
 @NgModule({
     declarations: [
 
@@ -27,6 +29,7 @@ import { PageContentComponent } from './components/page-content/page-content.com
         TranslateDirective,
         PageContentComponent,
         InputNumber,
+        TreeSelect
     ],
     exports: [
         CommonModule,
@@ -35,6 +38,7 @@ import { PageContentComponent } from './components/page-content/page-content.com
         ButtonModule,
         CheckboxModule,
         InputTextModule,
+        TreeSelect,
 
         IconFieldModule,
         InputIconModule,
