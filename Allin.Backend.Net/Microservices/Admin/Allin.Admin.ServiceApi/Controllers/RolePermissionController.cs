@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace Allin.Admin.ServiceApi.Controllers
 {
     [AllowAnonymous]
-    public class RoleController : AuthorizeApiControllerBase
+    public class RolePermissionController : AuthorizeApiControllerBase
     {
         private readonly IRoleQueries _roleQueries;
 
-        public RoleController(IMediator mediator,
+        public RolePermissionController(IMediator mediator,
             IUserAccessor userAccessor,
             IWebHostEnvironment currentEnvironment,
             IRoleQueries roleQueries) : base(mediator, userAccessor, currentEnvironment)
