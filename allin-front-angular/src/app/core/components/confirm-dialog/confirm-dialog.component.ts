@@ -9,6 +9,7 @@ export interface ConfirmDialogConfig {
     message: string;
     headerCssClasses: string;
     messageCssClasses?: string;
+    extraData: any;
     mainActionButtonConfigs?: ConfirmDialogActionButtonConfig;
     secondaryActionButtonConfigs?: ConfirmDialogActionButtonConfig;
     contentAreaTemplate?: TemplateRef<any>;

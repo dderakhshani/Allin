@@ -44,7 +44,7 @@ export class AddPersonComponent {
     showValidationWarning = true;
 
     @Output()
-    commandChange = new EventEmitter<CreatePersonCommand | null>();
+    commandChange = new EventEmitter<CreatePersonCommand | null | undefined>();
 
     extendedFields: ExtendedFieldModel[] = [];
     extendedFieldsValue?: ExtendedFieldValueModel[];

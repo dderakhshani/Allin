@@ -17,12 +17,10 @@
                 <div class="flex flex-col w-full space-y-5 pt-5">
                     <div class="flex space-x-5">
                         <div class="w-1/2">
-                            <p-selectButton [options]="legalOptions" [formControl]="form.controls.isLegal"
-                                optionLabel="label" optionValue="isLegal" />
+                            <p-selectButton [options]="legalOptions" [formControl]="form.controls.isLegal" optionLabel="label" optionValue="isLegal" />
                         </div>
                         <div class="w-1/2" [hidden]=" form.controls.isLegal.value === true">
-                            <p-selectButton [options]="genderOptions" [formControl]="form.controls.genderEnum"
-                                optionLabel="label" optionValue="genderValue" />
+                            <p-selectButton [options]="genderOptions" [formControl]="form.controls.genderEnum" optionLabel="label" optionValue="genderValue" />
                         </div>
 
                     </div>
@@ -64,13 +62,12 @@
                         @for (mobile of form.controls.mobiles.controls; track $index) {
                         <div class="flex space-x-5 items-end">
                             <div class=" flex flex-col space-y-2 w-52">
-                                <p-dropdown [options]="mobileTypes" [formControl]="mobile.get('type')"
-                                    optionLabel="name" optionValue="value" placeholder="Select Location Type" />
+                                <p-dropdown [options]="mobileTypes" [formControl]="mobile.get('type')  | formControl" optionLabel="name" optionValue="value"
+                                    placeholder="Select Location Type" />
                             </div>
                             <div class=" flex flex-col space-y-2">
                                 <p-floatlabel variant="on">
-                                    <input pInputText id="on_label" [formControl]="mobile.get('phoneNumber')"
-                                        autocomplete="off" />
+                                    <input pInputText id="on_label" [formControl]="mobile.get('phoneNumber')  | formControl" autocomplete="off" />
                                     <label for="on_label">{{'person.mobile' | translate}}</label>
                                 </p-floatlabel>
                             </div>
@@ -81,8 +78,7 @@
                         }
                     </div>
                     <div class="flex">
-                        <p-button (click)=addMobile() [label]="'admin.add-phone' | translate" icon="pi pi-plus-circle"
-                            [text]="true" severity="secondary" />
+                        <p-button (click)=addMobile() [label]="'admin.add-phone' | translate" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
                     </div>
 
                     <div class="flex space-x-5 ">
@@ -97,13 +93,12 @@
                         @for (address of form.controls.personAddresses.controls; track $index) {
                         <div class="flex space-x-5 items-end">
                             <div class=" flex flex-col space-y-2 w-52">
-                                <p-dropdown [options]="location" [formControl]="address.get('type')" optionLabel="name"
+                                <p-dropdown [options]="location" [formControl]="address.get('type') | formControl" optionLabel="name"
                                     placeholder="Select Location Type" />
                             </div>
                             <div class=" flex flex-col space-y-2">
                                 <p-floatlabel variant="on">
-                                    <input pInputText id="on_label" [formControl]="address.get('addressLine')"
-                                        autocomplete="off" />
+                                    <input pInputText id="on_label" [formControl]="address.get('addressLine') | formControl" autocomplete="off" />
                                     <label for="on_label">{{'person.address' | translate}}</label>
                                 </p-floatlabel>
                             </div>
@@ -116,8 +111,8 @@
 
 
                     <div class="flex">
-                        <p-button (click)="addAddress()" [label]="'admin.add-address' | translate"
-                            icon="pi pi-plus-circle" [text]="true" severity="secondary" />
+                        <p-button (click)="addAddress()" [label]="'admin.add-address' | translate" icon="pi pi-plus-circle" [text]="true"
+                            severity="secondary" />
                     </div>
                 </div>
             </p-accordionTab>

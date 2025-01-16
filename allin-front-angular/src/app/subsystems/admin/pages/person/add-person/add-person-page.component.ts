@@ -14,7 +14,7 @@ import { BasicModule } from '../../../../../core/basic.module';
 export class AddPersonPageComponent {
 
 
-    command?: CreatePersonCommand;
+    command?: CreatePersonCommand | null;
 
     constructor(private personService: PersonService) { }
 

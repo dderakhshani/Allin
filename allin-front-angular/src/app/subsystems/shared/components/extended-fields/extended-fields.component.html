@@ -4,13 +4,13 @@
         <div>
             <label>{{getField($index).fieldName}}</label>
             @if(getField($index).uiControl==UIControlEnum.Text){
-            <input type="text" pInputText [formControl]="ctl.get('value')" />
+            <input type="text" pInputText [formControl]="ctl.get('value') | formControl" />
             }
             @else if(getField($index).uiControl==UIControlEnum.ToggleSwitch){
-            <p-toggleswitch [formControl]="ctl.get('value')" />
+            <p-toggleswitch [formControl]="ctl.get('value') | formControl" />
             }
             @else if(getField($index).uiControl==UIControlEnum.Number){
-            <p-inputnumber [formControl]="ctl.get('value')" mode="decimal" inputId="withoutgrouping" />
+            <p-inputnumber [formControl]="ctl.get('value') | formControl" mode="decimal" inputId="withoutgrouping" />
             }
         </div>
 
