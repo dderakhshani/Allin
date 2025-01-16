@@ -7,8 +7,8 @@ namespace Allin.Admin.Application.Commands
     {
         public CreateRoleCommandValidator(ILocalizator localizator)
         {
-            RuleFor(x => x.Title).NotNull().WithMessage(localizator["TitleIsRequired"]);
-            RuleFor(x => x.UniqueName).NotNull().WithMessage(localizator["NameIsRequired"]);
+            RuleFor(x => x.Title).NotEmpty().NotNull().WithMessage(localizator["TitleIsRequired"]);
+            RuleFor(x => x.UniqueName).NotEmpty().NotNull().WithMessage(localizator["NameIsRequired"]);
         }
     }
 }
