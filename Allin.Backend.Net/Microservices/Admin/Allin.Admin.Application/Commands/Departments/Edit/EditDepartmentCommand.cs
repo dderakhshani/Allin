@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class EditDepartmentCommand : IRequest<bool>, IMapFrom<Department, CreateDepartmentCommand>
+    public class EditDepartmentCommand : IRequest<bool>, IMapFrom<Department, EditDepartmentCommand>
     {
         public required long Id { get; set; }
         public long? ParentId { get; set; }
