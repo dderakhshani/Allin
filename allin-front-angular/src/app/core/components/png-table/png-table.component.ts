@@ -109,15 +109,19 @@ export class PngTableComponent {
     expandedRows = {};
 
     constructor(private httpService: BaseHttpService) {
-
         effect(() => {
-            // this.getDataFromServer();
+            const t = this.fetchDataTrigger();
+
+            if (this.configOptions.internaLoadFetch)
+                this.getDataFromServer({});
         });
+
     }
 
     ngOnInit(): void {
         if (this.dataApiUrl)
             this.configOptions.internaLoadFetch = true;
+
 
     }
 
