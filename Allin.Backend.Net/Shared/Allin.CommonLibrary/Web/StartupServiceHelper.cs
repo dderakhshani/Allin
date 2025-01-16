@@ -99,6 +99,7 @@ namespace Allin.Common.Web
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
+            app.UseMiddleware<ValidationExceptionHandlingMiddleware>();
         }
 
         private static void AddValidation(this IServiceCollection services)

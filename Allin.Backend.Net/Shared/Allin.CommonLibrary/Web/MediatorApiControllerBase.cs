@@ -50,38 +50,22 @@ namespace Allin.Common.Web
 
         protected async Task<IActionResult> SendQuery<TResponse>(IRequest<TResponse> query, CancellationToken cancellationToken)
         {
-            return Ok(await Send(query, cancellationToken));
+            return (await Send(query, cancellationToken)).MakeActionResult();
         }
 
         protected async Task<IActionResult> SendCommand<TResponse>(IRequest<TResponse> command,
            CancellationToken cancellationToken)
         {
-            return Ok(await Send(command, cancellationToken));
+            return (await Send(command, cancellationToken)).MakeActionResult();
         }
 
         private async Task<GeneralApiResult> Send<TResponse>(IRequest<TResponse> query,
             CancellationToken cancellationToken)
         {
-            try
-            {
-                var result = await _mediator.Send(query, cancellationToken);
-                return GeneralApiResult.Ok(Nanoid.Generate(size: 8), result);
-            }
 
-            catch (ValidationException ex)//TODO: Middle must handle this
-            {
-                var logger = HttpContext.RequestServices.GetRequiredService<ILogger<AuthorizeApiControllerBase>>();
-                logger.LogError(ex, ex.Message);
+            var result = await _mediator.Send(query, cancellationToken);
+            return GeneralApiResult.Ok(Nanoid.Generate(size: 8), result);
 
-                return GeneralApiResult.ValidationError(Nanoid.Generate(size: 8), ex.Errors);
-            }
-            catch (BuesinessRuleException ex)//TODO: Middle must handle this
-            {
-                var logger = HttpContext.RequestServices.GetRequiredService<ILogger<AuthorizeApiControllerBase>>();
-                logger.LogError(ex, ex.Message);
-
-                return GeneralApiResult.ValidationError(Nanoid.Generate(size: 8), ex.Errors);
-            }
         }
     }
 }
