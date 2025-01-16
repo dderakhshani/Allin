@@ -104,7 +104,6 @@ export class CreateRolePageComponent {
             const { department, ...formValues } = this.form.getRawValue();
             const command = <CreateRoleCommand>{
                 ...formValues,
-                uniqueName: "todo",
                 departmentId: this.form.controls.department.value?.data.id,
                 permissionIds: this.selectedPermissions.map(x => x.data.id),
             }

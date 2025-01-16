@@ -26,6 +26,7 @@
     },
     "role": {
         "title": "Role Name",
+        "uniqueName": "Unique Name",
         "description": "Description",
         "department": "Department"
     },
