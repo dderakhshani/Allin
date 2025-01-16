@@ -84,6 +84,10 @@ export class PngTableComponent {
     @Input()
     public isRowExapandable?: boolean = false;
 
+
+    @Output()
+    onLoadingStateChange = new EventEmitter<boolean>();
+
     @Output()
     onRowExpand = new EventEmitter<any>();
 
@@ -196,6 +200,7 @@ export class PngTableComponent {
         };
 
         this.loading = true;
+        this.onLoadingStateChange.emit(this.loading);
         if (this.dataApiUrl?.queryStringParams)
             this.dataApiUrl.queryStringParams = { ...this.dataApiUrl.queryStringParams, ... this.convertToQueryString(queryParams) };
         else if (this.dataApiUrl)
@@ -208,7 +213,10 @@ export class PngTableComponent {
                     this.totalCount = result.totalCount;
                     this.manipulateDataCallback && this.manipulateDataCallback(result);
                 }),
-                finalize(() => this.loading = false)
+                finalize(() => {
+                    this.loading = false;
+                    this.onLoadingStateChange.emit(this.loading);
+                })
             )
             .subscribe(result => {
 
