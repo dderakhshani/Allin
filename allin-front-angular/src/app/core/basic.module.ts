@@ -19,6 +19,7 @@ import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { PageContentComponent } from './components/page-content/page-content.component';
 import { TreeSelect } from 'primeng/treeselect';
+import { FormControlPipe } from './pipes/form-control.pipe';
 @NgModule({
     declarations: [
 
@@ -29,7 +30,8 @@ import { TreeSelect } from 'primeng/treeselect';
         TranslateDirective,
         PageContentComponent,
         InputNumber,
-        TreeSelect
+        TreeSelect,
+        FormControlPipe
     ],
     exports: [
         CommonModule,
@@ -49,7 +51,8 @@ import { TreeSelect } from 'primeng/treeselect';
         InputNumber,
         TranslatePipe,
         TranslateDirective,
-        PageContentComponent
+        PageContentComponent,
+        FormControlPipe
     ]
 })
 export class BasicModule { }
