@@ -8,7 +8,7 @@ import { BasicModule } from '../../../../../core/basic.module';
 import { PngTableComponent } from '../../../../../core/components/png-table/png-table.component';
 import { DepartmentModel } from '../../../models/queries/department-model';
 import { DepartmentService } from '../../../apis/department.service';
-import { finalize, Observable, of } from 'rxjs';
+import { finalize, forkJoin, Observable, of } from 'rxjs';
 import { Tree } from 'primeng/tree';
 import { RoleService } from '../../../apis/role.service';
 import { PermissiontModel } from '../../../models/queries/permission-model';
@@ -85,40 +85,28 @@ export class CreateRolePageComponent {
     }
 
     ngOnInit() {
-        this.fetchDepartmentData();
-        this.fetchPermissionData();
+        this.isLoading = true;
+
+        forkJoin([
+            this.departmentService.getAllTree(),
+            this.roleService.getAllTree()
+        ]).pipe(finalize(() => {
+            this.isLoading = false;
+        })).subscribe(response => {
+            this.departments = response[0];
+            this.permissions = response[1];
+        });
     }
 
-    fetchDepartmentData() {
-        this.isLoading = true;
-        this.departmentService.getAllTree()
-            .pipe(finalize(() => {
-                this.isLoading = false;
-            }))
-            .subscribe(response => {
-                this.departments = response;
-            });
-    }
-
-    fetchPermissionData() {
-        this.isLoading = true;
-        this.roleService.getAllTree()
-            .pipe(finalize(() => {
-                this.isLoading = false;
-            }))
-            .subscribe(response => {
-                this.permissions = response;
-            });
-    }
 
     save(): Observable<boolean> {
         if (this.form.valid) {
             const { department, ...formValues } = this.form.getRawValue();
             const command = <CreateRoleCommand>{
-                formValues,
+                ...formValues,
                 uniqueName: "todo",
                 departmentId: this.form.controls.department.value?.data.id,
-                positionIds: this.selectedPermissions.map(x => x.data.id),
+                permissionIds: this.selectedPermissions.map(x => x.data.id),
             }
 
             return new Observable((subscriber) => {

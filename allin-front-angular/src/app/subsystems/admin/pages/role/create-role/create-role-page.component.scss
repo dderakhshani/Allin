@@ -4,7 +4,11 @@ p-tree.permissions {
 
 }
 
-::ng-deep .p-tree-node-label {
+// ::ng-deep .p-tree-node-content {
+//     border-bottom: 1px solid var(--p-divider-border-color);
+// }
+
+.permissions ::ng-deep .p-tree-node-label {
     border: 1px solid var(--p-divider-border-color);
     border-radius: 5px;
     padding: .5rem 1rem;
