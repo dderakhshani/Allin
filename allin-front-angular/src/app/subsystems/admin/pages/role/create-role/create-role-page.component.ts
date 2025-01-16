@@ -113,12 +113,14 @@ export class CreateRolePageComponent {
 
     save(): Observable<boolean> {
         if (this.form.valid) {
+            const { department, ...formValues } = this.form.getRawValue();
             const command = <CreateRoleCommand>{
-                ...<CreateRoleCommand>this.form.getRawValue(),
+                formValues,
                 uniqueName: "todo",
                 departmentId: this.form.controls.department.value?.data.id,
                 positionIds: this.selectedPermissions.map(x => x.data.id),
             }
+
             return new Observable((subscriber) => {
                 this.roleService.create(command).subscribe(data => {
 
