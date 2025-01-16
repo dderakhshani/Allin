@@ -9,7 +9,10 @@
 
         <div class="pt-2 h-full">
             <app-png-table [columns]="columns" [dataApiUrl]="roleApiUrl" [fetchDataTrigger]="fetchDataTrigger" [isRowExapandable]="true" (onRowExpand)="loadInnerData($event)" (onLoadingStateChange)="isLoading=$event">
-
+                <ng-template let-rowData templateForColumn="actionColumnTemplate">
+                    <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (onClick)="editClick(rowData)" />
+                    <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" />
+                </ng-template>
                 <ng-template #expandedRow let-rowData="rowData">
                     <div expanded-row>
                         <div>

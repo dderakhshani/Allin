@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
 import { BasicModule } from '../../../../../core/basic.module';
 import { PngTableComponent } from '../../../../../core/components/png-table/png-table.component';
@@ -32,12 +32,19 @@ import { TreeTableModule } from 'primeng/treetable';
     styleUrl: './role-list-page.component.scss'
 })
 export class RoleListPageComponent {
+
+    @Output()
+    onEditClick = new EventEmitter<RoleModel>();
+    @Output()
+    onDeleteClick = new EventEmitter<RoleModel>();
+
     isLoading = true;
 
     columns: TableColumnBase[] = [
         new TableTextColumn({
-            title: 'id',
-            rootFieldName: 'id',
+            title: '',
+            rootFieldName: '',
+            templateRefId: 'actionColumnTemplate',
             sortable: false,
         }),
         new TableTextColumn({
@@ -112,4 +119,13 @@ export class RoleListPageComponent {
                 item.permissions = response;
             });
     }
+
+    editClick(item: RoleModel) {
+        this.onEditClick.emit(item);
+    }
+
+    deleteClick(item: RoleModel) {
+        this.onDeleteClick.emit(item);
+    }
+
 }
