@@ -11,7 +11,7 @@ import { RoleModel } from '../models/queries/role-model';
 })
 export class RoleService {
 
-    private readonly controllerPath = "role";
+    private readonly controllerPath = "role-permission";
 
     constructor(private baseHttpService: BaseHttpService) { }
 
@@ -38,13 +38,13 @@ export class RoleService {
     // }
 
 
-    getAll(): Observable<RoleModel[]> {
-        return this.baseHttpService.getData({
-            controller: this.controllerPath,
-            action: 'get-all',
-            routeParameters: []
-        });
-    }
+    // getAll(): Observable<RoleModel[]> {
+    //     return this.baseHttpService.getData({
+    //         controller: this.controllerPath,
+    //         action: 'get-all',
+    //         routeParameters: []
+    //     });
+    // }
 
     getAllTree(): Observable<TreeNode<PermissiontModel>[]> {
         return this.baseHttpService.getData({
@@ -52,5 +52,14 @@ export class RoleService {
             action: 'get-permissions-tree',
             routeParameters: []
         });
+    }
+
+    getPermissionsTreeByRoleId(id: number): Observable<PermissiontModel[]> {
+        return this.baseHttpService.getData(
+            {
+                controller: this.controllerPath,
+                action: 'get-permissions-tree-by-role-id',
+                routeParameters: [id]
+            });
     }
 }

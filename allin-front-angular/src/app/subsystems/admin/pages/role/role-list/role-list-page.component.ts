@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
 import { BasicModule } from '../../../../../core/basic.module';
 import { PngTableComponent } from '../../../../../core/components/png-table/png-table.component';
@@ -15,6 +15,8 @@ import { TableModule } from 'primeng/table';
 import { RoleService } from '../../../apis/role.service';
 import { finalize } from 'rxjs';
 import { RoleModel } from '../../../models/queries/role-model';
+import { PermissiontModel } from '../../../models/queries/permission-model';
+import { TreeTableModule } from 'primeng/treetable';
 
 @Component({
     selector: 'app-role-list-page',
@@ -23,27 +25,55 @@ import { RoleModel } from '../../../models/queries/role-model';
         BasicModule,
         PngTableComponent,
         ToolbarModule,
-        TableModule
+        TreeTableModule
     ],
     providers: [DialogService],
     templateUrl: './role-list-page.component.html',
     styleUrl: './role-list-page.component.scss'
 })
 export class RoleListPageComponent {
-    isLoading = false;
+    isLoading = true;
+
+    columns: TableColumnBase[] = [
+        new TableTextColumn({
+            title: 'id',
+            rootFieldName: 'id',
+            sortable: false,
+        }),
+        new TableTextColumn({
+            title: 'title',
+            rootFieldName: 'title',
+            sortable: false,
+        }),
+        new TableTextColumn({
+            title: 'uniqueName',
+            rootFieldName: 'uniqueName',
+            sortable: false,
+        }),
+        new TableTextColumn({
+            title: 'description',
+            rootFieldName: 'description',
+            sortable: false,
+        })
+    ];
 
     roles!: RoleModel[];
-    products!: RoleModel[];
 
     ref: DynamicDialogRef | undefined;
 
-    customers!: Customer[];
     representatives!: Representative[];
     statuses!: any[];
     loading: boolean = true;
     cities: any[] | undefined;
     selectedCity: any | undefined;
     messages: Message[] = [];
+    fetchDataTrigger = signal<boolean>(true)
+
+    roleApiUrl = {
+        controller: `role-permission`,
+        action: 'get-all',
+        routeParameters: []
+    };
 
     constructor(private userService: UserService,
         public dialogService: DialogService,
@@ -54,20 +84,9 @@ export class RoleListPageComponent {
     }
 
     ngOnInit() {
-        this.fetchRoleListData();
     }
 
-    fetchRoleListData() {
-        this.isLoading = true;
-        this.roleService.getAll()
-            .pipe(finalize(() => {
-                this.isLoading = false;
-            }))
-            .subscribe(response => {
-                this.roles = response;
-                this.products = response;
-            });
-    }
+
 
     openAdd() {
         const config: PageDialogConfig = {
@@ -78,8 +97,19 @@ export class RoleListPageComponent {
         this.ref = openDialog(config, this.dialogService);
         this.ref.onClose.subscribe((result: any) => {
             if (result) {
-                // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
+                this.fetchDataTrigger.update((value) => !value);
             }
         });
+    }
+
+    loadInnerData(item: RoleModel) {
+        this.isLoading = true;
+        this.roleService.getPermissionsTreeByRoleId(item.id)
+            .pipe(finalize(() => {
+                this.isLoading = false;
+            }))
+            .subscribe(response => {
+                item.permissions = response;
+            });
     }
 }
