@@ -21,14 +21,14 @@ export class RoleService {
         }, model);
     }
 
-    // delete(id: number): Observable<boolean> {
-    //   return this.baseHttpService.deleteData(
-    //     {
-    //       controller: this.controllerPath,
-    //       action: '',
-    //       routeParameters: [id]
-    //     });
-    // }
+    delete(id: number): Observable<boolean> {
+        return this.baseHttpService.deleteData(
+            {
+                controller: this.controllerPath,
+                action: '',
+                routeParameters: [id]
+            });
+    }
 
     // edit(model: EditDepartmentCommand): Observable<void> {
     //   return this.baseHttpService.putJsonData({

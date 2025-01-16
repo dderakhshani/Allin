@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
 import { BasicModule } from '../../../../../core/basic.module';
 import { PngTableComponent } from '../../../../../core/components/png-table/png-table.component';
@@ -17,6 +17,7 @@ import { finalize } from 'rxjs';
 import { RoleModel } from '../../../models/queries/role-model';
 import { PermissiontModel } from '../../../models/queries/permission-model';
 import { TreeTableModule } from 'primeng/treetable';
+import { openConfirmDeleteDialog } from '../../../../../core/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-role-list-page',
@@ -32,12 +33,6 @@ import { TreeTableModule } from 'primeng/treetable';
     styleUrl: './role-list-page.component.scss'
 })
 export class RoleListPageComponent {
-
-    @Output()
-    onEditClick = new EventEmitter<RoleModel>();
-    @Output()
-    onDeleteClick = new EventEmitter<RoleModel>();
-
     isLoading = true;
 
     columns: TableColumnBase[] = [
@@ -120,12 +115,26 @@ export class RoleListPageComponent {
             });
     }
 
-    editClick(item: RoleModel) {
-        this.onEditClick.emit(item);
-    }
+    // editClick(item: RoleModel) {
+    //     this.onEditClick.emit(item);
+    // }
 
     deleteClick(item: RoleModel) {
-        this.onDeleteClick.emit(item);
+        //TODO: translate
+        this.ref = openConfirmDeleteDialog(`Are you sure you want to delete ${item.title}?`, this.dialogService);
+
+        this.ref.onClose.subscribe((result: any) => {
+            if (result) {
+                this.isLoading = true;
+                this.roleService.delete(item.id)
+                    .pipe(finalize(() => {
+                        this.isLoading = false;
+                    }))
+                    .subscribe(response => {
+                        //TODO: reloade grid data
+                    });
+            }
+        });
     }
 
 }
