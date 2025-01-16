@@ -12,12 +12,13 @@ namespace Allin.Admin.ServiceApi.Controllers
     public class RoleController : AuthorizeApiControllerBase
     {
         private readonly IRoleQueries _roleQueries;
-        private readonly IPermissionQueries _permissionQueries;
 
-        public RoleController(IMediator mediator, IUserAccessor userAccessor, IWebHostEnvironment currentEnvironment, IRoleQueries roleQueries, IPermissionQueries permissionQueries) : base(mediator, userAccessor, currentEnvironment)
+        public RoleController(IMediator mediator,
+            IUserAccessor userAccessor,
+            IWebHostEnvironment currentEnvironment,
+            IRoleQueries roleQueries) : base(mediator, userAccessor, currentEnvironment)
         {
             _roleQueries = roleQueries;
-            _permissionQueries = permissionQueries;
         }
 
         [HttpGet("{id}")]
@@ -35,7 +36,13 @@ namespace Allin.Admin.ServiceApi.Controllers
         [HttpGet("get-permissions-tree")]
         public async Task<IActionResult> GetPermissions(CancellationToken cancellationToken)
         {
-            return OkResult(await _permissionQueries.GetAllTree(cancellationToken));
+            return OkResult(await _roleQueries.GetAllPermissionsTree(cancellationToken));
+        }
+
+        [HttpGet("get-permissions-tree-by-role-id/{roleId}")]
+        public async Task<IActionResult> GetPermissions(long roleId, CancellationToken cancellationToken)
+        {
+            return OkResult(await _roleQueries.GetPermissionsTreeByRoleId(roleId, cancellationToken));
         }
 
         [HttpPost("create")]
