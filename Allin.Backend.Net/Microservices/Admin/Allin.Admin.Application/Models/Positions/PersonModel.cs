@@ -1,10 +1,11 @@
 ﻿using Allin.Admin.Application.Common;
 using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Utilities.Mappings;
+using Allin.Common.Models;
 
 namespace Allin.Admin.Application.Models
 {
-    public class PositionModel : AdminBaseModel, IMapFrom<Position, PositionModel>
+    public class PositionModel : BaseHierarchyModel, IMapFrom<Position, PositionModel>
     {
         public long? ParentId { get; set; }
         public string LevelCode { get; set; }

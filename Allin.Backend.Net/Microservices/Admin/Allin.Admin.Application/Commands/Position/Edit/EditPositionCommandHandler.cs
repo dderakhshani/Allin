@@ -16,15 +16,11 @@ namespace Allin.Admin.Application.Commands
 
         public override async Task<bool> Handle(EditPositionCommand request, CancellationToken cancellationToken)
         {
-            var department = await DbContext.Departments.Include(x => x.DepartmentPositions).FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
+            var department = await DbContext.Positions.Include(x => x.DepartmentPositions).FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
 
             Mapper.Map(request, department);
 
-            department.DepartmentPositions.Clear();
-            department.DepartmentPositions = request.PositionIds.Select(x => new DepartmentPosition()
-            {
-                PositionId = x,
-            }).ToList();
+
 
             await DbContext.SaveChangesAsync();
 
