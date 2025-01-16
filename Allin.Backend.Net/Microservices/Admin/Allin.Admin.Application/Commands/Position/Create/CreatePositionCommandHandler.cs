@@ -16,7 +16,7 @@ namespace Allin.Admin.Application.Commands
         {
             var entity = Mapper.Map<Position>(request);
 
-            // entity.Hierarchy = await DbContext.Departments.GetHierarchyIdAsync(request.ParentId);
+            entity.Hierarchy = await DbContext.Positions.GetHierarchyIdAsync(request.ParentId);
 
             DbContext.Positions.Add(entity);
 

@@ -8,9 +8,7 @@ namespace Allin.Admin.Application.Models
     public class PositionModel : BaseHierarchyModel, IMapFrom<Position, PositionModel>
     {
         public long? ParentId { get; set; }
-        public string LevelCode { get; set; }
         public string Title { get; set; }
 
-        public virtual PositionModel Parent { get; set; }
     }
 }

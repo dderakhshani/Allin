@@ -24,7 +24,7 @@ namespace Allin.Admin.Application.Queries
         {
             return (await DbContext.Positions.AsNoTracking()
                                 .ProjectTo<PositionModel>(MapperProvider).ToListAsync())
-                                .ToTreeModel(nameof(PositionModel.Title), nameof(PositionModel.LevelCode));
+                                .ToTreeModel(nameof(PositionModel.Title), nameof(PositionModel.Id));
         }
 
         public async Task<PositionModel> GetById(long id, CancellationToken cancellationToken)
