@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { PermissiontModel } from '../models/queries/permission-model';
 import { CreateRoleCommand } from '../models/commands/create-role-command';
 import { RoleModel } from '../models/queries/role-model';
+import { EditRoleCommand } from '../models/commands/edit-role-command';
 
 @Injectable({
     providedIn: 'root'
@@ -30,12 +31,12 @@ export class RoleService {
             });
     }
 
-    // edit(model: EditDepartmentCommand): Observable<void> {
-    //   return this.baseHttpService.putJsonData({
-    //     controller: this.controllerPath,
-    //     action: 'edit'
-    //   }, model);
-    // }
+    edit(model: EditRoleCommand): Observable<void> {
+        return this.baseHttpService.putJsonData({
+            controller: this.controllerPath,
+            action: 'edit'
+        }, model);
+    }
 
 
     // getAll(): Observable<RoleModel[]> {

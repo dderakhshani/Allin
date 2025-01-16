@@ -51,7 +51,7 @@ namespace Allin.Admin.ServiceApi.Controllers
             return await SendCommand(request, cancellationToken);
         }
 
-        [HttpPut]
+        [HttpPut("edit")]
         public async Task<IActionResult> Edit([FromBody] EditRoleCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);

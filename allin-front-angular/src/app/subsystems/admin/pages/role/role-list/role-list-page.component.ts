@@ -18,6 +18,7 @@ import { RoleModel } from '../../../models/queries/role-model';
 import { PermissiontModel } from '../../../models/queries/permission-model';
 import { TreeTableModule } from 'primeng/treetable';
 import { openConfirmDeleteDialog } from '../../../../../core/components/confirm-dialog/confirm-dialog.component';
+import { EditRolePageComponent } from '../edit-role/edit-role-page.component';
 
 @Component({
     selector: 'app-role-list-page',
@@ -115,9 +116,22 @@ export class RoleListPageComponent {
             });
     }
 
-    // editClick(item: RoleModel) {
-    //     this.onEditClick.emit(item);
-    // }
+    editClick(item: RoleModel) {
+        const config: PageDialogConfig = {
+            extraData: item,
+            component: EditRolePageComponent,
+            header: 'Edit Role',
+            description: 'this is a desciption of the Edit Role',
+            isFullScreen: false,
+        };
+        this.ref = openDialog(config, this.dialogService);
+        this.ref.onClose.subscribe((result: any) => {
+            if (result) {
+                // this.fetchData(); //TODO: reloade grid data
+                // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
+            }
+        });
+    }
 
     deleteClick(item: RoleModel) {
         //TODO: translate
