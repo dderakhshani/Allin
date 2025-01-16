@@ -1,10 +1,8 @@
-<p-table #datatable [value]="_dataSource" dataKey="id" [rows]="10" [rowHover]="true" stripedRows
-    [rowsPerPageOptions]="configOptions.rowsPerPageOptions" [loading]="loading" [paginator]="true"
-    [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [scrollable]="true" scrollHeight="100%" [globalFilterFields]="getGlobalFilterable" sortMode="multiple"
-    [multiSortMeta]="" [lazy]="this.configOptions.internaLoadFetch" [tableStyle]="{ 'min-width': '75rem' }"
-    (onLazyLoad)="getDataFromServer($event)" [expandedRowKeys]="expandedRows" (onRowExpand)="rowExpand($event)"
-    (onRowCollapse)="rowCollapse($event)" (onPage)="pageChanged($event)" (onFilter)="filterChanged($event)">
+<p-table #datatable [value]="_dataSource" dataKey="id" [rows]="10" [rowHover]="true" stripedRows [rowsPerPageOptions]="configOptions.rowsPerPageOptions"
+    [loading]="loading" [paginator]="true" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [scrollable]="true" scrollHeight="100%" [globalFilterFields]="getGlobalFilterable" sortMode="multiple" [multiSortMeta]=""
+    [lazy]="this.configOptions.internaLoadFetch" [tableStyle]="{ 'min-width': '75rem' }" (onLazyLoad)="getDataFromServer()" [expandedRowKeys]="expandedRows"
+    (onRowExpand)="rowExpand($event)" (onRowCollapse)="rowCollapse($event)" (onPage)="pageChanged($event)" (onFilter)="filterChanged($event)">
     <ng-template pTemplate="caption">
         <div class="flex items-center">
 
@@ -12,8 +10,7 @@
                 <p-inputIcon>
                     <i class="pi pi-search"></i>
                 </p-inputIcon>
-                <input pInputText type="text" (input)="datatable.filterGlobal($any($event.target).value, 'contains')"
-                    placeholder="Search keyword" />
+                <input pInputText type="text" (input)="datatable.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
             </p-iconField>
 
             <div class="px-2">
@@ -29,7 +26,8 @@
                     <p-button icon="pi pi-print" [outlined]="true" severity="secondary" class="mr-2" />
                     <p-button icon="pi pi-file-export" [outlined]="true" severity="secondary" class="mr-2" />
                     <p-button icon="pi pi-cog" [outlined]="true" severity="secondary" class="mr-2" />
-                    <p-button icon="pi pi-refresh" [outlined]="true" severity="secondary" class="mr-2" />
+                    <p-button *ngIf="configOptions.internaLoadFetch" (onClick)="getDataFromServer()" icon="pi pi-refresh" [outlined]="true" severity="secondary"
+                        class="mr-2" />
                 </div>
                 }
 
@@ -62,8 +60,7 @@
 
                     @if (column.filterOptions.filterControl== filterControlEnum.DropDown) {
                     <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                        <p-multiSelect [ngModel]="value"
-                            [options]="(((column | as : tableDropDownColumn).itemsSource.items) | observableOrArray  | async)!"
+                        <p-multiSelect [ngModel]="value" [options]="(((column | as : tableDropDownColumn).itemsSource.items) | observableOrArray  | async)!"
                             placeholder="Any" (onChange)="filter($event.value)" optionLabel="name">
                         </p-multiSelect>
                     </ng-template>
@@ -78,8 +75,7 @@
 
                     }
                     @else {
-                    <p-columnFilter type="text" [field]="column.fieldName" placeholder="Search by name"
-                        display="menu" />
+                    <p-columnFilter type="text" [field]="column.fieldName" placeholder="Search by name" display="menu" />
                     }
 
                     }
@@ -111,8 +107,7 @@
             <td *ngFor="let col of columns">
 
                 @if(col.templateRefId){
-                <ng-container
-                    *ngTemplateOutlet="this.getColumnTemplate(col.templateRefId);context:{ $implicit: rowData, index: rowIndex, col: col }">
+                <ng-container *ngTemplateOutlet="this.getColumnTemplate(col.templateRefId);context:{ $implicit: rowData, index: rowIndex, col: col }">
                 </ng-container>
                 }
                 @else if(col.fieldType== fieldTypesEnum.Boolean){
@@ -132,8 +127,7 @@
                 <i class="pi" *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.OnlyCloseNoColor"
                     [ngClass]="{ 'pi-times-circle': !rowData[col.fieldName] }"></i>
 
-                <p-checkbox *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.Checkbox" readonly binary="true"
-                    [(ngModel)]="rowData[col.fieldName]" />
+                <p-checkbox *ngIf="boolCol.displayStyle==booleanColumnDisplayEnum.Checkbox" readonly binary="true" [(ngModel)]="rowData[col.fieldName]" />
                 }
                 @else{
                 {{ rowData[col.fieldName] }}

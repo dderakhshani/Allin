@@ -14,15 +14,15 @@
 
                 @if (filter.column.fieldType===FieldTypes.DropDown ||
                 filter.column.fieldType===FieldTypes.Enum) {
-                <ng-container *ngIf="filter.column.itemsSource">
-                    <ng-container *ngIf="(filter.column.itemsSource?.items$ | async) as items">
-                        "{{getItemsSourceValue(filter.column,items,filter.value)}}"
+                <ng-container *ngIf="(filter.column | as : tableDropDownColumn).itemsSource">
+                    <ng-container *ngIf="(((filter.column | as : tableDropDownColumn).itemsSource.items) | observableOrArray  | async)! as items">
+                        "{{getItemsSourceValue((filter.column | as : tableDropDownColumn),items,filter.values[0])}}"
                     </ng-container>
                 </ng-container>
                 }
                 @else {
                 <ng-container *ngIf="filter.column.fieldType===FieldTypes.Date">
-                    "{{filter.value | date}}"
+                    "{{filter.values[0] | date}}"
                 </ng-container>
 
                 <ng-container *ngIf="filter.column.fieldType!==FieldTypes.Date">
@@ -34,7 +34,7 @@
             }
 
         </div>
-        @if (filters?.length>1) {
+        @if (filters && filters.length>1) {
         <p-button label="Clear" icon="pi pi-filter-slash" variant="outlined" class="ml-10" (click)="removeAll()" />
         }
 

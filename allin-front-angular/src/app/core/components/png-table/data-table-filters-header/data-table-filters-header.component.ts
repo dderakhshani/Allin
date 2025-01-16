@@ -5,6 +5,8 @@ import { FilterQueryCondition } from '../models/query.models';
 import { Chip } from 'primeng/chip';
 import { FieldTypesEnum, TableColumnBase, TableDropDownColumn } from '../models/table-column-model';
 import { BasicModule } from '../../../basic.module';
+import { AsPipe } from '../../../pipes/as.pipe';
+import { ObservableOrArrayPipe } from '../../../pipes/observable-array.pipe';
 
 @Component({
     selector: 'c-data-table-filters-header',
@@ -13,11 +15,14 @@ import { BasicModule } from '../../../basic.module';
     standalone: true,
     imports: [
         BasicModule,
-        Chip
+        Chip,
+        AsPipe,
+        ObservableOrArrayPipe
     ]
 })
 export class DataTableFiltersHeaderComponent implements OnInit {
 
+    tableDropDownColumn = TableDropDownColumn;
     FieldTypes = FieldTypesEnum;
 
     Object = Object;

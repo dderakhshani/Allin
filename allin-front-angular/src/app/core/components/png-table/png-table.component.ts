@@ -54,7 +54,7 @@ export class PngTableComponent {
     tableDropDownColumn = TableDropDownColumn;
     filterControlEnum = FilterControlEnum;
 
-    @ContentChild('expandedRow', { static: true }) contentTemplate?: TemplateRef<any>;
+    @ContentChild('expandedRow', { static: true }) contentTemplate!: TemplateRef<any> | null;
 
     public columnsTemplateMap: Map<string, TemplateRef<any>> = new Map();
     @ContentChildren(TemplateRef, { descendants: true })
@@ -96,6 +96,9 @@ export class PngTableComponent {
 
     manipulateDataCallback?: (value: PagedList<any[]>) => PagedList<any[]>;
 
+    currentFilters: FilterQueryCondition[] = [];
+    cachedQueryParamModel: QueryParamModel = <QueryParamModel>{};
+
     queryPaging: QueryPaging = {
         pageSize: 10,
         pageIndex: 0
@@ -117,7 +120,7 @@ export class PngTableComponent {
             const t = this.fetchDataTrigger();
 
             if (this.configOptions.internaLoadFetch)
-                this.getDataFromServer({});
+                this.getDataFromServer();
         });
 
     }
@@ -158,8 +161,6 @@ export class PngTableComponent {
         this.queryPaging.pageSize = e.rows;
     }
 
-
-    currentFilters: FilterQueryCondition[] = [];
     filterChanged(e: TableFilterEvent) {
         this.currentFilters = [];
         for (var key in e.filters) {
@@ -168,7 +169,6 @@ export class PngTableComponent {
                 this.currentFilters = this.currentFilters ?? {};
                 this.currentFilters = [... this.currentFilters, ...qc];
             }
-
         }
     }
 
@@ -176,11 +176,10 @@ export class PngTableComponent {
         this.currentFilters = filters;
         this.queryPaging.pageIndex = 0;
         if (this.configOptions.internaLoadFetch)
-            this.getDataFromServer({});
+            this.getDataFromServer();
     }
 
-    getDataFromServer(event: TableLazyLoadEvent) {
-
+    lazyLoad(event: TableLazyLoadEvent) {
         let conditions: ServerQueryCondition[] = [];
         for (var key in event.filters) {
             const qc = new QueryFilterHelper(this.columns.find(x => x.fieldName == key)!, event.filters[key]).toServerCondition();
@@ -189,8 +188,7 @@ export class PngTableComponent {
             }
 
         }
-
-        const queryParams = <QueryParamModel>{
+        this.cachedQueryParamModel = <QueryParamModel>{
             pagingProperties: this.queryPaging,
             group: "",
             columnsNamesToShow: [],
@@ -198,13 +196,15 @@ export class PngTableComponent {
             orderByProperties: event.multiSortMeta?.map(x => x.field + " " + (x.order == 1 ? "asc" : "desc")).join(", ").trim() ?? "",
             searchTerm: event.globalFilter
         };
+    }
 
+    getDataFromServer() {
         this.loading = true;
         this.onLoadingStateChange.emit(this.loading);
         if (this.dataApiUrl?.queryStringParams)
-            this.dataApiUrl.queryStringParams = { ...this.dataApiUrl.queryStringParams, ... this.convertToQueryString(queryParams) };
+            this.dataApiUrl.queryStringParams = { ...this.dataApiUrl.queryStringParams, ... this.convertToQueryString(this.cachedQueryParamModel) };
         else if (this.dataApiUrl)
-            this.dataApiUrl.queryStringParams = this.convertToQueryString(queryParams);
+            this.dataApiUrl.queryStringParams = this.convertToQueryString(this.cachedQueryParamModel);
 
         this.httpService.getData<PagedList<any[]>>(this.dataApiUrl!)
             .pipe(
