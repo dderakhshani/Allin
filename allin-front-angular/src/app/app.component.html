@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="flex flex-col h-full">
     <!-- Toolbar -->
     <header class="flex border-l border-b shadow">
@@ -10,8 +11,7 @@
                 <div class="flex items-center ">
 
                     <p-divider layout="vertical"></p-divider>
-                    <p-button class="me-2" type="button" icon="pi pi-bars" variant="text"
-                        (click)="toggleDrawer()"></p-button>
+                    <p-button class="me-2" type="button" icon="pi pi-bars" variant="text" (click)="toggleDrawer()"></p-button>
                 </div>
 
             </ng-template>
@@ -51,6 +51,7 @@
 
         <!-- Main Content Area -->
         <main class="flex flex-grow  overflow-hidden max-h-[calc(100vh-57px)]">
+
             <p-tabs [value]="activeTab" class="flex-grow">
                 <p-tablist>
                     @for (tab of openedTabs; track tab.routerLink) {
@@ -58,8 +59,7 @@
                         <i class="material-symbols-outlined mr-4">{{tab.icon}}</i>
                         {{ tab.label }}
 
-                        <p-button type="button" class="me-2" icon="pi pi-times" variant="text" [rounded]="true"
-                            severity="secondary"></p-button>
+                        <p-button type="button" class="me-2" icon="pi pi-times" variant="text" [rounded]="true" severity="secondary"></p-button>
                     </p-tab>
                     }
                 </p-tablist>

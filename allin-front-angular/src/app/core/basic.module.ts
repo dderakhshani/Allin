@@ -37,17 +37,16 @@ import { FormControlPipe } from './pipes/form-control.pipe';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+
         ButtonModule,
         CheckboxModule,
         InputTextModule,
         TreeSelect,
-
         IconFieldModule,
         InputIconModule,
         MultiSelectModule,
         DropdownModule,
         DividerModule,
-        MessageModule,
         InputNumber,
         TranslatePipe,
         TranslateDirective,

@@ -19,13 +19,12 @@ import { Ripple } from 'primeng/ripple';
 import { ToggleSwitch } from 'primeng/toggleswitch';
 import { DividerModule } from 'primeng/divider';
 import { MenuService } from './core/services/menu.service';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
     selector: 'app-root',
     standalone: true,
     imports: [RouterOutlet,
-        TranslatePipe,
-        TranslateDirective,
         BasicModule,
         ToolbarModule,
         ToggleButtonModule,
@@ -37,8 +36,8 @@ import { MenuService } from './core/services/menu.service';
         AvatarModule,
         ToggleSwitch,
         MenuComponent,
-        DividerModule,
-        Ripple
+        ToastModule,
+        Ripple,
     ],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'

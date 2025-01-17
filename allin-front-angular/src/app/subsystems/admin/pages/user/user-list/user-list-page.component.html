@@ -2,22 +2,16 @@
 
     <ng-container toolbar>
         <div class="p-toolbar-group-end ">
-            <p-button [label]="'admin.create-user' | translate" icon="pi pi-plus" class="mr-2"
-                (onClick)="openAddUser()" />
+            <p-button [label]="'admin.create-user' | translate" icon="pi pi-plus" class="mr-2" (onClick)="openAddUser()" />
         </div>
     </ng-container>
     <div class="flex flex-col h-full">
-        <p-message [closable]="false">
-            {{'admin.user.msg1' | translate}}
-        </p-message>
 
         <div class="pt-2 h-full">
-            <app-png-table [columns]="columns" [dataSource]="customers" [isRowExapandable]="true"
-                (onRowExpand)="loadInnerData($event)">
+            <app-png-table [columns]="columns" [dataSource]="customers" [isRowExapandable]="true" (onRowExpand)="loadInnerData($event)">
 
                 <div custom-filters>
-                    <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"
-                        placeholder="Select a City" />
+                    <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" placeholder="Select a City" />
                 </div>
 
                 <ng-template let-rowData templateForColumn="countryColumnTemplate">

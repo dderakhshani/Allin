@@ -1,16 +1,19 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { API_BASE_URL } from './core/services/base.http.service';
 import { environment } from '../environments/environment';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateService, TranslateLoader } from "@ngx-translate/core";
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { providePrimeNG } from 'primeng/config';
 import { definePreset } from '@primeng/themes';
 import Aura from '@primeng/themes/aura';
+import { httpErrorsInterceptor } from './core/interceptors/http-errors.interceptor';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
     new TranslateHttpLoader(http, './i18n/', '.json');
@@ -46,8 +49,11 @@ export const appConfig: ApplicationConfig = {
                 }
             }
         }),
-        provideHttpClient(),
+
         { provide: API_BASE_URL, useValue: `${environment.baseUrl}/api` },
+        provideHttpClient(withInterceptors([httpErrorsInterceptor])),
+        MessageService,
+        importProvidersFrom(ToastModule),
         provideTranslateService({
             defaultLanguage: 'en',
             loader: {
