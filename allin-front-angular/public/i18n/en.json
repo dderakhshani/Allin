@@ -34,6 +34,10 @@
         "title": "Department Name",
         "code": "Department Code"
     },
+    "position": {
+        "title": "Position Name",
+        "create-position": "Add Position"
+    },
     "admin": {
         "create-employee": "Add Employee",
         "create-person": "Add Person",

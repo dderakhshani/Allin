@@ -1,51 +1,50 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { TreeTableModule } from 'primeng/treetable';
-import { DepartmentModel } from '../../../../models/queries/department-model';
 import { BasicModule } from '../../../../../../core/basic.module';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { DepartmentService } from '../../../../apis/department.service';
+import { PositionModel } from '../../../../models/queries/position-model';
+import { PositionService } from '../../../../apis/position.service';
 
 @Component({
-  selector: 'app-position-grid',
-  standalone: true,
-  imports: [
-    BasicModule,
-    TreeTableModule],
-  templateUrl: './position-grid.component.html',
-  styleUrl: './position-grid.component.scss'
+    selector: 'app-position-grid',
+    standalone: true,
+    imports: [
+        BasicModule,
+        TreeTableModule],
+    templateUrl: './position-grid.component.html',
+    styleUrl: './position-grid.component.scss'
 })
 export class PositionGridComponent {
 
-  @Input()
-  data?: TreeNode<DepartmentModel>[];
+    @Input()
+    data?: TreeNode<PositionModel>[];
 
-  @Output()
-  onAddChildClick = new EventEmitter<DepartmentModel>();
-  @Output()
-  onEditClick = new EventEmitter<DepartmentModel>();
-  @Output()
-  onDeleteClick = new EventEmitter<DepartmentModel>();
+    @Output()
+    onAddChildClick = new EventEmitter<PositionModel>();
+    @Output()
+    onEditClick = new EventEmitter<PositionModel>();
+    @Output()
+    onDeleteClick = new EventEmitter<PositionModel>();
 
-  ref: DynamicDialogRef | undefined;
+    ref: DynamicDialogRef | undefined;
 
-  constructor(public dialogService: DialogService,
-    private departmentService: DepartmentService,
-  ) { }
+    constructor(public dialogService: DialogService,
+    ) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  addChildClick(item: DepartmentModel) {
-    this.onAddChildClick.emit(item);
-  }
+    addChildClick(item: PositionModel) {
+        this.onAddChildClick.emit(item);
+    }
 
-  editClick(item: DepartmentModel) {
-    this.onEditClick.emit(item);
-  }
+    editClick(item: PositionModel) {
+        this.onEditClick.emit(item);
+    }
 
-  deleteClick(item: DepartmentModel) {
-    this.onDeleteClick.emit(item);
-  }
+    deleteClick(item: PositionModel) {
+        this.onDeleteClick.emit(item);
+    }
 
 }
