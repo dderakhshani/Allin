@@ -32,7 +32,7 @@ export class PersonService {
         return this.baseHttpService.deleteData(
             {
                 controller: this.controllerPath,
-                action: 'delete',
+                action: '',
                 routeParameters: [id]
             });
     }

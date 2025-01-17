@@ -14,6 +14,8 @@ import { PersonService } from '../../../apis/person.service';
 import { PersonModel } from '../../../models/queries/person-model';
 import { NoToolbarCTableConfig } from '../../../../../core/components/png-table/models/table-config-options';
 import { environment } from '../../../../../../environments/environment';
+import { openConfirmDeleteDialog } from '../../../../../core/components/confirm-dialog/confirm-dialog.component';
+import { finalize } from 'rxjs';
 
 @Component({
     selector: 'app-person-list-page',
@@ -33,6 +35,12 @@ export class PersonListPageComponent {
 
     columns: TableColumnBase[] = [
         new TableTextColumn({
+            title: '',
+            rootFieldName: '',
+            templateRefId: 'actionColumnTemplate',
+            sortable: false,
+        }),
+        new TableTextColumn({
             title: 'First Name',
             rootFieldName: 'firstName',
         }),
@@ -48,18 +56,6 @@ export class PersonListPageComponent {
             title: 'Email',
             rootFieldName: 'email',
         }),
-        // new TableTextColumn({
-        //     title: 'Status',
-        //     rootFieldName: 'email',
-        //     templateRefId: 'statusColumnTemplate',
-        //     sortable: false,
-        // }),
-        // new TableBooleanColumn({
-        //     title: 'Verified',
-        //     rootFieldName: 'verified',
-        //     sortable: false,
-        //     displayStyle: BooleanColumnDisplayEnum.OnlyCheckColorFull
-        // })
     ];
 
     ref: DynamicDialogRef | undefined;
@@ -100,6 +96,41 @@ export class PersonListPageComponent {
         this.ref.onClose.subscribe((result: any) => {
             if (result) {
                 // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
+            }
+        });
+    }
+
+    editClick(item: PersonModel) {
+        // const config: PageDialogConfig = {
+        //     extraData: item,
+        //     component: EditRolePageComponent,
+        //     header: 'Edit Role',
+        //     description: 'this is a desciption of the Edit Role',
+        //     isFullScreen: false,
+        // };
+        // this.ref = openDialog(config, this.dialogService);
+        // this.ref.onClose.subscribe((result: any) => {
+        //     if (result) {
+        //         // this.fetchData(); //TODO: reloade grid data
+        //         // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
+        //     }
+        // });
+    }
+
+    deleteClick(item: PersonModel) {
+        //TODO: translate
+        this.ref = openConfirmDeleteDialog(`Are you sure you want to delete ${item.firstName} ${item.lastName}?`, this.dialogService);
+
+        this.ref.onClose.subscribe((result: any) => {
+            if (result) {
+                this.isLoading = true;
+                this.personService.delete(item.id)
+                    .pipe(finalize(() => {
+                        this.isLoading = false;
+                    }))
+                    .subscribe(response => {
+                        //TODO: reloade grid data
+                    });
             }
         });
     }
