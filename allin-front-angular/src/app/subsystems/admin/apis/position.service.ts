@@ -7,43 +7,43 @@ import { EditPositionCommand } from '../models/commands/edit-position-command';
 import { PositionModel } from '../models/queries/position-model';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class PositionService {
 
-  private readonly controllerPath = "position";
+    private readonly controllerPath = "position";
 
-  constructor(private baseHttpService: BaseHttpService) { }
+    constructor(private baseHttpService: BaseHttpService) { }
 
-  create(model: CreatePositionCommand): Observable<any> {
-    return this.baseHttpService.postJsonData({
-      controller: this.controllerPath, action: 'create'
-    }, model);
-  }
+    create(model: CreatePositionCommand): Observable<any> {
+        return this.baseHttpService.postJsonData({
+            controller: this.controllerPath, action: 'create'
+        }, model);
+    }
 
-  delete(id: number): Observable<boolean> {
-    return this.baseHttpService.deleteData(
-      {
-        controller: this.controllerPath,
-        action: '',
-        routeParameters: [id]
-      });
-  }
+    delete(id: number): Observable<boolean> {
+        return this.baseHttpService.deleteData(
+            {
+                controller: this.controllerPath,
+                action: '',
+                routeParameters: [id]
+            });
+    }
 
-  edit(model: EditPositionCommand): Observable<void> {
-    return this.baseHttpService.putJsonData({
-      controller: this.controllerPath,
-      action: 'edit'
-    }, model);
-  }
+    edit(model: EditPositionCommand): Observable<void> {
+        return this.baseHttpService.putJsonData({
+            controller: this.controllerPath,
+            action: 'edit'
+        }, model);
+    }
 
-  getAllTree(): Observable<TreeNode<PositionModel>[]> {
-    return this.baseHttpService.getData({
-      controller: this.controllerPath,
-      action: 'get-department-tree',
-      routeParameters: []
-    });
-  }
+    getAllTree(): Observable<TreeNode<PositionModel>[]> {
+        return this.baseHttpService.getData({
+            controller: this.controllerPath,
+            action: 'get-all-tree',
+            routeParameters: []
+        });
+    }
 
 
 }

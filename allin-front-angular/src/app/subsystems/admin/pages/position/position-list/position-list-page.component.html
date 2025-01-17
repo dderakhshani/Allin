@@ -1,1 +1,24 @@
-<p>position-list-page works!</p>
+<app-page-content [isLoading]="isLoading" [blockUI]="true">
+
+    <ng-container toolbar>
+        <div class="p-toolbar-group-end ">
+            <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label" optionValue="value" aria-labelledby="basic">
+                <ng-template #item let-item>
+                    <i [class]="item.icon"> {{item.label}}</i>
+                </ng-template>
+            </p-selectbutton>
+        </div>
+
+    </ng-container>
+
+
+    @if(selectedShowType=="chart"){
+    <app-position-chart [data]="positions" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)" (onDeleteClick)="deleteItem($event)"></app-position-chart>
+    }
+    @else if(selectedShowType=="grid"){
+    <app-position-grid [data]="positions" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)" (onDeleteClick)="deleteItem($event)"></app-position-grid>
+    }
+
+
+
+</app-page-content>
