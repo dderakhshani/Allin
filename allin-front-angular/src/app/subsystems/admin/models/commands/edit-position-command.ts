@@ -2,8 +2,6 @@
 export interface EditPositionCommand {
     id?: number;
     parentId?: number;
-    code?: string;
+    levelCode?: string;
     title?: string;
-    branchId?: number;
-    positionIds?: number[];
 }

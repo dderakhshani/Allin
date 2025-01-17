@@ -66,8 +66,8 @@ export class PositionListPageComponent {
         const config: PageDialogConfig = {
             extraData: parentItem,
             component: CreatePositionPageComponent,
-            header: 'Add New Department',
-            description: 'this is a desciption of the add person page',
+            header: 'Add New Position',
+            description: 'this is a desciption of the add Position page',
             isFullScreen: false,
         };
         this.ref = openDialog(config, this.dialogService);
@@ -82,8 +82,8 @@ export class PositionListPageComponent {
     openAddPosition() {
         const config: PageDialogConfig = {
             component: CreatePositionPageComponent,
-            header: 'Add New Department',
-            description: 'this is a desciption of the add person page',
+            header: 'Add New Position',
+            description: 'this is a desciption of the add Position page',
             isFullScreen: false,
         };
         this.ref = openDialog(config, this.dialogService);
@@ -99,8 +99,8 @@ export class PositionListPageComponent {
         const config: PageDialogConfig = {
             extraData: item,
             component: EditPositionPageComponent,
-            header: 'Edit Department',
-            description: 'this is a desciption of the Edit Department',
+            header: 'Edit Position',
+            description: 'this is a desciption of the Edit Position',
             isFullScreen: false,
         };
         this.ref = openDialog(config, this.dialogService);
