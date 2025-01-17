@@ -2,25 +2,21 @@
     <ng-template pTemplate="header">
         <tr>
             <th></th>
-            <th>Department Name</th>
-            <th>Code</th>
+            <th>Position Name</th>
 
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
         <tr [ttRow]="rowNode">
             <td>
-                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info"
-                    (onClick)="editClick(rowData)" />
-                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger"
-                    (onClick)="deleteClick(rowData)" />
+                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (onClick)="editClick(rowData)" />
+                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" />
                 <p-button label="Add Child" icon="pi pi-plus" (onClick)="addChildClick(rowData)" />
             </td>
             <td>
                 <p-treeTableToggler [rowNode]="rowNode" />
                 {{ rowData.title }}
             </td>
-            <td>{{ rowData.code }}</td>
 
         </tr>
     </ng-template>
