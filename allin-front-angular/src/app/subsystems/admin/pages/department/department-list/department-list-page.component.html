@@ -1,14 +1,11 @@
 <app-page-content [isLoading]="isLoading" [blockUI]="true">
 
-    <ng-container toolbar>
-        <div class="p-toolbar-group-end ">
-            <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label"
-                optionValue="value" aria-labelledby="basic">
-                <ng-template #item let-item>
-                    <i [class]="item.icon"> {{item.label}}</i>
-                </ng-template>
-            </p-selectbutton>
-        </div>
+    <ng-container toolbar-start>
+        <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label" optionValue="value" aria-labelledby="basic">
+            <ng-template #item let-item>
+                <i [class]="item.icon"> {{item.label}}</i>
+            </ng-template>
+        </p-selectbutton>
 
     </ng-container>
 

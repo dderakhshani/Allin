@@ -1,14 +1,13 @@
 <app-page-content [isLoading]="isLoading">
 
     <ng-container toolbar>
-        <div class="p-toolbar-group-end ">
-            <p-button [label]="'admin.create-role' | translate" icon="pi pi-plus" class="mr-2" (onClick)="openAdd()" />
-        </div>
+        <p-button [label]="'admin.create-role' | translate" icon="pi pi-plus" class="mr-2" (onClick)="openAdd()" />
     </ng-container>
     <div class="flex flex-col h-full">
 
         <div class="pt-2 h-full">
-            <app-png-table [columns]="columns" [dataApiUrl]="roleApiUrl" [fetchDataTrigger]="fetchDataTrigger" [isRowExapandable]="true" (onRowExpand)="loadInnerData($event)" (onLoadingStateChange)="isLoading=$event">
+            <app-png-table [columns]="columns" [dataApiUrl]="roleApiUrl" [fetchDataTrigger]="fetchDataTrigger" [isRowExapandable]="true"
+                (onRowExpand)="loadInnerData($event)" (onLoadingStateChange)="isLoading=$event">
                 <ng-template let-rowData templateForColumn="actionColumnTemplate">
                     <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (onClick)="editClick(rowData)" />
                     <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" />

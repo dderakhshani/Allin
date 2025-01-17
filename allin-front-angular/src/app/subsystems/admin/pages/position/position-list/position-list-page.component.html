@@ -1,21 +1,24 @@
 <app-page-content [isLoading]="isLoading" [blockUI]="true">
+    <ng-container toolbar-start>
+        <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label" optionValue="value" aria-labelledby="basic">
+            <ng-template #item let-item>
+                <i [class]="item.icon"> {{item.label}}</i>
+            </ng-template>
+        </p-selectbutton>
+    </ng-container>
+
     <ng-container toolbar>
-        <div class="p-toolbar-group-end ">
-            <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label" optionValue="value" aria-labelledby="basic">
-                <ng-template #item let-item>
-                    <i [class]="item.icon"> {{item.label}}</i>
-                </ng-template>
-            </p-selectbutton>
-            <p-button [label]="'position.create-position' | translate" icon="pi pi-plus" class="mr-2" (onClick)="openAddPosition()" />
-        </div>
+        <p-button [label]="'position.create-position' | translate" icon="pi pi-plus" class="ml-auto mr-2" (onClick)="openAddPosition()" />
     </ng-container>
 
 
     @if(selectedShowType=="chart"){
-    <app-position-chart [data]="positions" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)" (onDeleteClick)="deleteItem($event)"></app-position-chart>
+    <app-position-chart [data]="positions" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)"
+        (onDeleteClick)="deleteItem($event)"></app-position-chart>
     }
     @else if(selectedShowType=="grid"){
-    <app-position-grid [data]="positions" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)" (onDeleteClick)="deleteItem($event)"></app-position-grid>
+    <app-position-grid [data]="positions" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)"
+        (onDeleteClick)="deleteItem($event)"></app-position-grid>
     }
 
 

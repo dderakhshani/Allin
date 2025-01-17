@@ -6,7 +6,13 @@
 
     <header class="shadow z-50">
         <p-toolbar class="toolbar">
-            <ng-content select="[toolbar]"></ng-content>
+            <ng-template #start>
+                <ng-content select="[toolbar-start]"></ng-content>
+            </ng-template>
+            <ng-template #end>
+                <ng-content select="[toolbar-end]"></ng-content>
+                <ng-content select="[toolbar]"></ng-content>
+            </ng-template>
         </p-toolbar>
     </header>
 
