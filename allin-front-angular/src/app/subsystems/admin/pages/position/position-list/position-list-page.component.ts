@@ -79,6 +79,22 @@ export class PositionListPageComponent {
         });
     }
 
+    openAddPosition() {
+        const config: PageDialogConfig = {
+            component: CreatePositionPageComponent,
+            header: 'Add New Department',
+            description: 'this is a desciption of the add person page',
+            isFullScreen: false,
+        };
+        this.ref = openDialog(config, this.dialogService);
+        this.ref.onClose.subscribe((result: any) => {
+            if (result) {
+                this.fetchData();
+                // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
+            }
+        });
+    }
+
     openEdit(item: PositionModel) {
         const config: PageDialogConfig = {
             extraData: item,

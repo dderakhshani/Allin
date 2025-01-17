@@ -1,8 +1,6 @@
 
 export interface CreatePositionCommand {
     parentId?: number;
-    code?: string;
+    levelCode?: string;
     title?: string;
-    branchId?: number;
-    positionIds?: number[];
 }

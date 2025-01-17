@@ -1,5 +1,4 @@
 <app-page-content [isLoading]="isLoading" [blockUI]="true">
-
     <ng-container toolbar>
         <div class="p-toolbar-group-end ">
             <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label" optionValue="value" aria-labelledby="basic">
@@ -7,8 +6,8 @@
                     <i [class]="item.icon"> {{item.label}}</i>
                 </ng-template>
             </p-selectbutton>
+            <p-button [label]="'position.create-position' | translate" icon="pi pi-plus" class="mr-2" (onClick)="openAddPosition()" />
         </div>
-
     </ng-container>
 
 
