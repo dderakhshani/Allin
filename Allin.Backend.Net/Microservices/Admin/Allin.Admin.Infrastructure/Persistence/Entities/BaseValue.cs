@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Allin.Common.Data;
-namespace Allin.Admin.Infrastructure.Persistence;
+﻿namespace Allin.Admin.Infrastructure.Persistence;
 
-public class BaseValue : AdminBaseEntity 
+public class BaseValue : AdminBaseEntity
 {
-  public long BaseValueTypeId { get; set; }
-  public long? ParentId { get; set; }
-  public string BaseValueTitle { get; set; } = null!;
-  public short Order { get; set; }
-  public int Value { get; set; }
-  public string Description { get; set; } = null!;
+    public long BaseValueTypeId { get; set; }
+    public long? ParentId { get; set; }
+    public string BaseValueTitle { get; set; } = null!;
+    public short Order { get; set; }
+    public int Value { get; set; }
+    public string Description { get; set; } = null!;
     public virtual BaseValueType BaseValueType { get; set; } = null!;
 }
