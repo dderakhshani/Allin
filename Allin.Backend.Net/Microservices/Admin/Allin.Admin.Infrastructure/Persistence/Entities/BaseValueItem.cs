@@ -8,5 +8,5 @@ public class BaseValueItem : AdminBaseEntity
     public short Order { get; set; }
     public int Value { get; set; }
     public string? Description { get; set; } = null!;
-    public virtual BaseValueType BaseValueType { get; set; } = null!;
+    public virtual BaseValue BaseValue { get; set; } = null!;
 }

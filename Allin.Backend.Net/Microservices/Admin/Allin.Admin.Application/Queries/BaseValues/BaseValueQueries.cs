@@ -25,9 +25,9 @@ namespace Allin.Admin.Application.Queries
             return await DbContext.BaseValueItems.AsNoTracking().ProjectTo<BaseValueItemModel>(MapperProvider).ToListAsync();
         }
 
-        public async Task<IEnumerable<BaseValueTypeModel>> GetAllBaseValueTypes(CancellationToken cancellationToken)
+        public async Task<IEnumerable<BaseValueModel>> GetAllBaseValueTypes(CancellationToken cancellationToken)
         {
-            return await DbContext.BaseValueTypes.AsNoTracking().ProjectTo<BaseValueTypeModel>(MapperProvider).ToListAsync();
+            return await DbContext.BaseValues.AsNoTracking().ProjectTo<BaseValueModel>(MapperProvider).ToListAsync();
         }
 
         public async Task<BaseValueItemModel> GetById(long id, CancellationToken cancellationToken)
@@ -39,5 +39,6 @@ namespace Allin.Admin.Application.Queries
         {
             return await DbContext.BaseValueItems.Where(x => x.BaseValueId == valueTypeId).AsNoTracking().ProjectTo<BaseValueItemModel>(MapperProvider).ToListAsync();
         }
+
     }
 }

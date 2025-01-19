@@ -1,6 +1,6 @@
 ﻿namespace Allin.Admin.Infrastructure.Persistence;
 
-public class BaseValueType : AdminBaseEntity
+public class BaseValue : AdminBaseEntity
 {
     public string Title { get; set; } = null!;
     public string? Description { get; set; }
