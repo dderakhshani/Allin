@@ -8,5 +8,7 @@ namespace Allin.Admin.Application.Queries
         Task<PagedList<BaseValueModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken);
         Task<IEnumerable<BaseValueModel>> GetAll(CancellationToken cancellationToken);
         Task<BaseValueModel> GetById(long id, CancellationToken cancellationToken);
+        Task<IEnumerable<BaseValueModel>> GetByValueTypeId(long valueTypeId, CancellationToken cancellationToken);
+        Task<IEnumerable<BaseValueTypeModel>> GetAllBaseValueTypes(CancellationToken cancellationToken);
     }
 }

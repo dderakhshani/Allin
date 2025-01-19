@@ -1,4 +1,5 @@
-﻿using Allin.Admin.Application.Queries;
+﻿using Allin.Admin.Application.Commands;
+using Allin.Admin.Application.Queries;
 using Allin.Common.Web;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -30,10 +31,42 @@ namespace Allin.Admin.ServiceApi.Controllers
             return OkResult(await _baseValueQueries.GetAll(cancellationToken));
         }
 
-        //[HttpGet("get-time")]
-        //public async Task<IActionResult> GetAllBaseValues(CancellationToken cancellationToken)
-        //{
-        //    return OkResult(await _baseValueQueries.GetAll(cancellationToken));
-        //}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(long id, CancellationToken cancellationToken)
+        {
+            return OkResult(await _baseValueQueries.GetById(id, cancellationToken));
+        }
+
+        [HttpGet("get-by-value-type-id/{valueTypeId}")]
+        public async Task<IActionResult> GetByValueTypeId(long valueTypeId, CancellationToken cancellationToken)
+        {
+            return OkResult(await _baseValueQueries.GetByValueTypeId(valueTypeId, cancellationToken));
+        }
+
+        [HttpGet("get-all-type-values")]
+        public async Task<IActionResult> GetAllTypeValues(CancellationToken cancellationToken)
+        {
+            return OkResult(await _baseValueQueries.GetAllBaseValueTypes(cancellationToken));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateBaseValueCommand request, CancellationToken cancellationToken)
+        {
+            return await SendCommand(request, cancellationToken);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Edit([FromBody] EditBaseValueCommand request, CancellationToken cancellationToken)
+        {
+            return await SendCommand(request, cancellationToken);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] long id, CancellationToken cancellationToken)
+        {
+            return await SendCommand(new DeleteBaseValueCommand(id), cancellationToken);
+        }
+
+
     }
 }

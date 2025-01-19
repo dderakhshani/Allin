@@ -6,19 +6,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class DeleteBranchCommandHandler : AdminCommandHandler<DeleteBranchCommand, bool>
+    public class DeleteBaseValueCommandHandler : AdminCommandHandler<DeleteBaseValueCommand, bool>
     {
         private readonly IExceptionProvider _exceptionProvider;
-        public DeleteBranchCommandHandler(AdminDbContext dbContext, IMapper mapper, IExceptionProvider exceptionProvider) : base(dbContext, mapper)
+        public DeleteBaseValueCommandHandler(AdminDbContext dbContext, IMapper mapper, IExceptionProvider exceptionProvider) : base(dbContext, mapper)
         {
             _exceptionProvider = exceptionProvider;
         }
 
-        public override async Task<bool> Handle(DeleteBranchCommand request, CancellationToken cancellationToken)
+        public override async Task<bool> Handle(DeleteBaseValueCommand request, CancellationToken cancellationToken)
         {
-            var branch = await DbContext.Branchs.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
+            var BaseValue = await DbContext.BaseValues.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
 
-            DbContext.Branchs.Remove(branch);
+            DbContext.BaseValues.Remove(BaseValue);
 
             await DbContext.SaveChangesAsync();
 
