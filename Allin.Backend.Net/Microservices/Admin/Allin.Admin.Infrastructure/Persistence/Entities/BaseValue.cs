@@ -4,9 +4,9 @@ public class BaseValue : AdminBaseEntity
 {
     public long BaseValueTypeId { get; set; }
     public long? ParentId { get; set; }
-    public string BaseValueTitle { get; set; } = null!;
+    public string Title { get; set; } = null!;
     public short Order { get; set; }
     public int Value { get; set; }
-    public string Description { get; set; } = null!;
+    public string? Description { get; set; } = null!;
     public virtual BaseValueType BaseValueType { get; set; } = null!;
 }
