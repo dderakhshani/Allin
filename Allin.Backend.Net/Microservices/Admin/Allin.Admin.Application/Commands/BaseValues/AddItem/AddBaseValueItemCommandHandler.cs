@@ -4,13 +4,13 @@ using AutoMapper;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class AddBaseValueCommandHandler : AdminCommandHandler<AddBaseValueCommand, bool>
+    public class AddBaseValueItemCommandHandler : AdminCommandHandler<AddBaseValueItemCommand, bool>
     {
-        public AddBaseValueCommandHandler(AdminDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public AddBaseValueItemCommandHandler(AdminDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 
-        public override async Task<bool> Handle(AddBaseValueCommand request, CancellationToken cancellationToken)
+        public override async Task<bool> Handle(AddBaseValueItemCommand request, CancellationToken cancellationToken)
         {
             var entity = Mapper.Map<BaseValueItem>(request);
 

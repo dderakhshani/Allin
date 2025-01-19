@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class AddBaseValueCommand : IRequest<bool>, IMapFrom<BaseValueItem, AddBaseValueCommand>
+    public class AddBaseValueItemCommand : IRequest<bool>, IMapFrom<BaseValueItem, AddBaseValueItemCommand>
     {
-        public long BaseValueTypeId { get; set; }
+        public long BaseValueId { get; set; }
         public long? ParentId { get; set; }
         public required string Title { get; set; }
         public short Order { get; set; }

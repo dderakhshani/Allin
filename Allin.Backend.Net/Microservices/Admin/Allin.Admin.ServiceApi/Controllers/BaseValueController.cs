@@ -49,8 +49,15 @@ namespace Allin.Admin.ServiceApi.Controllers
             return OkResult(await _baseValueQueries.GetAllBaseValueTypes(cancellationToken));
         }
 
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] CreateBaseValueCommand request, CancellationToken cancellationToken)
+        {
+            return await SendCommand(request, cancellationToken);
+        }
+
+
         [HttpPost("add")]
-        public async Task<IActionResult> Create([FromBody] AddBaseValueCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create([FromBody] AddBaseValueItemCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);
         }
