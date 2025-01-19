@@ -12,9 +12,9 @@ namespace Allin.Admin.Application.Commands
 
         public override async Task<bool> Handle(AddBaseValueCommand request, CancellationToken cancellationToken)
         {
-            var entity = Mapper.Map<BaseValue>(request);
+            var entity = Mapper.Map<BaseValueItem>(request);
 
-            DbContext.BaseValues.Add(entity);
+            DbContext.BaseValueItems.Add(entity);
             await DbContext.SaveChangesAsync(cancellationToken);
 
             return true;

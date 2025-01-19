@@ -16,7 +16,7 @@ namespace Allin.Admin.Infrastructure.Persistence
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<BaseValue> BaseValues { get; set; }
+        public DbSet<BaseValueItem> BaseValueItems { get; set; }
         public DbSet<Branch> Branchs { get; set; }
         public DbSet<BaseValueType> BaseValueTypes { get; set; }
         public DbSet<Department> Departments { get; set; }

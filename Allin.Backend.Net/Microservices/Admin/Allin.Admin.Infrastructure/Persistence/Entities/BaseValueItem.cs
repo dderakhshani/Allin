@@ -1,8 +1,8 @@
 ﻿namespace Allin.Admin.Infrastructure.Persistence;
 
-public class BaseValue : AdminBaseEntity
+public class BaseValueItem : AdminBaseEntity
 {
-    public long BaseValueTypeId { get; set; }
+    public long BaseValueId { get; set; }
     public long? ParentId { get; set; }
     public string Title { get; set; } = null!;
     public short Order { get; set; }

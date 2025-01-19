@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Allin.Admin.Infrastructure.Persistence
 {
-    public class BaseValueConfiguration : AdminTypeConfiguration<BaseValue>
+    public class BaseValueItemConfiguration : AdminTypeConfiguration<BaseValueItem>
     {
-        public override void Configure(EntityTypeBuilder<BaseValue> builder)
+        public override void Configure(EntityTypeBuilder<BaseValueItem> builder)
         {
-            builder.ToTable("BaseValues", "Admin");
+            builder.ToTable("BaseValueItems", "Admin");
 
             base.Configure(builder);
         }
