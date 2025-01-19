@@ -9,7 +9,7 @@ public class Employee : AdminBaseEntity
     public long ContractTypeBaseId { get; set; }
     public bool Floating { get; set; }
     public DateTime? LeaveDate { get; set; }
-    public virtual BaseValue ContractTypeBase { get; set; } = null!;
+    public virtual BaseValueItem ContractTypeBase { get; set; } = null!;
     public virtual DepartmentPosition? DepartmentPosition { get; set; }
     public virtual Person Person { get; set; } = null!;
     public virtual ICollection<User> Users { get; set; } = new List<User>();

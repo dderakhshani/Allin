@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Allin.Admin.Application.Commands
 {
-    public class AddBaseValueCommand : IRequest<bool>, IMapFrom<BaseValue, AddBaseValueCommand>
+    public class AddBaseValueCommand : IRequest<bool>, IMapFrom<BaseValueItem, AddBaseValueCommand>
     {
         public long BaseValueTypeId { get; set; }
         public long? ParentId { get; set; }

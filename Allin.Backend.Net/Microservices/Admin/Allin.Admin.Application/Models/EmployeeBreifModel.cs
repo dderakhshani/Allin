@@ -20,7 +20,7 @@ namespace Allin.Admin.Application.Models
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Employee, BreifEmployeeModel>()
-                    .ForMember(dest => dest.ContractTypeBaseTitle, opt => opt.MapFrom(src => src.ContractTypeBase.BaseValueTitle))
+                    .ForMember(dest => dest.ContractTypeBaseTitle, opt => opt.MapFrom(src => src.ContractTypeBase.Title))
 
                     .ForMember(dest => dest.DepartmentTitle, opt => opt.MapFrom(src => src.DepartmentPosition.Department.Title))
 
