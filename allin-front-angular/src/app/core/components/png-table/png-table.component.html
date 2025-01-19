@@ -5,7 +5,6 @@
     (onRowExpand)="rowExpand($event)" (onRowCollapse)="rowCollapse($event)" (onPage)="pageChanged($event)" (onFilter)="filterChanged($event)">
     <ng-template pTemplate="caption">
         <div class="flex items-center">
-
             <p-iconField iconPosition="left" class="ml-2">
                 <p-inputIcon>
                     <i class="pi pi-search"></i>
@@ -138,12 +137,12 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
         <tr>
-            <td colspan="5">{{emptymMessage}}</td>
+            <td [attr.colspan]="realColumnCount">{{emptymMessage}}</td>
         </tr>
     </ng-template>
     <ng-template #expandedrow let-rowData let-rowIndex>
         <tr>
-            <td colspan="7">
+            <td [attr.colspan]="realColumnCount">
                 <ng-container *ngTemplateOutlet="contentTemplate; context: { rowData: rowData, rowIndex: rowIndex }">
                 </ng-container>
             </td>

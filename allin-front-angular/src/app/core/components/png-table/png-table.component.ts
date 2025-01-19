@@ -240,6 +240,10 @@ export class PngTableComponent {
         this.onRowCollapse.emit(event.data);
     }
 
+    get realColumnCount() {
+        return this.columns.length + (this.isRowExapandable ? 1 : 0) + (this.isRowselectable ? 1 : 0)
+    }
+
 
     private convertToQueryString(queryParam: QueryParamModel): { [key: string]: string | number | boolean } {
         const queryStringParams: { [key: string]: string | number | boolean } = {};
