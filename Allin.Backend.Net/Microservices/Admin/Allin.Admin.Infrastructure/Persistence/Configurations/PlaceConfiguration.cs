@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Allin.Admin.Infrastructure.Persistence
 {
-    public class LocationConfiguration : AdminTypeConfiguration<Location>
+    public class PlaceConfiguration : AdminTypeConfiguration<Place>
     {
-        public override void Configure(EntityTypeBuilder<Location> builder)
+        public override void Configure(EntityTypeBuilder<Place> builder)
         {
-            builder.ToTable("Locations", "Admin");
+            builder.ToTable("Places", "Organization");
 
             base.Configure(builder);
         }

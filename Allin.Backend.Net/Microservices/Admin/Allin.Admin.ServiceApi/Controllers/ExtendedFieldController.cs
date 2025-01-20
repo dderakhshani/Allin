@@ -24,10 +24,10 @@ namespace Allin.Admin.ServiceApi.Controllers
             return OkResult(await _tableExtendedFieldQueries.GetByTableName(tablName, cancellationToken));
         }
 
-        [HttpGet("get-all")]
-        public async Task<IActionResult> GetAll([FromQuery] QueryParamModel param, CancellationToken cancellationToken)
+        [HttpGet("get-all/{tableName}")]
+        public async Task<IActionResult> GetAll([FromRoute] string tableName, [FromQuery] QueryParamModel param, CancellationToken cancellationToken)
         {
-            return OkResult(await _tableExtendedFieldQueries.GetAll(param, cancellationToken));
+            return OkResult(await _tableExtendedFieldQueries.GetAll(tableName, param, cancellationToken));
         }
 
         [HttpPost]
@@ -45,7 +45,14 @@ namespace Allin.Admin.ServiceApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] long id, CancellationToken cancellationToken)
         {
-            return await SendCommand(new DeleteBranchCommand(id), cancellationToken);
+            return await SendCommand(new DeleteTableExtendedFieldCommand(id), cancellationToken);
+        }
+
+
+        [HttpDelete("delete-item/{id}")]
+        public async Task<IActionResult> DeleteItem([FromRoute] long id, CancellationToken cancellationToken)
+        {
+            return await SendCommand(new DeleteTableExtendedFieldItemCommand(id), cancellationToken);
         }
 
     }

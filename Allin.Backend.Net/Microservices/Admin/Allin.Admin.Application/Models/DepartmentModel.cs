@@ -1,5 +1,4 @@
-﻿using Allin.Admin.Application.Common;
-using Allin.Admin.Infrastructure.Persistence;
+﻿using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Models;
 using Allin.Common.Utilities.Mappings;
 

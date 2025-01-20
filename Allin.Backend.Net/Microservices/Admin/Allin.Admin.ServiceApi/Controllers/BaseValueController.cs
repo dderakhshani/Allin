@@ -37,10 +37,10 @@ namespace Allin.Admin.ServiceApi.Controllers
             return OkResult(await _baseValueQueries.GetById(id, cancellationToken));
         }
 
-        [HttpGet("get-by-value-type-id/{valueTypeId}")]
-        public async Task<IActionResult> GetByValueTypeId(long valueTypeId, CancellationToken cancellationToken)
+        [HttpGet("get-items/{baseValueId}")]
+        public async Task<IActionResult> GetByValueTypeId(long baseValueId, CancellationToken cancellationToken)
         {
-            return OkResult(await _baseValueQueries.GetByValueTypeId(valueTypeId, cancellationToken));
+            return OkResult(await _baseValueQueries.GetByBaseValueId(baseValueId, cancellationToken));
         }
 
         [HttpGet("get-all-type-values")]
@@ -72,6 +72,12 @@ namespace Allin.Admin.ServiceApi.Controllers
         public async Task<IActionResult> Delete([FromRoute] long id, CancellationToken cancellationToken)
         {
             return await SendCommand(new DeleteBaseValueCommand(id), cancellationToken);
+        }
+
+        [HttpDelete("delete-item/{id}")]
+        public async Task<IActionResult> DeleteItem([FromRoute] long id, CancellationToken cancellationToken)
+        {
+            return await SendCommand(new DeleteBaseValueItemCommand(id), cancellationToken);
         }
 
 

@@ -16,13 +16,13 @@ namespace Allin.Admin.Infrastructure.Persistence
             base.OnModelCreating(modelBuilder);
         }
 
-        public DbSet<BaseValueItem> BaseValueItems { get; set; }
-        public DbSet<Branch> Branchs { get; set; }
         public DbSet<BaseValue> BaseValues { get; set; }
+        public DbSet<Branch> Branchs { get; set; }
+        public DbSet<BaseValueItem> BaseValueItems { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<DepartmentPosition> DepartmentPositions { get; set; }
         public DbSet<Employee> Employeies { get; set; }
-        public DbSet<Location> Locations { get; set; }
+        public DbSet<Place> Locations { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Person> Persons { get; set; }

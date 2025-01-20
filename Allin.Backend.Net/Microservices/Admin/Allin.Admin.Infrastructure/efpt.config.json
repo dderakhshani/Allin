@@ -15,15 +15,11 @@
    "T4TemplatePath": null,
    "Tables": [
       {
+         "Name": "[admin].[BaseValueItems]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[admin].[BaseValues]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[admin].[BaseValueTypes]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[admin].[Locations]",
          "ObjectType": 0
       },
       {

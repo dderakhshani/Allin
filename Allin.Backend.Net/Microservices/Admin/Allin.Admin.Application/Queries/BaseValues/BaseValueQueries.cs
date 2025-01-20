@@ -3,6 +3,7 @@ using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Data;
 using Allin.Common.Data.QueryHelpers;
 using Allin.Common.Data.QueryHelpers.QueryResultMaker;
+using Allin.Common.Utilities;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
@@ -35,10 +36,9 @@ namespace Allin.Admin.Application.Queries
             return Mapper.Map<BaseValueItemModel>(await DbContext.BaseValueItems.AsNoTracking().FirstAsync(x => x.Id == id, cancellationToken));
         }
 
-        public async Task<IEnumerable<BaseValueItemModel>> GetByValueTypeId(long valueTypeId, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TreeNode<BaseValueItemModel>>> GetByBaseValueId(long valueTypeId, CancellationToken cancellationToken)
         {
-            return await DbContext.BaseValueItems.Where(x => x.BaseValueId == valueTypeId).AsNoTracking().ProjectTo<BaseValueItemModel>(MapperProvider).ToListAsync();
+            return (await DbContext.BaseValueItems.Where(x => x.BaseValueId == valueTypeId).AsNoTracking().ProjectTo<BaseValueItemModel>(MapperProvider).ToListAsync()).ToTreeModel(nameof(BaseValueItemModel.Title), nameof(BaseValueItemModel.Id));
         }
-
     }
 }

@@ -20,9 +20,7 @@
 
   <ItemGroup>
     <Folder Include="Commands\Roles\Delete\Validator\" />
-    <Folder Include="Commands\Users\Delete\" />
     <Folder Include="Commands\Users\ChangePassword\" />
-    <Folder Include="Commands\Users\Delete\" />
     <Folder Include="Queries\BaseValues\Params\" />
     <Folder Include="Queries\Users\Params\" />
     <Folder Include="Services\" />

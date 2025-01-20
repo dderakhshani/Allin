@@ -15,9 +15,9 @@ namespace Allin.Admin.Application.Queries
         {
         }
 
-        public async Task<PagedList<TableExtendedFieldModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken)
+        public async Task<PagedList<TableExtendedFieldModel>> GetAll(string tableName, QueryParamModel param, CancellationToken cancellationToken)
         {
-            return await DbContext.TableExtendedFields.Include(x => x.TableExtendedFieldItems).AsNoTracking().ProjectTo<TableExtendedFieldModel>(MapperProvider).ToPagedListAsync(param);
+            return await DbContext.TableExtendedFields.Where(x => x.TableName == tableName).Include(x => x.TableExtendedFieldItems).AsNoTracking().ProjectTo<TableExtendedFieldModel>(MapperProvider).ToPagedListAsync(param);
         }
 
         public async Task<TableExtendedFieldModel> GetById(long id, CancellationToken cancellationToken)
@@ -25,7 +25,7 @@ namespace Allin.Admin.Application.Queries
             return Mapper.Map<TableExtendedFieldModel>(await DbContext.TableExtendedFields.AsNoTracking().FirstAsync(x => x.Id == id, cancellationToken));
         }
 
-         public async Task<List<TableExtendedFieldModel>> GetByTableName(string tableName, CancellationToken cancellationToken)
+        public async Task<List<TableExtendedFieldModel>> GetByTableName(string tableName, CancellationToken cancellationToken)
         {
             // return Mapper.Map<TableExtendedFieldModel>(await DbContext.TableExtendedFields.AsNoTracking().FirstAsync(x => x.TableName == tableName, cancellationToken));
 

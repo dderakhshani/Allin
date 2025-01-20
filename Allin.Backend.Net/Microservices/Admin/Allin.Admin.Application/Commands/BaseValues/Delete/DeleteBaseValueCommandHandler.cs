@@ -16,9 +16,9 @@ namespace Allin.Admin.Application.Commands
 
         public override async Task<bool> Handle(DeleteBaseValueCommand request, CancellationToken cancellationToken)
         {
-            var BaseValue = await DbContext.Departments.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
+            var entity = await DbContext.BaseValues.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
 
-            DbContext.Departments.Remove(BaseValue);
+            DbContext.BaseValues.Remove(entity);
 
             await DbContext.SaveChangesAsync();
 

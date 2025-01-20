@@ -16,9 +16,9 @@ namespace Allin.Admin.Application.Commands
 
         public override async Task<bool> Handle(DeleteBranchCommand request, CancellationToken cancellationToken)
         {
-            var branch = await DbContext.Branchs.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
+            var Branch = await DbContext.Departments.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
 
-            DbContext.Branchs.Remove(branch);
+            DbContext.Departments.Remove(Branch);
 
             await DbContext.SaveChangesAsync();
 
