@@ -14,7 +14,7 @@ namespace Allin.Common.Configurations
             builder.Property<DateTime>("CreatedAt")
                             .IsRequired();
 
-            builder.Property<DateTime>("ModifiedAt");
+            builder.Property<DateTime?>("ModifiedAt");
 
             builder.Property<bool>("IsDeleted")
               .IsRequired();

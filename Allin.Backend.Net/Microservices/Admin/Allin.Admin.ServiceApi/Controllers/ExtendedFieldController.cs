@@ -37,7 +37,7 @@ namespace Allin.Admin.ServiceApi.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] EditBranchCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Edit([FromBody] EditTableExtendedFieldCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);
         }

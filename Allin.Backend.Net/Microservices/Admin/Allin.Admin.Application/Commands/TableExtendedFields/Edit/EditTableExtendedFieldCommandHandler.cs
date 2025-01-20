@@ -2,6 +2,7 @@
 using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Validations;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Allin.Admin.Application.Commands
 {
@@ -15,11 +16,15 @@ namespace Allin.Admin.Application.Commands
 
         public override async Task<bool> Handle(EditTableExtendedFieldCommand request, CancellationToken cancellationToken)
         {
-            //var branch = await DbContext.Branchs.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
+            var entity = await DbContext.TableExtendedFields.Include(x => x.TableExtendedFieldItems).FirstOrDefaultAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
 
-            //Mapper.Map(request, branch);
+            Mapper.Map(request, entity);
 
-            //await DbContext.SaveChangesAsync();
+            Mapper.Map(request.Items, entity.TableExtendedFieldItems);
+
+            DbContext.TableExtendedFields.Update(entity);
+
+            await DbContext.SaveChangesAsync();
 
             return true;
         }
