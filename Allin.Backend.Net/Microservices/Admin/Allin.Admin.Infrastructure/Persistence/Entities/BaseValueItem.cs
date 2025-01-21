@@ -11,6 +11,5 @@ public class BaseValueItem : AdminBaseEntity, IHierarchyEntity
     public short Order { get; set; }
     public int Value { get; set; }
     public string? Description { get; set; }
-    public BaseValueItem? Parent { get; set; }
-    public BaseValue BaseValue { get; set; }
+    public virtual BaseValue BaseValue { get; set; } = null!;
 }

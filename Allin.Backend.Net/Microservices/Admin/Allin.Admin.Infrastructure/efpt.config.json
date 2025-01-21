@@ -87,6 +87,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[organization].[Places]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[organization].[Positions]",
          "ObjectType": 0
       }

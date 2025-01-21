@@ -132,7 +132,7 @@ public class <#= EntityType.Name #> : AdminBaseEntity <#= EntityType.GetProperti
         }
 
         var targetType = navigation.TargetEntityType.Name;
-        if (EntityType.Name!="BaseValueItem" || targetType=="BaseValueType")
+        if (EntityType.Name!="BaseValueItem" || targetType=="BaseValue")
         if (navigation.IsCollection  )
         {
 #>
