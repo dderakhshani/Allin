@@ -38,6 +38,10 @@
         "title": "Position Name",
         "create-position": "Add Position"
     },
+    "place": {
+        "title": "Place Name",
+        "create-place": "Add Place"
+    },
     "admin": {
         "create-employee": "Add Employee",
         "create-person": "Add Person",

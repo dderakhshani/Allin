@@ -1,1 +1,24 @@
-<p>place-list-page works!</p>
+<app-page-content [isLoading]="isLoading" [blockUI]="true">
+    <ng-container toolbar-start>
+        <p-selectbutton [options]="stateOptions" [(ngModel)]="selectedShowType" optionLabel="label" optionValue="value" aria-labelledby="basic">
+            <ng-template #item let-item>
+                <i [class]="item.icon"> {{item.label}}</i>
+            </ng-template>
+        </p-selectbutton>
+    </ng-container>
+
+    <ng-container toolbar>
+        <p-button [label]="'place.create-place' | translate" icon="pi pi-plus" class="ml-auto mr-2" (onClick)="openAddPosition()" />
+    </ng-container>
+
+
+    @if(selectedShowType=="chart"){
+    <app-palce-chart [data]="places" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)" (onDeleteClick)="deleteItem($event)"></app-palce-chart>
+    }
+    @else if(selectedShowType=="grid"){
+    <app-palce-grid [data]="places" (onAddChildClick)="openAdd($event)" (onEditClick)="openEdit($event)" (onDeleteClick)="deleteItem($event)"></app-palce-grid>
+    }
+
+
+
+</app-page-content>
