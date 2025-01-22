@@ -17,13 +17,13 @@ export const Basevalue_ROUTES: Routes = [
     },
     {
         path: "edit",
-        component: BasevalueListPageComponent, data: {
+        component: EditBasevaluePageComponent, data: {
             title: 'edit basevalue'
         }
     },
     {
         path: "list",
-        component: EditBasevaluePageComponent, data: {
+        component: BasevalueListPageComponent, data: {
             title: 'basevalue list'
         }
     },
