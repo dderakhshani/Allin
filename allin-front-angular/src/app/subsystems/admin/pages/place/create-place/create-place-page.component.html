@@ -1,1 +1,6 @@
-<p>create-place-page works!</p>
+<div class="flex flex-col w-full space-y-5 p-5" [formGroup]="form">
+    <div class="flex flex-col space-y-2">
+        <label for="Title">{{'place.title' | translate}}</label>
+        <input pInputText id="title" [formControl]="form.controls.placeTitle" [ngClass]="{'ng-invalid ':  form.controls.placeTitle.invalid}" />
+    </div>
+</div>
