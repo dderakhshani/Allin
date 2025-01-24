@@ -1,5 +1,6 @@
 ﻿using Allin.Admin.Application.Commands;
 using Allin.Admin.Application.Queries;
+using Allin.Common.Data.QueryHelpers;
 using Allin.Common.Web;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -44,9 +45,9 @@ namespace Allin.Admin.ServiceApi.Controllers
         }
 
         [HttpGet("get-all-type-values")]
-        public async Task<IActionResult> GetAllTypeValues(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAllTypeValues([FromQuery] QueryParamModel param, CancellationToken cancellationToken)
         {
-            return OkResult(await _baseValueQueries.GetAllBaseValueTypes(cancellationToken));
+            return OkResult(await _baseValueQueries.GetAllBaseValueTypes(param, cancellationToken));
         }
 
         [HttpPost("create")]

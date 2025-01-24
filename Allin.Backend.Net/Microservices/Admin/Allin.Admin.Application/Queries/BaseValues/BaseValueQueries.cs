@@ -26,9 +26,9 @@ namespace Allin.Admin.Application.Queries
             return await DbContext.BaseValueItems.AsNoTracking().ProjectTo<BaseValueItemModel>(MapperProvider).ToListAsync();
         }
 
-        public async Task<IEnumerable<BaseValueModel>> GetAllBaseValueTypes(CancellationToken cancellationToken)
+        public async Task<PagedList<BaseValueModel>> GetAllBaseValueTypes(QueryParamModel param, CancellationToken cancellationToken)
         {
-            return await DbContext.BaseValues.AsNoTracking().ProjectTo<BaseValueModel>(MapperProvider).ToListAsync();
+            return await DbContext.BaseValues.AsNoTracking().ProjectTo<BaseValueModel>(MapperProvider).ToPagedListAsync(param, cancellationToken);
         }
 
         public async Task<BaseValueItemModel> GetById(long id, CancellationToken cancellationToken)
