@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Persistence\Complexes\" />
+    <Folder Include="Persistence\Configurations\" />
+    <Folder Include="Persistence\Entities\" />
+    <Folder Include="Persistence\Enums\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Allin.CommonLibrary\Allin.CommonLibrary.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Allin.SharedCore\Allin.SharedCore.csproj" />
+  </ItemGroup>
+
+</Project>
