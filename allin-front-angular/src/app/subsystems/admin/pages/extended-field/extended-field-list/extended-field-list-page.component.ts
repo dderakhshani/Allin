@@ -5,8 +5,10 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TableColumnBase, TableTextColumn } from '../../../../../core/components/png-table/models/table-column-model';
 import { openDialog, PageDialogConfig } from '../../../../../core/components/page-dialog/page-dialog.component';
 import { CreateExtendedFieldPageComponent } from '../create-extended-field/create-extended-field-page.component';
-import { ExtendedFieldsService } from '../../../../shared/apis/extended-fields.service';
 import { ExtendedFieldTableNamesEnum } from '../../../../shared/models/enums/extended-field-table-enum';
+import { ExtendedfieldNewService } from '../../../apis/extendedfield.service';
+import { finalize } from 'rxjs';
+import { ExtendedFieldModel } from '../../../models/queries/extendedfield-model';
 
 @Component({
     selector: 'app-extended-field-list-page',
@@ -30,11 +32,12 @@ export class ExtendedFieldListPageComponent {
     ];
 
     tableNames: { name: string }[] = [];
+    extendedFields?: ExtendedFieldModel[];
 
 
     ref: DynamicDialogRef | undefined;
 
-    constructor(private extendedFieldsService: ExtendedFieldsService,
+    constructor(private extendedFieldsService: ExtendedfieldNewService,
         public dialogService: DialogService,
     ) {
 
@@ -60,7 +63,14 @@ export class ExtendedFieldListPageComponent {
         });
     }
 
-    loadInnerData(data: any) {
-
+    loadInnerData(item: string) {
+        this.isLoading = true;
+        this.extendedFieldsService.getExtendedFieldByTableName(item)
+            .pipe(finalize(() => {
+                this.isLoading = false;
+            }))
+            .subscribe(response => {
+                this.extendedFields = response;
+            });
     }
 }
