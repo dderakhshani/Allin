@@ -1,1 +1,59 @@
-<p>add-basevalue-page works!</p>
+<form class="flex flex-col w-full" [formGroup]="form">
+    <div class="card flex w-full justify-content-center ">
+        <p-accordion [multiple]="true" [activeIndex]="[0,1]">
+            <p-accordionTab [header]="'baseValue.basic-info' | translate">
+                <div class="flex space-x-5 pt-5">
+                    <div class=" flex flex-col space-y-2 w-1/2">
+                        <label for="RoleTitle">{{'baseValue.title' | translate}} </label>
+                        <input pInputText id="roleTitle" [formControl]="form.controls.title" />
+                    </div>
+                    <div class=" flex flex-col space-y-2 w-1/2">
+                        <label for="UniqueName">{{'baseValue.uniqueName' | translate}} </label>
+                        <input pInputText id="uniqueName" [formControl]="form.controls.uniqueName" />
+                    </div>
+                </div>
+                <div class="flex flex-col space-y-2 w-full ">
+                    <label for="Description">{{'baseValue.description' | translate}} </label>
+                    <input pInputText id="description" [formControl]="form.controls.description" />
+                </div>
+            </p-accordionTab>
+            <p-accordionTab [header]="'baseValue.basic-items' | translate">
+                <p-button [label]="'baseValue.add-item' | translate" icon="pi pi-plus" class="mr-2" (click)=addItem() />
+                <p-treetable [value]="baseValueItems" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 5rem;"></th>
+                            <th style="width: 10rem;"></th>
+                            <th>Title</th>
+                            <th>Value</th>
+                            <th>Description</th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                        <tr [ttRow]="rowNode">
+                            <td style="width: 5rem;">
+                                <p-treeTableToggler [rowNode]="rowNode" />
+                            </td>
+                            <td style="width: 10rem;">
+                                <!-- <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (onClick)="editClick(rowData)" />
+                                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" /> -->
+                            </td>
+                            <td>
+                                {{ rowData.title }}
+                            </td>
+                            <td>
+                                {{ rowData.value }}
+                            </td>
+                            <td>
+                                {{ rowData.description }}
+                            </td>
+
+                        </tr>
+                    </ng-template>
+                </p-treetable>
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+
+</form>
