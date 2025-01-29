@@ -83,9 +83,15 @@ export class MenuService {
                     },
                     {
                         label: 'Base Values',
-                        icon: 'location_on',
+                        icon: 'token',
                         badge: '2',
                         routerLink: '/admin/baseValue/list'
+                    },
+                    {
+                        label: 'Extended Fields',
+                        icon: 'splitscreen_add',
+                        badge: '2',
+                        routerLink: '/admin/extendedfield/list'
                     },
 
 

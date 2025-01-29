@@ -57,5 +57,12 @@ export const Admin_ROOT_ROUTES: Routes = [
         },
         loadChildren: () => import('./place/routes').then(mod => mod.Place_ROUTES)
     },
+    {
+        path: "extendedfield",
+        data: {
+            title: 'extendedfield'
+        },
+        loadChildren: () => import('./extended-field/routes').then(mod => mod.ExtendedField_ROUTES)
+    },
 
 ];
