@@ -91,6 +91,25 @@ export class MenuService {
 
                 ],
             },
+            {
+                label: 'Inventory',
+                icon: 'inventory_2',
+                shortcut: '⌘+N',
+                items: [
+                    {
+                        label: 'Categories',
+                        icon: 'category',
+                        shortcut: '⌘+N',
+                        routerLink: '/settings/security'
+                    },
+                    {
+                        label: 'Products',
+                        icon: 'conveyor_belt',
+                        shortcut: '⌘+N',
+                        routerLink: '/settings/security'
+                    },
+                ],
+            },
         ]
     }
 }
