@@ -1,0 +1,124 @@
+﻿{
+   "CodeGenerationMode": 4,
+   "ContextClassName": "AllinDBContext",
+   "ContextNamespace": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Allin.Admin.Infrastructure.Persistence",
+   "OutputPath": "Persistence\\Entities",
+   "PreserveCasingWithRegex": true,
+   "ProjectRootNamespace": "Allin.Admin.Infrastructure",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 2,
+   "SelectedToBeGenerated": 2,
+   "T4TemplatePath": null,
+   "Tables": [
+      {
+         "Name": "[admin].[BaseValueItems]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[admin].[BaseValues]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[admin].[MenuItems]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[admin].[Permissions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[admin].[RolePermissions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[admin].[Roles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[admin].[UserDeniedPermissions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[admin].[UserRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[admin].[Users]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[common].[TableExtendedFieldItems]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[common].[TableExtendedFields]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[common].[TableExtendedFieldValues]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[organization].[Branchs]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[organization].[DepartmentPositions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[organization].[Departments]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[organization].[Employees]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[organization].[PersonAddresses]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[organization].[Persons]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[organization].[Places]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[organization].[Positions]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": null,
+   "UncountableWords": null,
+   "UseAsyncStoredProcedureCalls": true,
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDatabaseNamesForRoutines": true,
+   "UseDateOnlyTimeOnly": true,
+   "UseDbContextSplitting": false,
+   "UseDecimalDataAnnotationForSprocResult": true,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseHierarchyId": true,
+   "UseInflector": true,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": true,
+   "UsePrefixNavigationNaming": false,
+   "UseSchemaFolders": false,
+   "UseSchemaNamespaces": false,
+   "UseSpatial": false,
+   "UseT4": true,
+   "UseT4Split": false
+}

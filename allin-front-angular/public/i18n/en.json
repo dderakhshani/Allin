@@ -43,7 +43,13 @@
         "create-place": "Add Place"
     },
     "baseValue": {
-        "create-baseValue-type": "Add BaseValue"
+        "create-baseValue-type": "Add BaseValue",
+        "add-item": "Add Item",
+        "basic-info": "Info",
+        "basic-items": "Items",
+        "title": "Title",
+        "uniqueName": "Unique Name",
+        "description": "Description"
     },
     "admin": {
         "create-employee": "Add Employee",

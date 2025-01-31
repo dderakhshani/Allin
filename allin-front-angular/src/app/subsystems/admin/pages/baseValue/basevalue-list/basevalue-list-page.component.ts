@@ -90,5 +90,38 @@ export class BasevalueListPageComponent {
         //         item.permissions = response;
         //     });
     }
+    editClick(item: BaseValueTypeModel) {
+        // const config: PageDialogConfig = {
+        //     extraData: item,
+        //     component: EditRolePageComponent,
+        //     header: 'Edit Role',
+        //     description: 'this is a desciption of the Edit Role',
+        //     isFullScreen: false,
+        // };
+        // this.ref = openDialog(config, this.dialogService);
+        // this.ref.onClose.subscribe((result: any) => {
+        //     if (result) {
+        //         // this.fetchData(); //TODO: reloade grid data
+        //         // this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
+        //     }
+        // });
+    }
 
+    deleteClick(item: BaseValueTypeModel) {
+        //TODO: translate
+        // this.ref = openConfirmDeleteDialog(`Are you sure you want to delete ${item.title}?`, this.dialogService);
+
+        // this.ref.onClose.subscribe((result: any) => {
+        //     if (result) {
+        //         this.isLoading = true;
+        //         this.roleService.delete(item.id)
+        //             .pipe(finalize(() => {
+        //                 this.isLoading = false;
+        //             }))
+        //             .subscribe(response => {
+        //                 //TODO: reloade grid data
+        //             });
+        //     }
+        // });
+    }
 }

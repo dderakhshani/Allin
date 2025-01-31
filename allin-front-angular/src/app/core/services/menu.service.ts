@@ -83,12 +83,37 @@ export class MenuService {
                     },
                     {
                         label: 'Base Values',
-                        icon: 'location_on',
+                        icon: 'token',
                         badge: '2',
                         routerLink: '/admin/baseValue/list'
                     },
+                    {
+                        label: 'Extended Fields',
+                        icon: 'splitscreen_add',
+                        badge: '2',
+                        routerLink: '/admin/extendedfield/list'
+                    },
 
 
+                ],
+            },
+            {
+                label: 'Inventory',
+                icon: 'inventory_2',
+                shortcut: '⌘+N',
+                items: [
+                    {
+                        label: 'Categories',
+                        icon: 'category',
+                        shortcut: '⌘+N',
+                        routerLink: '/settings/security'
+                    },
+                    {
+                        label: 'Products',
+                        icon: 'conveyor_belt',
+                        shortcut: '⌘+N',
+                        routerLink: '/settings/security'
+                    },
                 ],
             },
         ]
