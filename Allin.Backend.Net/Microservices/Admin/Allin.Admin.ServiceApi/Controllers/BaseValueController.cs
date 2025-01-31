@@ -38,7 +38,7 @@ namespace Allin.Admin.ServiceApi.Controllers
             return OkResult(await _baseValueQueries.GetById(id, cancellationToken));
         }
 
-        [HttpGet("get-items/{baseValueId}")]
+        [HttpGet("get-items-tree/{baseValueId}")]
         public async Task<IActionResult> GetByValueTypeId(long baseValueId, CancellationToken cancellationToken)
         {
             return OkResult(await _baseValueQueries.GetByBaseValueId(baseValueId, cancellationToken));
@@ -47,6 +47,7 @@ namespace Allin.Admin.ServiceApi.Controllers
         [HttpGet("get-all-type-values")]
         public async Task<IActionResult> GetAllTypeValues([FromQuery] QueryParamModel param, CancellationToken cancellationToken)
         {
+
             return OkResult(await _baseValueQueries.GetAllBaseValueTypes(param, cancellationToken));
         }
 

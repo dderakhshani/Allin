@@ -50,3 +50,4 @@ app.UseBaseFeatures();
 
 app.Run();
 
+public partial class Program { }

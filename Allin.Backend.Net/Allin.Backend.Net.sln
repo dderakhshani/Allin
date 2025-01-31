@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allin.ApiGetway", "Allin.ApiGetway\Allin.ApiGetway.csproj", "{887F9991-4052-46D3-A8BD-F308006876C9}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allin.Admin.Infrastructure", "Microservices\Admin\Allin.Admin.Infrastructure\Allin.Admin.Infrastructure.csproj", "{A62A4018-A7FD-4728-87B4-F30BC2D234CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allin.Admin.Application", "Microservices\Admin\Allin.Admin.Application\Allin.Admin.Application.csproj", "{87659999-3438-4542-8124-4EDC0A471371}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Allin.Admin.IntegrationTest", "Microservices\Admin\Allin.Admin.IntegrationTest\Allin.Admin.IntegrationTest.csproj", "{989629A1-988E-49BE-BEC9-C50FB2E52241}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{87659999-3438-4542-8124-4EDC0A471371}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87659999-3438-4542-8124-4EDC0A471371}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87659999-3438-4542-8124-4EDC0A471371}.Release|Any CPU.Build.0 = Release|Any CPU
+		{989629A1-988E-49BE-BEC9-C50FB2E52241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{989629A1-988E-49BE-BEC9-C50FB2E52241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{989629A1-988E-49BE-BEC9-C50FB2E52241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{989629A1-988E-49BE-BEC9-C50FB2E52241}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +77,6 @@ Global
 		{B5A27125-0BE6-49BA-9560-9AE1592C56AD} = {4216CDB9-40B0-4D5A-9603-124A0EE03603}
 		{A62A4018-A7FD-4728-87B4-F30BC2D234CC} = {4216CDB9-40B0-4D5A-9603-124A0EE03603}
 		{87659999-3438-4542-8124-4EDC0A471371} = {4216CDB9-40B0-4D5A-9603-124A0EE03603}
+		{989629A1-988E-49BE-BEC9-C50FB2E52241} = {4216CDB9-40B0-4D5A-9603-124A0EE03603}
 	EndGlobalSection
 EndGlobal
