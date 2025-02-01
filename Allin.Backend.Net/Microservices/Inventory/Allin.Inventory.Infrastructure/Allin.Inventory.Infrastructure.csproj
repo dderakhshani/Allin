@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Persistence\Complexes\" />
-    <Folder Include="Persistence\Configurations\" />
-    <Folder Include="Persistence\Entities\" />
+    <Folder Include="Persistence\Enums\" />
+    <Folder Include="Persistence\Complexes\" />
     <Folder Include="Persistence\Enums\" />
   </ItemGroup>
 

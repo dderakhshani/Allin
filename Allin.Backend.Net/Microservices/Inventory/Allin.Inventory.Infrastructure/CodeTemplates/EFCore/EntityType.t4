@@ -42,7 +42,7 @@
     if (!string.IsNullOrEmpty(NamespaceHint))
     {
 #>
-namespace Allin.Admin.Infrastructure.Persistence;
+namespace Allin.Inventory.Infrastructure.Persistence;
 
 <#
     }
@@ -66,7 +66,7 @@ namespace Allin.Admin.Infrastructure.Persistence;
         }
     }
 #>
-public class <#= EntityType.Name #> : AdminBaseEntity <#= EntityType.GetProperties().Any(x=> x.Name=="Hierarchy")?", IHierarchyEntity":"" #>
+public class <#= EntityType.Name #> : InventoryBaseEntity <#= EntityType.GetProperties().Any(x=> x.Name=="Hierarchy")?", IHierarchyEntity":"" #>
 {
 <#
     var firstProperty = true;

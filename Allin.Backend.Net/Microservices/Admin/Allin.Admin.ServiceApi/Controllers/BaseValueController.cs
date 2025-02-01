@@ -64,7 +64,13 @@ namespace Allin.Admin.ServiceApi.Controllers
             return await SendCommand(request, cancellationToken);
         }
 
-        [HttpPut]
+        [HttpPut("edit-item")]
+        public async Task<IActionResult> EditBaseValueItem([FromBody] EditBaseValueItemCommand request, CancellationToken cancellationToken)
+        {
+            return await SendCommand(request, cancellationToken);
+        }
+
+        [HttpPut("edit")]
         public async Task<IActionResult> Edit([FromBody] EditBaseValueCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);

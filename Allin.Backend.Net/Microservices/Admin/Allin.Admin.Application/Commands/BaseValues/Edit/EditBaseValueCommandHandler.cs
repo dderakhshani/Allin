@@ -16,7 +16,7 @@ namespace Allin.Admin.Application.Commands
 
         public override async Task<bool> Handle(EditBaseValueCommand request, CancellationToken cancellationToken)
         {
-            var entity = await DbContext.BaseValueItems.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
+            var entity = await DbContext.BaseValues.FirstAsync(x => x.Id == request.Id) ?? throw _exceptionProvider.RecordNotFoundValidationException();
 
             Mapper.Map(request, entity);
 
