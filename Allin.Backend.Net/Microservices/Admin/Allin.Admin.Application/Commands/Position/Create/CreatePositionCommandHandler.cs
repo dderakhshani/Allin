@@ -2,7 +2,6 @@
 using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Data;
 using AutoMapper;
-using System.Data;
 
 namespace Allin.Admin.Application.Commands
 {

@@ -3,10 +3,10 @@ using Allin.Admin.Infrastructure.Persistence;
 using Allin.Common.Data;
 using Allin.Common.Data.QueryHelpers;
 using Allin.Common.Data.QueryHelpers.QueryResultMaker;
+using Allin.Common.Utilities;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using Allin.Common.Utilities;
 
 namespace Allin.Admin.Application.Queries
 {

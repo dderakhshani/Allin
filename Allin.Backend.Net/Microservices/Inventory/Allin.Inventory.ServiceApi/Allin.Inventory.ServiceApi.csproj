@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Allin.CommonLibrary\Allin.CommonLibrary.csproj" />
+    <ProjectReference Include="..\Allin.Inventory.Application\Allin.Inventory.Application.csproj" />
     <ProjectReference Include="..\Allin.Inventory.Infrastructure\Allin.Inventory.Infrastructure.csproj" />
   </ItemGroup>
 

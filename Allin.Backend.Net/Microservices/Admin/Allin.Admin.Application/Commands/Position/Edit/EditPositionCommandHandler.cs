@@ -20,8 +20,6 @@ namespace Allin.Admin.Application.Commands
 
             Mapper.Map(request, department);
 
-
-
             await DbContext.SaveChangesAsync();
 
             return true;
