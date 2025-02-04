@@ -115,8 +115,7 @@ export class BasevalueListPageComponent {
         //     }
         // });
     }
-
-    deleteItemClick(item: BaseValueTypeModel) {
+    deleteClick(item: BaseValueTypeModel) {
         //TODO: translate
         this.ref = openConfirmDeleteDialog(`Are you sure you want to delete ${item.title}?`, this.dialogService);
 
@@ -124,6 +123,23 @@ export class BasevalueListPageComponent {
             if (result) {
                 this.isLoading = true;
                 this.basevalueService.delete(item.id)
+                    .pipe(finalize(() => {
+                        this.isLoading = false;
+                    }))
+                    .subscribe(response => {
+                        //TODO: reloade grid data
+                    });
+            }
+        });
+    }
+    deleteItemClick(item: BaseValueItemModel) {
+        //TODO: translate
+        this.ref = openConfirmDeleteDialog(`Are you sure you want to delete ${item.title}?`, this.dialogService);
+
+        this.ref.onClose.subscribe((result: any) => {
+            if (result) {
+                this.isLoading = true;
+                this.basevalueService.deleteItems(item.id)
                     .pipe(finalize(() => {
                         this.isLoading = false;
                     }))
