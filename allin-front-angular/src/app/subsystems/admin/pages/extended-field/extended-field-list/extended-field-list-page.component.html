@@ -3,8 +3,41 @@
     <div class="flex flex-col h-full">
 
         <div class="pt-2 h-full">
-            <app-png-table [columns]="columns" [dataSource]="tableNames" [isRowExapandable]="true" (onRowExpand)="loadInnerData($event)">
+            <app-png-table [columns]="columns" [dataSource]="tableNames" [fetchDataTrigger]="fetchDataTrigger" [isRowExapandable]="true" (onRowExpand)="loadInnerData($event)" (onLoadingStateChange)="isLoading=$event">
+                <ng-template #expandedRow let-rowData="rowData">
+                    <div expanded-row>
+                        <div>
+                            <h4>Permissions of {{rowData.value}}:</h4>
+                        </div>
+                        <p-treetable [value]="rowData.extendedFields" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 5rem"></th>
+                                    <th style="width: 5rem"></th>
+                                    <th>Field Name</th>
+                                    <th>Description</th>
 
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                                <tr [ttRow]="rowNode">
+                                    <td style="width: 5rem">
+                                        <p-treeTableToggler [rowNode]="rowNode" />
+                                    </td>
+                                    <td style="width: 5rem">
+                                        <!-- <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" /> -->
+                                    </td>
+                                    <td>
+
+                                        {{ rowData.fieldName }}
+                                    </td>
+                                    <td>{{ rowData.description }}</td>
+
+                                </tr>
+                            </ng-template>
+                        </p-treetable>
+                    </div>
+                </ng-template>
             </app-png-table>
         </div>
     </div>

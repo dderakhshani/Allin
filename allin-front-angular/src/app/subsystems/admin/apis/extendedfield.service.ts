@@ -12,12 +12,14 @@ export class ExtendedfieldNewService {
 
     constructor(private baseHttpService: BaseHttpService) { }
 
-    getExtendedFieldByTableName(tableName: string): Observable<ExtendedFieldModel[]> {
+    getExtendedFieldTreeByTableName(tableNameTemp: string): Observable<ExtendedFieldModel[]> {
+
+
         return this.baseHttpService.getData(
             {
                 controller: this.controllerPath,
                 action: 'get-all',
-                routeParameters: [tableName]
+                routeParameters: [tableNameTemp]
             });
     }
 }

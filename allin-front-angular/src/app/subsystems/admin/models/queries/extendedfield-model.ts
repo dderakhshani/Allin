@@ -1,3 +1,5 @@
+import { TreeNode } from "primeng/api";
+
 export interface ExtendedFieldModel {
     id: number;
     parentId?: number;
@@ -8,6 +10,13 @@ export interface ExtendedFieldModel {
     fieldType: number,
     uiControl: number,
     orderIndex: number,
-    // items:[]
+    items: [],
+    children: ExtendedFieldModel[];
 
+}
+
+export interface TableNameModel {
+    value: string;
+    // extendedFields?: ExtendedFieldModel[];
+    extendedFields?: TreeNode<ExtendedFieldModel>[];
 }
