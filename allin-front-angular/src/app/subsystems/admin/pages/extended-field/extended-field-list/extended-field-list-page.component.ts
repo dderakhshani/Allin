@@ -38,7 +38,6 @@ export class ExtendedFieldListPageComponent {
 
     tableNames: TableNameModel[] = [];
     // extendedFields?: ExtendedFieldModel[];
-    extendedFields?: TreeNode<ExtendedFieldModel>[];
 
 
     ref: DynamicDialogRef | undefined;
@@ -49,7 +48,7 @@ export class ExtendedFieldListPageComponent {
 
     }
     ngOnInit() {
-        this.tableNames = Object.values(ExtendedFieldTableNamesEnum).map(name => ({ value: name, extendedFields: undefined }));
+        this.tableNames = Object.values(ExtendedFieldTableNamesEnum).map(name => ({ value: name, extendedFields: [] }));
     }
 
 
@@ -76,9 +75,8 @@ export class ExtendedFieldListPageComponent {
                 this.isLoading = false;
             }))
             .subscribe(response => {
-                this.extendedFields = response;
 
-                item.extendedFields = response;
+                item.extendedFields = response.data;
             });
     }
 }

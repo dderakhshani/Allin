@@ -7,8 +7,9 @@
                 <ng-template #expandedRow let-rowData="rowData">
                     <div expanded-row>
                         <div>
-                            <h4>Permissions of {{rowData.value}}:</h4>
+                            <h4>Fields of {{rowData.value}}:</h4>
                         </div>
+                        {{rowData.extendedFields | json}}
                         <p-treetable [value]="rowData.extendedFields" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
                             <ng-template pTemplate="header">
                                 <tr>
@@ -25,13 +26,13 @@
                                         <p-treeTableToggler [rowNode]="rowNode" />
                                     </td>
                                     <td style="width: 5rem">
-                                        <!-- <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" /> -->
+                                        <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" />
                                     </td>
                                     <td>
 
                                         {{ rowData.fieldName }}
                                     </td>
-                                    <td>{{ rowData.description }}</td>
+                                    <td>{{ rowData.uniqueName }}</td>
 
                                 </tr>
                             </ng-template>

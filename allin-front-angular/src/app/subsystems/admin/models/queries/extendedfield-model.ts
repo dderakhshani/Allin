@@ -18,5 +18,5 @@ export interface ExtendedFieldModel {
 export interface TableNameModel {
     value: string;
     // extendedFields?: ExtendedFieldModel[];
-    extendedFields?: TreeNode<ExtendedFieldModel>[];
+    extendedFields: TreeNode<ExtendedFieldModel>[];
 }
