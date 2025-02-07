@@ -14,9 +14,9 @@
                 <ng-template #expandedRow let-rowData="rowData">
                     <div expanded-row>
                         <div>
-                            <h4>Permissions of {{rowData.title}}:</h4>
+                            <h4>Items of {{rowData.title}}:</h4>
                         </div>
-                        <p-treetable [value]="items" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+                        <p-treetable [value]="rowData.items" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th style="width: 5rem"></th>

@@ -96,7 +96,6 @@ export class BasevalueListPageComponent {
             }))
             .subscribe(response => {
                 item.items = response;
-                this.items = item.items;
             });
     }
     editClick(item: BaseValueTypeModel) {
