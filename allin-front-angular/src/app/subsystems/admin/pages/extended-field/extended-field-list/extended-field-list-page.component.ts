@@ -55,8 +55,8 @@ export class ExtendedFieldListPageComponent {
     openAdd() {
         const config: PageDialogConfig = {
             component: CreateExtendedFieldPageComponent,
-            header: 'Add New Place',
-            description: 'this is a desciption of the add Place page',
+            header: 'Add New Extended Field',
+            description: 'this is a desciption of the add Extended Field page',
             isFullScreen: false,
         };
         this.ref = openDialog(config, this.dialogService);
