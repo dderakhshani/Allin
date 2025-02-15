@@ -1,19 +1,27 @@
 ﻿{
    "CodeGenerationMode": 4,
-   "ContextClassName": "AllinDBContext",
+   "ContextClassName": "InventoryDBContext",
    "ContextNamespace": null,
    "FilterSchemas": false,
    "IncludeConnectionString": false,
    "ModelNamespace": null,
-   "OutputContextPath": "Allin.Admin.Infrastructure.Persistence",
+   "OutputContextPath": "..\\Allin.Inventory.Infrastructure",
    "OutputPath": "Persistence\\Entities",
    "PreserveCasingWithRegex": true,
-   "ProjectRootNamespace": "Allin.Admin.Infrastructure",
+   "ProjectRootNamespace": "Allin.Inventory.Infrastructure",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 2,
-   "SelectedToBeGenerated": 2,
+   "SelectedToBeGenerated": 1,
    "T4TemplatePath": null,
    "Tables": [
+      {
+         "Name": "[admin].[BaseValueItems]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[admin].[BaseValues]",
+         "ObjectType": 0
+      },
       {
          "Name": "[inventory].[InventoryCategories]",
          "ObjectType": 0
@@ -56,9 +64,8 @@
    "UseAsyncStoredProcedureCalls": true,
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
-   "UseDatabaseNamesForRoutines": true,
    "UseDateOnlyTimeOnly": true,
-   "UseDbContextSplitting": false,
+   "UseDbContextSplitting": true,
    "UseDecimalDataAnnotationForSprocResult": true,
    "UseFluentApiOnly": true,
    "UseHandleBars": false,
@@ -75,6 +82,5 @@
    "UseSchemaFolders": false,
    "UseSchemaNamespaces": false,
    "UseSpatial": false,
-   "UseT4": true,
-   "UseT4Split": false
+   "UseT4": true
 }

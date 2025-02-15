@@ -1,31 +1,46 @@
-﻿using Allin.Common.Data;
+﻿
+using Allin.Inventory.Infrastructure.Persistence.Configurations;
 using Allin.Inventory.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Reflection;
+namespace Allin.Inventory.Infrastructure;
 
-namespace Allin.Inventory.Infrastructure
+public partial class InventoryDbContext : DbContext
 {
-    public class InventoryDbContext : BaseDbContext
+    public InventoryDbContext(DbContextOptions<InventoryDbContext> options)
+        : base(options)
     {
-        public InventoryDbContext(DbContextOptions options) : base(options)
-        {
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            base.OnModelCreating(modelBuilder);
-        }
-
-        public DbSet<InventoryCategory> InventoryCategories { get; set; }
-        public DbSet<InventoryCategoryAllowdMeasure> InventoryCategoryAllowdMeasures { get; set; }
-        public DbSet<InventoryCategoryProperty> InventoryCategoryProperties { get; set; }
-        public DbSet<InventoryCategoryPropertyItem> InventoryCategoryPropertyItems { get; set; }
-        public DbSet<InventoryItem> InventoryItems { get; set; }
-        public DbSet<InventoryItemAllowdMeasure> InventoryItemAllowdMeasures { get; set; }
-        public DbSet<InventoryItemType> InventoryItemTypes { get; set; }
-        public DbSet<InventoryPropertyValue> InventoryPropertyValues { get; set; }
-        public DbSet<MeasureUnit> MeasureUnits { get; set; }
-
     }
+
+    public virtual DbSet<BaseValue> BaseValues { get; set; }
+
+    public virtual DbSet<BaseValueItem> BaseValueItems { get; set; }
+
+    public virtual DbSet<InventoryCategory> InventoryCategories { get; set; }
+
+    public virtual DbSet<InventoryCategoryAllowdMeasure> InventoryCategoryAllowdMeasures { get; set; }
+
+    public virtual DbSet<InventoryCategoryProperty> InventoryCategoryProperties { get; set; }
+
+    public virtual DbSet<InventoryCategoryPropertyItem> InventoryCategoryPropertyItems { get; set; }
+
+    public virtual DbSet<InventoryItem> InventoryItems { get; set; }
+
+    public virtual DbSet<InventoryItemAllowdMeasure> InventoryItemAllowdMeasures { get; set; }
+
+    public virtual DbSet<InventoryItemType> InventoryItemTypes { get; set; }
+
+    public virtual DbSet<InventoryPropertyValue> InventoryPropertyValues { get; set; }
+
+    public virtual DbSet<MeasureUnit> MeasureUnits { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        base.OnModelCreating(modelBuilder);
+    }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

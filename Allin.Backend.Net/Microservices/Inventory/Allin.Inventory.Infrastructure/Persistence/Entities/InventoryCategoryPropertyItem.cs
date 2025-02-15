@@ -12,4 +12,5 @@ public class InventoryCategoryPropertyItem : InventoryBaseEntity
   public string? Code { get; set; }
   public int OrderIndex { get; set; }
   public bool IsActive { get; set; }
+    public virtual InventoryCategoryProperty CategoryProperty { get; set; } = null!;
 }

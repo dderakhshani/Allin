@@ -14,4 +14,6 @@ public class InventoryCategoryProperty : InventoryBaseEntity , IHierarchyEntity
   public long? MeasureId { get; set; }
   public long? PropertyTypeBaseId { get; set; }
   public int OrderIndex { get; set; }
+    public virtual InventoryCategory? Category { get; set; }
+    public virtual ICollection<InventoryCategoryPropertyItem> InventoryCategoryPropertyItems { get; set; } = new List<InventoryCategoryPropertyItem>();
 }
