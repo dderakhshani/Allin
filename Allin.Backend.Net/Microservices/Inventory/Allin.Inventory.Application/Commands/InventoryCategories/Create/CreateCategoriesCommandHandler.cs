@@ -1,5 +1,4 @@
 ﻿using Allin.Inventory.Application.Common;
-using Allin.Inventory.Infrastructure;
 using Allin.Inventory.Infrastructure.Persistence;
 using AutoMapper;
 

@@ -1,5 +1,5 @@
 ﻿using Allin.Common.Utilities;
-using Allin.Inventory.Infrastructure;
+using Allin.Inventory.Infrastructure.Persistence;
 using AutoMapper;
 using MediatR;
 
