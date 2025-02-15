@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Allin.Common.Data;
+﻿using Allin.Common.Data;
 using Microsoft.EntityFrameworkCore;
 namespace Allin.Inventory.Infrastructure.Persistence;
 
-public class InventoryCategoryProperty : InventoryBaseEntity , IHierarchyEntity
+public class InventoryCategoryProperty : InventoryBaseEntity, IHierarchyEntity
 {
   public long? ParentId { get; set; }
   public long? CategoryId { get; set; }

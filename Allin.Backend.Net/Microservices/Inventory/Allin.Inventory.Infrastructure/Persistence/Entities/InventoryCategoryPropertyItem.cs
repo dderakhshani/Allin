@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Allin.Common.Data;
-namespace Allin.Inventory.Infrastructure.Persistence;
+﻿namespace Allin.Inventory.Infrastructure.Persistence;
 
-public class InventoryCategoryPropertyItem : InventoryBaseEntity 
+public class InventoryCategoryPropertyItem : InventoryBaseEntity
 {
   public long CategoryPropertyId { get; set; }
   public long? ParentId { get; set; }
