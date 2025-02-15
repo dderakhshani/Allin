@@ -3,7 +3,7 @@ using Allin.Common.Data.QueryHelpers;
 using Allin.Common.Data.QueryHelpers.QueryResultMaker;
 using Allin.Common.Utilities;
 using Allin.Inventory.Application.Models;
-using Allin.Inventory.Infrastructure;
+using Allin.Inventory.Infrastructure.Persistence;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
