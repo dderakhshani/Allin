@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { BasicModule } from '../../../../../core/basic.module';
 import { PngTableComponent } from '../../../../../core/components/png-table/png-table.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -8,13 +8,16 @@ import { CreateExtendedFieldPageComponent } from '../create-extended-field/creat
 import { ExtendedFieldTableNamesEnum } from '../../../../shared/models/enums/extended-field-table-enum';
 import { ExtendedfieldNewService } from '../../../apis/extendedfield.service';
 import { finalize } from 'rxjs';
-import { ExtendedFieldModel } from '../../../models/queries/extendedfield-model';
+import { ExtendedFieldModel, TableNameModel } from '../../../models/queries/extendedfield-model';
+import { TreeNode } from 'primeng/api';
+import { TreeTableModule } from 'primeng/treetable';
 
 @Component({
     selector: 'app-extended-field-list-page',
     standalone: true,
     imports: [BasicModule,
         PngTableComponent,
+        TreeTableModule
     ],
     providers: [DialogService],
     templateUrl: './extended-field-list-page.component.html',
@@ -22,17 +25,19 @@ import { ExtendedFieldModel } from '../../../models/queries/extendedfield-model'
 })
 export class ExtendedFieldListPageComponent {
     isLoading = false;
+    loading: boolean = true;
+    fetchDataTrigger = signal<boolean>(true)
 
     columns: TableColumnBase[] = [
         new TableTextColumn({
             title: 'Table Name',
-            rootFieldName: 'name',
+            rootFieldName: 'value',
             sortable: false,
         })
     ];
 
-    tableNames: { name: string }[] = [];
-    extendedFields?: ExtendedFieldModel[];
+    tableNames: TableNameModel[] = [];
+    // extendedFields?: ExtendedFieldModel[];
 
 
     ref: DynamicDialogRef | undefined;
@@ -43,15 +48,15 @@ export class ExtendedFieldListPageComponent {
 
     }
     ngOnInit() {
-        this.tableNames = Object.values(ExtendedFieldTableNamesEnum).map(name => ({ name }));
+        this.tableNames = Object.values(ExtendedFieldTableNamesEnum).map(name => ({ value: name, extendedFields: [] }));
     }
 
 
     openAdd() {
         const config: PageDialogConfig = {
             component: CreateExtendedFieldPageComponent,
-            header: 'Add New Place',
-            description: 'this is a desciption of the add Place page',
+            header: 'Add New Extended Field',
+            description: 'this is a desciption of the add Extended Field page',
             isFullScreen: false,
         };
         this.ref = openDialog(config, this.dialogService);
@@ -63,14 +68,15 @@ export class ExtendedFieldListPageComponent {
         });
     }
 
-    loadInnerData(item: string) {
+    loadInnerData(item: TableNameModel) {
         this.isLoading = true;
-        this.extendedFieldsService.getExtendedFieldByTableName(item)
+        this.extendedFieldsService.getExtendedFieldTreeByTableName(item.value)
             .pipe(finalize(() => {
                 this.isLoading = false;
             }))
             .subscribe(response => {
-                this.extendedFields = response;
+
+                item.extendedFields = response.data;
             });
     }
 }

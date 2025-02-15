@@ -19,7 +19,7 @@
             </p-accordionTab>
             <p-accordionTab [header]="'baseValue.basic-items' | translate">
                 <p-button [label]="'baseValue.add-item' | translate" icon="pi pi-plus" class="mr-2" (click)=addItem() />
-                <p-treetable [value]="baseValueItems" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+                <!-- <p-treetable [value]="baseValueItems" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
                     <ng-template pTemplate="header">
                         <tr>
                             <th style="width: 5rem;"></th>
@@ -36,8 +36,8 @@
                                 <p-treeTableToggler [rowNode]="rowNode" />
                             </td>
                             <td style="width: 10rem;">
-                                <!-- <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (onClick)="editClick(rowData)" />
-                                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" /> -->
+                                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (onClick)="editClick(rowData)" />
+                                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" />
                             </td>
                             <td>
                                 {{ rowData.title }}
@@ -51,7 +51,7 @@
 
                         </tr>
                     </ng-template>
-                </p-treetable>
+                </p-treetable> -->
             </p-accordionTab>
         </p-accordion>
     </div>

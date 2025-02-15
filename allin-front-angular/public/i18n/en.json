@@ -42,6 +42,13 @@
         "title": "Place Name",
         "create-place": "Add Place"
     },
+    "extendedfield": {
+        "create-extended-field": "Add Extended Field",
+        "add-item": "Add Item",
+        "title": "Title",
+        "uniqueName": "Unique Name",
+        "description": "Description"
+    },
     "baseValue": {
         "create-baseValue-type": "Add BaseValue",
         "add-item": "Add Item",

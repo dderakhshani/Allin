@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TableNameModel } from '../../../models/queries/extendedfield-model';
 
 @Component({
   selector: 'app-create-extended-field-page',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './create-extended-field-page.component.scss'
 })
 export class CreateExtendedFieldPageComponent {
+
+
+    tableNames: TableNameModel[] = [];
 
 }

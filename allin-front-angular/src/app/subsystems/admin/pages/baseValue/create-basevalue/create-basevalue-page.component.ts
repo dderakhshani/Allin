@@ -23,7 +23,8 @@ export class CreateBasevaluePageComponent {
     isLoading = false;
 
     baseValue?: CreateBaseValueCommand;
-    baseValueItems?: TreeNode<CreateBaseValueItemCommand>[];
+    // baseValueItems?: TreeNode<CreateBaseValueItemCommand>[];
+    baseValueItems?: CreateBaseValueItemCommand[];
     form = this.fb.group({
         title: this.fb.control<string | null>(null),
         uniqueName: this.fb.control<string | null>(null),
@@ -41,12 +42,10 @@ export class CreateBasevaluePageComponent {
 
         this.baseValueItems = [
             {
-                data: {
-                    title: "test",
-                    description: "test",
-                    baseValueId: 0,
-                    value: 1,
-                },
+                title: "test",
+                description: "test",
+                baseValueId: 0,
+                value: 1,
             }
         ];
         // const itemGroup = this.fb.group({

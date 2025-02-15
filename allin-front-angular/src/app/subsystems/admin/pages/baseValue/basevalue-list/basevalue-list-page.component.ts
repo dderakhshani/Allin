@@ -9,6 +9,10 @@ import { openDialog, PageDialogConfig } from '../../../../../core/components/pag
 import { CreateBasevaluePageComponent } from '../create-basevalue/create-basevalue-page.component';
 import { BasevalueService } from '../../../apis/basevalue.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { finalize } from 'rxjs';
+import { BaseValueItemModel } from '../../../models/queries/base-value-item-model';
+import { TreeNode } from 'primeng/api';
+import { openConfirmDeleteDialog } from '../../../../../core/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
     selector: 'app-basevalue-list-page',
@@ -58,7 +62,11 @@ export class BasevalueListPageComponent {
     baseValueTypes!: BaseValueTypeModel[];
     ref: DynamicDialogRef | undefined;
 
+    loading: boolean = true;
     fetchDataTrigger = signal<boolean>(true)
+
+    items?: TreeNode<BaseValueItemModel>[];
+
     baseValueTypeApiUrl = {
         controller: `base-value`,
         action: 'get-all-type-values',
@@ -82,13 +90,13 @@ export class BasevalueListPageComponent {
 
     loadInnerData(item: BaseValueTypeModel) {
         this.isLoading = true;
-        // this.roleService.getPermissionsTreeByRoleId(item.id)
-        //     .pipe(finalize(() => {
-        //         this.isLoading = false;
-        //     }))
-        //     .subscribe(response => {
-        //         item.permissions = response;
-        //     });
+        this.basevalueService.getItemsTreeByBaseValueId(item.id)
+            .pipe(finalize(() => {
+                this.isLoading = false;
+            }))
+            .subscribe(response => {
+                item.items = response;
+            });
     }
     editClick(item: BaseValueTypeModel) {
         // const config: PageDialogConfig = {
@@ -106,22 +114,38 @@ export class BasevalueListPageComponent {
         //     }
         // });
     }
-
     deleteClick(item: BaseValueTypeModel) {
         //TODO: translate
-        // this.ref = openConfirmDeleteDialog(`Are you sure you want to delete ${item.title}?`, this.dialogService);
+        this.ref = openConfirmDeleteDialog(`Are you sure you want to delete ${item.title}?`, this.dialogService);
 
-        // this.ref.onClose.subscribe((result: any) => {
-        //     if (result) {
-        //         this.isLoading = true;
-        //         this.roleService.delete(item.id)
-        //             .pipe(finalize(() => {
-        //                 this.isLoading = false;
-        //             }))
-        //             .subscribe(response => {
-        //                 //TODO: reloade grid data
-        //             });
-        //     }
-        // });
+        this.ref.onClose.subscribe((result: any) => {
+            if (result) {
+                this.isLoading = true;
+                this.basevalueService.delete(item.id)
+                    .pipe(finalize(() => {
+                        this.isLoading = false;
+                    }))
+                    .subscribe(response => {
+                        //TODO: reloade grid data
+                    });
+            }
+        });
+    }
+    deleteItemClick(item: BaseValueItemModel) {
+        //TODO: translate
+        this.ref = openConfirmDeleteDialog(`Are you sure you want to delete ${item.title}?`, this.dialogService);
+
+        this.ref.onClose.subscribe((result: any) => {
+            if (result) {
+                this.isLoading = true;
+                this.basevalueService.deleteItems(item.id)
+                    .pipe(finalize(() => {
+                        this.isLoading = false;
+                    }))
+                    .subscribe(response => {
+                        //TODO: reloade grid data
+                    });
+            }
+        });
     }
 }
