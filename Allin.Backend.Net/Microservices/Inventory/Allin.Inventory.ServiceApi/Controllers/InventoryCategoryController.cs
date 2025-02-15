@@ -2,6 +2,7 @@
 using Allin.Common.Data.QueryHelpers;
 using Allin.Common.Web;
 using Allin.Inventory.Application.Commands;
+using Allin.Inventory.Application.Commands.InventoryCategories.Create;
 using Allin.Inventory.Application.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -38,22 +39,22 @@ namespace Allin.Admin.ServiceApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateMeasureUnitCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create([FromBody] CreateCategoriesCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] EditMeasureUnitCommand request, CancellationToken cancellationToken)
-        {
-            return await SendCommand(request, cancellationToken);
-        }
+        //[HttpPut]
+        //public async Task<IActionResult> Edit([FromBody] EditMeasureUnitCommand request, CancellationToken cancellationToken)
+        //{
+        //    return await SendCommand(request, cancellationToken);
+        //}
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete([FromRoute] long id, CancellationToken cancellationToken)
-        {
-            return await SendCommand(new DeleteMeasureUnitCommand(id), cancellationToken);
-        }
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> Delete([FromRoute] long id, CancellationToken cancellationToken)
+        //{
+        //    return await SendCommand(new DeleteMeasureUnitCommand(id), cancellationToken);
+        //}
 
     }
 }
