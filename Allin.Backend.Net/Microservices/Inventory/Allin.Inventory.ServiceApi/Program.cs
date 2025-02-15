@@ -1,7 +1,7 @@
 using Allin.Common.Utilities;
 using Allin.Common.Utilities.Mappings;
 using Allin.Common.Web;
-using Allin.Inventory.Infrastructure;
+using Allin.Inventory.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 

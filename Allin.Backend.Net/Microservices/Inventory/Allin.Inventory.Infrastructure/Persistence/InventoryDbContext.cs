@@ -1,9 +1,8 @@
 ﻿using Allin.Common.Data;
-using Allin.Inventory.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace Allin.Inventory.Infrastructure
+namespace Allin.Inventory.Infrastructure.Persistence
 {
     public class InventoryDbContext : BaseDbContext
     {

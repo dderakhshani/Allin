@@ -16,6 +16,7 @@ public class InventoryCategory : InventoryBaseEntity, IHierarchyEntity
     public long? MeasureUnitId { get; set; }
     public long? DefaultWarehouseId { get; set; }
     public string? Description { get; set; }
+    public virtual ICollection<InventoryCategoryProperty> InventoryCategoryProperties { get; set; } = new List<InventoryCategoryProperty>();
     public virtual ICollection<InventoryItem> InventoryItems { get; set; } = new List<InventoryItem>();
     public virtual ICollection<InventoryCategory> InverseParent { get; set; } = new List<InventoryCategory>();
     public virtual InventoryCategory? Parent { get; set; }
