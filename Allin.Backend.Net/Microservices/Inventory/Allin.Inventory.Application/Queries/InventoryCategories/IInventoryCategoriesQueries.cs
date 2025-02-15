@@ -6,8 +6,8 @@ namespace Allin.Inventory.Application.Queries
 {
     public interface IInventoryCategoriesQueries
     {
-        Task<PagedList<MeasureUnitModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken);
-        Task<MeasureUnitModel> GetById(long id, CancellationToken cancellationToken);
-        Task<IEnumerable<TreeNode<MeasureUnitModel>>> GetAllTree(QueryParamModel param, CancellationToken cancellationToken);
+        Task<PagedList<InventoryCategoryModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken);
+        Task<InventoryCategoryModel> GetById(long id, CancellationToken cancellationToken);
+        Task<IEnumerable<TreeNode<InventoryCategoryModel>>> GetAllTree(QueryParamModel param, CancellationToken cancellationToken);
     }
 }

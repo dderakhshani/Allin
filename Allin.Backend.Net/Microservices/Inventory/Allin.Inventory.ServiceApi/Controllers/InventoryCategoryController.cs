@@ -12,29 +12,29 @@ namespace Allin.Admin.ServiceApi.Controllers
     [AllowAnonymous]
     public class InventoryCategoryController : AuthorizeApiControllerBase
     {
-        private readonly IInventoryCategoriesQueries _measureUnitQueries;
+        private readonly IInventoryCategoriesQueries _inventoryCategoriesQueries;
 
-        public InventoryCategoryController(IMediator mediator, IUserAccessor userAccessor, IWebHostEnvironment currentEnvironment, IInventoryCategoriesQueries MeasureUnitQueries) : base(mediator, userAccessor, currentEnvironment)
+        public InventoryCategoryController(IMediator mediator, IUserAccessor userAccessor, IWebHostEnvironment currentEnvironment, IInventoryCategoriesQueries InventoryCategoriesQueries) : base(mediator, userAccessor, currentEnvironment)
         {
-            _measureUnitQueries = MeasureUnitQueries;
+            _inventoryCategoriesQueries = InventoryCategoriesQueries;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(long id, CancellationToken cancellationToken)
         {
-            return OkResult(await _measureUnitQueries.GetById(id, cancellationToken));
+            return OkResult(await _inventoryCategoriesQueries.GetById(id, cancellationToken));
         }
 
         [HttpGet("get-all")]
         public async Task<IActionResult> GetAll([FromQuery] QueryParamModel param, CancellationToken cancellationToken)
         {
-            return OkResult(await _measureUnitQueries.GetAll(param, cancellationToken));
+            return OkResult(await _inventoryCategoriesQueries.GetAll(param, cancellationToken));
         }
 
         [HttpGet("get-all-tree")]
         public async Task<IActionResult> GetAllTree([FromQuery] QueryParamModel param, CancellationToken cancellationToken)
         {
-            return OkResult(await _measureUnitQueries.GetAllTree(param, cancellationToken));
+            return OkResult(await _inventoryCategoriesQueries.GetAllTree(param, cancellationToken));
         }
 
         [HttpPost]

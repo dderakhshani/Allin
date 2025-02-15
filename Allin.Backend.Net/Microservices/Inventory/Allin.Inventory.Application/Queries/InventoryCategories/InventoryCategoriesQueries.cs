@@ -16,21 +16,21 @@ namespace Allin.Inventory.Application.Queries
         {
         }
 
-        public async Task<PagedList<MeasureUnitModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken)
+        public async Task<PagedList<InventoryCategoryModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken)
         {
-            return await DbContext.MeasureUnits.AsNoTracking().ProjectTo<MeasureUnitModel>(MapperProvider).ToPagedListAsync(param);
+            return await DbContext.InventoryCategories.AsNoTracking().ProjectTo<InventoryCategoryModel>(MapperProvider).ToPagedListAsync(param);
         }
 
-        public async Task<IEnumerable<TreeNode<MeasureUnitModel>>> GetAllTree(QueryParamModel param, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TreeNode<InventoryCategoryModel>>> GetAllTree(QueryParamModel param, CancellationToken cancellationToken)
         {
-            return (await DbContext.MeasureUnits.AsNoTracking()
-                               .ProjectTo<MeasureUnitModel>(MapperProvider).ToListAsync())
-                               .ToTreeModel(nameof(MeasureUnitModel.Title), nameof(MeasureUnitModel.Id));
+            return (await DbContext.InventoryCategories.AsNoTracking()
+                               .ProjectTo<InventoryCategoryModel>(MapperProvider).ToListAsync())
+                               .ToTreeModel(nameof(InventoryCategoryModel.Title), nameof(InventoryCategoryModel.Id));
         }
 
-        public async Task<MeasureUnitModel> GetById(long id, CancellationToken cancellationToken)
+        public async Task<InventoryCategoryModel> GetById(long id, CancellationToken cancellationToken)
         {
-            return Mapper.Map<MeasureUnitModel>(await DbContext.MeasureUnits.AsNoTracking().FirstAsync(x => x.Id == id, cancellationToken));
+            return Mapper.Map<InventoryCategoryModel>(await DbContext.InventoryCategories.AsNoTracking().FirstAsync(x => x.Id == id, cancellationToken));
         }
     }
 }
