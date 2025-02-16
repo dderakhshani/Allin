@@ -56,5 +56,18 @@ namespace Allin.Admin.ServiceApi.Controllers
         //    return await SendCommand(new DeleteMeasureUnitCommand(id), cancellationToken);
         //}
 
+        [HttpGet("get-Properties")]
+        public async Task<IActionResult> GetPropertiesByCategoryId(long id, CancellationToken cancellationToken)
+        {
+            return OkResult(await _inventoryCategoryQueries.GetPropertiesByCategoryId(id, cancellationToken));
+        }
+
+        [HttpGet("get-items-Property")]
+        public async Task<IActionResult> GetPropertyItemsByPropertyId(long id, CancellationToken cancellationToken)
+        {
+            return OkResult(await _inventoryCategoryQueries.GetPropertyItemsByPropertyId(id, cancellationToken));
+        }
+
+
     }
 }

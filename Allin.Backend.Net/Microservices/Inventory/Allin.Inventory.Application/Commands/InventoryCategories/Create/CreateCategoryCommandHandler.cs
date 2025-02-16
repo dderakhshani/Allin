@@ -1,4 +1,5 @@
-﻿using Allin.Inventory.Application.Common;
+﻿using Allin.Common.Data;
+using Allin.Inventory.Application.Common;
 using Allin.Inventory.Infrastructure.Persistence;
 using AutoMapper;
 
@@ -20,6 +21,8 @@ namespace Allin.Inventory.Application.Commands.InventoryCategories.Create
         public override async Task<bool> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             var entity = Mapper.Map<InventoryCategory>(request);
+
+            entity.Hierarchy = await DbContext.InventoryCategories.GetHierarchyIdAsync(request.ParentId);
 
             DbContext.InventoryCategories.Add(entity);
             await DbContext.SaveChangesAsync(cancellationToken);

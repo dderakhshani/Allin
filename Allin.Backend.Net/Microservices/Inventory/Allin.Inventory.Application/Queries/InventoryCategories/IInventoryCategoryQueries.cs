@@ -9,5 +9,7 @@ namespace Allin.Inventory.Application.Queries
         Task<PagedList<InventoryCategoryModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken);
         Task<InventoryCategoryModel> GetById(long id, CancellationToken cancellationToken);
         Task<IEnumerable<TreeNode<InventoryCategoryModel>>> GetAllTree(QueryParamModel param, CancellationToken cancellationToken);
+        Task<List<InventoryCategoryPropertyModel>> GetPropertiesByCategoryId(long id, CancellationToken cancellationToken);
+        Task<List<InventoryCategoryPropertyItemModel>> GetPropertyItemsByPropertyId(long id, CancellationToken cancellationToken);
     }
 }

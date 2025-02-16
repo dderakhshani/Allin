@@ -7,6 +7,7 @@ using Allin.Inventory.Infrastructure.Persistence;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Allin.Inventory.Application.Queries
 {
@@ -31,6 +32,16 @@ namespace Allin.Inventory.Application.Queries
         public async Task<InventoryCategoryModel> GetById(long id, CancellationToken cancellationToken)
         {
             return Mapper.Map<InventoryCategoryModel>(await DbContext.InventoryCategories.AsNoTracking().FirstAsync(x => x.Id == id, cancellationToken));
+        }
+
+        public async Task<List<InventoryCategoryPropertyModel>> GetPropertiesByCategoryId(long id, CancellationToken cancellationToken)
+        {
+            return Mapper.Map<List<InventoryCategoryPropertyModel>>(await DbContext.InventoryCategoryProperties.AsNoTracking().Where(x => x.CategoryId == id).ProjectTo<InventoryCategoryPropertyModel>(MapperProvider).ToListAsync(cancellationToken));
+        }
+
+        public async Task<List<InventoryCategoryPropertyItemModel>> GetPropertyItemsByPropertyId(long id, CancellationToken cancellationToken)
+        {
+            return Mapper.Map<List<InventoryCategoryPropertyItemModel>>(await DbContext.InventoryCategoryPropertyItems.AsNoTracking().Where(x => x.CategoryPropertyId == id).ProjectTo<InventoryCategoryPropertyItemModel>(MapperProvider).ToListAsync(cancellationToken));
         }
     }
 }
