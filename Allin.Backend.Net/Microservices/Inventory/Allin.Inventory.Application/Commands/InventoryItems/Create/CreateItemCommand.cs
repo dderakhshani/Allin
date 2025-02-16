@@ -13,24 +13,30 @@ namespace Allin.Inventory.Application.Commands.InventoryCategories.Create
 {
     public class CreateItemCommand : IRequest<bool>, IMapFrom<InventoryItem, CreateItemCommandHandler>
     {
-        public string Title { get; set; }
+        public long? ParentId { get; set; }
+        public string ItemTitle { get; set; }
         public string Code { get; set; }
+        public string? Code2 { get; set; }
+        public string? Code3 { get; set; }
+        public string? Code4 { get; set; }
+        public long CategoryId { get; set; }
+        public long StatusBaseId { get; set; }
+        public long MeasureUnitId { get; set; }
+        public long ItemTypeId { get; set; }
         public string? Description { get; set; }
+        public string? Manufacturer { get; set; }
+        public string? ModelNumber { get; set; }
+        public int LifeTimeHours { get; set; }
         public IEnumerable<CreatePropertyValuesCommandArg> PropertyValues { get; set; }
 
-        //public void Mapping(Profile profile)
-        //{
-        //    profile.CreateMap<BaseValue, CreateBaseValueCommand>()
-        //          .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.BaseValueItems))
-        //          .ReverseMap();
-        //}
     }
 
     public class CreatePropertyValuesCommandArg : IRequest<bool>, IMapFrom<InventoryPropertyValue, CreatePropertyValuesCommandArg>
     {
-        public string Title { get; set; }
-        public string UniqueName { get; set; }
-        public long CategoryId { get; set; }
+        public long ItemId { get; set; }
+        public long CategoryPropertyId { get; set; }
+        public long? ValuePropertyItemId { get; set; }
+        public string Value { get; set; }
     }
 
 }

@@ -25,4 +25,5 @@ public class InventoryItem : InventoryBaseEntity , IHierarchyEntity
   public string? ModelNumber { get; set; }
   public int? LifeTimeHours { get; set; }
     public virtual InventoryCategory Category { get; set; } = null!;
+    public virtual ICollection<InventoryPropertyValue> InventoryPropertyValues { get; set; } = new List<InventoryPropertyValue>();
 }

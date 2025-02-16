@@ -9,4 +9,6 @@ public class InventoryPropertyValue : InventoryBaseEntity
   public long CategoryPropertyId { get; set; }
   public long? ValuePropertyItemId { get; set; }
   public string? Value { get; set; }
+    public virtual InventoryCategoryProperty CategoryProperty { get; set; } = null!;
+    public virtual InventoryItem Item { get; set; } = null!;
 }
