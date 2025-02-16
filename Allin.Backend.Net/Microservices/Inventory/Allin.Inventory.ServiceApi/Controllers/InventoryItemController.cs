@@ -11,35 +11,35 @@ using Microsoft.AspNetCore.Mvc;
 namespace Allin.Admin.ServiceApi.Controllers
 {
     [AllowAnonymous]
-    public class InventoryCategoryController : AuthorizeApiControllerBase
+    public class InventoryItemController : AuthorizeApiControllerBase
     {
-        private readonly IInventoryCategoryQueries _inventoryCategoryQueries;
+        private readonly IInventoryItemQueries _inventoryItemQueries;
 
-        public InventoryCategoryController(IMediator mediator, IUserAccessor userAccessor, IWebHostEnvironment currentEnvironment, IInventoryCategoryQueries InventoryCategoryQueries) : base(mediator, userAccessor, currentEnvironment)
+        public InventoryItemController(IMediator mediator, IUserAccessor userAccessor, IWebHostEnvironment currentEnvironment, IInventoryItemQueries InventoryItemQueries) : base(mediator, userAccessor, currentEnvironment)
         {
-            _inventoryCategoryQueries = InventoryCategoryQueries;
+            _inventoryItemQueries = InventoryItemQueries;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(long id, CancellationToken cancellationToken)
         {
-            return OkResult(await _inventoryCategoryQueries.GetById(id, cancellationToken));
+            return OkResult(await _inventoryItemQueries.GetById(id, cancellationToken));
         }
 
         [HttpGet("get-all")]
         public async Task<IActionResult> GetAll([FromQuery] QueryParamModel param, CancellationToken cancellationToken)
         {
-            return OkResult(await _inventoryCategoryQueries.GetAll(param, cancellationToken));
+            return OkResult(await _inventoryItemQueries.GetAll(param, cancellationToken));
         }
 
         [HttpGet("get-all-tree")]
         public async Task<IActionResult> GetAllTree([FromQuery] QueryParamModel param, CancellationToken cancellationToken)
         {
-            return OkResult(await _inventoryCategoryQueries.GetAllTree(param, cancellationToken));
+            return OkResult(await _inventoryItemQueries.GetAllTree(param, cancellationToken));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateCategoryCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create([FromBody] CreateItemCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);
         }

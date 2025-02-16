@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Allin.Inventory.Application.Queries
 {
-    public class InventoryCategoriesQueries : QueryBase<InventoryDbContext>, IInventoryCategoriesQueries
+    public class InventoryCategoryQueries : QueryBase<InventoryDbContext>, IInventoryCategoryQueries
     {
-        public InventoryCategoriesQueries(InventoryDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public InventoryCategoryQueries(InventoryDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

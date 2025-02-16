@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Allin.Inventory.Application.Commands.InventoryCategories.Create
 {
-    public class CreateCategoriesCommand : IRequest<bool>, IMapFrom<InventoryCategory, CreateCategoriesCommandHandler>
+    public class CreateCategoryCommand : IRequest<bool>, IMapFrom<InventoryCategory, CreateCategoryCommandHandler>
     {
-        public required string Title { get; set; }
-        public required string Code { get; set; }
+        public string Title { get; set; }
+        public string Code { get; set; }
         public string? Description { get; set; }
         public IEnumerable<CreateCategoryPropertiesCommandArg>? Properties { get; set; }
 
@@ -28,15 +28,15 @@ namespace Allin.Inventory.Application.Commands.InventoryCategories.Create
 
     public class CreateCategoryPropertiesCommandArg : IRequest<bool>, IMapFrom<InventoryCategoryProperty, CreateCategoryPropertiesCommandArg>
     {
-        public required string Title { get; set; }
-        public required string UniqueName { get; set; }
+        public string Title { get; set; }
+        public string UniqueName { get; set; }
         public long CategoryId { get; set; }
         public IEnumerable<CreateCategoryPropertyItemsCommandArg>? Items { get; set; }
     }
     public class CreateCategoryPropertyItemsCommandArg : IRequest<bool>, IMapFrom<InventoryCategoryPropertyItem, CreateCategoryPropertyItemsCommandArg>
     {
-        public required string Title { get; set; }
-        public required string UniqueName { get; set; }
-        public required string Code { get; set; }
+        public string Title { get; set; }
+        public string UniqueName { get; set; }
+        public string Code { get; set; }
     }
 }

@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\InventoryItems\Delete\" />
+    <Folder Include="Commands\InventoryItems\Edit\" />
     <Folder Include="Commands\InventoryCategories\Delete\" />
     <Folder Include="Commands\InventoryCategories\Edit\" />
+    <Folder Include="Queries\InventoryItems\Params\" />
     <Folder Include="Queries\InventoryCategories\Params\" />
     <Folder Include="Queries\MeasureUnits\Params\" />
   </ItemGroup>

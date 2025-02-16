@@ -4,7 +4,7 @@ using Allin.Inventory.Application.Models;
 
 namespace Allin.Inventory.Application.Queries
 {
-    public interface IInventoryCategoriesQueries
+    public interface IInventoryCategoryQueries
     {
         Task<PagedList<InventoryCategoryModel>> GetAll(QueryParamModel param, CancellationToken cancellationToken);
         Task<InventoryCategoryModel> GetById(long id, CancellationToken cancellationToken);

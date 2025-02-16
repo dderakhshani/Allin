@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace Allin.Inventory.Application.Commands.InventoryCategories.Create
 {
-    public class CreateCategoriesCommandHandler : InventoryCommandHandler<CreateCategoriesCommand, bool>
+    public class CreateCategoryCommandHandler : InventoryCommandHandler<CreateCategoryCommand, bool>
     {
-        public CreateCategoriesCommandHandler(InventoryDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public CreateCategoryCommandHandler(InventoryDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 
-        public override async Task<bool> Handle(CreateCategoriesCommand request, CancellationToken cancellationToken)
+        public override async Task<bool> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             var entity = Mapper.Map<InventoryCategory>(request);
 
