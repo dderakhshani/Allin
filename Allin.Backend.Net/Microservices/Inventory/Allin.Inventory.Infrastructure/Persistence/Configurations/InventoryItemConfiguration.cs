@@ -9,32 +9,13 @@ using System.Collections.Generic;
 
 namespace Allin.Inventory.Infrastructure.Persistence.Configurations
 {
-    public partial class InventoryItemConfiguration : IEntityTypeConfiguration<InventoryItem>
+    public partial class InventoryItemConfiguration : InventoryTypeConfiguration<InventoryItem>
     {
-        public void Configure(EntityTypeBuilder<InventoryItem> entity)
+        public void Configure(EntityTypeBuilder<InventoryItem> builder)
         {
-            entity.HasKey(e => e.Id).HasName("PK__Inventor__727E838B2FC59BA8");
+            builder.ToTable("InventoryItems", "Inventory");
 
-            entity.ToTable("InventoryItems", "inventory");
-
-            entity.Property(e => e.Code).HasMaxLength(50);
-            entity.Property(e => e.Code2).HasMaxLength(50);
-            entity.Property(e => e.Code3).HasMaxLength(50);
-            entity.Property(e => e.Code4).HasMaxLength(50);
-            entity.Property(e => e.Description).HasMaxLength(255);
-            entity.Property(e => e.ItemTitle).HasMaxLength(100);
-            entity.Property(e => e.ItemTypeId).HasComment("Assets(Machines,...), Consumable, Salable Product");
-            entity.Property(e => e.Manufacturer).HasMaxLength(100);
-            entity.Property(e => e.ModelNumber).HasMaxLength(50);
-
-            entity.HasOne(d => d.Category).WithMany(p => p.InventoryItems)
-                .HasForeignKey(d => d.CategoryId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Inventory__Categ__2B3F6F97");
-
-            OnConfigurePartial(entity);
+            base.Configure(builder);
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<InventoryItem> entity);
     }
 }

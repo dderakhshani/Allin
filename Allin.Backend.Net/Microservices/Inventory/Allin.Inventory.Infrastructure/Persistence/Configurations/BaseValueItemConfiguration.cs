@@ -8,25 +8,13 @@ using System.Collections.Generic;
 
 namespace Allin.Inventory.Infrastructure.Persistence.Configurations
 {
-    public partial class BaseValueItemConfiguration : IEntityTypeConfiguration<BaseValueItem>
+    public partial class BaseValueItemConfiguration : InventoryTypeConfiguration<BaseValueItem>
     {
-        public void Configure(EntityTypeBuilder<BaseValueItem> entity)
+        public void Configure(EntityTypeBuilder<BaseValueItem> builder)
         {
-            entity.HasKey(e => e.Id).HasName("PK_BaseValues_1");
+            builder.ToTable("BaseValueItems", "Admin");
 
-            entity.ToTable("BaseValueItems", "admin");
-
-            entity.Property(e => e.Description).HasMaxLength(300);
-            entity.Property(e => e.Title).HasMaxLength(150);
-
-            entity.HasOne(d => d.BaseValue).WithMany(p => p.BaseValueItems)
-                .HasForeignKey(d => d.BaseValueId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_BaseValues_BaseValueTypes");
-
-            OnConfigurePartial(entity);
+            base.Configure(builder);
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<BaseValueItem> entity);
     }
 }

@@ -9,23 +9,13 @@ using System.Collections.Generic;
 
 namespace Allin.Inventory.Infrastructure.Persistence.Configurations
 {
-    public partial class BaseValueConfiguration : IEntityTypeConfiguration<BaseValue>
+    public partial class BaseValueConfiguration : InventoryTypeConfiguration<BaseValue>
     {
-        public void Configure(EntityTypeBuilder<BaseValue> entity)
+        public void Configure(EntityTypeBuilder<BaseValue> builder)
         {
-            entity.HasKey(e => e.Id).HasName("PK_BaseValueTypes");
+            builder.ToTable("BaseValues", "Admin");
 
-            entity.ToTable("BaseValues", "admin");
-
-            entity.Property(e => e.Description).HasMaxLength(300);
-            entity.Property(e => e.Title).HasMaxLength(150);
-            entity.Property(e => e.UniqueName)
-                .HasMaxLength(128)
-                .IsUnicode(false);
-
-            OnConfigurePartial(entity);
+            base.Configure(builder);
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<BaseValue> entity);
     }
 }

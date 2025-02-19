@@ -9,19 +9,13 @@ using System.Collections.Generic;
 
 namespace Allin.Inventory.Infrastructure.Persistence.Configurations
 {
-    public partial class MeasureUnitConfiguration : IEntityTypeConfiguration<MeasureUnit>
+    public partial class MeasureUnitConfiguration : InventoryTypeConfiguration<MeasureUnit>
     {
-        public void Configure(EntityTypeBuilder<MeasureUnit> entity)
+        public void Configure(EntityTypeBuilder<MeasureUnit> builder)
         {
-            entity.ToTable("MeasureUnits", "inventory");
+            builder.ToTable("MeasureUnits", "Inventory");
 
-            entity.Property(e => e.Title)
-                .HasMaxLength(10)
-                .IsFixedLength();
-
-            OnConfigurePartial(entity);
+            base.Configure(builder);
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<MeasureUnit> entity);
     }
 }

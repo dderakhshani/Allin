@@ -9,23 +9,13 @@ using System.Collections.Generic;
 
 namespace Allin.Inventory.Infrastructure.Persistence.Configurations
 {
-    public partial class InventoryItemTypeConfiguration : IEntityTypeConfiguration<InventoryItemType>
+    public partial class InventoryItemTypeConfiguration : InventoryTypeConfiguration<InventoryItemType>
     {
-        public void Configure(EntityTypeBuilder<InventoryItemType> entity)
+        public void Configure(EntityTypeBuilder<InventoryItemType> builder)
         {
-            entity.HasKey(e => e.Id).HasName("PK__Inventor__F51540FB0C725706");
+            builder.ToTable("InventoryItemTypes", "Inventory");
 
-            entity.ToTable("InventoryItemTypes", "inventory");
-
-            entity.HasIndex(e => e.ItemTypeName, "UQ__Inventor__1FA416B00E8A2ECE").IsUnique();
-
-            entity.Property(e => e.Description).HasMaxLength(255);
-            entity.Property(e => e.IsOperational).HasDefaultValue(false);
-            entity.Property(e => e.ItemTypeName).HasMaxLength(50);
-
-            OnConfigurePartial(entity);
+            base.Configure(builder);
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<InventoryItemType> entity);
     }
 }

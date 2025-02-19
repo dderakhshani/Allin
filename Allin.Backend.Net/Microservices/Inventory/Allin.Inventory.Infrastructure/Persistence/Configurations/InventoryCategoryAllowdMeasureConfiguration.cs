@@ -9,19 +9,14 @@ using System.Collections.Generic;
 
 namespace Allin.Inventory.Infrastructure.Persistence.Entities.Configurations
 {
-    public partial class InventoryCategoryAllowdMeasureConfiguration : IEntityTypeConfiguration<InventoryCategoryAllowdMeasure>
+    public partial class InventoryCategoryAllowdMeasureConfiguration : InventoryTypeConfiguration<InventoryCategoryAllowdMeasure>
     {
-        public void Configure(EntityTypeBuilder<InventoryCategoryAllowdMeasure> entity)
+        public void Configure(EntityTypeBuilder<InventoryCategoryAllowdMeasure> builder)
         {
-            entity.HasKey(e => e.Id).HasName("PK_CommodityCategoryMeasures_Id");
+            builder.ToTable("BaseValueItems", "Admin");
 
-            entity.ToTable("InventoryCategoryAllowdMeasures", "inventory");
-
-            entity.HasIndex(e => new { e.CategoryId, e.MeasureId }, "IX_CommodityCategoryMeasures").IsUnique();
-
-            OnConfigurePartial(entity);
+            base.Configure(builder);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<InventoryCategoryAllowdMeasure> entity);
     }
 }

@@ -9,17 +9,13 @@ using System.Collections.Generic;
 
 namespace Allin.Inventory.Infrastructure.Persistence.Configurations
 {
-    public partial class InventoryPropertyValueConfiguration : IEntityTypeConfiguration<InventoryPropertyValue>
+    public partial class InventoryPropertyValueConfiguration : InventoryTypeConfiguration<InventoryPropertyValue>
     {
-        public void Configure(EntityTypeBuilder<InventoryPropertyValue> entity)
+        public void Configure(EntityTypeBuilder<InventoryPropertyValue> builder)
         {
-            entity.HasKey(e => e.Id).HasName("PK_CommodityPropertyValues");
+            builder.ToTable("InventoryPropertyValues", "Inventory");
 
-            entity.ToTable("InventoryPropertyValues", "inventory");
-
-            OnConfigurePartial(entity);
+            base.Configure(builder);
         }
-
-        partial void OnConfigurePartial(EntityTypeBuilder<InventoryPropertyValue> entity);
     }
 }

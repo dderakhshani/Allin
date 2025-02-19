@@ -9,24 +9,15 @@ using System.Collections.Generic;
 
 namespace Allin.Inventory.Infrastructure.Persistence.Configurations
 {
-    public partial class InventoryCategoryPropertyConfiguration : IEntityTypeConfiguration<InventoryCategoryProperty>
+    public partial class InventoryCategoryPropertyConfiguration : InventoryTypeConfiguration<InventoryCategoryProperty>
     {
-        public void Configure(EntityTypeBuilder<InventoryCategoryProperty> entity)
+        public void Configure(EntityTypeBuilder<InventoryCategoryProperty> builder)
         {
-            entity.HasKey(e => e.Id).HasName("PK_ItemsProperty_Id");
 
-            entity.ToTable("InventoryCategoryProperties", "inventory");
+            builder.ToTable("InventoryCategoryProperties", "Inventory");
 
-            entity.Property(e => e.Title).HasMaxLength(50);
-            entity.Property(e => e.UniqueName).HasMaxLength(50);
-
-            entity.HasOne(d => d.Category).WithMany(p => p.InventoryCategoryProperties)
-                .HasForeignKey(d => d.CategoryId)
-                .HasConstraintName("FK_InventoryCategoryProperties_InventoryCategories");
-
-            OnConfigurePartial(entity);
+            base.Configure(builder);
         }
 
-        partial void OnConfigurePartial(EntityTypeBuilder<InventoryCategoryProperty> entity);
     }
 }

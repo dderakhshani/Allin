@@ -10,6 +10,12 @@ namespace Allin.Inventory.Infrastructure.Persistence
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(modelBuilder);
+        }
+
         public virtual DbSet<BaseValue> BaseValues { get; set; }
 
         public virtual DbSet<BaseValueItem> BaseValueItems { get; set; }
@@ -31,12 +37,6 @@ namespace Allin.Inventory.Infrastructure.Persistence
         public virtual DbSet<InventoryPropertyValue> InventoryPropertyValues { get; set; }
 
         public virtual DbSet<MeasureUnit> MeasureUnits { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            base.OnModelCreating(modelBuilder);
-        }
 
 
     }

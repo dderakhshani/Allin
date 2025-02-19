@@ -23,9 +23,28 @@ namespace Allin.Inventory.Application.Commands.InventoryCategories.Create
             var entity = Mapper.Map<InventoryCategory>(request);
 
             entity.Hierarchy = await DbContext.InventoryCategories.GetHierarchyIdAsync(request.ParentId);
-
             DbContext.InventoryCategories.Add(entity);
             await DbContext.SaveChangesAsync(cancellationToken);
+
+
+
+
+            //using (DbContext.Database.BeginTransaction())
+            //{
+
+            //    entity.Hierarchy = await DbContext.InventoryCategories.GetHierarchyIdAsync(request.ParentId);
+            //    DbContext.InventoryCategories.Add(entity);
+            //    await DbContext.SaveChangesAsync(cancellationToken);
+
+            //    foreach (var propterty in entity.InventoryCategoryProperties)
+            //    {
+            //        propterty.Hierarchy = await DbContext.InventoryCategoryProperties.GetHierarchyIdAsync(propterty.ParentId);
+            //    }
+
+            //    await DbContext.SaveChangesAsync(cancellationToken);
+
+            //}
+
 
             return true;
         }
