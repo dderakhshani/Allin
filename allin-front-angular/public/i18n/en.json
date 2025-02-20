@@ -70,6 +70,11 @@
             "msg1": "This is a message only for users page list"
         }
     },
+    "inventory": {
+        "category": {
+            "create-category": "Add Category"
+        }
+    },
     "primeng": {
         "accept": "Yes",
         "addRule": "Add Rule",

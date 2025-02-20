@@ -1,0 +1,61 @@
+<app-page-content [isLoading]="isLoading">
+    <ng-container toolbar>
+        <p-button [label]="'inventory.category.create-category' | translate" icon="pi pi-plus" class="mr-2" (onClick)="openAdd()" />
+    </ng-container>
+
+    <div class="flex flex-col h-full">
+
+        <div class="pt-2 h-full">
+            <app-png-table [columns]="columns" [dataApiUrl]="categoryApiUrl" [fetchDataTrigger]="fetchDataTrigger" [isRowExapandable]="true" (onRowExpand)="loadInnerData($event)" (onLoadingStateChange)="isLoading=$event">
+                <ng-template let-rowData templateForColumn="actionColumnTemplate">
+                    <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (onClick)="editClick(rowData)" />
+                    <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" />
+                </ng-template>
+                <!-- <ng-template #expandedRow let-rowData="rowData">
+                    <div expanded-row>
+                        <div>
+                            <h4>Items of {{rowData.title}}:</h4>
+                        </div>
+                        <p-treetable [value]="rowData.items" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width: 5rem"></th>
+                                    <th style="width: 5rem"></th>
+                                    <th>Item Title</th>
+                                    <th>Value</th>
+                                    <th>Description</th>
+                                    <th>Order</th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                                <tr [ttRow]="rowNode">
+                                    <td style="width: 5rem">
+                                        <p-treeTableToggler [rowNode]="rowNode" />
+                                    </td>
+                                    <td style="width: 5rem">
+                                        <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteItemClick(rowData)" />
+                                    </td>
+                                    <td>
+                                        {{ rowData.title }}
+                                    </td>
+                                    <td>
+                                        {{ rowData.value }}
+                                    </td>
+                                    <td>
+                                        {{ rowData.description }}
+                                    </td>
+                                    <td>
+                                        {{ rowData.order }}
+                                    </td>
+
+                                </tr>
+                            </ng-template>
+                        </p-treetable>
+                    </div>
+                </ng-template> -->
+            </app-png-table>
+        </div>
+    </div>
+
+</app-page-content>

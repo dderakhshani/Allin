@@ -106,7 +106,7 @@ export class MenuService {
                         label: 'Categories',
                         icon: 'category',
                         shortcut: '⌘+N',
-                        routerLink: '/settings/security'
+                        routerLink: '/inventory/categories/list'
                     },
                     {
                         label: 'Products',
