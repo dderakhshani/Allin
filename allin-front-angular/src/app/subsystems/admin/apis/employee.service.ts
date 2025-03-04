@@ -4,18 +4,18 @@ import { CreateEmployeeCommand } from '../models/commands/create-employee-comman
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class EmployeeService {
 
-  private readonly controllerPath = "employee";
+    private readonly controllerPath = "admin/employee";
 
-  constructor(private baseHttpService: BaseHttpService) { }
+    constructor(private baseHttpService: BaseHttpService) { }
 
-  create(model: CreateEmployeeCommand): Observable<any> {
-    return this.baseHttpService.postJsonData({
-      controller: this.controllerPath, action: 'create'
-    }, model);
-  }
+    create(model: CreateEmployeeCommand): Observable<any> {
+        return this.baseHttpService.postJsonData({
+            controller: this.controllerPath, action: 'create'
+        }, model);
+    }
 
 }

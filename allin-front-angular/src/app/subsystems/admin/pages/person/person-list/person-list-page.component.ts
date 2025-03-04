@@ -68,7 +68,7 @@ export class PersonListPageComponent {
     selectedCity: any | undefined;
     messages: Message[] = [];
     dataApiUrl = {
-        controller: `person`,
+        controller: `admin/person`,
         action: 'get-all',
         routeParameters: []
     };

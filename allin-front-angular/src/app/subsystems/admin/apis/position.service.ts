@@ -11,7 +11,7 @@ import { PositionModel } from '../models/queries/position-model';
 })
 export class PositionService {
 
-    private readonly controllerPath = "position";
+    private readonly controllerPath = "admin/position";
 
     constructor(private baseHttpService: BaseHttpService) { }
 

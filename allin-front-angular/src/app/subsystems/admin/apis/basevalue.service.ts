@@ -9,7 +9,7 @@ import { BaseValueItemModel } from '../models/queries/base-value-item-model';
 })
 export class BasevalueService {
 
-    private readonly controllerPath = "base-value";
+    private readonly controllerPath = "admin/base-value";
 
     constructor(private baseHttpService: BaseHttpService) { }
 

@@ -12,7 +12,7 @@ import { EditRoleCommand } from '../models/commands/edit-role-command';
 })
 export class RoleService {
 
-    private readonly controllerPath = "role-permission";
+    private readonly controllerPath = "admin/role-permission";
 
     constructor(private baseHttpService: BaseHttpService) { }
 

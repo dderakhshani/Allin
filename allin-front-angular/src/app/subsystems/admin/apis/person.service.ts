@@ -11,7 +11,7 @@ import { PagedList } from '../../../core/components/png-table/models/paged-list'
 })
 export class PersonService {
 
-    private readonly controllerPath = "person";
+    private readonly controllerPath = "admin/person";
 
     constructor(private baseHttpService: BaseHttpService) { }
 

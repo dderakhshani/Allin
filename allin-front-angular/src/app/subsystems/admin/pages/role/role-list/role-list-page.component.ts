@@ -73,7 +73,7 @@ export class RoleListPageComponent {
     fetchDataTrigger = signal<boolean>(true)
 
     roleApiUrl = {
-        controller: `role-permission`,
+        controller: `admin/role-permission`,
         action: 'get-all',
         routeParameters: []
     };

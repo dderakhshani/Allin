@@ -10,7 +10,7 @@ import { TreeNode } from 'primeng/api';
 })
 export class ExtendedfieldNewService {
 
-    private readonly controllerPath = "extended-field";
+    private readonly controllerPath = "admin/extended-field";
 
     constructor(private baseHttpService: BaseHttpService) { }
 

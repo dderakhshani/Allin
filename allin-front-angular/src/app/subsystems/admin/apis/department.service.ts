@@ -8,43 +8,43 @@ import { CreateDepartmentCommand } from '../models/commands/create-department-co
 import { EditDepartmentCommand } from '../models/commands/edit-department-command';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class DepartmentService {
 
-  private readonly controllerPath = "department";
+    private readonly controllerPath = "admin/department";
 
-  constructor(private baseHttpService: BaseHttpService) { }
+    constructor(private baseHttpService: BaseHttpService) { }
 
-  create(model: CreateDepartmentCommand): Observable<any> {
-    return this.baseHttpService.postJsonData({
-      controller: this.controllerPath, action: 'create'
-    }, model);
-  }
+    create(model: CreateDepartmentCommand): Observable<any> {
+        return this.baseHttpService.postJsonData({
+            controller: this.controllerPath, action: 'create'
+        }, model);
+    }
 
-  delete(id: number): Observable<boolean> {
-    return this.baseHttpService.deleteData(
-      {
-        controller: this.controllerPath,
-        action: '',
-        routeParameters: [id]
-      });
-  }
+    delete(id: number): Observable<boolean> {
+        return this.baseHttpService.deleteData(
+            {
+                controller: this.controllerPath,
+                action: '',
+                routeParameters: [id]
+            });
+    }
 
-  edit(model: EditDepartmentCommand): Observable<void> {
-    return this.baseHttpService.putJsonData({
-      controller: this.controllerPath,
-      action: 'edit'
-    }, model);
-  }
+    edit(model: EditDepartmentCommand): Observable<void> {
+        return this.baseHttpService.putJsonData({
+            controller: this.controllerPath,
+            action: 'edit'
+        }, model);
+    }
 
 
-  getAllTree(): Observable<TreeNode<DepartmentModel>[]> {
-    return this.baseHttpService.getData({
-      controller: this.controllerPath,
-      action: 'get-department-tree',
-      routeParameters: []
-    });
-  }
+    getAllTree(): Observable<TreeNode<DepartmentModel>[]> {
+        return this.baseHttpService.getData({
+            controller: this.controllerPath,
+            action: 'get-department-tree',
+            routeParameters: []
+        });
+    }
 
 }

@@ -68,7 +68,7 @@ export class BasevalueListPageComponent {
     items?: TreeNode<BaseValueItemModel>[];
 
     baseValueTypeApiUrl = {
-        controller: `base-value`,
+        controller: `admin/base-value`,
         action: 'get-all-type-values',
         routeParameters: []
     };
