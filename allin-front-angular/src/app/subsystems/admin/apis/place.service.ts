@@ -11,7 +11,7 @@ import { EditPlaceCommand } from '../models/commands/edit-place-command';
 })
 export class PlaceService {
 
-    private readonly controllerPath = "place";
+    private readonly controllerPath = "admin/place";
 
     constructor(private baseHttpService: BaseHttpService) { }
 

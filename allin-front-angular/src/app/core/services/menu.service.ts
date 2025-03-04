@@ -103,6 +103,18 @@ export class MenuService {
                 shortcut: '⌘+N',
                 items: [
                     {
+                        label: 'Packings',
+                        icon: 'package_2',
+                        shortcut: '⌘+N',
+                        routerLink: '/inventory/categories/list'
+                    },
+                    {
+                        label: 'Packing Arrangements',
+                        icon: 'dataset',
+                        shortcut: '⌘+N',
+                        routerLink: '/inventory/categories/list'
+                    },
+                    {
                         label: 'Categories',
                         icon: 'category',
                         shortcut: '⌘+N',
