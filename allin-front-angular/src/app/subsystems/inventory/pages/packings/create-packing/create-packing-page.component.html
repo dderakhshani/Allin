@@ -1,1 +1,67 @@
-<p>create-packing-page works!</p>
+<form class="flex flex-col w-full" [formGroup]="form">
+    <div class="card flex w-full justify-content-center ">
+        <p-accordion [multiple]="true" [activeIndex]="[0,1]">
+            <p-accordionTab [header]="'inventory.packing.basic-info' | translate">
+                <div class="flex space-x-5 pt-5">
+                    <div class=" flex flex-col space-y-2 w-1/4">
+                        <label for="PackingTitle">{{'inventory.packing.title' | translate}} </label>
+                        <input pInputText id="packingTitle" [formControl]="form.controls.title" />
+                    </div>
+                    <div class=" flex flex-col space-y-2 w-1/4">
+                        <label for="LevelCode">{{'inventory.packing.lelvelCode' | translate}} </label>
+                        <input pInputText id="levelCode" [formControl]="form.controls.levelCode" />
+                    </div>
+                    <div class=" flex flex-col space-y-2 w-1/4">
+                        <label for="ConversionFactor">{{'inventory.packing.conversionFactor' | translate}} </label>
+                        <input pInputText id="conversionFactor" [formControl]="form.controls.conversionFactor" />
+                    </div>
+                    <div class=" flex flex-col space-y-2 w-1/4">
+                        <label for="MeasureUnitBaseId">{{'inventory.packing.measureUnit' | translate}} </label>
+                        <input pInputText id="measureUnitBaseId" [formControl]="form.controls.measureUnitBaseId" />
+                    </div>
+                    <!-- <div class=" flex flex-col space-y-2 w-1/4">
+                        <label for="MeasureUnitBaseId">{{'inventory.packing.measureUnit' | translate}} </label>
+                        <p-select formControlName="selectedCity" [options]="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-56" />
+                    </div> -->
+                </div>
+
+            </p-accordionTab>
+            <p-accordionTab [header]="'inventory.packing.arrangement' | translate">
+                <!-- <p-treetable [value]="baseValueItems" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 5rem;"></th>
+                            <th style="width: 10rem;"></th>
+                            <th>Title</th>
+                            <th>Value</th>
+                            <th>Description</th>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                        <tr [ttRow]="rowNode">
+                            <td style="width: 5rem;">
+                                <p-treeTableToggler [rowNode]="rowNode" />
+                            </td>
+                            <td style="width: 10rem;">
+                                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (onClick)="editClick(rowData)" />
+                                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" />
+                            </td>
+                            <td>
+                                {{ rowData.title }}
+                            </td>
+                            <td>
+                                {{ rowData.value }}
+                            </td>
+                            <td>
+                                {{ rowData.description }}
+                            </td>
+
+                        </tr>
+                    </ng-template>
+                </p-treetable> -->
+            </p-accordionTab>
+        </p-accordion>
+    </div>
+
+</form>

@@ -37,7 +37,7 @@ namespace Allin.Admin.ServiceApi.Controllers
         //    return OkResult(await _packingQueries.GetAllTree(param, cancellationToken));
         //}
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody] CreatePackingCommand request, CancellationToken cancellationToken)
         {
             return await SendCommand(request, cancellationToken);

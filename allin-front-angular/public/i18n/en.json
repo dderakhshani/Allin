@@ -75,7 +75,13 @@
             "create-category": "Add Category"
         },
         "packing": {
-            "create-packing": "Add packing"
+            "create-packing": "Add packing",
+            "basic-info": "Info",
+            "arrangement": "Arrangement",
+            "title": "Title",
+            "lelvelCode": "Level Code",
+            "conversionFactor": "Conversion Factor",
+            "measureUnit": "Measure Unit"
         }
     },
     "primeng": {
