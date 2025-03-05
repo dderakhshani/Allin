@@ -106,7 +106,7 @@ export class MenuService {
                         label: 'Packings',
                         icon: 'package_2',
                         shortcut: '⌘+N',
-                        routerLink: '/inventory/categories/list'
+                        routerLink: '/inventory/packings/list'
                     },
                     {
                         label: 'Packing Arrangements',

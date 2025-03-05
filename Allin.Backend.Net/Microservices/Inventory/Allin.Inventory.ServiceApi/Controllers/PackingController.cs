@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace Allin.Admin.ServiceApi.Controllers
 {
     [AllowAnonymous]
-    public class PakingController : AuthorizeApiControllerBase
+    public class PackingController : AuthorizeApiControllerBase
     {
         private readonly IPackingQueries _packingQueries;
 
-        public PakingController(IMediator mediator, IUserAccessor userAccessor, IWebHostEnvironment currentEnvironment, IPackingQueries PackingQueries) : base(mediator, userAccessor, currentEnvironment)
+        public PackingController(IMediator mediator, IUserAccessor userAccessor, IWebHostEnvironment currentEnvironment, IPackingQueries PackingQueries) : base(mediator, userAccessor, currentEnvironment)
         {
             _packingQueries = PackingQueries;
         }

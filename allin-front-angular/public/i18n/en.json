@@ -73,6 +73,9 @@
     "inventory": {
         "category": {
             "create-category": "Add Category"
+        },
+        "packing": {
+            "create-packing": "Add packing"
         }
     },
     "primeng": {

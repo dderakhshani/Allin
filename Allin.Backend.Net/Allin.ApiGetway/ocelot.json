@@ -18,7 +18,7 @@
       ]
     },
     {
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -26,7 +26,7 @@
           "Port": "7020"
         }
       ],
-      "UpstreamPathTemplate": "/inventory/{everything}",
+      "UpstreamPathTemplate": "/api/inventory/{everything}",
       "UpstreamHttpMethod": [
         "GET",
         "POST",
