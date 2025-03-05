@@ -2,6 +2,13 @@ import { Routes } from "@angular/router";
 
 export const INVENTORY_ROOT_ROUTES: Routes = [
     {
+        path: "packings",
+        data: {
+            title: 'Packings'
+        },
+        loadChildren: () => import('./packings/routes').then(mod => mod.PACKING_ROUTES)
+    },
+    {
         path: "categories",
         data: {
             title: 'Categories'
