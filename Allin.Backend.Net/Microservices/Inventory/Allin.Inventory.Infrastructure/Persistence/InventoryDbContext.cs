@@ -37,6 +37,8 @@ namespace Allin.Inventory.Infrastructure.Persistence
         public virtual DbSet<InventoryPropertyValue> InventoryPropertyValues { get; set; }
 
         public virtual DbSet<MeasureUnit> MeasureUnits { get; set; }
+        public virtual DbSet<Packing> Packings { get; set; }
+        public virtual DbSet<PackingArrangement> PackingArrangements { get; set; }
 
 
     }

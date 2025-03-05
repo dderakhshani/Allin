@@ -57,6 +57,14 @@
       {
          "Name": "[inventory].[MeasureUnits]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[inventory].[PackingArrangements]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[inventory].[Packings]",
+         "ObjectType": 0
       }
    ],
    "UiHint": null,
