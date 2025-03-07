@@ -1,4 +1,6 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using Allin.Common.Data;
 namespace Allin.Inventory.Infrastructure.Persistence;
 
 public class Packing : InventoryBaseEntity 
