@@ -12,9 +12,9 @@ namespace Allin.Inventory.Application.Commands.packings.Create
 
         public override async Task<bool> Handle(CreatePackingCommand request, CancellationToken cancellationToken)
         {
-            var entity = Mapper.Map<Packing>(request);
+            var packing = Mapper.Map<Packing>(request);
 
-            DbContext.Packings.Add(entity);
+            DbContext.Packings.Add(packing);
             await DbContext.SaveChangesAsync(cancellationToken);
 
             return true;
