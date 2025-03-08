@@ -20,6 +20,13 @@ namespace Allin.Inventory.Infrastructure.Persistence
                 .HasForeignKey(d => d.PackingId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_PackingArrangements_Packings");
+
+            //builder.HasOne<Packing>()
+            //    .WithMany()
+            //    .HasForeignKey(d => d.PackingId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull);
+
+
             base.Configure(builder);
         }
     }

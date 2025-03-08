@@ -22,7 +22,7 @@ namespace Allin.Inventory.Application.Commands.packings.Create
 
     public class CreateArrangementCommand : IRequest<bool>, IMapFrom<PackingArrangement, CreateArrangementCommand>
     {
-        public long PackingId { get; set; }
+        public long? PackingId { get; set; }
         public double ConversionFactor { get; set; }
         public long ContainerPackingId { get; set; }
 
