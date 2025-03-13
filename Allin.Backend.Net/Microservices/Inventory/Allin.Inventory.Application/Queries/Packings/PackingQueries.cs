@@ -20,6 +20,10 @@ namespace Allin.Inventory.Application.Queries
         {
             return await DbContext.Packings.AsNoTracking().ProjectTo<PackingModel>(MapperProvider).ToPagedListAsync(param);
         }
+        public async Task<IEnumerable<PackingModel>> GetAllByLevel(int level, CancellationToken cancellationToken)
+        {
+            return await DbContext.Packings.Where(x=> x.LevelCode < level).AsNoTracking().ProjectTo<PackingModel>(MapperProvider).ToListAsync();
+        }
 
         //public async Task<IEnumerable<TreeNode<MeasureUnitModel>>> GetAllTree(QueryParamModel param, CancellationToken cancellationToken)
         //{

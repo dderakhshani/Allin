@@ -40,5 +40,10 @@ namespace Allin.Admin.Application.Queries
         {
             return (await DbContext.BaseValueItems.Where(x => x.BaseValueId == valueTypeId).AsNoTracking().ProjectTo<BaseValueItemModel>(MapperProvider).ToListAsync()).ToTreeModel(nameof(BaseValueItemModel.Title), nameof(BaseValueItemModel.Id));
         }
+
+        public async Task<IEnumerable<BaseValueItemModel>> GetByValueTypeIdList(long valueTypeId, CancellationToken cancellationToken)
+        {
+            return await DbContext.BaseValueItems.Where(x => x.BaseValueId == valueTypeId).AsNoTracking().ProjectTo<BaseValueItemModel>(MapperProvider).ToListAsync();
+        }
     }
 }

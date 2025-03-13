@@ -8,8 +8,8 @@
                         <input pInputText id="packingTitle" [formControl]="form.controls.title" />
                     </div>
                     <div class=" flex flex-col space-y-2 w-1/4">
-                        <label for="LevelCode">{{'inventory.packing.lelvelCode' | translate}} </label>
-                        <input pInputText id="levelCode" [formControl]="form.controls.levelCode" />
+                        <label for="LevelCode">{{'inventory.packing.lelvel' | translate}} </label>
+                        <p-select [options]="levels" [(ngModel)]="selectedLevel" optionLabel="name" placeholder="Select a Level" class="w-full md:w-56" appendTo="body" id="levelCode" [formControl]="form.controls.levelCode" (onChange)="onSelectLevel()" />
                     </div>
                     <div class=" flex flex-col space-y-2 w-1/4">
                         <label for="ConversionFactor">{{'inventory.packing.conversionFactor' | translate}} </label>
@@ -17,49 +17,59 @@
                     </div>
                     <div class=" flex flex-col space-y-2 w-1/4">
                         <label for="MeasureUnitBaseId">{{'inventory.packing.measureUnit' | translate}} </label>
-                        <input pInputText id="measureUnitBaseId" [formControl]="form.controls.measureUnitBaseId" />
+                        <p-select [options]="measureBaseValue.items" [(ngModel)]="selectedBasevalue" optionLabel="title" [filter]="true" filterBy="title" [showClear]="true" placeholder="{{'inventory.packing.selectMeasureUnit'| translate}}" class="w-full md:w-56" appendTo="body">
+                            <ng-template #selectedItem let-selectedOption>
+                                <div class="flex items-center gap-2">
+                                    <div>{{ selectedOption.title }}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-baseValue #item>
+                                <div class="flex items-center gap-2">
+                                    <div>{{ baseValue.title }}</div>
+                                </div>
+                            </ng-template>
+                        </p-select>
                     </div>
-                    <!-- <div class=" flex flex-col space-y-2 w-1/4">
-                        <label for="MeasureUnitBaseId">{{'inventory.packing.measureUnit' | translate}} </label>
-                        <p-select formControlName="selectedCity" [options]="cities" optionLabel="name" placeholder="Select a City" class="w-full md:w-56" />
-                    </div> -->
                 </div>
 
             </p-accordionTab>
             <p-accordionTab [header]="'inventory.packing.arrangement' | translate">
-                <!-- <p-treetable [value]="baseValueItems" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th style="width: 5rem;"></th>
-                            <th style="width: 10rem;"></th>
-                            <th>Title</th>
-                            <th>Value</th>
-                            <th>Description</th>
+                <div class="flex flex-col w-full space-y-5 pt-5">
+                    <div formArrayName="arrangements">
 
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
-                        <tr [ttRow]="rowNode">
-                            <td style="width: 5rem;">
-                                <p-treeTableToggler [rowNode]="rowNode" />
-                            </td>
-                            <td style="width: 10rem;">
-                                <p-button icon="pi pi-pencil" [rounded]="true" [text]="true" severity="info" (onClick)="editClick(rowData)" />
-                                <p-button icon="pi pi-trash" [rounded]="true" [text]="true" severity="danger" (onClick)="deleteClick(rowData)" />
-                            </td>
-                            <td>
-                                {{ rowData.title }}
-                            </td>
-                            <td>
-                                {{ rowData.value }}
-                            </td>
-                            <td>
-                                {{ rowData.description }}
-                            </td>
+                        @for (arrangement of form.controls.arrangements.controls; track $index) {
+                        <div class="flex space-x-5 items-end">
+                            <div class=" flex flex-col space-y-2 w-52">
+                                <p-select [options]="packings" [(ngModel)]="selectedPacking" optionLabel="title" [filter]="true" filterBy="title" [showClear]="true" placeholder="{{'inventory.packing.select-paking'| translate}}" class="w-full md:w-56" appendTo="body">
+                                    <ng-template #selectedItem let-selectedOption>
+                                        <div class="flex items-center gap-2">
+                                            <div>{{ selectedOption.title }}</div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template let-packing #item>
+                                        <div class="flex items-center gap-2">
+                                            <div>{{ packing.title }}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-select>
+                            </div>
+                            <div class=" flex flex-col space-y-2">
+                                <p-floatlabel variant="on">
+                                    <input pInputText id="on_label" [formControl]="form.controls.conversionFactor.get('conversionFactor')  | formControl" autocomplete="off" />
+                                    <label for="on_label">{{'inventory.packing.conversionFactor' | translate}}</label>
+                                </p-floatlabel>
+                            </div>
+                            <div>
+                                <p-button icon="pi pi-trash" [text]="true" [severity]="'danger'" />
+                            </div>
+                        </div>
+                        }
+                    </div>
+                    <div class="flex">
+                        <p-button (click)=addItem() [label]="'inventory.packing.add-arrangement' | translate" icon="pi pi-plus-circle" [text]="true" severity="secondary" />
+                    </div>
 
-                        </tr>
-                    </ng-template>
-                </p-treetable> -->
+                </div>
             </p-accordionTab>
         </p-accordion>
     </div>

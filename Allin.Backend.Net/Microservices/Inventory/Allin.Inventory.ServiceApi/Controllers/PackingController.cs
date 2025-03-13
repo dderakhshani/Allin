@@ -55,5 +55,11 @@ namespace Allin.Admin.ServiceApi.Controllers
         //    return await SendCommand(new DeleteMeasureUnitCommand(id), cancellationToken);
         //}
 
+        [HttpGet("get-all-by-level/{level}")]
+        public async Task<IActionResult> GetAllByLevel(int level, CancellationToken cancellationToken)
+        {
+            return OkResult(await _packingQueries.GetAllByLevel(level, cancellationToken));
+        }
+
     }
 }

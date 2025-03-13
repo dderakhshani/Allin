@@ -4,5 +4,14 @@ export interface CreatePackingCommnad {
     title: string;
     conversionFactor: number;
     measureUnitBaseId: number;
+    arrangements?: CreateArrangementCommnad[];
+
+}
+
+export interface CreateArrangementCommnad {
+
+    packingId: number;
+    conversionFactor: number;
+    containerPackingId: number;
 
 }

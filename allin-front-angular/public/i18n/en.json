@@ -79,9 +79,13 @@
             "basic-info": "Info",
             "arrangement": "Arrangement",
             "title": "Title",
-            "lelvelCode": "Level Code",
+            "lelvel": "Level",
             "conversionFactor": "Conversion Factor",
-            "measureUnit": "Measure Unit"
+            "measureUnit": "Measure Unit",
+            "selectMeasureUnit": "Select a Measure Unit",
+            "add-arrangement": "Add Arrangement",
+            "packing": "Packing",
+            "select-paking": "Select a Pakcking"
         }
     },
     "primeng": {

@@ -28,6 +28,15 @@ export class BasevalueService {
             });
     }
 
+    getItemsByBaseValueId(id: number): Observable<BaseValueItemModel[]> {
+        return this.baseHttpService.getData(
+            {
+                controller: this.controllerPath,
+                action: 'get-items',
+                routeParameters: [id]
+            });
+    }
+
     delete(id: number): Observable<boolean> {
         return this.baseHttpService.deleteData(
             {
