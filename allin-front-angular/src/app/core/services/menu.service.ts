@@ -109,12 +109,6 @@ export class MenuService {
                         routerLink: '/inventory/packings/list'
                     },
                     {
-                        label: 'Packing Arrangements',
-                        icon: 'dataset',
-                        shortcut: '⌘+N',
-                        routerLink: '/inventory/categories/list'
-                    },
-                    {
                         label: 'Categories',
                         icon: 'category',
                         shortcut: '⌘+N',
