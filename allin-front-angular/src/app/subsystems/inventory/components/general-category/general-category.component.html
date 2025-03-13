@@ -1,0 +1,49 @@
+<form class="flex flex-col w-full" [formGroup]="form">
+    <div class="card flex flex-col w-full justify-content-center px-5">
+        <div class="flex space-x-5 pt-5">
+            <div class=" flex flex-col space-y-2 w-1/2">
+                <label for="PackingTitle">{{'inventory.packing.title' | translate}} </label>
+                <input pInputText id="packingTitle" [formControl]="form.controls.title" />
+            </div>
+            <div class=" flex flex-col space-y-2 w-1/2">
+                <label for="LevelCode">Parent </label>
+                <p-select [options]="levels" [(ngModel)]="selectedLevel" optionLabel="name" placeholder="Select a Level" class="w-full md:w-56" appendTo="body" id="levelCode" [formControl]="form.controls.levelCode" (onChange)="onSelectLevel()" />
+            </div>
+        </div>
+        <div class="flex space-x-5 pt-5">
+            <div class=" flex flex-col space-y-2 w-1/2">
+                <label for="PackingTitle">Code</label>
+                <input pInputText id="packingTitle" [formControl]="form.controls.title" />
+            </div>
+            <div class=" flex flex-col space-y-2 w-1/2">
+                <label for="LevelCode">Code prefix </label>
+                <p-selectbutton [options]="paymentOptions" [(ngModel)]="value" [multiple]="false" optionLabel="name" optionValue="value" />
+            </div>
+
+        </div>
+        <div class="flex space-x-5 pt-5">
+            <div class=" flex flex-col space-y-2 w-full">
+                <label for="LevelCode">Items Type </label>
+                <p-selectbutton [options]="paymentOptions" [(ngModel)]="value" [multiple]="false" optionLabel="name" optionValue="value" />
+            </div>
+
+        </div>
+        <div class="flex space-x-5 pt-5">
+            <div class=" flex flex-col space-y-2 w-1/2">
+                <label for="LevelCode">Measure Unit </label>
+                <p-select [options]="levels" [(ngModel)]="selectedLevel" optionLabel="name" placeholder="Select a Level" class="w-full md:w-56" appendTo="body" id="levelCode" [formControl]="form.controls.levelCode" (onChange)="onSelectLevel()" />
+            </div>
+            <div class=" flex flex-col space-y-2 w-1/2">
+                <label for="LevelCode">Defult Warehouse </label>
+                <p-select [options]="levels" [(ngModel)]="selectedLevel" optionLabel="name" placeholder="Select a Level" class="w-full md:w-56" appendTo="body" id="levelCode" [formControl]="form.controls.levelCode" (onChange)="onSelectLevel()" />
+            </div>
+        </div>
+        <div class="flex space-x-5 pt-5">
+            <div class=" flex flex-col space-y-2 w-full">
+                <label for="LevelCode"> Description </label>
+                <textarea rows="5" cols="30" pTextarea [autoResize]="true"></textarea>
+            </div>
+        </div>
+    </div>
+
+</form>

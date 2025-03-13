@@ -65,8 +65,8 @@ export class CategoryListPageComponent {
     openAdd() {
         const config: PageDialogConfig = {
             component: CreateCategoryPageComponent,
-            header: 'Add New base value',
-            description: 'this is a desciption of the add base value page',
+            header: 'Add New Category',
+            description: 'this is a desciption of the add Category page',
         };
         this.ref = openDialog(config, this.dialogService);
         this.ref.onClose.subscribe((result: any) => {
