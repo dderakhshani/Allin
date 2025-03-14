@@ -29,6 +29,33 @@
             }
         },
         {
+            "label": "Inventory Api Run",
+            "type": "shell",
+            "command": "dotnet watch run xyz",
+            "options": {
+                "cwd": "${workspaceFolder}/Allin.Backend.Net/Microservices/Inventory/Allin.Inventory.ServiceApi"
+            },
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "group": "inventory",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Inventory Api Build",
+            "type": "shell",
+            "command": "dotnet build",
+            "options": {
+                "cwd": "${workspaceFolder}/Allin.Backend.Net/Microservices/Inventory/Allin.Inventory.ServiceApi"
+            },
+            "isBackground": true,
+            "problemMatcher": [],
+            "presentation": {
+                "group": "inventory",
+            }
+        },
+        {
             "label": "Front End",
             "type": "shell",
             "command": "npm install; npm start",

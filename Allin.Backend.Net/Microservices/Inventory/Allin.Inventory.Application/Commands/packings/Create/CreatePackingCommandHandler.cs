@@ -14,12 +14,11 @@ namespace Allin.Inventory.Application.Commands.packings.Create
         {
             var packing = Mapper.Map<Packing>(request);
 
-            foreach (var item in packing.PackingArrangementPackings)
+            foreach (var item in packing.PackingArrangementContainerPackings)
             {
                 item.ContainerPacking = packing;
-                item.PackingId = item.PackingId;
             }
-                
+
 
             DbContext.Packings.Add(packing);
             await DbContext.SaveChangesAsync(cancellationToken);

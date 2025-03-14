@@ -15,7 +15,7 @@ namespace Allin.Inventory.Application.Commands.packings.Create
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Packing, CreatePackingCommand>()
-                  .ForMember(dest => dest.Arrangements, opt => opt.MapFrom(src => src.PackingArrangementPackings))
+                  .ForMember(dest => dest.Arrangements, opt => opt.MapFrom(src => src.PackingArrangementContainerPackings))
                   .ReverseMap();
         }
     }
