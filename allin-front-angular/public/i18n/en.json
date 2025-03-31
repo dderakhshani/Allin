@@ -72,7 +72,8 @@
     },
     "inventory": {
         "category": {
-            "create-category": "Add Category"
+            "create-category": "Add Category",
+            "add-property-Item": "Add"
         },
         "packing": {
             "create-packing": "Add packing",

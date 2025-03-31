@@ -93,6 +93,12 @@ export class MenuService {
                         badge: '2',
                         routerLink: '/admin/extendedfield/list'
                     },
+                    {
+                        label: 'Teams',
+                        icon: 'groups',
+                        badge: '2',
+                        routerLink: '/admin/team/list'
+                    },
 
 
                 ],

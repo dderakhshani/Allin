@@ -64,5 +64,12 @@ export const Admin_ROOT_ROUTES: Routes = [
         },
         loadChildren: () => import('./extended-field/routes').then(mod => mod.ExtendedField_ROUTES)
     },
+    {
+        path: "team",
+        data: {
+            title: 'team'
+        },
+        loadChildren: () => import('./team/routes').then(mod => mod.Team_ROUTES)
+    },
 
 ];
