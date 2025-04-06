@@ -10,6 +10,7 @@ public class Position : AdminBaseEntity , IHierarchyEntity
   public long? ParentId { get; set; }
   public string Title { get; set; } = null!;
     public virtual ICollection<DepartmentPosition> DepartmentPositions { get; set; } = new List<DepartmentPosition>();
+    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
     public virtual ICollection<Position> InverseParent { get; set; } = new List<Position>();
     public virtual Position? Parent { get; set; }
 }

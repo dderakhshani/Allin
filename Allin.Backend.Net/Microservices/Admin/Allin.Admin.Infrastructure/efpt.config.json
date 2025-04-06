@@ -79,6 +79,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[organization].[EmployeeTeams]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[organization].[PersonAddresses]",
          "ObjectType": 0
       },
@@ -92,6 +96,10 @@
       },
       {
          "Name": "[organization].[Positions]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[organization].[Teams]",
          "ObjectType": 0
       }
    ],
@@ -108,6 +116,7 @@
    "UseHandleBars": false,
    "UseHierarchyId": true,
    "UseInflector": true,
+   "UseInternalAccessModifiersForSprocsAndFunctions": false,
    "UseLegacyPluralizer": false,
    "UseManyToManyEntity": false,
    "UseNoDefaultConstructor": false,

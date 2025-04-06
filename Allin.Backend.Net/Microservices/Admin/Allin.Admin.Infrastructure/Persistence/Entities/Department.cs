@@ -13,6 +13,8 @@ public class Department : AdminBaseEntity , IHierarchyEntity
   public long BranchId { get; set; }
     public virtual Branch Branch { get; set; } = null!;
     public virtual ICollection<DepartmentPosition> DepartmentPositions { get; set; } = new List<DepartmentPosition>();
+    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
     public virtual ICollection<Department> InverseParent { get; set; } = new List<Department>();
     public virtual Department? Parent { get; set; }
+    public virtual ICollection<Team> Teams { get; set; } = new List<Team>();
 }
