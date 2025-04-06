@@ -27,6 +27,7 @@ namespace Allin.Inventory.Infrastructure.Persistence
         public virtual DbSet<InventoryCategoryProperty> InventoryCategoryProperties { get; set; }
 
         public virtual DbSet<InventoryCategoryPropertyItem> InventoryCategoryPropertyItems { get; set; }
+        public virtual DbSet<InventoryCategoryPropertyRange> InventoryCategoryPropertyRanges { get; set; }
 
         public virtual DbSet<InventoryItem> InventoryItems { get; set; }
 
@@ -39,6 +40,8 @@ namespace Allin.Inventory.Infrastructure.Persistence
         public virtual DbSet<MeasureUnit> MeasureUnits { get; set; }
         public virtual DbSet<Packing> Packings { get; set; }
         public virtual DbSet<PackingArrangement> PackingArrangements { get; set; }
+        public DbSet<Place> Places { get; set; }
+        public DbSet<Warehouse> Warehouses { get; set; }
 
 
     }

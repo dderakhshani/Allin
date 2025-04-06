@@ -8,6 +8,7 @@ public class Employee : AdminBaseEntity
   public long PersonId { get; set; }
   public long? DepartmentId { get; set; }
   public long? PositionId { get; set; }
+  public long? WorkingPlace { get; set; }
   public string EmployeeCode { get; set; } = null!;
   public DateTime? EmploymentDate { get; set; }
   public long ContractTypeBaseId { get; set; }

@@ -20,10 +20,10 @@ namespace Allin.Admin.Application.Models
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Employee, EmployeeModel>()
-                    .ForMember(dest => dest.DepartmentId, opt => opt.MapFrom(src => src.DepartmentPosition.DepartmentId))
+            //profile.CreateMap<Employee, EmployeeModel>()
+            //        .ForMember(dest => dest.DepartmentId, opt => opt.MapFrom(src => src.DepartmentPosition.DepartmentId))
 
-                    .ForMember(dest => dest.PositionId, opt => opt.MapFrom(src => src.DepartmentPosition.PositionId));
+            //        .ForMember(dest => dest.PositionId, opt => opt.MapFrom(src => src.DepartmentPosition.PositionId));
 
         }
     }

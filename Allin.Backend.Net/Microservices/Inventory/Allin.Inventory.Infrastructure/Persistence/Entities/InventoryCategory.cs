@@ -14,12 +14,18 @@ public class InventoryCategory : InventoryBaseEntity , IHierarchyEntity
     /// <summary>
     /// Assets(Machines,...), Consumable, Salable Product
     /// </summary>
-  public long? ItemsTypeId { get; set; }
+  public ItemsTypeEnums? ItemsTypeEnum { get; set; }
   public long? MeasureUnitId { get; set; }
   public long? DefaultWarehouseId { get; set; }
   public string? Description { get; set; }
+    /// <summary>
+    /// Operational, Breakdown, Maintenance, Idle
+    /// </summary>
+  public OparetionStatusEnums? OparetionStatusEnum { get; set; }
+    public virtual Warehouse? DefaultWarehouse { get; set; }
+    public virtual ICollection<InventoryCategoryAllowdMeasure> InventoryCategoryAllowdMeasures { get; set; } = new List<InventoryCategoryAllowdMeasure>();
     public virtual ICollection<InventoryCategoryProperty> InventoryCategoryProperties { get; set; } = new List<InventoryCategoryProperty>();
     public virtual ICollection<InventoryItem> InventoryItems { get; set; } = new List<InventoryItem>();
-    public virtual ICollection<InventoryCategory> InverseParent { get; set; } = new List<InventoryCategory>();
-    public virtual InventoryCategory? Parent { get; set; }
+    public virtual MeasureUnit? MeasureUnit { get; set; }
+    public virtual ICollection<Packing> Packings { get; set; } = new List<Packing>();
 }

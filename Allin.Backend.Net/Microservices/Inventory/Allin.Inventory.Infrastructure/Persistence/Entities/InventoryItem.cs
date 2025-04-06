@@ -17,13 +17,21 @@ public class InventoryItem : InventoryBaseEntity , IHierarchyEntity
   public long StatusBaseId { get; set; }
   public long MeasureUnitId { get; set; }
     /// <summary>
-    /// Assets(Machines,...), Consumable, Salable Product
+    /// 1=Assets(Machines,...), Consumable, Salable Product
     /// </summary>
-  public long ItemTypeId { get; set; }
+  public ItemTypeEnums ItemTypeEnum { get; set; }
+    /// <summary>
+    /// 0=Not trackable, 1=Tack Up Time 2=Track Down Time
+    /// </summary>
+  public OperationTrackTypeEnums OperationTrackTypeEnum { get; set; }
   public string? Description { get; set; }
   public string? Manufacturer { get; set; }
   public string? ModelNumber { get; set; }
   public int? LifeTimeHours { get; set; }
     public virtual InventoryCategory Category { get; set; } = null!;
+    public virtual ICollection<InventoryCategoryPropertyRange> InventoryCategoryPropertyRanges { get; set; } = new List<InventoryCategoryPropertyRange>();
+    public virtual ICollection<InventoryItemAllowdMeasure> InventoryItemAllowdMeasures { get; set; } = new List<InventoryItemAllowdMeasure>();
     public virtual ICollection<InventoryPropertyValue> InventoryPropertyValues { get; set; } = new List<InventoryPropertyValue>();
+    public virtual MeasureUnit MeasureUnit { get; set; } = null!;
+    public virtual BaseValue StatusBase { get; set; } = null!;
 }

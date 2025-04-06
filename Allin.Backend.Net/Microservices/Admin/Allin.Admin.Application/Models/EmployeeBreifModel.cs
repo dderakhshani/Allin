@@ -19,12 +19,12 @@ namespace Allin.Admin.Application.Models
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Employee, BreifEmployeeModel>()
-                    .ForMember(dest => dest.ContractTypeBaseTitle, opt => opt.MapFrom(src => src.ContractTypeBase.Title))
+            //profile.CreateMap<Employee, BreifEmployeeModel>()
+            //        .ForMember(dest => dest.ContractTypeBaseTitle, opt => opt.MapFrom(src => src.ContractTypeBase.Title))
 
-                    .ForMember(dest => dest.DepartmentTitle, opt => opt.MapFrom(src => src.DepartmentPosition.Department.Title))
+            //        .ForMember(dest => dest.DepartmentTitle, opt => opt.MapFrom(src => src.DepartmentPosition.Department.Title))
 
-                    .ForMember(dest => dest.PositionTitle, opt => opt.MapFrom(src => src.DepartmentPosition.Position.Title));
+            //        .ForMember(dest => dest.PositionTitle, opt => opt.MapFrom(src => src.DepartmentPosition.Position.Title));
 
         }
     }

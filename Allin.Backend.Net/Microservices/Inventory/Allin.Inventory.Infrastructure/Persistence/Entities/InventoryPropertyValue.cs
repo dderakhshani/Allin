@@ -11,4 +11,5 @@ public class InventoryPropertyValue : InventoryBaseEntity
   public string? Value { get; set; }
     public virtual InventoryCategoryProperty CategoryProperty { get; set; } = null!;
     public virtual InventoryItem Item { get; set; } = null!;
+    public virtual InventoryCategoryPropertyItem? ValuePropertyItem { get; set; }
 }
